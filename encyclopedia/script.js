@@ -11,6 +11,7 @@ fetch('../card-data.json')
         
         cardData.forEach(card => {
             createCard(card);
+            if (card.cardType !== "Utility") { preloadImage(`../assets/cards/${cardNameToImageName(card.name)}-back.png`) }
         });
     }
 );
@@ -66,3 +67,8 @@ cardPopupModal.addEventListener("click", (e) => {
         cardPopupModal.style.display = "none";
     }
 });
+
+function preloadImage(url) {
+    const img = new Image();
+    img.src = url;
+}
