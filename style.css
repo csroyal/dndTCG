@@ -74,3 +74,28 @@ h1 {
     font-size: 24px;
     margin-top: 32px;
 }
+
+@media (max-width: 700px) {
+    #backToMain {
+        display: none;
+    }
+
+    .encyclopedia-card {
+        width: 25%;
+        height: auto;
+        aspect-ratio: 362 / 508;
+    }
+
+    #cardPopupImage {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 362 / 508;
+    }
+
+    #cardPopupDescription {
+        font-size: 16px;
+        max-width: 85%;
+        max-height: 15%;
+        margin-top: 48px;
+    }
+}
