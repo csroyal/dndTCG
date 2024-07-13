@@ -1,0 +1,460 @@
+[
+    {
+        "name": "Axe Beak",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage."
+    },
+    {
+        "name": "Cockatrice",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 1d4 + 1 piercing damage, and the target must succeed on a DC 11 CON saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 1 turn."
+    },
+    {
+        "name": "Flame Skull",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Illumination</b>. This monster sheds either dim light in a 15-foot radius, or bright light in a 15-foot radius and dim light for an additional 15 feet. It can switch between the options as an action.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
+    },
+    {
+        "name": "Ghoul",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage. If the target is a creature other than an elf or undead, it must succeed on a DC 10 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "name": "Shadow",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Shadow Stealth</b>. While in dim light or darkness, this monster can take the Hide action as a bonus action.<br><br><b>Sunlight Weakness</b>. While in sunlight, this monster has disadvantage on attack rolls, ability checks, and saving throws.<br><br><u>Actions</u><br><br><b>Strength Drain</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 necrotic damage, and the target's STR score is reduced by 1d4 for 2 turns."
+    },
+    {
+        "name": "Skeleton",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Shortsword</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
+    },
+    {
+        "name": "Wolf",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 piercing damage. If the target is a creature, it must succeed on a DC 11 STR saving throw or be knocked prone."
+    },
+    {
+        "name": "Zombie",
+        "rarity": "R",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Undead Fortitude</b>. If damage reduces this monster to 0 hit points, it must make a CON saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, this monster drops to 1 hit point instead.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 bludgeoning damage."
+    },
+    {
+        "name": "Animated Armor",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Antimagic Susceptibility</b>. This monster is incapacitated while in the area of an antimagic field. If targeted by dispel magic, this monster must succeed on a CON saving throw against the caster's spell save DC or fall unconscious for 1 minute.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes 2 Slam attacks.<br><br><b>Slam</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 bludgeoning damage."
+    },
+    {
+        "name": "Ankheg",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage plus 1d6 acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.<br><br><b>Acid Spray (1/S)</b>. This monster spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 DEX saving throw, taking 3d6 acid damage on a failed save, or half as much damage on a successful one."
+    },
+    {
+        "name": "Banshee",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Incorporeal Movement</b>. This monster can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if she ends her turn inside an object.<br><br><u>Actions</u><br><br><b>Corrupting Touch</b>. Melee Spell Attack: +4 to hit, reach 5 ft., one target. Hit: 3d6 + 2 necrotic damage.<br><br><b>Horrifying Visage (1/S)</b>. Each non-undead creature within 60 feet of this monster that can see it must succeed on a DC 13 WIS saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, with disadvantage if this monster is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to Horrifying Visage for the next 24 hours."
+    },
+    {
+        "name": "Bulette",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Standing Leap</b>. This monster's long jump is up to 30 feet and its high jump is up to 15 feet, with or without a running start.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 4d12 + 4 piercing damage.<br><br><b>Deadly Leap</b>. If this monster jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 STR or DEX saving throw or be knocked prone and take 3d6 + 4 bludgeoning damage plus 3d6 + 4 slashing damage. On a successful save, the creature takes half the damage, isn't knocked prone, and is pushed 5 feet out of this monster's space into an unoccupied space of the creature's choice."
+    },
+    {
+        "name": "Chuul",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Sense Magic</b>. This monster senses magic within 120 feet of it at will.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and this monster doesn't have two other creatures grappled.<br><br><b>Tentacles</b>. One creature grappled by this monster must succeed on a DC 13 CON saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "name": "Gelatinous Cube",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Ooze Cube</b>. This monster takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to Engulf and has disadvantage on the saving throw.<br><br><u>Actions</u><br><br><b>Pseudopod</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 3d6 acid damage.<br><br><b>Engulf</b>. Whenever this monster enters a creature's space, the creature must make a DC 12 DEX saving throw. On a successful save, the creature can choose to be pushed 5 feet back or to the side of this monster. A creature that chooses not to be pushed suffers the consequences of a failed saving throw. On a failed save, this monster enters the creature's space, and the creature takes 3d6 acid damage and is engulfed. The engulfed creature can't breathe, is restrained, and takes 6d6 acid damage at the start of each of the cube's turns. When this monster moves, the engulfed creature moves with it. An engulfed creature can try to escape by taking an action to make a DC 12 STR check. On a success, the creature escapes and enters a space of its choice within 5 feet of this monster."
+    },
+    {
+        "name": "Grick",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Stone Camouflage</b>. This monster has advantage on Stealth checks made to hide in rocky terrain.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Tentacle attack. If it hits, it can make a Beak attack against the same target.<br><br><b>Tentacles</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d6 + 2 slashing damage.<br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
+    },
+    {
+        "name": "Harpy",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2d4 + 1 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Every humanoid and giant within 300 feet that can hear the song must succeed on a DC 11 WIS saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time.<br><br>While charmed by the harpy, a target is incapacitated. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks. A charmed target can repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it. A target that successfully saves is immune to the song."
+    },
+    {
+        "name": "Merrow",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 1d8 + 4 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d4 + 4 slashing damage.<br><br><b>Harpoon</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a Huge or smaller creature, it must succeed on a STR contest against this monster or be pulled up to 20 feet toward this monster."
+    },
+    {
+        "name": "Minotaur",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 2d8 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be pushed up to 10 feet away and knocked prone.<br><br><b>Reckless</b>. At the start of its turn, this monster can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn.<br><br><u>Actions</u><br><br><b>Greataxe</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d12 + 4 slashing damage.<br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
+    },
+    {
+        "name": "Mummy",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 bludgeoning damage plus 3d6 necrotic damage. If the target is a creature, it must succeed on a DC 12 CON saving throw or be cursed with mummy rot. The cursed target can't regain hit points. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic.<br><br><b>Dreadful Glare (1/S)</b>. This monster targets one creature it can see within 60 feet of it. If the target can see this monster, it must succeed on a DC 11 WIS saving or become frightened until the end of this monster's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to Dreadful Glare for the next 24 hours."
+    },
+    {
+        "name": "Owlbear",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Keen Sight and Smell</b>. This monster has advantage on Perception checks that rely on sight or smell.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak attack and a Claw attack.<br><br><b>Beak</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 1d10 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d8 + 5 slashing damage."
+    },
+    {
+        "name": "Phase Spider",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Ethereal Jaunt</b>. As a bonus action, this monster can magically shift from the Material Plane to the Ethereal Plane, or vice versa.<br><br><b>Spider Climb</b>. This monster can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.<br><br><b>Web Walker</b>. This monster ignores movement restrictions caused by webbing.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1d10 + 2 piercing damage, and the target must make a DC 11 CON saving throw, taking 4d8 poison damage on a failed save, or half as much on a successful one."
+    },
+    {
+        "name": "Winter Wolf",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be knocked prone.<br><br><b>Cold Breath (1/S)</b>. Exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC 12 DEX saving throw, taking 4d8 cold damage on a failed save, or half as much damage on a successful one."
+    },
+    {
+        "name": "Archmage",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Preparations</b>. This monster casts Mage Armor, Stoneskin, and Mind Blank on itself when summoned.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Dagger</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d4 + 2 piercing damage."
+    },
+    {
+        "name": "Iron Golem",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Fire Absorption</b>. Whenever this monster is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.<br><br><b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 3d8 + 7 bludgeoning damage.<br><br><b>Poison Breath (1/S)</b>. Exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 19 CON saving throw, taking 10d8 poison damage on a failed save, or half as much damage on a successful one."
+    },
+    {
+        "name": "Lich",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d6 cold damage. The target must succeed on a DC 18 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.<br><br><b>Cantrip</b>. This monster casts a cantrip of your choice from the Wizard spell list."
+    },
+    {
+        "name": "Roc",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak and a Talon attack.<br><br><b>Beak</b>. Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 4d8 + 9 piercing damage.<br><br><b>Talons</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 4d6 + 9 slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and the roc can't use its talons on another target."
+    },
+    {
+        "name": "Stone Golem",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d8 + 6 bludgeoning damage.<br><br><b>Slow (1/S)</b>. Targets one or more creatures it can see within 10 feet of it. Each target must make a DC 17 WIS saving throw against this magic. On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "name": "Treant",
+        "rarity": "SSR",
+        "actionCost": "",
+        "cardType": "Monster",
+        "description": "<b>Siege Monster</b>. This monster deals double damage to objects and structures.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Rock</b>. Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target. Hit: 4d10 + 6 bludgeoning damage.<br><br><b>Animate Trees (1/S)</b>. This monster animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have INT and CHA scores of 1, they can't speak, and they have only the Slam action option. This monster can take a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
+    },
+    {
+        "name": "Acid Arrow",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn."
+    },
+    {
+        "name": "Blindness/Deafness",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You can blind or deafen a foe. Choose one creature that you can see within range to make a CON saving throw. If it fails, the target is either blinded or deafened (your choice) for 1 minute. At the end of each of its turns, the target can make a CON saving throw. On a success, the spell ends."
+    },
+    {
+        "name": "Burning Hands",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a DEX saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one.<br><br>The fire ignites any flammable objects in the area that aren't being worn or carried."
+    },
+    {
+        "name": "Charm Person",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A humanoid you see within range must make a WIS saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
+    },
+    {
+        "name": "Chromatic Orb",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You hurl a sphere of energy at a creature that you can see within range. You choose acid, cold, fire, lightning, poison, or thunder for the type of orb you create, and then make a ranged spell attack against the target. If the attack hits, the creature takes 3d8 damage of the type you chose."
+    },
+    {
+        "name": "Detect Magic",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "For 10 minutes, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any."
+    },
+    {
+        "name": "Earth Tremor",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You cause a tremor in the ground within 10 feet. Each creature other than you in that area must make a DEX saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone. If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared."
+    },
+    {
+        "name": "Earthbind",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Choose one creature you can see within 300 feet. Yellow strips of magical energy loop around the creature. The target must succeed on a STR saving throw, or its flying speed (if any) is reduced to 0 feet for 1 minute. An airborne creature affected by this spell safely descends at 60 feet per round until it reaches the ground or the spell ends."
+    },
+    {
+        "name": "Feather Fall",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Choose up to five falling creatures within 60 feet. A falling creature's rate of descent slows to 60 feet per round for 1 minute. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature."
+    },
+    {
+        "name": "Grease",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Slick grease covers the ground in a 10-foot square centered on a point within 60 feet and turns it into difficult terrain for the duration.<br><br>When the grease appears, each creature standing in its area must succeed on a DEX saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a DEX saving throw or fall prone."
+    },
+    {
+        "name": "Hold Person",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Choose a humanoid that you can see within 60 feet. The target must succeed on a WIS saving throw or be paralyzed for 1 minute. At the end of each of its turns, the target can make another WIS saving throw. On a success, the spell ends on the target."
+    },
+    {
+        "name": "Magic Missile",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You create four glowing darts of magical force. Each dart hits a creature of your choice that you can see within 120 feet. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several."
+    },
+    {
+        "name": "Mage Armor",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action."
+    },
+    {
+        "name": "Web",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You conjure a mass of thick, sticky webbing at a point of your choice within 60 feet. The webs fill a 20-foot cube from that point for 1 hour. The webs are difficult terrain and lightly obscure their area.<br><br>If the webs aren't anchored between two solid masses or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn.<br><br>Each creature that starts its turn in the webs or that enters them during its turn must make a DEX saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.<br><br>A creature restrained by the webs can use its action to make a STR check against your spell save DC. If it succeeds, it is no longer restrained.<br><br>The webs are flammable. Any webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire."
+    },
+    {
+        "name": "Banishment",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a CHA saving throw or be banished.<br><br>While banished the target is incapacitated. The target remains there until the spell ends or after 1 minute, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied."
+    },
+    {
+        "name": "Cone of Cold",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a CON saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.<br><Br>A creature killed by this spell becomes a frozen statue until it thaws."
+    },
+    {
+        "name": "Fireball",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A bright streak flashes from your pointing finger to a point you choose within 150 feet and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a DEX saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one."
+    },
+    {
+        "name": "Immolation",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Flames wreathe one creature you can see within 90 feet. The target must make a DEX saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for 1 minute. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can't be extinguished by nonmagical means.<br><br>If damage from this spell kills a target, the target is turned to ash."
+    },
+    {
+        "name": "Lightning Bolt",
+        "rarity": "SR",
+        "actionCost": "",
+        "cardType": "Spell",
+        "description": "A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a DEX saving throw. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one. The lightning ignites flammable objects in the area that aren't being worn or carried."
+    },
+    {
+        "name": "Misty Step",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Spell",
+        "description": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see."
+    },
+    {
+        "name": "Stoneskin",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "This spell turns the flesh of a willing creature you touch as hard as stone. For 1 hour or until the spell ends, the target has resistance to non-magical bludgeoning, piercing, and slashing damage."
+    },
+    {
+        "name": "Power Word Kill",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You utter a word of power that can compel one creature you can see within 60 feet to die instantly. If the creature you choose has 100 hit points or fewer, it dies. Otherwise, the spell has no effect."
+    },
+    {
+        "name": "Shield",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "An invisible barrier of magical force appears and protects the target. Until the start of your next turn, the target has a +5 bonus to AC, including against the triggering attack, and takes no damage from magic missile.",
+        "reactionTrigger": "You or an ally is hit by an attack or targeted by magic missiles"
+    },
+    {
+        "name": "Counterspell",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.",
+        "reactionTrigger": "A creature within 60 ft. of you casts a spell"
+    },
+    {
+        "name": "Redirect",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "Your mastery over the arcane lets you alter the course of spells targeted at you. If the spell is of 5th level or lower you alter its course and can send it back to the initial caster as if it were your own spell; having to make a spell attack roll or the initial caster now making the saving throw. If the spell if of 6th level or higher, make an ability check using your spellcasting ability with a DC equal to 10 + the spell's level. On a success, you alter the spell's course. On a failure, the spell maintains its original course towards affecting you.",
+        "reactionTrigger": "Hit by a ranged attack or spell"
+    },
+    {
+        "name": "Call of the Beast",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Search your deck for a <i>Beast</i> monster card and add it your hand. Shuffle your deck afterward. You can only play this card if you have a <i>Beast</i> monster on the field."
+    },
+    {
+        "name": "Law of Equivalent Exchange",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Discard a card from your hand. Then, draw 1 card from your deck."
+    },
+    {
+        "name": "Monster Sacrifice",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Discard a Monster card from your hand. Then, search your deck for a Monster card with the same Rarity as the one you discarded and add it to your hand. Shuffle your deck afterward."
+    },
+    {
+        "name": "Greedy Looting",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Draw 2 cards from your deck."
+    },
+    {
+        "name": "Mental Reset",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Shuffle your hand into your deck. Then, draw the same amount of cards that you had in your hand."
+    },
+    {
+        "name": "Mouth of the Beholder",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "This card is required for the activation of “Eye of the Beholder”. When that card is activated, discard this card. You can only have 1 copy of this card in your deck."
+    },
+    {
+        "name": "Reanimate",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Discard a card from your hand. Search your discard pile for any Monster card and put it in play."
+    },
+    {
+        "name": "Repairs",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Choose one of your Construct Monsters on the field and heal 3d8 damage from it."
+    },
+    {
+        "name": "Rewind the Clock",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Shuffle your discard pile into your deck."
+    },
+    {
+        "name": "Tentacles of the Beholder",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "This card is required for the activation of “Eye of the Beholder”. When that card is activated, discard this card. You can only have 1 copy of this card in your deck."
+    },
+    {
+        "name": "Eye of the Beholder",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "If you play this card without “Tentacles of the Beholder” and “Mouth of the Beholder” in your hand, this card does nothing. Make an attack that deals 12d10 true damage to a target creature."
+    },
+    {
+        "name": "Mind's Eye",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Search your deck for a card and put it into your hand. Shuffle your deck afterward."
+    }
+]

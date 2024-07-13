@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DnD TCG Simulator</title>
+</head>
+<body>
+    <button id="encyclopedia">Encyclopedia</button>
+    <button id="collection">Collection</button>
+    <button id="simulator">Simulator</button>
+    <script>
+        let buttons = document.querySelectorAll("button");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                window.location.href = `./${btn.id}`;
+            });
+        });
+    </script>
+</body>
+</html>
