@@ -24,7 +24,7 @@ function createCard(card) {
 
     newCard.addEventListener("click", () => {
         var drawSound = new Audio('../assets/draw.mp3');
-        drawSound.volume = 0.6;
+        drawSound.volume = 0.75;
         drawSound.play();
 
         console.log("show", card);
@@ -36,7 +36,7 @@ function createCard(card) {
             let cardPopupImageFacingFront = true;
             cardPopupImage.onclick = () => {
                 var flipSound = new Audio('../assets/flip.mp3');
-                flipSound.volume = 0.4;
+                flipSound.volume = 0.55;
                 flipSound.play();
                 if (cardPopupImageFacingFront) {
                     cardPopupImage.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}-back.png)`;
@@ -71,4 +71,14 @@ cardPopupModal.addEventListener("click", (e) => {
 function preloadImage(url) {
     const img = new Image();
     img.src = url;
+}
+
+document.getElementById("backToTop").addEventListener("click", backToTop);
+
+function backToTop() {
+    // Smooth scroll to the top of the document
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
