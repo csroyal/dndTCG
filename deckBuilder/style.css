@@ -1,0 +1,57 @@
+#startContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#userDeckList {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#createNewDeck, .user-deck {
+    background-color: rgb(100,100,100);
+    border: 2px solid black;
+    color: white;
+    padding: 24px 36px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    width: 90%;
+    margin: 12px 0px;
+}
+
+#createNewDeck {
+    text-align: center;
+}
+
+#createNewDeck i {
+    margin-right: 4px;
+}
+
+#createNewDeck:hover, .user-deck:hover {
+    background-color: rgb(125,125,125);
+}
+
+.user-deck {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.deck-del-btn {
+    background-color: rgb(200,45,45);
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.deck-del-btn:hover {
+    background-color: rgb(225,70,70);
+}
