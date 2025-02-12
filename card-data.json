@@ -467,7 +467,31 @@
         "actionCost": "Reaction",
         "cardType": "Reaction",
         "description": "You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames. The creature must make a DEX saving throw. It takes 2d10 fire damage on a failed save, or half as much damage on a successful one.",
-        "reactionTrigger": "You are damaged by a creature within 60 feet of you that you can see"
+        "reactionTrigger": "You or an ally are damaged by a creature within 60 feet of them that they can see"
+    },
+    {
+        "name": "Pit Trap",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The creature that moved near you falls into a spiked pit trap. The creature must make a DEX saving throw. It takes 2d8 piercing damage and its movement speed is reduced to 0 on a failed save, or half as much damage and no movement speed reduction on a successful one.",
+        "reactionTrigger": "A creature moves within 10 feet of you or an ally"
+    },
+    {
+        "name": "Poison Dart Trap",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The creature that moved near you succumbs to a volley of poisonous darts. The creature must make a DEX saving throw. It takes 1d4 piercing damage, 1d4 poison damage, and is Poisoned on a failed save, or half as much damage on a successful one and is not Poisoned.",
+        "reactionTrigger": "A creature moves within 10 feet of you or an ally"
+    },
+    {
+        "name": "Reroll",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The player that just rolled rerolls a die involved in the roll.",
+        "reactionTrigger": "Any player rolls a die"
     },
     {
         "name": "Shield",
@@ -483,7 +507,15 @@
         "actionCost": "Reaction",
         "cardType": "Reaction",
         "description": "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect.",
-        "reactionTrigger": "A creature within 60 ft. of you casts a spell"
+        "reactionTrigger": "A creature within 60 feet of you casts a spell"
+    },
+    {
+        "name": "Necromancer's Gravecall",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The words of the Necromancer flow through you and command your servant to continue its fight. The creature that was just killed is revived. If the creature is of SR rarity, then it is revived with half of its maximum HP.",
+        "reactionTrigger": "An SR rarity or lower Undead monster on the field under your control is killed"
     },
     {
         "name": "Redirect",
@@ -491,7 +523,15 @@
         "actionCost": "Reaction",
         "cardType": "Reaction",
         "description": "Your mastery over the arcane lets you alter the course of spells targeted at you. If the spell is of 5th level or lower you alter its course and can send it back to the initial caster as if it were your own spell; having to make a spell attack roll or the initial caster now making the saving throw. If the spell if of 6th level or higher, make an ability check using your spellcasting ability with a DC equal to 10 + the spell's level. On a success, you alter the spell's course. On a failure, the spell maintains its original course towards affecting you.",
-        "reactionTrigger": "Hit by a ranged attack or spell"
+        "reactionTrigger": "You or an ally is hit by a ranged attack or spell"
+    },
+    {
+        "name": "Siphon Life",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "You siphon the life of your own wicked servants. The monster that was just attacked receives 1d8 necrotic damage and you draw a card.",
+        "reactionTrigger": "A monster on the field under your control is hit by an attack"
     },
     {
         "name": "Bardic Inspiration",
@@ -550,18 +590,25 @@
         "description": "Replace one of your <i>Beast</i> monsters on the field with a <i>Beast</i> monster of the same rarity in your hand. The new monster cannot take an action until your next turn."
     },
     {
+        "name": "Final Will & Testament",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Draw 2 cards. You can only play this card if one of your monsters died on the field last turn."
+    },
+    {
         "name": "Fortune Teller",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Utility",
-        "description": "Look at the top 4 cards of your deck. Put a card you find there into your hand. Shuffle your deck afterward."
+        "description": "Look at the top 4 cards of your deck. Put a card you find there into your hand. Shuffle the remaining cards back into your deck."
     },
     {
         "name": "Gambler",
         "rarity": "SR",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Shuffle your hand into your deck. Roll a d20. If you rolled higher than a 10, draw 7 cards. If you rolled lower than a 10, draw 1 card."
+        "description": "Shuffle your hand into your deck. Roll a d20. If you rolled higher than a 10, draw 6 cards. If you rolled lower than a 10, draw 1 card."
     },
     {
         "name": "Greedy Looting",
@@ -569,6 +616,20 @@
         "actionCost": "Action",
         "cardType": "Utility",
         "description": "Draw 2 cards from your deck."
+    },
+    {
+        "name": "Luminous Crystal",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Look at the bottom 3 cards of your deck. Put one into your hand, and put the remaining two on top of your deck in any order."
+    },
+    {
+        "name": "Magic Librarian",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Draw a card for each Spell card in your hand."
     },
     {
         "name": "Mental Reset",
@@ -583,6 +644,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "This card is required for the activation of “Eye of the Beholder”. When that card is activated, discard this card. You can only have 1 copy of this card in your deck."
+    },
+    {
+        "name": "Orb of Dragonkind",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Choose 1: <br><ul><li>Choose one of your <i>Dragon</i> monsters on the field. That monster gains an extra action during this turn.</li><li>Search your deck for a <i>Dragon</i> monster card and add it to your hand. Shuffle your deck afterward.</li></ul>"
     },
     {
         "name": "Reanimate",
@@ -639,5 +707,12 @@
         "actionCost": "Action",
         "cardType": "Utility",
         "description": "Search your deck for a card and put it into your hand. Shuffle your deck afterward."
+    },
+    {
+        "name": "The Ace Up Your Sleeve",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Choose 1:<br><ul><li>Look at the top 5 cards of your deck. Put 2 of them into your hand, and shuffle the remaining cards into your deck.</li><li>When a monster on the field under your control deals damage during this turn, the attack deals an extra 6d6 damage.</li><li>Search your deck for a Monster or Spell card and put it into your hand. Shuffle your deck afterward.</li></ul>"
     }
 ]

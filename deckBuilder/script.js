@@ -1,17 +1,11 @@
-let cardData;
+let startContainer = document.getElementById("startContainer");
 let createNewDeck = document.getElementById("createNewDeck");
 let userDeckList = document.getElementById("userDeckList");
-
-fetch('../card-data.json')
-    .then((response) => response.json())
-    .then((json) => {
-        cardData = json;
-        console.log(cardData);
-
-        cardData.forEach(card => {
-        });
-    }
-);
+let deckEditor = document.getElementById("deckEditor");
+let deckEditorName = document.getElementById("deckEditorName");
+let backToDeckList = document.getElementById("backToDeckList");
+let currentDeckListing = document.getElementById("currentDeckListing");
+let cardCollection = document.getElementById("cardCollection");
 
 let user_collection = JSON.parse(localStorage.getItem("DNDTCG_USER_COLLECTION"));
 let user_decks = JSON.parse(localStorage.getItem("DNDTCG_USER_DECKS"));
@@ -26,6 +20,10 @@ if (user_decks) {
 
 createNewDeck.addEventListener("click", () => {
     let deckName = prompt("Enter a name for your new deck:");
+    if (!deckName) {
+        alert("Please enter a name when creating a new deck.");
+        return;
+    }
     for (d in user_decks) {
         if (deckName === user_decks[d].name) {
             alert("A deck with that name already exists.");
@@ -46,6 +44,23 @@ function addDeckToDecklist(deck) {
     let deckDiv = document.createElement("div");
     deckDiv.classList.add("user-deck");
     deckDiv.innerHTML = deck.name;
+    deckDiv.addEventListener("click", (e) => {
+        if (e.target.classList.contains("user-deck")) {
+            console.log("open deck", deck.name);
+            startContainer.style.display = "none";
+            deckEditor.style.display = "flex";
+            deckEditorName.innerHTML = deck.name;
+
+            if (!user_collection) {
+                // noCards.style.display = "flex";
+            } else {
+                user_collection = masterSort(user_collection);
+                user_collection.forEach(card => {
+                    addToCardCollection(card);
+                });
+            }
+        }
+    });
 
     let delBtn = document.createElement("div");
     delBtn.classList.add("deck-del-btn");
@@ -68,4 +83,17 @@ function addDeckToDecklist(deck) {
     deckDiv.append(delBtn);
 
     userDeckList.append(deckDiv);
+}
+
+backToDeckList.addEventListener("click", () => {
+    startContainer.style.display = "flex";
+    deckEditor.style.display = "none";
+});
+
+function addToCardCollection(card) {
+    let newCardDiv = document.createElement("div");
+    newCardDiv.classList.add("card-collection-card");
+    newCardDiv.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
+
+    cardCollection.append(newCardDiv);
 }

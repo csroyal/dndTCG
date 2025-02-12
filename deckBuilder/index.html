@@ -8,12 +8,25 @@
     <title>Deck Builder - DnD TCG</title>
 </head>
 <body>
-    <h1>Deck Builder</h1>
+    <a id="backToMain" href="../index.html"><i class="bi bi-arrow-left"></i> Back</a>
     <div id="startContainer">
+        <h1>Deck Builder</h1>
         <div id="userDeckList">
             <div id="createNewDeck"><i class="bi bi-plus-circle"></i> Create a new deck</div>
         </div>
     </div>
+    <div id="deckEditor">
+        <div id="deckEditorHeader">
+            <a id="backToDeckList"><i class="bi bi-arrow-left"></i> Back to Deck List</a>
+            <h1>Editing <span id="deckEditorName"></span></h1>
+            <div id="saveDeck"><i class="bi bi-floppy"></i> Save</div>
+        </div>
+        <div id="deckEditorBody">
+            <div id="currentDeckListing"></div>
+            <div id="cardCollection"></div>
+        </div>
+    </div>
+    <script src="../index.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

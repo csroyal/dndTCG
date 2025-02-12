@@ -1,4 +1,3 @@
-let cardData;
 let cardPopupModal = document.getElementById("cardPopupModal");
 let cardPopupImage = document.getElementById("cardPopupImage");
 let cardPopupDescription = document.getElementById("cardPopupDescription");
@@ -53,32 +52,10 @@ function createCard(card) {
     document.getElementById("encyclopediaContainer").append(newCard);
 }
 
-function cardNameToImageName(input) {
-    let lowerCaseString = input.toLowerCase();
-    let result = lowerCaseString
-        .replace(/\s+/g, '-')
-        .replace(/'/g, '')
-        .replace(/\//g, '-');
-    return result;
-}
-
 cardPopupModal.addEventListener("click", (e) => {
     if (e.target.id === "cardPopupModal") {
         cardPopupModal.style.display = "none";
     }
 });
 
-function preloadImage(url) {
-    const img = new Image();
-    img.src = url;
-}
-
 document.getElementById("backToTop").addEventListener("click", backToTop);
-
-function backToTop() {
-    // Smooth scroll to the top of the document
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
