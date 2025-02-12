@@ -46,6 +46,9 @@ function addToCardCollection(card) {
     let newCardDiv = document.createElement("div");
     newCardDiv.classList.add("card-collection-card");
     newCardDiv.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
+    newCardDiv.addEventListener("click", () => {
+        if (confirm("Remove " + card.name + " from your collection?")) removeFromCollection(card);
+    });
 
     cardCollection.append(newCardDiv);
 }
@@ -80,24 +83,7 @@ saveToCollection.addEventListener("click", () => {
         return;
     }
     if (confirm("Add selected cards to collection?")) {
-        addToCollectionModalContainer.style.display = "none";
-        console.log(addingToCollectionArr);
-        for (c in addingToCollectionArr) {
-            user_collection.push(addingToCollectionArr[c]);
-            document.getElementById("cardListCard" + cardNameToImageName(addingToCollectionArr[c].name)).remove();
-        }
-        user_collection = masterSort(user_collection);
-        while (cardCollection.firstChild) {
-            cardCollection.removeChild(cardCollection.firstChild);
-        }
-        user_collection.forEach(card => {
-            addToCardCollection(card);
-        });
-        localStorage.setItem("DNDTCG_USER_COLLECTION", JSON.stringify(user_collection));
-
-        cardCollection.style.display = "flex";
-        noCards.style.display = "none";
-        addingToCollectionArr = [];
+        saveAndDisplayCollection();
     }
 });
 
@@ -129,3 +115,28 @@ document.getElementById("clearCollection").addEventListener("click", () => {
         user_collection = [];
     }
 });
+
+function saveAndDisplayCollection() {
+    addToCollectionModalContainer.style.display = "none";
+    for (c in addingToCollectionArr) {
+        user_collection.push(addingToCollectionArr[c]);
+        document.getElementById("cardListCard" + cardNameToImageName(addingToCollectionArr[c].name)).remove();
+    }
+    user_collection = masterSort(user_collection);
+    while (cardCollection.firstChild) {
+        cardCollection.removeChild(cardCollection.firstChild);
+    }
+    user_collection.forEach(card => {
+        addToCardCollection(card);
+    });
+    localStorage.setItem("DNDTCG_USER_COLLECTION", JSON.stringify(user_collection));
+
+    cardCollection.style.display = "flex";
+    noCards.style.display = "none";
+    addingToCollectionArr = [];
+}
+
+function removeFromCollection(card) {
+    user_collection = user_collection.filter(obj => obj !== card);
+    saveAndDisplayCollection();
+}
