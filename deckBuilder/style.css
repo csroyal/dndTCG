@@ -107,6 +107,16 @@ html, body {
     width: 60%;
     height: 95%;
     overflow-y: auto;
+    position: relative;
+}
+
+#deckCount {
+    /* position: absolute;
+    bottom: 4px;
+    right: 8px; */
+    font-size: 24px;
+    z-index: 2;
+    text-align: center;
 }
 
 #cardCollection {
@@ -121,7 +131,8 @@ html, body {
     overflow-y: auto;
 }
 
-.card-collection-card {
+.card-collection-card, .card-decklist-card {
+    display: inline-flex;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -131,4 +142,9 @@ html, body {
     transition: all 0.25s;
     position: relative;
     border: 2px solid black;
+    cursor: pointer;
+}
+
+.card-collection-card:hover {
+    transform: scale(1.1);
 }

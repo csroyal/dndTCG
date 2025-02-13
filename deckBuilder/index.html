@@ -18,12 +18,18 @@
     <div id="deckEditor">
         <div id="deckEditorHeader">
             <a id="backToDeckList"><i class="bi bi-arrow-left"></i> Back to Deck List</a>
-            <h1>Editing <span id="deckEditorName"></span></h1>
+            <div>
+                <h1>Editing: <span id="deckEditorName"></span></h1>
+                <div id="deckCount"><span id="currentDeckCount">0</span> / 30</div>
+            </div>
             <div id="saveDeck"><i class="bi bi-floppy"></i> Save</div>
         </div>
         <div id="deckEditorBody">
-            <div id="currentDeckListing"></div>
-            <div id="cardCollection"></div>
+            <div id="currentDeckListing">
+            </div>
+            <div id="cardCollection">
+                <div id="noCards">You have no cards in your collection</div>
+            </div>
         </div>
     </div>
     <script src="../index.js"></script>

@@ -2,232 +2,273 @@
     {
         "name": "Axe Beak",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Beast",
         "description": "<u>Actions</u><br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage."
     },
     {
         "name": "Cockatrice",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 1d4 + 1 piercing damage, and the target must succeed on a DC 11 CON saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 1 turn."
     },
     {
         "name": "Cultist",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Humanoid",
         "description": "<b>Dark Devotion</b>. This monster has advantage on saving throws against being charmed or frightened.<br><br><u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) slashing damage."
     },
     {
         "name": "Flame Skull",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<b>Illumination</b>. This monster sheds either dim light in a 15-foot radius, or bright light in a 15-foot radius and dim light for an additional 15 feet. It can switch between the options as an action.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
     },
     {
         "name": "Ghoul",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage. If the target is a creature other than an elf or undead, it must succeed on a DC 10 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
         "name": "Shadow",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<b>Shadow Stealth</b>. While in dim light or darkness, this monster can take the Hide action as a bonus action.<br><br><b>Sunlight Weakness</b>. While in sunlight, this monster has disadvantage on attack rolls, ability checks, and saving throws.<br><br><u>Actions</u><br><br><b>Strength Drain</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 necrotic damage, and the target's STR score is reduced by 1d4 for 2 turns."
     },
     {
         "name": "Skeleton",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<u>Actions</u><br><br><b>Shortsword</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Wolf",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Beast",
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 piercing damage. If the target is a creature, it must succeed on a DC 11 STR saving throw or be knocked prone."
     },
     {
         "name": "Zombie",
         "rarity": "R",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<b>Undead Fortitude</b>. If damage reduces this monster to 0 hit points, it must make a CON saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, this monster drops to 1 hit point instead.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 bludgeoning damage."
     },
     {
         "name": "Animated Armor",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Construct",
         "description": "<b>Antimagic Susceptibility</b>. This monster is incapacitated while in the area of an antimagic field. If targeted by dispel magic, this monster must succeed on a CON saving throw against the caster's spell save DC or fall unconscious for 1 minute.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes 2 Slam attacks.<br><br><b>Slam</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 bludgeoning damage."
     },
     {
         "name": "Ankheg",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage plus 1d6 acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.<br><br><b>Acid Spray (1/S)</b>. This monster spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 DEX saving throw, taking 3d6 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Banshee",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<b>Incorporeal Movement</b>. This monster can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if she ends her turn inside an object.<br><br><u>Actions</u><br><br><b>Corrupting Touch</b>. Melee Spell Attack: +4 to hit, reach 5 ft., one target. Hit: 3d6 + 2 necrotic damage.<br><br><b>Horrifying Visage (1/S)</b>. Each non-undead creature within 60 feet of this monster that can see it must succeed on a DC 13 WIS saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, with disadvantage if this monster is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to Horrifying Visage for the next 24 hours."
     },
     {
         "name": "Blue Dragon Wyrmling",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Dragon",
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d10 + 3 piercing damage plus 1d6 lightning damage.<br><br><b>Lightning Breath (1/S)</b>. This monster exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 12 DEX saving throw, taking 4d10 lightning damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Bulette",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Standing Leap</b>. This monster's long jump is up to 30 feet and its high jump is up to 15 feet, with or without a running start.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 4d12 + 4 piercing damage.<br><br><b>Deadly Leap</b>. If this monster jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 STR or DEX saving throw or be knocked prone and take 3d6 + 4 bludgeoning damage plus 3d6 + 4 slashing damage. On a successful save, the creature takes half the damage, isn't knocked prone, and is pushed 5 feet out of this monster's space into an unoccupied space of the creature's choice."
     },
     {
         "name": "Cave Bear",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Beast",
         "description": "<b>Keen Smell</b>. This monster has advantage on Perception checks that rely on smell.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and a Claw attack.<br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 1d8 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d6 + 5 slashing damage."
     },
     {
         "name": "Chuul",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Aberration",
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Sense Magic</b>. This monster senses magic within 120 feet of it at will.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and this monster doesn't have two other creatures grappled.<br><br><b>Tentacles</b>. One creature grappled by this monster must succeed on a DC 13 CON saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "name": "Fire Elemental",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Elemental",
+        "description": "<b>Illumination</b>. This monster sheds bright light in a 30-foot radius and dim light in an additional 30 feet.<br><br><b>Water Susceptibility</b>. For every 5 feet this monster moves in water, or for every gallon of water splashed on it, it takes 1 cold damage.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes two Touch attacks.<br><br><b>Touch</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 1d10 fire damage at the start of each of its turns."
     },
     {
         "name": "Gelatinous Cube",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Ooze",
         "description": "<b>Ooze Cube</b>. This monster takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to Engulf and has disadvantage on the saving throw.<br><br><u>Actions</u><br><br><b>Pseudopod</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 3d6 acid damage.<br><br><b>Engulf</b>. Whenever this monster enters a creature's space, the creature must make a DC 12 DEX saving throw. On a successful save, the creature can choose to be pushed 5 feet back or to the side of this monster. A creature that chooses not to be pushed suffers the consequences of a failed saving throw. On a failed save, this monster enters the creature's space, and the creature takes 3d6 acid damage and is engulfed. The engulfed creature can't breathe, is restrained, and takes 6d6 acid damage at the start of each of the cube's turns. When this monster moves, the engulfed creature moves with it. An engulfed creature can try to escape by taking an action to make a DC 12 STR check. On a success, the creature escapes and enters a space of its choice within 5 feet of this monster."
     },
     {
         "name": "Giant Eagle",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Beast",
         "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster a Beak attack and a Talon attack.<br><br><b>Beak</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d6 + 3 piercing damage.<br><br><b>Talons</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage."
     },
     {
         "name": "Grick",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Stone Camouflage</b>. This monster has advantage on Stealth checks made to hide in rocky terrain.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Tentacle attack. If it hits, it can make a Beak attack against the same target.<br><br><b>Tentacles</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d6 + 2 slashing damage.<br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Harpy",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2d4 + 1 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Every humanoid and giant within 300 feet that can hear the song must succeed on a DC 11 WIS saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time.<br><br>While charmed by the harpy, a target is incapacitated. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks. A charmed target can repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it. A target that successfully saves is immune to the song."
     },
     {
         "name": "Merrow",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 1d8 + 4 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d4 + 4 slashing damage.<br><br><b>Harpoon</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a Huge or smaller creature, it must succeed on a STR contest against this monster or be pulled up to 20 feet toward this monster."
     },
     {
         "name": "Minotaur",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 2d8 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be pushed up to 10 feet away and knocked prone.<br><br><b>Reckless</b>. At the start of its turn, this monster can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn.<br><br><u>Actions</u><br><br><b>Greataxe</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d12 + 4 slashing damage.<br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
     },
     {
         "name": "Mummy",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 bludgeoning damage plus 3d6 necrotic damage. If the target is a creature, it must succeed on a DC 12 CON saving throw or be cursed with mummy rot. The cursed target can't regain hit points. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic.<br><br><b>Dreadful Glare (1/S)</b>. This monster targets one creature it can see within 60 feet of it. If the target can see this monster, it must succeed on a DC 11 WIS saving or become frightened until the end of this monster's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to Dreadful Glare for the next 24 hours."
     },
     {
         "name": "Owlbear",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Keen Sight and Smell</b>. This monster has advantage on Perception checks that rely on sight or smell.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak attack and a Claw attack.<br><br><b>Beak</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 1d10 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d8 + 5 slashing damage."
     },
     {
         "name": "Phase Spider",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Ethereal Jaunt</b>. As a bonus action, this monster can magically shift from the Material Plane to the Ethereal Plane, or vice versa.<br><br><b>Spider Climb</b>. This monster can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.<br><br><b>Web Walker</b>. This monster ignores movement restrictions caused by webbing.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1d10 + 2 piercing damage, and the target must make a DC 11 CON saving throw, taking 4d8 poison damage on a failed save, or half as much on a successful one."
     },
     {
         "name": "Winter Wolf",
         "rarity": "SR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be knocked prone.<br><br><b>Cold Breath (1/S)</b>. Exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC 12 DEX saving throw, taking 4d8 cold damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Adult Black Dragon",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Dragon",
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and two Claw attacks.<br><br><b>Bite</b>. Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 2d10 + 6 piercing damage plus 1d8 acid damage.<br><br><b>Claw</b>. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 2d6 + 6 slashing damage.<br><br><b>Acid Breath (1/S)</b>. This monster exhales acid in a 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 DEX saving throw, taking 12d8 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Archmage",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Humanoid",
         "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Preparations</b>. This monster casts Mage Armor, Stoneskin, and Mind Blank on itself when summoned.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Dagger</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d4 + 2 piercing damage."
     },
     {
         "name": "Iron Golem",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Construct",
         "description": "<b>Fire Absorption</b>. Whenever this monster is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.<br><br><b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 3d8 + 7 bludgeoning damage.<br><br><b>Poison Breath (1/S)</b>. Exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 19 CON saving throw, taking 10d8 poison damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Lich",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Undead",
         "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d6 cold damage. The target must succeed on a DC 18 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.<br><br><b>Cantrip</b>. This monster casts a cantrip of your choice from the Wizard spell list."
     },
     {
         "name": "Roc",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Monstrosity",
         "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak and a Talon attack.<br><br><b>Beak</b>. Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 4d8 + 9 piercing damage.<br><br><b>Talons</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 4d6 + 9 slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and the roc can't use its talons on another target."
     },
     {
         "name": "Stone Golem",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Construct",
         "description": "<b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d8 + 6 bludgeoning damage.<br><br><b>Slow (1/S)</b>. Targets one or more creatures it can see within 10 feet of it. Each target must make a DC 17 WIS saving throw against this magic. On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
         "name": "Treant",
         "rarity": "SSR",
-        "actionCost": "",
+        "actionCost": "Action",
         "cardType": "Monster",
+        "monsterType": "Plant",
         "description": "<b>Siege Monster</b>. This monster deals double damage to objects and structures.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Rock</b>. Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target. Hit: 4d10 + 6 bludgeoning damage.<br><br><b>Animate Trees (1/S)</b>. This monster animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have INT and CHA scores of 1, they can't speak, and they have only the Slam action option. This monster can take a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
     },
     {
@@ -448,6 +489,13 @@
         "description": "You are immune to all damage for 10 minutes or until the spell ends."
     },
     {
+        "name": "Meteor Swarm",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius sphere centered on each point you choose must make a DEX saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once. The spell damages objects in the area and ignites flammable objects that aren't being worn or carried."
+    },
+    {
         "name": "Power Word Kill",
         "rarity": "SSR",
         "actionCost": "Action",
@@ -460,6 +508,14 @@
         "actionCost": "Action",
         "cardType": "Spell",
         "description": "Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a DEX saving throw. For each target, roll a d8 to determine which color ray affects it. On a 1-5 on the roll, the target takes 10d6 damage on a failed save, or half as much damage on a successful one.<br><br>1. <b>Red</b>. The target takes fire damage.<br><br>2. <b>Orange</b>. The target takes acid damage.<br><br>3. <b>Yellow</b>. The target takes lightning damage.<br><br>4. <b>Green</b>. The target takes poison damage.<br><br>5. <b>Blue</b>. The target takes cold damage.<br><br>6. <b>Indigo</b>. On a failed save, the target is restrained. It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.<br><br>7. <b>Violet</b>. On a failed save, the target is blinded. It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.<br><br>8. <b>Special</b>. The target is struck by two rays. Roll twice more, rerolling any 8."
+    },
+    {
+        "name": "Ferocious Roar",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The beast lets out a terrifying roar. The attacker must make a DC 12 WIS saving throw or become Frightened until the end of its next turn.",
+        "reactionTrigger": "A Beast monster under your control takes damage"
     },
     {
         "name": "Hellish Rebuke",
@@ -510,6 +566,22 @@
         "reactionTrigger": "A creature within 60 feet of you casts a spell"
     },
     {
+        "name": "Dimensional Blockage",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The connection is severed and the teleportation fails, dealing 4d8 force damage to the creature.",
+        "reactionTrigger": "A creature teleports or moves between planes"
+    },
+    {
+        "name": "Lightning Reflexes",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The target of this reaction automatically succeeds on the DEX saving throw. This card can only target one creature, and must be activated before the DEX saving throw is rolled.",
+        "reactionTrigger": "You or an ally are forced to make a DEX saving throw"
+    },
+    {
         "name": "Necromancer's Gravecall",
         "rarity": "SR",
         "actionCost": "Reaction",
@@ -532,6 +604,21 @@
         "cardType": "Reaction",
         "description": "You siphon the life of your own wicked servants. The monster that was just attacked receives 1d8 necrotic damage and you draw a card.",
         "reactionTrigger": "A monster on the field under your control is hit by an attack"
+    },
+    {
+        "name": "Phoenix Rebirth",
+        "rarity": "SSR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The creature is engulfed in flames, only to rise again, reborn from the ashes. Instead of being killed, it is restored to half of its maximum HP. Additionally, at the start of its next turn, it deals 3d6 fire damage to all enemies within 10 feet.",
+        "reactionTrigger": "The HP of a creature within 30 feet of you reduces to 0"
+    },
+    {
+        "name": "Arcane Recharge",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Shuffle up to 2 Spell cards from your discard pile into your deck."
     },
     {
         "name": "Bardic Inspiration",
@@ -562,6 +649,13 @@
         "description": "Discard a card from your hand. Then, draw 1 card from your deck."
     },
     {
+        "name": "Lucky Coin Flip",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Flip a coin. If heads, draw one card. If tails, restore 5 HP."
+    },
+    {
         "name": "Monster Sacrifice",
         "rarity": "R",
         "actionCost": "Bonus Action",
@@ -588,6 +682,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "Replace one of your <i>Beast</i> monsters on the field with a <i>Beast</i> monster of the same rarity in your hand. The new monster cannot take an action until your next turn."
+    },
+    {
+        "name": "Cursed Pact",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Choose one of your monsters on the field. It gains +4 to attack rolls but takes 1d6 necrotic damage at the start of each of your turns."
     },
     {
         "name": "Final Will & Testament",
@@ -657,7 +758,7 @@
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Utility",
-        "description": "Discard a card from your hand. Search your discard pile for any Monster card and put it in play."
+        "description": "Discard a card from your hand. Search your discard pile for any Monster card and put it in your hand."
     },
     {
         "name": "Repairs",
@@ -672,6 +773,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "Shuffle your discard pile into your deck."
+    },
+    {
+        "name": "Summon Greater Undead",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Choose one <i>Undead</i> monster from your discard pile and summon it to the field. If it is of SR rarity or lower, it returns with full HP. If it is SSR rarity, it returns with half HP."
     },
     {
         "name": "Tentacles of the Beholder",
