@@ -128,6 +128,14 @@
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Sense Magic</b>. This monster senses magic within 120 feet of it at will.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and this monster doesn't have two other creatures grappled.<br><br><b>Tentacles</b>. One creature grappled by this monster must succeed on a DC 13 CON saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
+        "name": "Cult High Priest",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Humanoid",
+        "description": "<b>Dark Blessing</b>. Cultist monsters under your control gain +3 to attack rolls.<br><br><u>Actions</u><br><br><b>Sacrificial Dagger</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage.<br><br><b>Blood Offering (1/S)</b>. Sacrifice one of your monsters. If you sacrificed an R rarity monster, heal 1d10 HP and draw a card. If you sacrificed an SR rarity monster, heal 3d8 HP and draw a card. If you sacrificed an SSR rarity monster, heal 6d6 HP and draw 2 cards."
+    },
+    {
         "name": "Fire Elemental",
         "rarity": "SR",
         "actionCost": "Action",
@@ -461,6 +469,20 @@
         "description": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see."
     },
     {
+        "name": "Soul Drain",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You sap the vitality from a creature, using it to restore your own strength. Choose one creature within range. The target must make a CON saving throw. On a failed save, the target takes 4d8 necrotic damage, and you regain hit points equal to half the damage dealt. On a successful save, the target takes half as much damage, and you regain no hit points."
+    },
+    {
+        "name": "Soul Shackles",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You bind a creature's soul with shadowy chains, hindering its ability to act. Choose one creature within 30 feet. The target must make a WIS saving throw. On a failed save, it is paralyzed until the end of its next turn. While paralyzed in this way, the target takes 2d6 necrotic damage at the start of each of its turns.<br><br>At the start of each of its turns, the target can make another WIS saving throw, ending the effect on a success."
+    },
+    {
         "name": "Speak with Dead",
         "rarity": "SR",
         "actionCost": "Action",
@@ -508,6 +530,14 @@
         "actionCost": "Action",
         "cardType": "Spell",
         "description": "Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a DEX saving throw. For each target, roll a d8 to determine which color ray affects it. On a 1-5 on the roll, the target takes 10d6 damage on a failed save, or half as much damage on a successful one.<br><br>1. <b>Red</b>. The target takes fire damage.<br><br>2. <b>Orange</b>. The target takes acid damage.<br><br>3. <b>Yellow</b>. The target takes lightning damage.<br><br>4. <b>Green</b>. The target takes poison damage.<br><br>5. <b>Blue</b>. The target takes cold damage.<br><br>6. <b>Indigo</b>. On a failed save, the target is restrained. It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.<br><br>7. <b>Violet</b>. On a failed save, the target is blinded. It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.<br><br>8. <b>Special</b>. The target is struck by two rays. Roll twice more, rerolling any 8."
+    },
+    {
+        "name": "Blood Price",
+        "rarity": "R",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "Reduce the damage taken by half. Then, deal 1d8 necrotic damage to an enemy within 10 feet.",
+        "reactionTrigger": "You take damage"
     },
     {
         "name": "Ferocious Roar",
@@ -606,6 +636,22 @@
         "reactionTrigger": "A monster on the field under your control is hit by an attack"
     },
     {
+        "name": "Twisted Fate",
+        "rarity": "SR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "The target of this reaction must reroll the saving throw.",
+        "reactionTrigger": "A creature succeeds on a saving throw"
+    },
+    {
+        "name": "Demonic Contract",
+        "rarity": "SSR",
+        "actionCost": "Reaction",
+        "cardType": "Reaction",
+        "description": "Your contract with the demons of the underworld must be carried out. Instead of dying, you revive with 1 HP. At the start of your next turn, you take 3d10 necrotic damage.",
+        "reactionTrigger": "Your HP reduces to 0"
+    },
+    {
         "name": "Phoenix Rebirth",
         "rarity": "SSR",
         "actionCost": "Reaction",
@@ -640,6 +686,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "Choose one of your monsters on the field. During this turn, that monster may take the <i>Dash</i>, <i>Disengage</i>, or <i>Hide</i> action as a bonus action."
+    },
+    {
+        "name": "Eye of the Void",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Look at the top 3 cards of your deck. You may discard one."
     },
     {
         "name": "Law of Equivalent Exchange",
@@ -689,6 +742,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "Choose one of your monsters on the field. It gains +4 to attack rolls but takes 1d6 necrotic damage at the start of each of your turns."
+    },
+    {
+        "name": "Dark Harvest",
+        "rarity": "SR",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Draw a card for each <i>Undead</i> monster you control."
     },
     {
         "name": "Final Will & Testament",
@@ -801,6 +861,13 @@
         "actionCost": "Action",
         "cardType": "Utility",
         "description": "You may take an additional action during this turn."
+    },
+    {
+        "name": "Cursed Battlefield",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "Until the end of the battle, all healing effects are halved, and all necrotic damage is doubled."
     },
     {
         "name": "Eye of the Beholder",
