@@ -1,0 +1,73 @@
+#backToMain {
+    color: white;
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+#deckSelectModalContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#deckSelectModal {
+    width: 50%;
+    height: 75%;
+    background-color: rgb(50,50,50);
+    border: 1px solid black;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#deckSelectModal h2 {
+    text-align: center;
+}
+
+#deckSelect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.user-deck {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(100,100,100);
+    border: 2px solid black;
+    color: white;
+    padding: 24px 36px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    width: 90%;
+    margin: 12px 0px;
+    box-sizing: border-box;
+}
+
+.user-deck.selected {
+    border: 2px solid lime;
+}
+
+#deckSelectConfirmBtn {
+    margin: 16px 0px;
+}
+
+#goToDeckBuilderBtn {
+    display: none;
+}

@@ -7,6 +7,7 @@ let backToDeckList = document.getElementById("backToDeckList");
 let currentDeckListing = document.getElementById("currentDeckListing");
 let cardCollection = document.getElementById("cardCollection");
 let noCards = document.getElementById("noCards");
+let goToCollectionBtn = document.getElementById("goToCollectionBtn");
 let currentDeckCount = document.getElementById("currentDeckCount");
 let saveDeck = document.getElementById("saveDeck");
 
@@ -58,8 +59,10 @@ function addDeckToDecklist(deck) {
 
             if (!user_collection) {
                 noCards.style.display = "flex";
+                goToCollectionBtn.style.display = "flex";
             } else {
                 noCards.style.display = "none";
+                goToCollectionBtn.style.display = "none";
                 user_collection = masterSort(user_collection);
                 user_collection.forEach(card => {
                     addToCardCollection(card);

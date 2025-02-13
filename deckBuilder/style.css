@@ -148,3 +148,7 @@ html, body {
 .card-collection-card:hover {
     transform: scale(1.1);
 }
+
+#noCards, #goToCollectionBtn {
+    color: white;
+}

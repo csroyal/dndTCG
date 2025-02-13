@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../site-style.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Battle Simulator - DnD TCG</title>
+</head>
+<body>
+    <a id="backToMain" href="../index.html"><i class="bi bi-arrow-left"></i> Back</a>
+    <div id="battleSim">
+        <div id="topRow">
+            <div class="spacer"></div>
+            <div id="monsterZoneContainer">
+                <div class="monster-zone" id="monsterZone1"></div>
+                <div class="monster-zone" id="monsterZone2"></div>
+                <div class="monster-zone" id="monsterZone3"></div>
+            </div>
+            <div id="discardPile"></div>
+        </div>
+        <div id="bottomRow">
+            <div class="spacer"></div>
+            <div id="reactionZoneContainer">
+                <div class="reaction-zone" id="reactionZone1"></div>
+                <div class="reaction-zone" id="reactionZone2"></div>
+                <div class="reaction-zone" id="reactionZone3"></div>
+            </div>
+            <div id="deckPile"></div>
+        </div>
+        <div id="hand">
+
+        </div>
+    </div>
+    <div id="deckSelectModalContainer">
+        <div id="deckSelectModal">
+            <h2>Select a Deck for Battle</h2>
+            <div id="deckSelect">
+
+            </div>
+            <button id="deckSelectConfirmBtn">Confirm</button>
+            <a id="goToDeckBuilderBtn" href="../deckBuilder/index.html">Go to Deck Builder</a>
+        </div>
+    </div>
+    <script src="../index.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
