@@ -5,7 +5,15 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
-        "description": "<u>Actions</u><br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage."
+        "description": "<b>Opportunistic Striker</b>. If this monster moves at least 20 feet before attacking, it deals an extra 1d6 slashing damage.<br><br><u>Actions</u><br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage."
+    },
+    {
+        "name": "Blink Dog",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Fey",
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 piercing damage.<br><br><b>Teleport (1/S)</b>. This monster magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, this monster can make one Bite attack."
     },
     {
         "name": "Cockatrice",
@@ -21,7 +29,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
-        "description": "<b>Dark Devotion</b>. This monster has advantage on saving throws against being charmed or frightened.<br><br><u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) slashing damage."
+        "description": "<b>Dark Devotion</b>. This monster has advantage on saving throws against being charmed or frightened.<br><br><u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 1d6 + 1 slashing damage."
     },
     {
         "name": "Flame Skull",
@@ -29,7 +37,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
-        "description": "<b>Illumination</b>. This monster sheds either dim light in a 15-foot radius, or bright light in a 15-foot radius and dim light for an additional 15 feet. It can switch between the options as an action.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
+        "description": "<b>Illumination</b>. This monster sheds bright light in a 15-foot radius and dim light for an additional 15 feet.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
     },
     {
         "name": "Ghoul",
@@ -37,7 +45,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
-        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage. If the target is a creature other than an elf or undead, it must succeed on a DC 10 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage.<br><br><b>Paralyzing Touch</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 necrotic damage. The target must make a DC 11 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
         "name": "Shadow",
@@ -174,6 +182,14 @@
         "cardType": "Monster",
         "monsterType": "Monstrosity",
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2d4 + 1 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Every humanoid and giant within 300 feet that can hear the song must succeed on a DC 11 WIS saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time.<br><br>While charmed by the harpy, a target is incapacitated. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks. A charmed target can repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it. A target that successfully saves is immune to the song."
+    },
+    {
+        "name": "Lizardfolk Shaman",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Humanoid",
+        "description": "<b>Tribal Wisdom</b>. When you summon a <i>Beast</i> or <i>Humanoid</i> monster, you may draw a card.<br><br><u>Actions</u><br><br><b>Staff</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 bludgeoning damage.<br><br><b>Primal Guidance (1/S)</b>. Choose one of your monsters on the field. Until the start of your next turn, it gains +1 AC and advantage on saving throws against magic."
     },
     {
         "name": "Merrow",
