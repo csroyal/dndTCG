@@ -1,8 +1,10 @@
+let deckSelectModalContainer = document.getElementById("deckSelectModalContainer");
 let deckSelect = document.getElementById("deckSelect");
 let deckSelectConfirmBtn = document.getElementById("deckSelectConfirmBtn");
 let goToDeckBuilderBtn = document.getElementById("goToDeckBuilderBtn");
 
 let user_decks = JSON.parse(localStorage.getItem("DNDTCG_USER_DECKS"));
+let currentDeck;
 
 if (user_decks) {
     user_decks.forEach(deck => {
@@ -34,5 +36,12 @@ function addDeckToDeckSelect(deck) {
 deckSelectConfirmBtn.addEventListener("click", () => {
     if (document.querySelector(".selected")) {
         console.log("a deck is selected:", document.querySelector(".selected").innerHTML);
+        for (d in user_decks) {
+            if (user_decks[d].name === document.querySelector(".selected").innerHTML) {
+                currentDeck = user_decks[d].deckList;
+                break;
+            }
+        }
+        deckSelectModalContainer.style.display = "none";
     }
 });

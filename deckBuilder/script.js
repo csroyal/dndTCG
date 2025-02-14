@@ -117,16 +117,40 @@ function addToCardCollection(card) {
             }
         }
 
-        if (card.rarity === "R" && currentCount === 3) {
+        let currentRarityCount = 0;
+        for (c in currentDeck.deckList) {
+            if (currentDeck.deckList[c].rarity === card.rarity) {
+                currentRarityCount++;
+            }
+        }
+
+        if (card.rarity === "R" && currentCount >= 3) {
             alert("You are only allowed 3 copies of an R rarity card in a deck.");
             return;
         }
-        else if (card.rarity === "SR" && currentCount === 2) {
+        else if (card.rarity === "SR" && currentCount >= 2) {
             alert("You are only allowed 2 copies of an SR rarity card in a deck.");
             return;
         }
-        else if (card.rarity === "SSR" && currentCount === 1) {
+        else if ((card.name === "Mouth of the Beholder" || card.name === "Tentacles of the Beholder") && currentCount >= 1) {
+            alert("You are only allowed 1 copy of this card in a deck.");
+            return;
+        }
+        else if (card.rarity === "SSR" && currentCount >= 1) {
             alert("You are only allowed 1 copy of an SSR rarity card in a deck.");
+            return;
+        }
+
+        if (card.rarity === "R" && currentRarityCount >= 15) {
+            alert("You can only have up to 15 R rarity cards in a deck.");
+            return;
+        }
+        else if (card.rarity === "SR" && currentRarityCount >= 10) {
+            alert("You can only have up to 10 SR rarity cards in a deck.");
+            return;
+        }
+        else if (card.rarity === "SSR" && currentRarityCount >= 5) {
+            alert("You can only have up to 5 SSR rarity cards in a deck.");
             return;
         }
 

@@ -65,7 +65,18 @@
 }
 
 #deckSelectConfirmBtn {
+    border: 2px solid black;
+    background-color: rgb(100,100,100);
+    padding: 12px 24px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
     margin: 16px 0px;
+}
+
+#deckSelectConfirmBtn:hover {
+    background-color: rgb(125,125,125);
 }
 
 #goToDeckBuilderBtn {

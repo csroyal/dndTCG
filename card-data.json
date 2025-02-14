@@ -40,12 +40,44 @@
         "description": "<b>Illumination</b>. This monster sheds bright light in a 15-foot radius and dim light for an additional 15 feet.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
     },
     {
+        "name": "Gas Spore",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Plant",
+        "description": "<b>Explosive Demise</b>. When this monster is destroyed, all creatures within 10 feet must make a DC 12 CON saving throw or take 3d6 poison damage and be poisoned until the end of their next turn. On a success, they take half damage.<br><br><b>Deceptive Appearance</b>. This monster looks like a Beholder at first glance. When an enemy targets it for the first time, they must make a DC 11 INT saving throw or waste their action attacking it, believing it to be a greater threat.<br><br><u>Actions</u><br><br><b>Spore Burst</b>. Melee Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 poison damage."
+    },
+    {
         "name": "Ghoul",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage.<br><br><b>Paralyzing Touch</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 necrotic damage. The target must make a DC 11 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "name": "Giant Bat",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Beast",
+        "description": "<b>Echolocation</b>. This monster can not be surprised and has advantage on Perception checks relying on hearing.<br><br><b>Flyby</b>. This monster does not provoke opportunity attacks when it flies out of an enemy's reach.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
+    },
+    {
+        "name": "Gnoll",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Humanoid",
+        "description": "<b>Rampage</b>. If this monster reduces an enemy to 0 HP, it may immediately move 10 feet and make a Claw attack against another enemy.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Spear</b>. Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d8 + 2 piercing damage."
+    },
+    {
+        "name": "Goblin",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Humanoid",
+        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Mud Mephit",
@@ -62,6 +94,14 @@
         "cardType": "Monster",
         "monsterType": "Fey",
         "description": "<b>Innate Magic</b>. When this monster is summoned, choose one:<ul><li>This monster casts Minor Invisibility on itself and cannot be targeted until it attacks or uses an ability.</li><li>A target within 30 feet must make a DC 11 WIS saving throw or be charmed until the start of your next turn.</li></ul><u>Actions</u><br><br><b>Pixie Dust</b>. Ranged Magic Attack: +4 to hit, range 15 ft., one target. Hit: 1d4 + 1 force damage, and the target must make a DC 11 CON saving throw or be dazed and lose reactions until the end of its next turn.<br><br><b>Fey Trickster (1/S)</b>. The target must make a DC 12 INT saving throw or have disadvantage on its next attack roll."
+    },
+    {
+        "name": "Rust Monster",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Monstrosity",
+        "description": "<b>Corroding Touch</b>. When this monster hits a target, if the target is wearing metal armor or wielding a metal weapon, it must make a DC 12 CON saving throw or have its AC reduced by 1 or its weapon deal -1 damage. This effect is cumulative.<br><br><b>Iron Hunger</b>. If this monster applies a -3 penalty to an item through Corroding Touch, it gains +2 AC until the start of its next turn.<br><br><u>Actions</u><br><br><b>Antennae Swipe</b>. Melee Attack: +5 to hit, reach 5 ft., one target. Hit: 1d8 + 2 bludgeoning damage."
     },
     {
         "name": "Shadow",
@@ -86,6 +126,14 @@
         "cardType": "Monster",
         "monsterType": "Elemental",
         "description": "<b>Death Burst</b>. When this monster dies, it leaves behind a cloud of smoke that fills a 5-foot-radius sphere centered on its space. The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 slashing damage.<br><br><b>Cinder Breath (1/S)</b>. This monster exhales a 15-foot cone of smoldering ash. Creatures in the area must make a DC 11 DEX saving throw or take 1d6 fire damage and have disadvantage on their next attack roll."
+    },
+    {
+        "name": "Tridrone",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Construct",
+        "description": "<b>Multi-tasking Strike</b>. This monster can attack up to three different targets per turn but cannot attack the same target more than once.<br><br><b>Modron Coordination</b>. This monster gains +1 AC for every ally Tridrone on the field.<br><br><u>Actions</u><br><br><b>Spear</b>. Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Wolf",
@@ -240,6 +288,14 @@
         "description": "<b>Dreadful Presence</b>. Enemy creatures within 10 feet of this monster have disadvantage on saving throws against being frightened.<br><br><u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 3d6 necrotic damage. The target must make a DC 14 CON saving throw or its maximum HP is reduced by an amount equal to the necrotic damage taken.<br><br><b>Healing Curse (1/S)</b>. Choose an enemy creature within 30 feet of this monster. It must make a DC 14 WIS saving throw or take 2d6 necrotic damage and be cursed until the end of its next turn. While cursed, the target has disadvantage on attack rolls and cannot regain HP."
     },
     {
+        "name": "Myconid Sovereign",
+        "rarity": "SR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Plant",
+        "description": "<b>Spore Leader</b>. Allied <i>Plant</i> monsters gain +1 AC and heal 1d4 HP at the start of this monster's turn.<br><br><u>Actions</u><br><br><b>Toxic Fist</b>. Melee Attack: +6 to hit, reach 5 ft., one target. Hit: 1d8 + 3 bludgeoning damage. The target must make a DC 14 CON saving throw or be poisoned until the end of its next turn.<br><br><b>Animating Spores (1/S)</b>. Search your discard pile for a <i>Beast</i> or <i>Humanoid</i> monster. Summon it to the field with half of its maximum HP. Return the summoned monster to the discard pile after 2 turns."
+    },
+    {
         "name": "Owlbear",
         "rarity": "SR",
         "actionCost": "Action",
@@ -294,6 +350,14 @@
         "cardType": "Monster",
         "monsterType": "Undead",
         "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d6 cold damage. The target must succeed on a DC 18 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.<br><br><b>Cantrip</b>. This monster casts a cantrip of your choice from the Wizard spell list."
+    },
+    {
+        "name": "Mind Flayer",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Aberration",
+        "description": "<b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Extract Brain</b>. Melee Spell Attack: +10 to hit, reach 5 ft., one target. Hit: 4d10 piercing damage. If the target is stunned, it must make a DC 16 INT saving throw or be instantly destroyed.<br><br><b>Mind Blast (1/S)</b>. All enemies within 15 feet must make a DC 16 INT saving throw or take 5d8 psychic damage and be stunned until the end of their next turn."
     },
     {
         "name": "Roc",
@@ -593,6 +657,13 @@
         "description": "Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a DEX saving throw. For each target, roll a d8 to determine which color ray affects it. On a 1-5 on the roll, the target takes 10d6 damage on a failed save, or half as much damage on a successful one.<br><br>1. <b>Red</b>. The target takes fire damage.<br><br>2. <b>Orange</b>. The target takes acid damage.<br><br>3. <b>Yellow</b>. The target takes lightning damage.<br><br>4. <b>Green</b>. The target takes poison damage.<br><br>5. <b>Blue</b>. The target takes cold damage.<br><br>6. <b>Indigo</b>. On a failed save, the target is restrained. It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.<br><br>7. <b>Violet</b>. On a failed save, the target is blinded. It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.<br><br>8. <b>Special</b>. The target is struck by two rays. Roll twice more, rerolling any 8."
     },
     {
+        "name": "Regenerate",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A creature you touch regains 4d8 + 15 HP. For 1 hour, the target regains 1 HP at the start of each of its turns."
+    },
+    {
         "name": "Blood Price",
         "rarity": "R",
         "actionCost": "Reaction",
@@ -782,6 +853,13 @@
         "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "Heal 1d8 damage and a condition from one of your summoned monsters. This card has no effect on <i>Undead</i> or <i>Construct</i> monsters."
+    },
+    {
+        "name": "Quick Feet",
+        "rarity": "R",
+        "actionCost": "Bonus Action",
+        "cardType": "Utility",
+        "description": "Choose one of your monsters on the field. Its movement speed increases by 10 feet until the end of the turn."
     },
     {
         "name": "Reckless Attack",
