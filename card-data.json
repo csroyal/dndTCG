@@ -48,6 +48,22 @@
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage.<br><br><b>Paralyzing Touch</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 necrotic damage. The target must make a DC 11 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
+        "name": "Mud Mephit",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Elemental",
+        "description": "<b>Death Burst</b>. When this monster dies, it explodes in a burst of sticky mud. Each Medium or smaller creature within 5 feet of it must succeed on a DC 11 DEX saving throw or be restrained until the end of the creature's next turn.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 slashing damage.<br><br><b>Mud Breath (1/S)</b>. This monster spits sticky mud at a target within 15 feet. The target must make a DC 11 DEX saving throw or have its movement speed halved until the end of its next turn."
+    },
+    {
+        "name": "Pixie",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Fey",
+        "description": "<b>Innate Magic</b>. When this monster is summoned, choose one:<ul><li>This monster casts Minor Invisibility on itself and cannot be targeted until it attacks or uses an ability.</li><li>A target within 30 feet must make a DC 11 WIS saving throw or be charmed until the start of your next turn.</li></ul><u>Actions</u><br><br><b>Pixie Dust</b>. Ranged Magic Attack: +4 to hit, range 15 ft., one target. Hit: 1d4 + 1 force damage, and the target must make a DC 11 CON saving throw or be dazed and lose reactions until the end of its next turn.<br><br><b>Fey Trickster (1/S)</b>. The target must make a DC 12 INT saving throw or have disadvantage on its next attack roll."
+    },
+    {
         "name": "Shadow",
         "rarity": "R",
         "actionCost": "Action",
@@ -62,6 +78,14 @@
         "cardType": "Monster",
         "monsterType": "Undead",
         "description": "<u>Actions</u><br><br><b>Shortsword</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
+    },
+    {
+        "name": "Smoke Mephit",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Elemental",
+        "description": "<b>Death Burst</b>. When this monster dies, it leaves behind a cloud of smoke that fills a 5-foot-radius sphere centered on its space. The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 slashing damage.<br><br><b>Cinder Breath (1/S)</b>. This monster exhales a 15-foot cone of smoldering ash. Creatures in the area must make a DC 11 DEX saving throw or take 1d6 fire damage and have disadvantage on their next attack roll."
     },
     {
         "name": "Wolf",
@@ -85,7 +109,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
-        "description": "<b>Antimagic Susceptibility</b>. This monster is incapacitated while in the area of an antimagic field. If targeted by dispel magic, this monster must succeed on a CON saving throw against the caster's spell save DC or fall unconscious for 1 minute.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes 2 Slam attacks.<br><br><b>Slam</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 bludgeoning damage."
+        "description": "<b>Living Armor</b>. This monster has resistance to non-magical attacks.<br><br><b>Sentinel Defense</b>. When an enemy moves within 5 feet of this monster, it must make a DC 13 STR saving throw or have its movement reduced to 0 until the end of the turn.<br><br><u>Actions</u><br><br><b>Heavy Slam</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 bludgeoning damage."
     },
     {
         "name": "Ankheg",
@@ -93,7 +117,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage plus 1d6 acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.<br><br><b>Acid Spray (1/S)</b>. This monster spits acid in a line that is 30 feet long and 5 feet wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 DEX saving throw, taking 3d6 acid damage on a failed save, or half as much damage on a successful one."
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage. The target must make a DC 12 STR saving throw or be grappled.<br><br><b>Acid Spray (1/S)</b>. This monster spits acid in a 15 foot line, provided that it has no creature grappled. Each creature in the area must make a DC 13 DEX saving throw, taking 3d6 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Banshee",
@@ -101,7 +125,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
-        "description": "<b>Incorporeal Movement</b>. This monster can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if she ends her turn inside an object.<br><br><u>Actions</u><br><br><b>Corrupting Touch</b>. Melee Spell Attack: +4 to hit, reach 5 ft., one target. Hit: 3d6 + 2 necrotic damage.<br><br><b>Horrifying Visage (1/S)</b>. Each non-undead creature within 60 feet of this monster that can see it must succeed on a DC 13 WIS saving throw or be frightened for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, with disadvantage if this monster is within line of sight, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to Horrifying Visage for the next 24 hours."
+        "description": "<b>Incorporeal Movement</b>. This monster can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if she ends her turn inside an object.<br><br><u>Actions</u><br><br><b>Corrupting Touch</b>. Melee Spell Attack: +6 to hit, reach 5 ft., one target. Hit: 3d6 necrotic damage.<br><br><b>Wail of the Dead (1/S)</b>. All non-Undead creatures within 10 feet must make a DC 14 CON saving throw. On a failure, they take 4d6 necrotic damage and are frightened until the end of their next turn. On a success, they take half as much damage and are not frightened."
     },
     {
         "name": "Blue Dragon Wyrmling",
@@ -109,7 +133,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Dragon",
-        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d10 + 3 piercing damage plus 1d6 lightning damage.<br><br><b>Lightning Breath (1/S)</b>. This monster exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 12 DEX saving throw, taking 4d10 lightning damage on a failed save, or half as much damage on a successful one."
+        "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d10 + 3 piercing damage plus 1d6 lightning damage.<br><br><b>Lightning Breath (1/S)</b>. This monster exhales lightning in a 20-foot line. Each creature in that line must make a DC 13 DEX saving throw, taking 4d6 lightning damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Bulette",
@@ -117,7 +141,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Standing Leap</b>. This monster's long jump is up to 30 feet and its high jump is up to 15 feet, with or without a running start.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 4d12 + 4 piercing damage.<br><br><b>Deadly Leap</b>. If this monster jumps at least 15 feet as part of its movement, it can then use this action to land on its feet in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 STR or DEX saving throw or be knocked prone and take 3d6 + 4 bludgeoning damage plus 3d6 + 4 slashing damage. On a successful save, the creature takes half the damage, isn't knocked prone, and is pushed 5 feet out of this monster's space into an unoccupied space of the creature's choice."
+        "description": "<b>Burrowing Terror</b>. If this monster moves at least 15 feet underground before attacking, its next attack deals an extra 1d8 damage.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d10 + 4 piercing damage.<br><br><b>Deadly Leap</b>. This monster leaps up to 20 feet and crashes down in a 10-foot radius. All creatures in the area must make a DC 14 DEX saving throw or take 3d6 bludgeoning damage and be knocked prone. On a successful save, the creature takes half the damage, isn't knocked prone, and is instead pushed 5 feet out of this monster's space."
     },
     {
         "name": "Cave Bear",
@@ -125,7 +149,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
-        "description": "<b>Keen Smell</b>. This monster has advantage on Perception checks that rely on smell.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and a Claw attack.<br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 1d8 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d6 + 5 slashing damage."
+        "description": "<b>Ferocious Charge</b>. If this monster moves at least 10 feet before attacking, its first attack deals an extra 1d8 damage, and the target must make a DC 13 STR saving throw or be knocked prone.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and a Claw attack.<br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 slashing damage."
     },
     {
         "name": "Chuul",
@@ -133,7 +157,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Aberration",
-        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Sense Magic</b>. This monster senses magic within 120 feet of it at will.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage. The target is grappled (escape DC 14) if it is a Large or smaller creature and this monster doesn't have two other creatures grappled.<br><br><b>Tentacles</b>. One creature grappled by this monster must succeed on a DC 13 CON saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Brutal Claws</b>. This monster can attack enemies that it has grappled, and it deals an extra 2d8 damage to those enemies.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage.<br><br><b>Tentacles</b>. This monster attempts to grapple a creature within 10 feet. The target must make a DC 14 STR saving throw or be restrained until the start of its next turn."
     },
     {
         "name": "Cult High Priest",
@@ -173,7 +197,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Stone Camouflage</b>. This monster has advantage on Stealth checks made to hide in rocky terrain.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Tentacle attack. If it hits, it can make a Beak attack against the same target.<br><br><b>Tentacles</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d6 + 2 slashing damage.<br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
+        "description": "<b>Stone Camouflage</b>. This monster has advantage on Stealth checks made to hide in rocky terrain.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Tentacle and a Beak attack.<br><br><b>Tentacles</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d6 + 2 slashing damage.<br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Harpy",
@@ -181,7 +205,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2d4 + 1 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Every humanoid and giant within 300 feet that can hear the song must succeed on a DC 11 WIS saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time.<br><br>While charmed by the harpy, a target is incapacitated. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks. A charmed target can repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it. A target that successfully saves is immune to the song."
+        "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Choose an enemy within 30 feet. It must make a DC 14 WIS saving throw or be charmed by this monster until the end of its next turn. The charmed creature must move toward this monster and cannot take reactions."
     },
     {
         "name": "Lizardfolk Shaman",
@@ -197,7 +221,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 1d8 + 4 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d4 + 4 slashing damage.<br><br><b>Harpoon</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a Huge or smaller creature, it must succeed on a STR contest against this monster or be pulled up to 20 feet toward this monster."
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Aquatic Hunter</b>. While this monster is in water, it and any allied creatures within 10 feet gain advantage on attack rolls.<br><br><u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d4 + 4 slashing damage.<br><br><b>Harpoon</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a Huge or smaller creature, it must succeed on a STR contest against this monster or be pulled up to 20 feet toward this monster."
     },
     {
         "name": "Minotaur",
@@ -205,7 +229,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 2d8 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be pushed up to 10 feet away and knocked prone.<br><br><b>Reckless</b>. At the start of its turn, this monster can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn.<br><br><u>Actions</u><br><br><b>Greataxe</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d12 + 4 slashing damage.<br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
+        "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then makes a melee attack, the target must make a DC 14 STR saving throw or be pushed 10 feet back and take an extra 2d6 bludgeoning damage.<br><br><b>Labyrinthine Fury</b>. his monster has advantage on attack rolls against creatures that are within 10 feet of a wall or obstacle.<br><br><u>Actions</u><br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
     },
     {
         "name": "Mummy",
@@ -213,7 +237,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
-        "description": "<u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 bludgeoning damage plus 3d6 necrotic damage. If the target is a creature, it must succeed on a DC 12 CON saving throw or be cursed with mummy rot. The cursed target can't regain hit points. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic.<br><br><b>Dreadful Glare (1/S)</b>. This monster targets one creature it can see within 60 feet of it. If the target can see this monster, it must succeed on a DC 11 WIS saving or become frightened until the end of this monster's next turn. If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to Dreadful Glare for the next 24 hours."
+        "description": "<b>Dreadful Presence</b>. Enemy creatures within 10 feet of this monster have disadvantage on saving throws against being frightened.<br><br><u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 3d6 necrotic damage. The target must make a DC 14 CON saving throw or its maximum HP is reduced by an amount equal to the necrotic damage taken.<br><br><b>Healing Curse (1/S)</b>. Choose an enemy creature within 30 feet of this monster. It must make a DC 14 WIS saving throw or take 2d6 necrotic damage and be cursed until the end of its next turn. While cursed, the target has disadvantage on attack rolls and cannot regain HP."
     },
     {
         "name": "Owlbear",
@@ -221,7 +245,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Keen Sight and Smell</b>. This monster has advantage on Perception checks that rely on sight or smell.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak attack and a Claw attack.<br><br><b>Beak</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 1d10 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d8 + 5 slashing damage."
+        "description": "<b>Keen Sight and Smell</b>. This monster has advantage on Perception checks that rely on sight or smell.<br><br><b>Monstrous Frenzy</b>. If this monster is reduced to half HP, it gains advantage on attack rolls until the end of its next turn.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak attack and a Claw attack.<br><br><b>Beak</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 1d10 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d8 + 5 slashing damage."
     },
     {
         "name": "Phase Spider",
@@ -229,7 +253,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Ethereal Jaunt</b>. As a bonus action, this monster can magically shift from the Material Plane to the Ethereal Plane, or vice versa.<br><br><b>Spider Climb</b>. This monster can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.<br><br><b>Web Walker</b>. This monster ignores movement restrictions caused by webbing.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1d10 + 2 piercing damage, and the target must make a DC 11 CON saving throw, taking 4d8 poison damage on a failed save, or half as much on a successful one."
+        "description": "<b>Ethereal Jaunt</b>. As a bonus action, this monster can can shift into the Ethereal Plane, moving through creatures and objects without provoking opportunity attacks.<br><br><b>Spider Climb</b>. This monster can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.<br><br><b>Web Walker</b>. This monster ignores movement restrictions caused by webbing.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 2d6 + 4 piercing damage plus 2d6 poison damage. The target must make a DC 14 CON saving throw or be poisoned for 1 minute (can repeat save at the end of each of its turns)."
     },
     {
         "name": "Winter Wolf",
@@ -237,7 +261,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a creature, it must succeed on a DC 14 STR saving throw or be knocked prone.<br><br><b>Cold Breath (1/S)</b>. Exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC 12 DEX saving throw, taking 4d8 cold damage on a failed save, or half as much damage on a successful one."
+        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage plus 1d6 cold damage.<br><br><b>Cold Breath (1/S)</b>. Exhales a 15-foot cone of freezing cold. Each creature in the area must make a DC 14 DEX saving throw or take 3d6 cold damage and have their movement speed halved until the end of their next turn."
     },
     {
         "name": "Adult Black Dragon",
@@ -245,7 +269,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Dragon",
-        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and two Claw attacks.<br><br><b>Bite</b>. Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 2d10 + 6 piercing damage plus 1d8 acid damage.<br><br><b>Claw</b>. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 2d6 + 6 slashing damage.<br><br><b>Acid Breath (1/S)</b>. This monster exhales acid in a 60-foot line that is 5 feet wide. Each creature in that line must make a DC 18 DEX saving throw, taking 12d8 acid damage on a failed save, or half as much damage on a successful one."
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and two Claw attacks.<br><br><b>Bite</b>. Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 2d10 + 6 piercing damage plus 1d8 acid damage.<br><br><b>Claw</b>. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 2d6 + 6 slashing damage.<br><br><b>Acid Breath (1/S)</b>. This monster exhales acid in a 30-foot line. Each creature in that line must make a DC 18 DEX saving throw, taking 12d8 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
         "name": "Archmage",
@@ -261,7 +285,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
-        "description": "<b>Fire Absorption</b>. Whenever this monster is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.<br><br><b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 3d8 + 7 bludgeoning damage.<br><br><b>Poison Breath (1/S)</b>. Exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 19 CON saving throw, taking 10d8 poison damage on a failed save, or half as much damage on a successful one."
+        "description": "<b>Fire Absorption</b>. Whenever this monster is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.<br><br><b>Immutable Form</b>. This monster is immune to all conditions except blinded, deafened, and paralyzed.<br><br><u>Actions</u><br><br><b>Heavy Slam</b>. Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 3d10 + 6 bludgeoning damage. The target must make a DC 17 STR saving throw or be knocked prone.<br><br><b>Poison Breath (1/S)</b>. Exhales poisonous gas in a 15-foot cone. Each creature in the area must make a DC 16 CON saving throw or take 5d6 poison damage and become poisoned until the end of its next turn."
     },
     {
         "name": "Lich",
@@ -277,7 +301,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
-        "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak and a Talon attack.<br><br><b>Beak</b>. Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 4d8 + 9 piercing damage.<br><br><b>Talons</b>. Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 4d6 + 9 slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and the roc can't use its talons on another target."
+        "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><b>Crushing Talons</b>. When this monster makes a melee attack, it can choose to grapple the target. If the grapple succeeds, the target is lifted into the air. At the start of each of this monster's turns, the grappled target takes 2d6 bludgeoning damage until released.<br><br><u>Actions</u><br><br><b>Talons</b>. Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 4d10 + 6 slashing damage.<br><br><b>Sonic Screech (1/S)</b>. Lets out a deafening screech. All enemies within 30 feet must make a DC 17 CON saving throw or take 5d6 thunder damage and be deafened until the end of their next turn. On a successful save, they take half damage and are not deafened."
     },
     {
         "name": "Stone Golem",
@@ -285,7 +309,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
-        "description": "<b>Immutable Form</b>. This monster is immune to any spell or effect that would alter its form.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d8 + 6 bludgeoning damage.<br><br><b>Slow (1/S)</b>. Targets one or more creatures it can see within 10 feet of it. Each target must make a DC 17 WIS saving throw against this magic. On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+        "description": "<b>Immutable Form</b>. This monster is immune to being charmed, paralyzed, or petrified. It also has advantage on saving throws against spells and other magical effects.<br><br><b>Stoneform Aura</b>. Allied <i>Construct</i> monsters within 10 feet of this monster gain resistance to bludgeoning, piercing, and slashing damage.<br><br><u>Actions</u><br><br><b>Pounding Fists</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 4d10 + 6 bludgeoning damage.<br><br><b>Trample (1/S)</b>. Choose one enemy creature within 15 feet of this monster. This monster moves to the target and then makes a melee attack. If it hits, the target is knocked prone."
     },
     {
         "name": "Treant",
@@ -293,7 +317,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Plant",
-        "description": "<b>Siege Monster</b>. This monster deals double damage to objects and structures.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Rock</b>. Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target. Hit: 4d10 + 6 bludgeoning damage.<br><br><b>Animate Trees (1/S)</b>. This monster animates one or two trees it can see within 60 feet of it. These trees have the same statistics as a treant, except they have INT and CHA scores of 1, they can't speak, and they have only the Slam action option. This monster can take a bonus action to turn it back into an inanimate tree. The tree then takes root if possible."
+        "description": "<b>Siege Monster</b>. This monster deals double damage to objects and structures.<br><br><u>Actions</u><br><br><b>Crushing Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Entangling Roots (1/S)</b>. Choose one enemy creature within 15 feet of this monster. The target must make a DC 16 STR saving throw or be restrained by the roots until the end of its next turn.<br><br><b>Ancient Guardian (1/S)</b>. Allied <i>Plant</i> and <i>Beast</i> monsters within 15 feet of this monster gain resistance to all damage types until the start of its next turn."
     },
     {
         "name": "Acid Arrow",
