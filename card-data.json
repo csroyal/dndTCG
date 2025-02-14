@@ -324,14 +324,14 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn."
+        "description": "You conjure a shimmering green arrow of acid that strikes a creature you can see within 60 feet. Make a ranged spell attack against the target. On a hit, the target takes 2d4 acid damage immediately and an additional 2d4 acid damage at the start of its next turn."
     },
     {
         "name": "Bane",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Up to three creatures of your choice that you can see within 30 feet must make CHA saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw."
+        "description": "Up to three creatures of your choice that you can see within 30 feet must make CHA saving throws. A target that fails this saving throw must roll a d4 and subtract the number rolled from their next two attack rolls or saving throws."
     },
     {
         "name": "Bless",
@@ -359,7 +359,7 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A humanoid you see within range must make a WIS saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
+        "description": "A humanoid you see within range must make a WIS saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you for 1 hour or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
     },
     {
         "name": "Chromatic Orb",
@@ -373,7 +373,7 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs."
+        "description": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on <i>Undead</i> or <i>Construct</i> monsters."
     },
     {
         "name": "Detect Magic",
@@ -408,7 +408,14 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Slick grease covers the ground in a 10-foot square centered on a point within 60 feet and turns it into difficult terrain for the duration.<br><br>When the grease appears, each creature standing in its area must succeed on a DEX saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a DEX saving throw or fall prone."
+        "description": "Nonflammable grease covers the ground in a 10-foot square centered on a point within 60 feet and turns it into Difficult Terrain for 1 minute.<br><br>When the grease appears, each creature standing in its area must succeed on a DEX saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone."
+    },
+    {
+        "name": "Heroism",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "A willing creature you touch is imbued with bravery. For 1 minute, the creature is immune to the Frightened condition and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns."
     },
     {
         "name": "Hold Person",
@@ -425,6 +432,13 @@
         "description": "You create four glowing darts of magical force. Each dart hits a creature of your choice that you can see within 120 feet. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several."
     },
     {
+        "name": "Mage Armor",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it for 8 hours. The target's base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action."
+    },
+    {
         "name": "Shield of Faith",
         "rarity": "R",
         "actionCost": "Bonus Action",
@@ -432,32 +446,39 @@
         "description": "A shimmering field appears and surrounds a creature of your choice within 60 feet, granting it a +2 bonus to AC for 10 minutes."
     },
     {
-        "name": "Mage Armor",
+        "name": "Thorn Whip",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action."
+        "description": "You create a long, vine-like whip covered in thorns that lashes out at your command toward a creature in range. Make a melee spell attack against the target. If the attack hits, the creature takes 1d6 piercing damage, and if the creature is Large or smaller, you pull the creature up to 10 feet closer to you."
+    },
+    {
+        "name": "Thunderwave",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a CON saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.<br><br>In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet."
     },
     {
         "name": "Web",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You conjure a mass of thick, sticky webbing at a point of your choice within 60 feet. The webs fill a 20-foot cube from that point for 1 hour. The webs are difficult terrain and lightly obscure their area.<br><br>If the webs aren't anchored between two solid masses or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn.<br><br>Each creature that starts its turn in the webs or that enters them during its turn must make a DEX saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.<br><br>A creature restrained by the webs can use its action to make a STR check against your spell save DC. If it succeeds, it is no longer restrained.<br><br>The webs are flammable. Any webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire."
+        "description": "You conjure a mass of sticky webbing at a point within 60 feet. The webs fill a 20-foot Cube there for 1 hour. The webs are Difficult Terrain, and the area within them is Lightly Obscured.<br><br>The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a DEX saving throw or have the Restrained condition while in the webs or until it breaks free.<br><br>A creature Restrained by the webs can take an action to make a STR (Athletics) check against your spell save DC. If it succeeds, it is no longer Restrained.<br><br>The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire."
     },
     {
         "name": "Banishment",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a CHA saving throw or be banished.<br><br>While banished the target is incapacitated. The target remains there until the spell ends or after 1 minute, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied."
+        "description": "One creature that you can see within 30 feet must succeed on a CHA saving throw or be transported to a harmless demiplane for 1 minute. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied."
     },
     {
         "name": "Black Tentacles",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Squirming, ebony tentacles fill a 20-foot square on ground that you can see within 90 feet. For 1 minute, these tentacles turn the ground in the area into difficult terrain.<br><br>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a DEX saving throw or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage.<br><br>A creature restrained by the tentacles can use its action to make a STR or DEX check against your spell save DC. On a success, it frees itself."
+        "description": "Squirming, ebony tentacles fill a 20-foot square on ground that you can see within 90 feet. For 1 minute, these tentacles turn the ground in the area into difficult terrain.<br><br>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a DEX saving throw or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage.<br><br>A Restrained creature can take an action to make a STR (Athletics) check against your spell save DC, ending the condition on itself on a success."
     },
     {
         "name": "Cone of Cold",
@@ -471,7 +492,7 @@
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A bright streak flashes from your pointing finger to a point you choose within 150 feet and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a DEX saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one."
+        "description": "A bright streak flashes from your pointing finger to a point you choose within 150 feet and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a DEX saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. It ignites flammable objects in the area that aren't being worn or carried."
     },
     {
         "name": "Immolation",
@@ -485,7 +506,7 @@
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Swarming, biting locusts fill a 20-foot-radius sphere centered on a point you choose within 300 feet. The sphere spreads around corners. The sphere remains for 10 minutes, and its area is lightly obscured. The sphere's area is difficult terrain.<br><br>When the area appears, each creature in it must make a CON saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there."
+        "description": "Swarming locusts fill a 20-foot-radius Sphere centered on a point you choose within 300 feet. The Sphere remains for 10 minutes, and its area is Lightly Obscured and Difficult Terrain.<br><br>When the area appears, each creature in it must make a CON saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there."
     },
     {
         "name": "Lightning Bolt",
@@ -513,7 +534,7 @@
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You sap the vitality from a creature, using it to restore your own strength. Choose one creature within range. The target must make a CON saving throw. On a failed save, the target takes 4d8 necrotic damage, and you regain hit points equal to half the damage dealt. On a successful save, the target takes half as much damage, and you regain no hit points."
+        "description": "You sap the vitality from a creature, using it to restore your own strength. Choose one creature within 30 feet. The target must make a CON saving throw. On a failed save, the target takes 4d8 necrotic damage, and you regain hit points equal to half the damage dealt. On a successful save, the target takes half as much damage, and you regain no hit points."
     },
     {
         "name": "Soul Shackles",
@@ -555,7 +576,7 @@
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius sphere centered on each point you choose must make a DEX saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once. The spell damages objects in the area and ignites flammable objects that aren't being worn or carried."
+        "description": "Blazing orbs of fire plummet to the ground at four different points you can see within 1 mile. Each creature in a 40-foot-radius sphere centered on each point you choose must make a DEX saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once.<br><br>The spell damages objects in the area and ignites flammable objects that aren't being worn or carried."
     },
     {
         "name": "Power Word Kill",
@@ -672,7 +693,7 @@
         "rarity": "SR",
         "actionCost": "Reaction",
         "cardType": "Reaction",
-        "description": "You siphon the life of your own wicked servants. The monster that was just attacked receives 1d8 necrotic damage and you draw a card.",
+        "description": "You siphon the life of your own wicked servants, unsatisfied with their performance. The monster that was just attacked receives 1d8 necrotic damage and you draw a card.",
         "reactionTrigger": "A monster on the field under your control is hit by an attack"
     },
     {
@@ -704,7 +725,7 @@
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Shuffle up to 2 Spell cards from your discard pile into your deck."
+        "description": "Shuffle up to 3 Spell cards from your discard pile into your deck."
     },
     {
         "name": "Bardic Inspiration",
@@ -732,7 +753,7 @@
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Look at the top 3 cards of your deck. You may discard one."
+        "description": "Look at the top 3 cards of your deck. You may discard one. Put the other cards back on top of your deck in any order."
     },
     {
         "name": "Law of Equivalent Exchange",
@@ -760,7 +781,7 @@
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Heal 1d8 damage and a condition from one of your summoned monsters. This card has no effect on undead or constructs."
+        "description": "Heal 1d8 damage and a condition from one of your summoned monsters. This card has no effect on <i>Undead</i> or <i>Construct</i> monsters."
     },
     {
         "name": "Reckless Attack",
