@@ -111,10 +111,13 @@ html, body {
 }
 
 #deckCount {
-    /* position: absolute;
-    bottom: 4px;
-    right: 8px; */
     font-size: 24px;
+    z-index: 2;
+    text-align: center;
+}
+
+#rarityCounts {
+    font-size: 18px;
     z-index: 2;
     text-align: center;
 }

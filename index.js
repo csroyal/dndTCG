@@ -26,6 +26,11 @@ function sortByCardType(cards) {
     return cards;
 }
 
+function sortByMonsterType(cards) {
+    cards.sort((a, b) => monsterTypeOrder[a.monsterType] - monsterTypeOrder[b.monsterType]);
+    return cards;
+}
+
 function masterSort(cards) {
     cards.sort((a, b) => {
         const cardTypeComparison = cardTypeOrder[a.cardType] - cardTypeOrder[b.cardType];

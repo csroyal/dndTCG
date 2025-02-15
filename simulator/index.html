@@ -13,24 +13,39 @@
         <div id="topRow">
             <div class="spacer"></div>
             <div id="monsterZoneContainer">
-                <div class="monster-zone" id="monsterZone1"></div>
-                <div class="monster-zone" id="monsterZone2"></div>
-                <div class="monster-zone" id="monsterZone3"></div>
+                <div class="monster-zone" id="monsterZone1">Monster Zone</div>
+                <div class="monster-zone" id="monsterZone2">Monster Zone</div>
+                <div class="monster-zone" id="monsterZone3">Monster Zone</div>
             </div>
-            <div id="discardPile"></div>
+            <div id="discardPile">
+                <div>Discard</div>
+            </div>
         </div>
         <div id="bottomRow">
             <div class="spacer"></div>
             <div id="reactionZoneContainer">
-                <div class="reaction-zone" id="reactionZone1"></div>
-                <div class="reaction-zone" id="reactionZone2"></div>
-                <div class="reaction-zone" id="reactionZone3"></div>
+                <div class="reaction-zone" id="reactionZone1">Reaction Zone</div>
+                <div class="reaction-zone" id="reactionZone2">Reaction Zone</div>
+                <div class="reaction-zone" id="reactionZone3">Reaction Zone</div>
             </div>
-            <div id="deckPile"></div>
+            <div id="deckPile">
+                <div>Deck</div>
+                <div class="deck-card"></div>
+                <div class="deck-card"></div>
+                <div class="deck-card"></div>
+            </div>
         </div>
+        <div class="bottom-spacer"></div>
         <div id="hand">
 
         </div>
+    </div>
+    <div id="actionTracker">
+        <div id="turnTracker">Turn <span id="turnNum">1</span></div>
+        <div id="action">Action: <div id="actionLight" class="light"></div></div>
+        <div id="bonusAction">Bonus Action: <div id="bonusActionLight" class="light"></div></div>
+        <div id="reaction">Reaction: <div id="reactionLight" class="light"></div></div>
+        <button id="endTurnBtn">End Turn</button>
     </div>
     <div id="deckSelectModalContainer">
         <div id="deckSelectModal">
@@ -42,7 +57,39 @@
             <a id="goToDeckBuilderBtn" href="../deckBuilder/index.html">Go to Deck Builder</a>
         </div>
     </div>
+    <div id="cardPopupModal">
+        <div id="cardPopupImage">
+
+        </div>
+        <div id="cardPopupDescription">
+
+        </div>
+    </div>
+    <div id="discardPileModalContainer">
+        <div id="discardPileModal">
+            <h2>Discard Pile</h2>
+            <div id="discardPileView"></div>
+        </div>
+    </div>
+    <div id="deckModalContainer">
+        <div id="deckModal">
+            <h2 id="deckViewTitle">Deck</h2>
+            <div id="deckView"></div>
+            <button id="deckViewConfirmBtn">Confirm</button>
+        </div>
+    </div>
+    <div id="handViewModalContainer">
+        <div id="handViewModal">
+            <h2 id="handViewTitle">Discard a card</h2>
+            <div id="handView"></div>
+            <button id="handViewConfirmBtn">Confirm</button>
+        </div>
+    </div>
+    <div class="dice-container">
+        <div class="dice">🎲</div>
+    </div>
     <script src="../index.js"></script>
+    <script src="./card-functions.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

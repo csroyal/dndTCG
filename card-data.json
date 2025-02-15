@@ -5,6 +5,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
+        "hp": 19,
         "description": "<b>Opportunistic Striker</b>. If this monster moves at least 20 feet before attacking, it deals an extra 1d6 slashing damage.<br><br><u>Actions</u><br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage."
     },
     {
@@ -13,6 +14,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Fey",
+        "hp": 22,
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 piercing damage.<br><br><b>Teleport (1/S)</b>. This monster magically teleports, along with any equipment it is wearing or carrying, up to 40 feet to an unoccupied space it can see. Before or after teleporting, this monster can make one Bite attack."
     },
     {
@@ -21,6 +23,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 27,
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 1d4 + 1 piercing damage, and the target must succeed on a DC 11 CON saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 1 turn."
     },
     {
@@ -29,6 +32,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 9,
         "description": "<b>Dark Devotion</b>. This monster has advantage on saving throws against being charmed or frightened.<br><br><u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 1d6 + 1 slashing damage."
     },
     {
@@ -37,6 +41,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 11,
         "description": "<b>Illumination</b>. This monster sheds bright light in a 15-foot radius and dim light for an additional 15 feet.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Fire Ray</b>. Ranged Spell Attack: +5 to hit, range 30 ft., one target. Hit: 2d6 fire damage."
     },
     {
@@ -45,6 +50,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Plant",
+        "hp": 1,
         "description": "<b>Explosive Demise</b>. When this monster is destroyed, all creatures within 10 feet must make a DC 12 CON saving throw or take 3d6 poison damage and be poisoned until the end of their next turn. On a success, they take half damage.<br><br><b>Deceptive Appearance</b>. This monster looks like a Beholder at first glance. When an enemy targets it for the first time, they must make a DC 11 INT saving throw or waste their action attacking it, believing it to be a greater threat.<br><br><u>Actions</u><br><br><b>Spore Burst</b>. Melee Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 poison damage."
     },
     {
@@ -53,6 +59,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 22,
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 slashing damage.<br><br><b>Paralyzing Touch</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 necrotic damage. The target must make a DC 11 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
     },
     {
@@ -61,6 +68,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
+        "hp": 22,
         "description": "<b>Echolocation</b>. This monster can not be surprised and has advantage on Perception checks relying on hearing.<br><br><b>Flyby</b>. This monster does not provoke opportunity attacks when it flies out of an enemy's reach.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
@@ -69,6 +77,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 22,
         "description": "<b>Rampage</b>. If this monster reduces an enemy to 0 HP, it may immediately move 10 feet and make a Claw attack against another enemy.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Spear</b>. Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d8 + 2 piercing damage."
     },
     {
@@ -77,6 +86,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 7,
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
@@ -85,6 +95,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Elemental",
+        "hp": 13,
         "description": "<b>Death Burst</b>. When this monster dies, it explodes in a burst of sticky mud. Each Medium or smaller creature within 5 feet of it must succeed on a DC 11 DEX saving throw or be restrained until the end of the creature's next turn.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 slashing damage.<br><br><b>Mud Breath (1/S)</b>. This monster spits sticky mud at a target within 15 feet. The target must make a DC 11 DEX saving throw or have its movement speed halved until the end of its next turn."
     },
     {
@@ -93,6 +104,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Fey",
+        "hp": 1,
         "description": "<b>Innate Magic</b>. When this monster is summoned, choose one:<ul><li>This monster casts Minor Invisibility on itself and cannot be targeted until it attacks or uses an ability.</li><li>A target within 30 feet must make a DC 11 WIS saving throw or be charmed until the start of your next turn.</li></ul><u>Actions</u><br><br><b>Pixie Dust</b>. Ranged Magic Attack: +4 to hit, range 15 ft., one target. Hit: 1d4 + 1 force damage, and the target must make a DC 11 CON saving throw or be dazed and lose reactions until the end of its next turn.<br><br><b>Fey Trickster (1/S)</b>. The target must make a DC 12 INT saving throw or have disadvantage on its next attack roll."
     },
     {
@@ -101,6 +113,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 22,
         "description": "<b>Corroding Touch</b>. When this monster hits a target, if the target is wearing metal armor or wielding a metal weapon, it must make a DC 12 CON saving throw or have its AC reduced by 1 or its weapon deal -1 damage. This effect is cumulative.<br><br><b>Iron Hunger</b>. If this monster applies a -3 penalty to an item through Corroding Touch, it gains +2 AC until the start of its next turn.<br><br><u>Actions</u><br><br><b>Antennae Swipe</b>. Melee Attack: +5 to hit, reach 5 ft., one target. Hit: 1d8 + 2 bludgeoning damage."
     },
     {
@@ -109,6 +122,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 16,
         "description": "<b>Shadow Stealth</b>. While in dim light or darkness, this monster can take the Hide action as a bonus action.<br><br><b>Sunlight Weakness</b>. While in sunlight, this monster has disadvantage on attack rolls, ability checks, and saving throws.<br><br><u>Actions</u><br><br><b>Strength Drain</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 2d6 + 2 necrotic damage, and the target's STR score is reduced by 1d4 for 2 turns."
     },
     {
@@ -117,6 +131,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 13,
         "description": "<u>Actions</u><br><br><b>Shortsword</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
@@ -125,6 +140,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Elemental",
+        "hp": 11,
         "description": "<b>Death Burst</b>. When this monster dies, it leaves behind a cloud of smoke that fills a 5-foot-radius sphere centered on its space. The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute.<br><br><u>Actions</u><br><br><b>Claw</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 slashing damage.<br><br><b>Cinder Breath (1/S)</b>. This monster exhales a 15-foot cone of smoldering ash. Creatures in the area must make a DC 11 DEX saving throw or take 1d6 fire damage and have disadvantage on their next attack roll."
     },
     {
@@ -133,6 +149,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
+        "hp": 16,
         "description": "<b>Multi-tasking Strike</b>. This monster can attack up to three different targets per turn but cannot attack the same target more than once.<br><br><b>Modron Coordination</b>. This monster gains +1 AC for every ally Tridrone on the field.<br><br><u>Actions</u><br><br><b>Spear</b>. Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
@@ -141,6 +158,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
+        "hp": 11,
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d4 + 2 piercing damage. If the target is a creature, it must succeed on a DC 11 STR saving throw or be knocked prone."
     },
     {
@@ -149,6 +167,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 22,
         "description": "<b>Undead Fortitude</b>. If damage reduces this monster to 0 hit points, it must make a CON saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, this monster drops to 1 hit point instead.<br><br><u>Actions</u><br><br><b>Slam</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 1 bludgeoning damage."
     },
     {
@@ -157,6 +176,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
+        "hp": 33,
         "description": "<b>Living Armor</b>. This monster has resistance to non-magical attacks.<br><br><b>Sentinel Defense</b>. When an enemy moves within 5 feet of this monster, it must make a DC 13 STR saving throw or have its movement reduced to 0 until the end of the turn.<br><br><u>Actions</u><br><br><b>Heavy Slam</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 bludgeoning damage."
     },
     {
@@ -165,6 +185,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 39,
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage. The target must make a DC 12 STR saving throw or be grappled.<br><br><b>Acid Spray (1/S)</b>. This monster spits acid in a 15 foot line, provided that it has no creature grappled. Each creature in the area must make a DC 13 DEX saving throw, taking 3d6 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
@@ -173,6 +194,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 58,
         "description": "<b>Incorporeal Movement</b>. This monster can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if she ends her turn inside an object.<br><br><u>Actions</u><br><br><b>Corrupting Touch</b>. Melee Spell Attack: +6 to hit, reach 5 ft., one target. Hit: 3d6 necrotic damage.<br><br><b>Wail of the Dead (1/S)</b>. All non-Undead creatures within 10 feet must make a DC 14 CON saving throw. On a failure, they take 4d6 necrotic damage and are frightened until the end of their next turn. On a success, they take half as much damage and are not frightened."
     },
     {
@@ -181,6 +203,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Dragon",
+        "hp": 52,
         "description": "<u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d10 + 3 piercing damage plus 1d6 lightning damage.<br><br><b>Lightning Breath (1/S)</b>. This monster exhales lightning in a 20-foot line. Each creature in that line must make a DC 13 DEX saving throw, taking 4d6 lightning damage on a failed save, or half as much damage on a successful one."
     },
     {
@@ -189,6 +212,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 64,
         "description": "<b>Burrowing Terror</b>. If this monster moves at least 15 feet underground before attacking, its next attack deals an extra 1d8 damage.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d10 + 4 piercing damage.<br><br><b>Deadly Leap</b>. This monster leaps up to 20 feet and crashes down in a 10-foot radius. All creatures in the area must make a DC 14 DEX saving throw or take 3d6 bludgeoning damage and be knocked prone. On a successful save, the creature takes half the damage, isn't knocked prone, and is instead pushed 5 feet out of this monster's space."
     },
     {
@@ -197,6 +221,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
+        "hp": 62,
         "description": "<b>Ferocious Charge</b>. If this monster moves at least 10 feet before attacking, its first attack deals an extra 1d8 damage, and the target must make a DC 13 STR saving throw or be knocked prone.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and a Claw attack.<br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 slashing damage."
     },
     {
@@ -205,6 +230,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Aberration",
+        "hp": 63,
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Brutal Claws</b>. This monster can attack enemies that it has grappled, and it deals an extra 2d8 damage to those enemies.<br><br><u>Actions</u><br><br><b>Pincer</b>. Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 2d6 + 4 bludgeoning damage.<br><br><b>Tentacles</b>. This monster attempts to grapple a creature within 10 feet. The target must make a DC 14 STR saving throw or be restrained until the start of its next turn."
     },
     {
@@ -213,6 +239,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 27,
         "description": "<b>Dark Blessing</b>. Cultist monsters under your control gain +3 to attack rolls.<br><br><u>Actions</u><br><br><b>Sacrificial Dagger</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d8 + 2 slashing damage.<br><br><b>Blood Offering (1/S)</b>. Sacrifice one of your monsters. If you sacrificed an R rarity monster, heal 1d10 HP and draw a card. If you sacrificed an SR rarity monster, heal 3d8 HP and draw a card. If you sacrificed an SSR rarity monster, heal 6d6 HP and draw 2 cards."
     },
     {
@@ -221,6 +248,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Elemental",
+        "hp": 51,
         "description": "<b>Illumination</b>. This monster sheds bright light in a 30-foot radius and dim light in an additional 30 feet.<br><br><b>Water Susceptibility</b>. For every 5 feet this monster moves in water, or for every gallon of water splashed on it, it takes 1 cold damage.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes two Touch attacks.<br><br><b>Touch</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 fire damage. If the target is a creature or a flammable object, it ignites. Until a creature takes an action to douse the fire, the target takes 1d10 fire damage at the start of each of its turns."
     },
     {
@@ -229,6 +257,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Ooze",
+        "hp": 84,
         "description": "<b>Ooze Cube</b>. This monster takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to Engulf and has disadvantage on the saving throw.<br><br><u>Actions</u><br><br><b>Pseudopod</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 3d6 acid damage.<br><br><b>Engulf</b>. Whenever this monster enters a creature's space, the creature must make a DC 12 DEX saving throw. On a successful save, the creature can choose to be pushed 5 feet back or to the side of this monster. A creature that chooses not to be pushed suffers the consequences of a failed saving throw. On a failed save, this monster enters the creature's space, and the creature takes 3d6 acid damage and is engulfed. The engulfed creature can't breathe, is restrained, and takes 6d6 acid damage at the start of each of the cube's turns. When this monster moves, the engulfed creature moves with it. An engulfed creature can try to escape by taking an action to make a DC 12 STR check. On a success, the creature escapes and enters a space of its choice within 5 feet of this monster."
     },
     {
@@ -237,6 +266,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Beast",
+        "hp": 56,
         "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster a Beak attack and a Talon attack.<br><br><b>Beak</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 1d6 + 3 piercing damage.<br><br><b>Talons</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage."
     },
     {
@@ -245,6 +275,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 48,
         "description": "<b>Stone Camouflage</b>. This monster has advantage on Stealth checks made to hide in rocky terrain.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Tentacle and a Beak attack.<br><br><b>Tentacles</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 2d6 + 2 slashing damage.<br><br><b>Beak</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
@@ -253,6 +284,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 38,
         "description": "<u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 3 slashing damage.<br><br><b>Luring Song</b>. This monster sings a magical melody. Choose an enemy within 30 feet. It must make a DC 14 WIS saving throw or be charmed by this monster until the end of its next turn. The charmed creature must move toward this monster and cannot take reactions."
     },
     {
@@ -261,6 +293,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 27,
         "description": "<b>Tribal Wisdom</b>. When you summon a <i>Beast</i> or <i>Humanoid</i> monster, you may draw a card.<br><br><u>Actions</u><br><br><b>Staff</b>. Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1d6 + 2 bludgeoning damage.<br><br><b>Primal Guidance (1/S)</b>. Choose one of your monsters on the field. Until the start of your next turn, it gains +1 AC and advantage on saving throws against magic."
     },
     {
@@ -269,6 +302,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 45,
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><b>Aquatic Hunter</b>. While this monster is in water, it and any allied creatures within 10 feet gain advantage on attack rolls.<br><br><u>Actions</u><br><br><b>Claws</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d4 + 4 slashing damage.<br><br><b>Harpoon</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 2d6 + 4 piercing damage. If the target is a Huge or smaller creature, it must succeed on a STR contest against this monster or be pulled up to 20 feet toward this monster."
     },
     {
@@ -277,6 +311,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 66,
         "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then makes a melee attack, the target must make a DC 14 STR saving throw or be pushed 10 feet back and take an extra 2d6 bludgeoning damage.<br><br><b>Labyrinthine Fury</b>. his monster has advantage on attack rolls against creatures that are within 10 feet of a wall or obstacle.<br><br><u>Actions</u><br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
     },
     {
@@ -285,6 +320,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 48,
         "description": "<b>Dreadful Presence</b>. Enemy creatures within 10 feet of this monster have disadvantage on saving throws against being frightened.<br><br><u>Actions</u><br><br><b>Rotting Fist</b>. Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 3d6 necrotic damage. The target must make a DC 14 CON saving throw or its maximum HP is reduced by an amount equal to the necrotic damage taken.<br><br><b>Healing Curse (1/S)</b>. Choose an enemy creature within 30 feet of this monster. It must make a DC 14 WIS saving throw or take 2d6 necrotic damage and be cursed until the end of its next turn. While cursed, the target has disadvantage on attack rolls and cannot regain HP."
     },
     {
@@ -293,6 +329,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Plant",
+        "hp": 50,
         "description": "<b>Spore Leader</b>. Allied <i>Plant</i> monsters gain +1 AC and heal 1d4 HP at the start of this monster's turn.<br><br><u>Actions</u><br><br><b>Toxic Fist</b>. Melee Attack: +6 to hit, reach 5 ft., one target. Hit: 1d8 + 3 bludgeoning damage. The target must make a DC 14 CON saving throw or be poisoned until the end of its next turn.<br><br><b>Animating Spores (1/S)</b>. Search your discard pile for a <i>Beast</i> or <i>Humanoid</i> monster. Summon it to the field with half of its maximum HP. Return the summoned monster to the discard pile after 2 turns."
     },
     {
@@ -301,6 +338,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 69,
         "description": "<b>Keen Sight and Smell</b>. This monster has advantage on Perception checks that rely on sight or smell.<br><br><b>Monstrous Frenzy</b>. If this monster is reduced to half HP, it gains advantage on attack rolls until the end of its next turn.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Beak attack and a Claw attack.<br><br><b>Beak</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 1d10 + 5 piercing damage.<br><br><b>Claws</b>. Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 2d8 + 5 slashing damage."
     },
     {
@@ -309,6 +347,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 32,
         "description": "<b>Ethereal Jaunt</b>. As a bonus action, this monster can can shift into the Ethereal Plane, moving through creatures and objects without provoking opportunity attacks.<br><br><b>Spider Climb</b>. This monster can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.<br><br><b>Web Walker</b>. This monster ignores movement restrictions caused by webbing.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 2d6 + 4 piercing damage plus 2d6 poison damage. The target must make a DC 14 CON saving throw or be poisoned for 1 minute (can repeat save at the end of each of its turns)."
     },
     {
@@ -317,6 +356,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 65,
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Bite</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage plus 1d6 cold damage.<br><br><b>Cold Breath (1/S)</b>. Exhales a 15-foot cone of freezing cold. Each creature in the area must make a DC 14 DEX saving throw or take 3d6 cold damage and have their movement speed halved until the end of their next turn."
     },
     {
@@ -325,6 +365,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Dragon",
+        "hp": 175,
         "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Multiattack (1/S)</b>. This monster makes a Bite attack and two Claw attacks.<br><br><b>Bite</b>. Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 2d10 + 6 piercing damage plus 1d8 acid damage.<br><br><b>Claw</b>. Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 2d6 + 6 slashing damage.<br><br><b>Acid Breath (1/S)</b>. This monster exhales acid in a 30-foot line. Each creature in that line must make a DC 18 DEX saving throw, taking 12d8 acid damage on a failed save, or half as much damage on a successful one."
     },
     {
@@ -333,6 +374,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Humanoid",
+        "hp": 99,
         "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Preparations</b>. This monster casts Mage Armor, Stoneskin, and Mind Blank on itself when summoned.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Dagger</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d4 + 2 piercing damage."
     },
     {
@@ -341,6 +383,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
+        "hp": 190,
         "description": "<b>Fire Absorption</b>. Whenever this monster is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.<br><br><b>Immutable Form</b>. This monster is immune to all conditions except blinded, deafened, and paralyzed.<br><br><u>Actions</u><br><br><b>Heavy Slam</b>. Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 3d10 + 6 bludgeoning damage. The target must make a DC 17 STR saving throw or be knocked prone.<br><br><b>Poison Breath (1/S)</b>. Exhales poisonous gas in a 15-foot cone. Each creature in the area must make a DC 16 CON saving throw or take 5d6 poison damage and become poisoned until the end of its next turn."
     },
     {
@@ -349,6 +392,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Undead",
+        "hp": 135,
         "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d6 cold damage. The target must succeed on a DC 18 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.<br><br><b>Cantrip</b>. This monster casts a cantrip of your choice from the Wizard spell list."
     },
     {
@@ -357,6 +401,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Aberration",
+        "hp": 81,
         "description": "<b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Extract Brain</b>. Melee Spell Attack: +10 to hit, reach 5 ft., one target. Hit: 4d10 piercing damage. If the target is stunned, it must make a DC 16 INT saving throw or be instantly destroyed.<br><br><b>Mind Blast (1/S)</b>. All enemies within 15 feet must make a DC 16 INT saving throw or take 5d8 psychic damage and be stunned until the end of their next turn."
     },
     {
@@ -365,6 +410,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Monstrosity",
+        "hp": 208,
         "description": "<b>Keen Sight</b>. This monster has advantage on Perception checks that rely on sight.<br><br><b>Crushing Talons</b>. When this monster makes a melee attack, it can choose to grapple the target. If the grapple succeeds, the target is lifted into the air. At the start of each of this monster's turns, the grappled target takes 2d6 bludgeoning damage until released.<br><br><u>Actions</u><br><br><b>Talons</b>. Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 4d10 + 6 slashing damage.<br><br><b>Sonic Screech (1/S)</b>. Lets out a deafening screech. All enemies within 30 feet must make a DC 17 CON saving throw or take 5d6 thunder damage and be deafened until the end of their next turn. On a successful save, they take half damage and are not deafened."
     },
     {
@@ -373,6 +419,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Construct",
+        "hp": 168,
         "description": "<b>Immutable Form</b>. This monster is immune to being charmed, paralyzed, or petrified. It also has advantage on saving throws against spells and other magical effects.<br><br><b>Stoneform Aura</b>. Allied <i>Construct</i> monsters within 10 feet of this monster gain resistance to bludgeoning, piercing, and slashing damage.<br><br><u>Actions</u><br><br><b>Pounding Fists</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 4d10 + 6 bludgeoning damage.<br><br><b>Trample (1/S)</b>. Choose one enemy creature within 15 feet of this monster. This monster moves to the target and then makes a melee attack. If it hits, the target is knocked prone."
     },
     {
@@ -381,6 +428,7 @@
         "actionCost": "Action",
         "cardType": "Monster",
         "monsterType": "Plant",
+        "hp": 148,
         "description": "<b>Siege Monster</b>. This monster deals double damage to objects and structures.<br><br><u>Actions</u><br><br><b>Crushing Slam</b>. Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Entangling Roots (1/S)</b>. Choose one enemy creature within 15 feet of this monster. The target must make a DC 16 STR saving throw or be restrained by the roots until the end of its next turn.<br><br><b>Ancient Guardian (1/S)</b>. Allied <i>Plant</i> and <i>Beast</i> monsters within 15 feet of this monster gain resistance to all damage types until the start of its next turn."
     },
     {
@@ -824,7 +872,7 @@
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Look at the top 3 cards of your deck. You may discard one. Put the other cards back on top of your deck in any order."
+        "description": "Look at the top 3 cards of your deck. Discard one and put the other cards back on top of your deck in any order."
     },
     {
         "name": "Law of Equivalent Exchange",
@@ -908,7 +956,7 @@
         "rarity": "SR",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Shuffle your hand into your deck. Roll a d20. If you rolled higher than a 10, draw 6 cards. If you rolled lower than a 10, draw 1 card."
+        "description": "Shuffle your hand into your deck. Roll a d20. If you rolled higher than a 10, draw 6 cards. If you rolled a 10 or lower, draw 1 card."
     },
     {
         "name": "Greedy Looting",
@@ -997,7 +1045,7 @@
     {
         "name": "Action Surge",
         "rarity": "SSR",
-        "actionCost": "Action",
+        "actionCost": "Bonus Action",
         "cardType": "Utility",
         "description": "You may take an additional action during this turn."
     },

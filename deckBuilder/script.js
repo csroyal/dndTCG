@@ -189,6 +189,16 @@ function displayDecklist() {
         addCardToDecklist(currentDeck.deckList[c]);
     }
     currentDeckCount.innerHTML = currentDeck.deckList.length;
+
+    let rCount = 0, srCount = 0, ssrCount = 0;
+    currentDeck.deckList.forEach(card => {
+        if (card.rarity === "R") rCount++;
+        if (card.rarity === "SR") srCount++;
+        if (card.rarity === "SSR") ssrCount++;
+    });
+    document.getElementById("rarityR").innerHTML = rCount;
+    document.getElementById("raritySR").innerHTML = srCount;
+    document.getElementById("raritySSR").innerHTML = ssrCount;
 }
 
 saveDeck.addEventListener("click", () => {
