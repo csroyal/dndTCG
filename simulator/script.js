@@ -18,10 +18,12 @@ let discardPileView = document.getElementById("discardPileView");
 let deckModalContainer = document.getElementById("deckModalContainer");
 let deckViewTitle = document.getElementById("deckViewTitle");
 let deckView = document.getElementById("deckView");
+let deckViewConfirmBtn = document.getElementById("deckViewConfirmBtn");
 let handViewModalContainer = document.getElementById("handViewModalContainer");
 let handViewTitle = document.getElementById("handViewTitle");
 let handView = document.getElementById("handView");
 let handViewConfirmBtn = document.getElementById("handViewConfirmBtn");
+let choicesEl = document.getElementById("choices");
 
 let user_decks = JSON.parse(localStorage.getItem("DNDTCG_USER_DECKS"));
 let currentDeck;
@@ -183,6 +185,10 @@ function playCard(card, cardEl) {
                     availableMonsterZone.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
                     card.currentZone = Number(availableMonsterZone.id.slice(-1) - 1);
                     currentMonsters.push(card);
+                    if (cursedBattlefield) {
+                        addEffectToMonster(card, { "effect": "Healing effects are halved.", "type": "negative", "source": "Cursed Battlefield" });
+                        addEffectToMonster(card, { "effect": "Necrotic damage is doubled.", "type": "positive", "source": "Cursed Battlefield" });
+                    }
                     addMonsterOverlay(card, availableMonsterZone);
                 }, 1200);
             } else {
@@ -248,6 +254,9 @@ function playCard(card, cardEl) {
                     alert("There are no target cards in your discard pile.");
                     return;
                 }
+                if (card.name === "Eye of the Beholder") {
+
+                }
 
                 playCardAnimation(cardEl);
                 let indexToRemove = currentHand.findIndex(c => c.name === card.name);
@@ -263,18 +272,34 @@ function playCard(card, cardEl) {
         } else if (card.actionCost === "Bonus Action") {
             if (bonusActionAvailable) {
                 // specific use cases
+                if (card.name === "Arcane Recharge" && !checkForSpellInDiscard()) {
+                    alert("There are no target cards in your discard pile.");
+                    return;
+                }
                 if (card.name === "Law of Equivalent Exchange" && currentHand.length === 1) {
                     alert("You must have another card in your hand to play this card.");
                     return;
+                }
+                if (card.name === "Odd Medicine") {
+                    if (currentMonsters.length === 0) {
+                        alert("You must have a targetable monster on the field to play this card.");
+                        return;
+                    }
+                    else if (!hasNonConstructOrUndeadOnField()) {
+                        alert("You must have a targetable monster on the field to play this card.");
+                        return;
+                    }
                 }
                 if (card.name === "Wild Shape") {
                     if (!checkForBeastOnField() && !checkForBeastInHand()) {
 
                     }
                 }
-                if (card.name === "Arcane Recharge" && !checkForSpellInDiscard()) {
-                    alert("There are no target cards in your discard pile.");
-                    return;
+                if (card.name === "Cursed Pact") {
+                    if (currentMonsters.length === 0) {
+                        alert("You must have a targetable monster on the field to play this card.");
+                        return;
+                    }
                 }
                 if (card.name === "Final Will & Testament" && !monsterDefeatedLastTurn) {
                     alert("The conditions to play this card have not been met.")
@@ -319,9 +344,9 @@ function playCardAnimation(card) {
 }
 
 function addToDiscardPile(card) {
+    currentDiscard.push(card);
     discardPile.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
     discardPile.innerHTML = "";
-    currentDiscard.push(card);
 
     let cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
@@ -331,7 +356,9 @@ function addToDiscardPile(card) {
 
 function rerenderDiscard() {
     discardPileView.innerHTML = "";
-    for (c in currentDiscard) { addToDiscardPile(currentDiscard[c]); }
+    let currentDiscardClone = currentDiscard;
+    currentDiscard = [];
+    for (c in currentDiscardClone) { addToDiscardPile(currentDiscardClone[c]); }
 }
 
 function resolveEffect(card) {
@@ -353,6 +380,8 @@ function newTurn() {
         monsterDefeatedThisTurn = false;
         monsterDefeatedLastTurn = true;
     }
+
+    handleEffects();
 
     let monsterActions = document.querySelectorAll(".monster-overlay-action");
     for (a in monsterActions) {
@@ -414,8 +443,26 @@ function addMonsterOverlay(card, zone) {
         }
     });
 
+    let effects = document.createElement("div");
+    effects.classList.add("monster-overlay-effects");
+    effects.innerHTML = "✨";
+    effects.addEventListener("click", () => {
+        if (!card.effects || !card.effects.length) { alert("This monster has no effects."); return; }
+        let message = "";
+        for (e in card.effects) {
+            if (card.effects[e].type === "positive") {
+                message += "✅ ";
+            } else if (card.effects[e].type === "negative") {
+                message += "❌ ";
+            }
+            message += card.effects[e].effect + "\n"
+        }
+        alert(message);
+    });
+
     overlay.append(health);
     overlay.append(action);
+    overlay.append(effects);
 
     zone.append(overlay);
 }
@@ -500,6 +547,10 @@ function rollDice(sides) {
     return randomRoll;
 }
 
+function rollDiceNoAnim(sides) {
+    return Math.floor(Math.random() * sides) + 1;
+}
+
 function flipCoin() {
     const coin = document.createElement("div");
     coin.classList.add("coin");
@@ -549,3 +600,25 @@ discardPileModalContainer.addEventListener("click", (e) => {
         discardPileModalContainer.style.display = "none";
     }
 });
+
+function handleEffects() {
+    for (c in currentMonsters) {
+        if (currentMonsters[c].effects) {
+            for (e in currentMonsters[c].effects) {
+                let currentEffect = currentMonsters[c].effects[e];
+                // Remove Quick Feet
+                if (currentEffect.source === "Quick Feet") {
+                    currentMonsters[c].effects.splice(e, 1);
+                }
+                // Deal 1d6 damage to Cursed Pact
+                if (currentEffect.source === "Cursed Pact" && currentEffect.type === "negative") {
+                    let damage = rollDiceNoAnim(6);
+                    let health = document.querySelector("#monsterZone" + currentMonsters[c].currentZone + " .monster-overlay-health");
+                    health -= damage;
+                    if (health < 0) health = 0;
+                    
+                }
+            }
+        }
+    }
+}

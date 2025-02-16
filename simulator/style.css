@@ -12,7 +12,7 @@ html, body {
     left: 35px;
 }
 
-#deckSelectModalContainer, #discardPileModalContainer, #deckModalContainer, #handViewModalContainer {
+#deckSelectModalContainer, #discardPileModalContainer, #deckModalContainer, #handViewModalContainer, #choiceModalContainer {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,11 +24,11 @@ html, body {
     background-color: rgba(0,0,0,0.5);
 }
 
-#discardPileModalContainer, #deckModalContainer, #handViewModalContainer {
+#discardPileModalContainer, #deckModalContainer, #handViewModalContainer, #choiceModalContainer {
     display: none;
 }
 
-#deckSelectModal, #discardPileModal, #deckModal, #handViewModal {
+#deckSelectModal, #discardPileModal, #deckModal, #handViewModal, #choiceModal {
     width: 50%;
     height: 75%;
     background-color: rgb(50,50,50);
@@ -40,11 +40,11 @@ html, body {
     flex-direction: column;
 }
 
-#deckSelectModal h2, #discardPileModal h2, #deckModal h2, #handViewTitle {
+#deckSelectModal h2, #discardPileModal h2, #deckModal h2, #handViewTitle, #choiceModal h2 {
     text-align: center;
 }
 
-#deckSelect, #discardPileView, #deckView, #handView {
+#deckSelect, #discardPileView, #deckView, #handView, #choices {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -382,7 +382,18 @@ html, body {
 
 .monster-overlay-action {
     position: absolute;
-    top: 35px;
+    top: 45px;
+    left: -1px;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    font-weight: bold;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.monster-overlay-effects {
+    position: absolute;
+    top: 90px;
     left: -1px;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
     font-weight: bold;

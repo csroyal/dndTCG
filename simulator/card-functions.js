@@ -27,9 +27,11 @@ let cardFunctions = {
     "Eye of the Void": () => { lookAtTop3Discard1Stack2InOrder(); },
     "Law of Equivalent Exchange": () => { discardOneThenDrawOne(); },
     "Lucky Coin Flip": () => { flipCoinHeadsDrawOne(); },
+    "Odd Medicine": () => { selectMonsterOddMedicine(); },
+    "Quick Feet": () => { selectMonsterAdd10Speed(); },
     "Wild Shape": () => { replaceBeastOnFieldWithSameRarityFromHand(); },
     // UTILITY - SR
-    "Cursed Pact": () => {},
+    "Cursed Pact": () => { selectMonsterCursedPact(); },
     "Dark Harvest": () => { drawCardForEachUndeadOnField(); },
     "Final Will & Testament": () => { drawCardsIfMonsterDiedLastTurn(2); },
     "Fortune Teller": () => { lookAtTop4Draw1ShuffleDeck(); },
@@ -38,16 +40,20 @@ let cardFunctions = {
     "Luminous Crystal": () => { lookAtBottom3Draw1Stack2InOrder(); },
     "Magic Librarian": () => { drawCardForEachSpellInHand(); },
     "Mental Reset": () => { shuffleHandIntoDeckDrawSameAmount(); },
-    "Orb of Dragonkind": () => { },
+    "Orb of Dragonkind": () => { twoChoicesOrbOfDragonkind(); },
     "Reanimate": () => { discardOneThenDrawMonsterFromDiscard(); },
     "Rewind the Clock": () => { shuffleDiscardIntoDeck(); },
+    "Traveling Merchant": () => {},
     // UTILITY - SSR
     "Action Surge": () => { enableActionSurge(); },
+    "Cursed Battlefield": () => { enableCursedBattlefield(); },
+    "Eye of the Beholder": () => {},
     "Mind's Eye": () => { searchDeck("any"); },
     "The Ace Up Your Sleeve": () => { aceUpYourSleeve(); }
 }
 let actionSurge = false;
 let cursedBattlefield = false;
+let monsterSelectRestrictions = [];
 
 function shuffleHandIntoDeck(callback) {
     hand.classList.add("shuffling");
@@ -64,6 +70,7 @@ function shuffleHandIntoDeck(callback) {
 }
 
 function discardFromHand(callback) {
+    handView.innerHTML = "";
     for (let c in currentHand) {
         let cardEl = document.createElement("div");
         cardEl.classList.add("card");
@@ -82,11 +89,68 @@ function discardFromHand(callback) {
         addToDiscardPile(selectedCard);
         rerenderHand();
         handViewModalContainer.style.display = "none";
-        document.querySelector("#handView .card.selected").classList.remove("selected");
         setTimeout(callback, 200);
     };
     handViewTitle.innerHTML = "Discard a card from your hand";
     handViewModalContainer.style.display = "flex";
+}
+
+function selectMonster(callback) {
+    handView.innerHTML = "";
+    for (let c in currentMonsters) {
+        let monsterIsRestricted = false;
+        for (r in monsterSelectRestrictions) {
+            if (currentMonsters[c].monsterType === monsterSelectRestrictions[r]) {
+                monsterIsRestricted = true;
+                break;
+            }
+        }
+        if (monsterIsRestricted) continue;
+        let cardEl = document.createElement("div");
+        cardEl.classList.add("card");
+        cardEl.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(currentMonsters[c].name)}.png)`;
+        cardEl.dataset.num = c;
+        cardEl.onclick = (e) => {
+            if (document.querySelector("#handView .card.selected")) { document.querySelector("#handView .card.selected").classList.remove("selected"); }
+            e.target.classList.add("selected");
+        }
+        handView.append(cardEl);
+    }
+    handViewConfirmBtn.onclick = () => {
+        let selectedCardNum = document.querySelector("#handView .card.selected").dataset.num;
+        let selectedCard = currentMonsters[document.querySelector("#handView .card.selected").dataset.num];
+        console.log(selectedCardNum, selectedCard);
+        handViewModalContainer.style.display = "none";
+        setTimeout(() => {
+            callback(selectedCard);
+        }, 200);
+    };
+    handViewTitle.innerHTML = "Choose a monster on the field";
+    handViewModalContainer.style.display = "flex";
+}
+
+function displayChoices(choicesArr) {
+    for (c in choicesArr) {
+        let choiceEl = document.createElement("div");
+        choiceEl.classList.add("choice");
+        choiceEl.innerHTML = choicesArr[c].text;
+        choiceEl.addEventListener("click", () => {
+            choicesArr[c].function();
+            choicesEl.style.display = "none";
+        });
+        choicesEl.append(choiceEl);
+    }
+    choicesEl.style.display = "flex";
+}
+
+function addEffectToMonster(card, effect) {
+    for (c in currentMonsters) {
+        if (currentMonsters[c].name === card.name) {
+            if (!currentMonsters[c].effects) currentMonsters[c].effects = [];
+            currentMonsters[c].effects.push(effect);
+            return;
+        }
+    }
 }
 
 function shuffleUpTo3SpellsDiscardIntoDeck() {
@@ -96,6 +160,7 @@ function shuffleUpTo3SpellsDiscardIntoDeck() {
             let cardEl = document.createElement("div");
             cardEl.classList.add("card");
             cardEl.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(currentDiscard[c].name)}.png)`;
+            cardEl.dataset.card = JSON.stringify(currentDiscard[c]);
             cardEl.onclick = (e) => {
                 let selectedCards = document.querySelectorAll("#deckView .card.selected");
                 console.log(selectedCards.length);
@@ -107,6 +172,23 @@ function shuffleUpTo3SpellsDiscardIntoDeck() {
             };
             deckView.append(cardEl);
         }
+    }
+    deckViewConfirmBtn.onclick = () => {
+        let selectedCards = document.querySelectorAll("#deckView .card.selected");
+        for (c in selectedCards) {
+            if (!selectedCards[c].tagName) break;
+            let selected = JSON.parse(selectedCards[c].dataset.card);
+            for (d in currentDiscard) {
+                if (selected.name === currentDiscard[d].name) {
+                    currentDiscard.splice(d, 1);
+                    currentDeck.push(selected);
+                    break;
+                }
+            }
+        }
+        rerenderDiscard();
+        deckModalContainer.style.display = "none";
+        setTimeout(shuffleDeck, 250);
     }
     deckViewTitle.innerHTML = "Select up to 3 spell cards from your discard pile";
     deckModalContainer.style.display = "flex";
@@ -167,8 +249,38 @@ function flipCoinHeadsDrawOne() {
     }, 3000);
 }
 
+function selectMonsterOddMedicine() {
+    monsterSelectRestrictions = ["Undead", "Construct"];
+    selectMonster((card) => {
+        let healAmount = rollDice(8);
+        if (cursedBattlefield) healAmount = Math.ceil(healAmount / 2);
+        setTimeout(() => {
+            let healthOverlay = document.querySelector("#monsterZone" + (card.currentZone + 1) + " .monster-overlay-health");
+            let currentHealth = Number(healthOverlay.innerHTML);
+            currentHealth += healAmount;
+            if (currentHealth > card.hp) { currentHealth = card.hp; }
+            healthOverlay.innerHTML = currentHealth;
+        }, 3000);
+    });
+}
+
+function selectMonsterAdd10Speed() {
+    monsterSelectRestrictions = [];
+    selectMonster((card) => {
+        addEffectToMonster(card, { effect: "Movement speed is increased by 10 feet.", type: "positive", source: "Quick Feet" });
+    });
+}
+
 function replaceBeastOnFieldWithSameRarityFromHand() {
 
+}
+
+function selectMonsterCursedPact() {
+    monsterSelectRestrictions = [];
+    selectMonster((card) => {
+        addEffectToMonster(card, { effect: "+4 bonus to attack rolls.", type: "positive", source: "Cursed Pact" });
+        addEffectToMonster(card, { effect: "Takes 1d6 necrotic damage at the start of each turn.", type: "negative", source: "Cursed Pact" });
+    });
 }
 
 function drawCardForEachUndeadOnField() {
@@ -268,6 +380,10 @@ function shuffleHandIntoDeckDrawSameAmount() {
     shuffleHandIntoDeck(() => { drawCards(drawAmount); });
 }
 
+function twoChoicesOrbOfDragonkind() {
+
+}
+
 function discardOneThenDrawMonsterFromDiscard() {
     discardFromHand(() => {
         deckView.innerHTML = "";
@@ -350,6 +466,14 @@ function enableActionSurge() {
     actionSurge = true;
 }
 
+function enableCursedBattlefield() {
+    cursedBattlefield = true;
+    for (c in currentMonsters) {
+        addEffectToMonster(currentMonsters[c], { "effect": "Healing effects are halved.", "type": "negative", "source": "Cursed Battlefield" });
+        addEffectToMonster(currentMonsters[c], { "effect": "Necrotic damage is doubled.", "type": "positive", "source": "Cursed Battlefield" });
+    }
+}
+
 function checkForBeastOnField() {
     for (m in currentMonsters) {
         if (currentMonsters[m].monsterType === "Beast") {
@@ -400,4 +524,13 @@ function checkForSpellInDiscard() {
             return true;
         }
     }
+}
+
+function hasNonConstructOrUndeadOnField() {
+    for (c in currentMonsters) {
+        if (currentMonsters[c].monsterType !== "Undead" && currentMonsters[c].monsterType !== "Construct") {
+            return true;
+        }
+    }
+    return false;
 }
