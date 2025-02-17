@@ -40,6 +40,10 @@ html, body {
     flex-direction: column;
 }
 
+#choiceModal {
+    height: 56%;
+}
+
 #deckSelectModal h2, #discardPileModal h2, #deckModal h2, #handViewTitle, #choiceModal h2 {
     text-align: center;
 }
@@ -89,7 +93,7 @@ html, body {
     border: 2px solid lime;
 }
 
-#deckSelectConfirmBtn, #handViewConfirmBtn, #deckViewConfirmBtn {
+#deckSelectConfirmBtn, #handViewConfirmBtn, #deckViewConfirmBtn, .choice {
     border: 2px solid black;
     background-color: rgb(100,100,100);
     padding: 12px 24px;
@@ -98,9 +102,10 @@ html, body {
     cursor: pointer;
     transition: all 0.25s;
     margin: 16px 0px;
+    user-select: none;
 }
 
-#deckSelectConfirmBtn:hover, #handViewConfirmBtn:hover, #deckViewConfirmBtn:hover {
+#deckSelectConfirmBtn:hover, #handViewConfirmBtn:hover, #deckViewConfirmBtn:hover, .choice:hover {
     background-color: rgb(125,125,125);
 }
 
@@ -304,8 +309,11 @@ html, body {
 }
 
 .occupied {
-    animation: zoneGlow 0.5s ease-in-out forwards;
     cursor: pointer;
+}
+
+.zone-glow {
+    animation: zoneGlow 0.5s ease-in-out forwards;
 }
 
 .dice-container {
@@ -322,12 +330,14 @@ html, body {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     visibility: hidden; /* Hidden until triggered */
+    z-index: 99;
 }
 
 .dice {
     color: black;
     font-size: 3rem;
     text-align: center;
+    z-index: 99;
 }
 
 .coin {
@@ -412,6 +422,93 @@ html, body {
 
 .reaction-used {
     animation: reactionPulse 1.5s ease-out forwards;
+}
+
+#beholderAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#beholderAnimation .card {
+    width: 272px;
+    aspect-ratio: 362 / 508;
+    border: 2px solid black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* #beholderTentacle {
+    background-image: url(../assets/cards/tentacles-of-the-beholder.png);
+    animation: beholderGlowMove 4s ease-in-out forwards;
+}
+
+#beholderEye {
+    background-image: url(../assets/cards/eye-of-the-beholder.png);
+    animation: beholderGlow 4s ease-in-out forwards;
+}
+
+#beholderMouth {
+    background-image: url(../assets/cards/mouth-of-the-beholder.png);
+    animation: beholderGlowMove 4s ease-in-out forwards;
+}
+
+#beholder {
+    display: none;
+} */
+
+.beholder-card.fusion-glow {
+    animation: beholderGlow 2s infinite alternate ease-in-out;
+}
+
+.beholder-card.fusion-move {
+    animation: moveToCenter 3s ease-in-out forwards;
+}
+
+.full-beholder {
+    position: absolute;
+    top: 0%;
+    left: 30%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    width: 40%;
+    height: auto;
+    animation: finalReveal 1.5s forwards;
+}
+
+.damage-number {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    font-size: 100px;
+    font-weight: bold;
+    color: lime;
+    text-shadow: 0 0 10px yellow, 0 0 20px lime;
+    opacity: 0;
+    animation: laserDamage 1.5s ease-out forwards;
+}
+
+.buff-animation {
+  animation: buffEffect 1s ease-out;
+}
+
+.debuff-animation {
+  animation: debuffEffect 0.8s ease-in-out;
+}
+
+.heal-animation {
+    animation: healEffect 1.5s ease-out;
+}
+
+.damage-animation {
+    animation: damageEffect 0.7s ease-in-out;
 }
 
 @keyframes shuffle {
@@ -520,4 +617,56 @@ html, body {
   100% {
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
   }
+}
+
+@keyframes beholderGlow {
+    0% { filter: brightness(100%); }
+    50% { filter: brightness(200%) drop-shadow(0 0 10px cyan); }
+    100% { filter: brightness(100%); }
+}
+  
+@keyframes moveToCenter {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-50vh) scale(1.2); opacity: 1; }
+    100% { transform: translateY(-50vh) scale(0); opacity: 0; }
+}
+
+@keyframes finalReveal {
+    0% { opacity: 0; transform: scale(0.5); filter: brightness(300%) drop-shadow(0 0 50px cyan); }
+    100% { opacity: 1; transform: scale(1); filter: brightness(100%); }
+}
+
+@keyframes laserDamage {
+    0% { transform: scale(0.5); opacity: 0; filter: brightness(200%); }
+    30% { transform: scale(1.2); opacity: 1; filter: brightness(300%) drop-shadow(0 0 20px lime); }
+    70% { transform: scale(1); filter: brightness(500%) drop-shadow(0 0 40px yellow); }
+    100% { transform: scale(1.5); opacity: 0; filter: brightness(100%); }
+}
+
+@keyframes buffEffect {
+    0% { filter: drop-shadow(0 0 0px lime); transform: scale(1); opacity: 1; }
+    50% { filter: drop-shadow(0 0 15px lime); transform: scale(1.05); }
+    100% { filter: drop-shadow(0 0 0px lime); transform: scale(1); opacity: 1; }
+}
+
+@keyframes debuffEffect {
+    0% { filter: brightness(100%) drop-shadow(0 0 0px red); transform: translateX(0); }
+    30% { filter: brightness(150%) drop-shadow(0 0 20px red); transform: translateX(-3px); }
+    60% { filter: brightness(150%) drop-shadow(0 0 20px red); transform: translateX(3px); }
+    100% { filter: brightness(100%) drop-shadow(0 0 0px red); transform: translateX(0); }
+}
+
+@keyframes healEffect {
+    0% { filter: brightness(100%) drop-shadow(0 0 0px lime); transform: scale(1); opacity: 1; }
+    50% { filter: brightness(150%) drop-shadow(0 0 20px lime); transform: scale(1.05); }
+    100% { filter: brightness(100%) drop-shadow(0 0 0px lime); transform: scale(1); opacity: 1; }
+}
+
+@keyframes damageEffect {
+    0% { filter: brightness(100%) drop-shadow(0 0 0px red); transform: translateX(0); }
+    20% { filter: brightness(200%) drop-shadow(0 0 15px red); transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+    100% { filter: brightness(100%) drop-shadow(0 0 0px red); transform: translateX(0); }
 }

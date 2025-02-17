@@ -375,7 +375,7 @@
         "cardType": "Monster",
         "monsterType": "Humanoid",
         "hp": 99,
-        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Preparations</b>. This monster casts Mage Armor, Stoneskin, and Mind Blank on itself when summoned.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Dagger</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d4 + 2 piercing damage."
+        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Preparations</b>. This monster casts Mage Armor, Stoneskin, and Mind Blank on itself when summoned.<br><br><b>Magic Resistance</b>. This monster has advantage on saving throws against spells and other magical effects.<br><br><u>Actions</u><br><br><b>Dagger</b>. Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 1d4 + 2 piercing damage."
     },
     {
         "name": "Iron Golem",
@@ -393,7 +393,7 @@
         "cardType": "Monster",
         "monsterType": "Undead",
         "hp": 135,
-        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 20 and +12 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d6 cold damage. The target must succeed on a DC 18 CON saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.<br><br><b>Cantrip</b>. This monster casts a cantrip of your choice from the Wizard spell list."
+        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Paralyzing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d10 necrotic damage. The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.<br><br><b>Master of Necromancy (1/S)</b>. This monster casts a spell using a Spell card from your discard pile."
     },
     {
         "name": "Mind Flayer",
@@ -851,7 +851,7 @@
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Utility",
-        "description": "Choose up to three of your monsters on the field. Add 1d4 to each monsters' next attack roll, ability check, or saving throw."
+        "description": "All monsters on the field under your control add 1d4 to their next attack roll, ability check, or saving throw."
     },
     {
         "name": "Call of the Beast",
@@ -1069,6 +1069,13 @@
         "actionCost": "Action",
         "cardType": "Utility",
         "description": "Search your deck for a card and put it into your hand. Shuffle your deck afterward."
+    },
+    {
+        "name": "Sanguine Revelation",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Utility",
+        "description": "You take as much damage as you want. For every 10 damage you just took, draw a card."
     },
     {
         "name": "The Ace Up Your Sleeve",
