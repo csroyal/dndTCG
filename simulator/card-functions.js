@@ -180,9 +180,10 @@ function displayChoices(choicesArr) {
 
 function addEffectToMonster(card, effect) {
     for (c in currentMonsters) {
-        if (currentMonsters[c].name === card.name) {
+        if (currentMonsters[c].name === card.name && currentMonsters[c].currentZone === card.currentZone) {
             if (!currentMonsters[c].effects) currentMonsters[c].effects = [];
             currentMonsters[c].effects.push(effect);
+            effectAnim(card, effect.type);
             return;
         }
     }
@@ -280,7 +281,6 @@ function phoenixRebirth() {
 
         setTimeout(() => {
             addEffectToMonster(selectedCard, { effect: "At the start of its next turn, deals 3d6 fire damage to all enemies within 10 feet.", type: "positive", source: "Phoenix Rebirth" });
-            effectAnim(selectedCard, "positive");
         }, 750);
 
         currentDiscard.splice(selectedCardNum, 1);
@@ -335,7 +335,6 @@ function shuffleUpTo3SpellsDiscardIntoDeck() {
 function addBardicInspirationToAllFieldMonsters() {
     for (m in currentMonsters) {
         addEffectToMonster(currentMonsters[m], { effect: "Add 1d4 to next attack roll, ability check, or saving throw.", type: "positive", source: "Bardic Inspiration" });
-        effectAnim(currentMonsters[m], "positive");
     }
 }
 
@@ -385,7 +384,6 @@ function selectMonsterCunningAction() {
     monsterSelectRestrictions = [];
     selectMonster((card) => {
         addEffectToMonster(card, { effect: "Can use Dash, Disengage or Hide as a bonus action.", type: "positive", source: "Cunning Action" });
-        effectAnim(card, "positive");
     });
 }
 
@@ -571,7 +569,6 @@ function selectMonsterAdd10Speed() {
     monsterSelectRestrictions = [];
     selectMonster((card) => {
         addEffectToMonster(card, { effect: "Movement speed is increased by 10 feet.", type: "positive", source: "Quick Feet" });
-        effectAnim(card, "positive");
     });
 }
 
@@ -580,7 +577,6 @@ function selectMonsterRecklessAttack() {
     selectMonster((card) => {
         addEffectToMonster(card, { effect: "Advantage on melee attack rolls.", type: "positive", source: "Reckless Attack" });
         addEffectToMonster(card, { effect: "Attack rolls against it have advantage", type: "negative", source: "Reckless Attack" });
-        effectAnim(card, "positive");
     });
 }
 
@@ -661,7 +657,6 @@ function selectMonsterCursedPact() {
     selectMonster((card) => {
         addEffectToMonster(card, { effect: "+4 bonus to attack rolls.", type: "positive", source: "Cursed Pact" });
         addEffectToMonster(card, { effect: "Takes 1d6 necrotic damage at the start of each turn.", type: "negative", source: "Cursed Pact" });
-        effectAnim(card, "positive");
     });
 }
 
@@ -829,7 +824,6 @@ function twoChoicesOrbOfDragonkind() {
                     monsterSelectRestrictions = ["Aberration", "Beast", "Construct", "Elemental", "Fey", "Humanoid", "Monstrosity", "Ooze", "Plant", "Undead"];
                     selectMonster((card) => {
                         addEffectToMonster(card, { effect: "Can use 2 actions this turn.", type: "positive", source: "Orb of Dragonkind" });
-                        effectAnim(card, "positive");
                     });
                 } else {
                     choiceModalContainer.style.display = "flex";
@@ -1148,10 +1142,9 @@ function enableActionSurge() {
 
 function enableCursedBattlefield() {
     cursedBattlefield = true;
-    for (c in currentMonsters) {
+    for (let c in currentMonsters) {
         addEffectToMonster(currentMonsters[c], { "effect": "Healing effects are halved.", "type": "negative", "source": "Cursed Battlefield" });
         addEffectToMonster(currentMonsters[c], { "effect": "Necrotic damage is doubled.", "type": "positive", "source": "Cursed Battlefield" });
-        effectAnim(currentMonsters[c], "positive");
     }
 }
 
@@ -1292,7 +1285,6 @@ function aceUpYourSleeve() {
                 aceUpYourSleeveDamageBoost = true;
                 for (let m in currentMonsters) {
                     addEffectToMonster(currentMonsters[m], { effect: "Next attack deals an extra 6d6 damage.", type: "positive", source: "The Ace Up Your Sleeve" });
-                    effectAnim(currentMonsters[m], "positive");
                 }
             }
         },

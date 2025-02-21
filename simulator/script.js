@@ -468,6 +468,80 @@ function summonMonster(card) {
     addMonsterOverlay(card, availableMonsterZone);
     setTimeout(() => {
         availableMonsterZone.classList.remove("zone-glow");
+
+        // Pixie - Innate Magic Passive
+        if (card.name === "Pixie") {
+            displayChoices([
+                {
+                    "text": "This monster casts Minor Invisibility on itself and cannot be targeted until it attacks or uses an ability.",
+                    "function": () => {
+                        addEffectToMonster(card, "This monster is invisible and cannot be targeted until it attacks or uses an ability.");
+                    }
+                },
+                {
+                    "text": "A target within 30 feet must make a DC 11 WIS saving throw or be charmed until the start of your next turn.",
+                    "function": () => {
+                        alert("A target within 30 feet must make a DC 11 WIS saving throw or be charmed until the start of your next turn.");
+                    }
+                }
+            ]);
+        }
+        
+        // Tridrone - Modron Coordination Passive
+        let tridroneCount = 0;
+        for (let c in currentMonsters) {
+            if (currentMonsters[c].name === "Tridrone") {
+                tridroneCount++;
+            }
+        }
+        if (tridroneCount > 1) {
+            for (let c in currentMonsters) {
+                if (currentMonsters[c].name === "Tridrone") {
+                    for (e in currentMonsters[c].effects) {
+                        let currentEffect = currentMonsters[c].effects[e];
+                        // Remove Primal Guidance
+                        if (currentEffect.source === "Modron Coordination") {
+                            currentMonsters[c].effects.splice(e, 1);
+                            break;
+                        }
+                    }
+                    addEffectToMonster(card, { effect: "This monster gains +" + tridroneCount + " AC." , type: "positive", source: "Modron Coordination" });
+                }
+            }
+        }
+        
+        // Lizardfolk Shaman - Tribal Wisdom Passive
+        for (let c in currentMonsters) {
+            if (currentMonsters[c].name === "Lizardfolk Shaman" && currentMonsters[c].currentZone !== card.currentZone) {
+                if (card.monsterType === "Beast" || card.monsterType === "Humanoid") {
+                    if (confirm("Activate Lizardfolk Shaman's Tribal Wisdom to draw a card?")) {
+                        drawCard();
+                    }
+                }
+            }
+        }
+
+        // Myconid Sovereign - Spore Leader Passive
+        if (card.name === "Myconid Sovereign") {
+            for (let c in currentMonsters) {
+                if (card.monsterType === "Plant") {
+                    addEffectToMonster(card, { effect: "This monster gains +1 AC and heals 1d4 HP at the start of your turn." , type: "positive", source: "Spore Leader" });
+                }
+            }
+        } else {
+            for (let c in currentMonsters) {
+                if (currentMonsters[c].name === "Myconid Sovereign" && card.monsterType === "Plant") {
+                    addEffectToMonster(card, { effect: "This monster gains +1 AC and heals 1d4 HP at the start of your turn." , type: "positive", source: "Spore Leader" });
+                }
+            }
+        }
+
+        // Archmage - Preparations Passive
+        if (card.name === "Archmage") {
+            addEffectToMonster(card, { effect: "Mage Armor - This monster's AC is 13 + its DEX modifier." , type: "positive", source: "Preparations" });
+            addEffectToMonster(card, { effect: "Stoneskin - This monster has resistance to slashing, piercing, and bludgeoning damage." , type: "positive", source: "Preparations" });
+            addEffectToMonster(card, { effect: "Mind Blank - This monster is immune to psychic damage, the charmed condition, and any effects that sense its emotions or thoughts." , type: "positive", source: "Preparations" });
+        }
     }, 500);
 } 
 
@@ -495,6 +569,12 @@ function addMonsterOverlay(card, zone) {
     action.addEventListener("click", () => {
         if (action.dataset.used === "true") return;
         if (confirm("Use this monster's action?")) {
+            let choices = Object.entries(monsterActions[card.name]).map(([name, data]) => ({
+                name,
+                ...data
+            }));
+            console.log(choices);
+            displayActions(card, choices);
             for (e in card.effects) {
                 if (card.effects[e].source === "Orb of Dragonkind") {
                     card.effects.splice(e, 1);
@@ -546,6 +626,11 @@ function damageMonster(card, damage) {
         document.querySelector("#monsterZone" + (card.currentZone + 1)).classList.add("damage-animation");
         setTimeout(() => {
             document.querySelector("#monsterZone" + (card.currentZone + 1)).classList.remove("damage-animation");
+
+            // Owlbear - Monstrous Frenzy Passive
+            if (card.name === "Owlbear" && Number(health.innerHTML) <= card.hp / 2) {
+                addEffectToMonster(card, { effect: "This monster gains advantage on attack rolls until the end of your next turn." , type: "positive", source: "Monstrous Frenzy", removeTurn: turnNum + 1 });
+            }
         }, 1500);
     }
 }
@@ -584,6 +669,46 @@ function killMonster(card) {
                 break;
             }
         }
+
+        // Gas Spore - Explosive Demise Passive
+        if (card.name === "Gas Spore") {
+            if(confirm("The Gas Spore explodes. All creatures within 10 feet must make a DC 12 CON saving throw or take 3d6 poison damage and be poisoned until the end of their next turn. On a success, they take half damage. Deal damage?")) {
+                let dmg = rollMultiDice(3, 6);
+                alert(`Gas Spore's Acid Spray deals ${dmg} poison damage and poisons against failed saves, and ${Math.floor(dmg / 2)} poison damage against successful saves!`);
+            }
+        }
+
+        // Mud Mephit - Death Burst Passive
+        if (card.name === "Mud Mephit") {
+            alert("The Mud Mephit explodes in a burst of sticky mud. Each Medium or smaller creature within 5 feet of it must succeed on a DC 11 DEX saving throw or be restrained until the end of the creature's next turn.");
+        }
+
+        // Smoke Mephit - Death Burst Passive
+        if (card.name === "Smoke Mephit") {
+            alert("The Smoke Mephit leaves behind a cloud of smoke that fills a 5-foot-radius sphere centered on its space. The sphere is heavily obscured. Wind disperses the cloud, which otherwise lasts for 1 minute.");
+        }
+
+        // Remove Myconid Sovereign's Spore Leader Passive
+        if (card.name === "Myconid Sovereign") {
+            let sporeLeaderStillActive = false;
+            for (let c in currentMonsters) {
+                if (currentMonsters[c].name === "Myconid Sovereign") {
+                    sporeLeaderStillActive = true;
+                    break;
+                }
+            }
+
+            if (!sporeLeaderStillActive){
+                for (let c in currentMonsters) {
+                    for (let e in currentMonsters[c].effects) {
+                        if (currentMonsters[c].effects[e].source === "Spore Leader") {
+                            currentMonsters[c].effects.splice(e, 1);
+                        }
+                    }
+                }
+            }
+        }
+
     }, 3000);
 }
 
@@ -595,7 +720,7 @@ function addReactionOverlay(card, zone) {
         displayCardPopup(card);
     });
     overlay.addEventListener("click", () => {
-        if (!reactionAvailable) { alert("You have already used your reaction for this turn."); }
+        if (!reactionAvailable) { alert("You have already used your reaction for this turn."); return; }
         if (card.name === "Necromancer's Gravecall") {
             if (!checkForMonsterTypeAndRarityInDiscard("Undead", "R") && !checkForMonsterTypeAndRarityInDiscard("Undead", "SR")) {
                 alert("You must have a targetable monster in the discard pile to play this card.");
@@ -734,6 +859,50 @@ function handleEffects() {
         if (currentMonsters[c].effects) {
             for (e in currentMonsters[c].effects) {
                 let currentEffect = currentMonsters[c].effects[e];
+                // Tridrone - Modron Coordination Passive
+                let tridroneCount = 0;
+                for (let c in currentMonsters) {
+                    if (currentMonsters[c].name === "Tridrone") {
+                        tridroneCount++;
+                    }
+                }
+                if (tridroneCount > 1) {
+                    for (let c in currentMonsters) {
+                        if (currentMonsters[c].name === "Tridrone") {
+                            for (e in currentMonsters[c].effects) {
+                                let currentEffect = currentMonsters[c].effects[e];
+                                // Remove Primal Guidance
+                                if (currentEffect.source === "Modron Coordination") {
+                                    currentMonsters[c].effects.splice(e, 1);
+                                    break;
+                                }
+                            }
+                            addEffectToMonster(card, { effect: "This monster gains +" + tridroneCount + " AC." , type: "positive", source: "Modron Coordination" });
+                        }
+                    }
+                }
+                // Remove Lizardfolk Shaman's Primal Guidance
+                if (currentEffect.source === "Primal Guidance") {
+                    currentMonsters[c].effects.splice(e, 1);
+                }
+                // Heal 1d4 from Myconid Sovereign's Spore Leader
+                if (currentEffect.source === "Spore Leader") {
+                    let dmg = rollDiceNoAnim(4);
+                    healMonster(currentMonsters[c], dmg);
+                }
+                // Return to discard after Myconid Sovereign's Animating Spores
+                if (currentEffect.source === "Animating Spores" && turnNum === currentEffect.removeTurn) {
+                    currentMonsters[c].effects.splice(e, 1);
+                    killMonster(currentMonsters[c]);
+                }
+                // Remove Owlbear's Monstrous Frenzy
+                if (currentEffect.source === "Monstrous Frenzy" && turnNum === currentEffect.removeTurn) {
+                    currentMonsters[c].effects.splice(e, 1);
+                }
+                // Remove Treant's Ancient Guardian
+                if (currentEffect.source === "Ancient Guardian") {
+                    currentMonsters[c].effects.splice(e, 1);
+                }
                 // Deal 3d6 with Phoenix Rebirth
                 if (currentEffect.source === "Phoenix Rebirth") {
                     currentMonsters[c].effects.splice(e, 1);

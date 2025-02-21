@@ -87,7 +87,7 @@
         "cardType": "Monster",
         "monsterType": "Humanoid",
         "hp": 7,
-        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
+        "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><u>Actions</u><br><br><b>Scimitar</b>. Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1d6 + 2 slashing damage.<br><br><b>Shortbow</b>. Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 1d6 + 2 piercing damage."
     },
     {
         "name": "Mud Mephit",
@@ -312,7 +312,7 @@
         "cardType": "Monster",
         "monsterType": "Monstrosity",
         "hp": 66,
-        "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then makes a melee attack, the target must make a DC 14 STR saving throw or be pushed 10 feet back and take an extra 2d6 bludgeoning damage.<br><br><b>Labyrinthine Fury</b>. his monster has advantage on attack rolls against creatures that are within 10 feet of a wall or obstacle.<br><br><u>Actions</u><br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
+        "description": "<b>Charge</b>. If this monster moves at least 10 feet straight toward a target and then makes a melee attack, the target must make a DC 14 STR saving throw or be pushed 10 feet back and take an extra 2d6 bludgeoning damage.<br><br><b>Labyrinthine Fury</b>. This monster has advantage on attack rolls against creatures that are within 10 feet of a wall or obstacle.<br><br><u>Actions</u><br><br><b>Gore</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d8 + 4 piercing damage."
     },
     {
         "name": "Mummy",
