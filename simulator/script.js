@@ -522,6 +522,13 @@ function addMonsterOverlay(card, zone) {
         }
         alert(message);
     });
+    effects.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        let effect = prompt("Add effect to monster:");
+        let type = prompt("Effect type (positive/negative):");
+        let obj = { effect: effect, type: type, source: "Custom" };
+        addEffectToMonster(card, obj);
+    });
 
     overlay.append(health);
     overlay.append(action);

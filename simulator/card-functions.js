@@ -41,7 +41,7 @@ let cardFunctions = {
     "Meteor Swarm": () => {},
     "Power Word Kill": () => {},
     "Prismatic Spray": () => {},
-    "Regenerate": () => {},
+    "Regenerate": () => { regenerate(); },
     // REACTION - SR
     "Necromancer's Gravecall": () => { necromancersGravecall(); },
     "Siphon Life": () => { siphonLife(); },
@@ -186,6 +186,13 @@ function addEffectToMonster(card, effect) {
             return;
         }
     }
+}
+
+function regenerate() {
+    setTimeout(() => {
+        let healing = rollMultiDice(4, 8) + 15;
+        alert("The target receives", healing, "health, and 1 health at the start of each of their turns.")
+    }, 300);
 }
 
 function necromancersGravecall() {
