@@ -469,13 +469,39 @@ function summonMonster(card) {
     setTimeout(() => {
         availableMonsterZone.classList.remove("zone-glow");
 
+        // Cultist - Dark Devotion Passive
+        if (card.name === "Cultist") {
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against being charmed or frightened.", type: "positive", source: "Dark Devotion" } );
+        }
+
+        // Flame Skull - Magic Resistance Passive
+        if (card.name === "Flame Skull") {
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against spells and other magical effects.", type: "positive", source: "Magic Resistance" } );
+        }
+
+        // Gas Spore - Deceptive Appearance Passive
+        if (card.name === "Gas Spore") {
+            addEffectToMonster(card, { effect: "When targeted by an enemy for the first time, they must make a DC 11 INT saving throw or waste their action.", type: "positive", source: "Deceptive Appearance" } );
+        }
+
+        // Giant Bat - Echolocation and Flyby Passives
+        if (card.name === "Giant Bat") {
+            addEffectToMonster(card, { effect: "Can not be surprised and has advantage on Perception checks relying on hearing.", type: "positive", source: "Echolocation" } );
+            addEffectToMonster(card, { effect: "Does not provoke opportunity attacks when flying.", type: "positive", source: "Flyby" } );
+        }
+
+        // Goblin - Pack Tactics Passive
+        if (card.name === "Goblin") {
+            addEffectToMonster(card, { effect: "Has advantage on attack rolls if a non-incapacitated ally is within 5 feet.", type: "positive", source: "Pack Tactics" } );
+        }
+
         // Pixie - Innate Magic Passive
         if (card.name === "Pixie") {
             displayChoices([
                 {
                     "text": "This monster casts Minor Invisibility on itself and cannot be targeted until it attacks or uses an ability.",
                     "function": () => {
-                        addEffectToMonster(card, "This monster is invisible and cannot be targeted until it attacks or uses an ability.");
+                        addEffectToMonster(card, { effect: "This monster is invisible and cannot be targeted until it attacks or uses an ability.", type: "positive", source: "Innate Magic" } );
                     }
                 },
                 {
@@ -485,6 +511,23 @@ function summonMonster(card) {
                     }
                 }
             ]);
+        }
+
+        // Rust Monster - Corroding Touch and Iron Hunger Passives
+        if (card.name === "Rust Monster") {
+            addEffectToMonster(card, { effect: "Attacked targets must make a DC 12 CON saving throw or have AC reduced by 1 or weapon deals -1 damage.", type: "positive", source: "Corroding Touch" } );
+            addEffectToMonster(card, { effect: "Gains +3 AC if applies a -3 penalty through Corroding Touch.", type: "positive", source: "Iron Hunger" } );
+        }
+
+        // Shadow - Shadow Stealth and Sunlight Weakness Passives
+        if (card.name === "Shadow") {
+            addEffectToMonster(card, { effect: "Can Hide as a bonus action in dim light or darkness.", type: "positive", source: "Shadow Stealth" } );
+            addEffectToMonster(card, { effect: "Has disadvantage on attack rolls, ability checks, and saving throws while in sun.", type: "negative", source: "Sunlight Weakness" } );
+        }
+
+        // Tridrone - Multi-tasking Strike Passive
+        if (card.name === "Tridrone") {
+            addEffectToMonster(card, { effect: "Can attack up to 3 different targets per turn.", type: "positive", source: "Multi-tasking Strike" } );
         }
         
         // Tridrone - Modron Coordination Passive
@@ -509,6 +552,47 @@ function summonMonster(card) {
                 }
             }
         }
+
+        // Wolf - Pack Tactics Passive
+        if (card.name === "Wolf") {
+            addEffectToMonster(card, { effect: "Has advantage on attack rolls if a non-incapacitated ally is within 5 feet.", type: "positive", source: "Pack Tactics" } );
+        }
+
+        // Animated Armor - Living Armor and Sentinel Defense Passives
+        if (card.name === "Animated Armor") {
+            addEffectToMonster(card, { effect: "Has resistance to non-magical attacks.", type: "positive", source: "Living Armor" } );
+            addEffectToMonster(card, { effect: "When an enemy moves within 5 feet of this monster, it must make a DC 13 STR saving throw or have its movement reduced to 0 until the end of the turn.", type: "positive", source: "Sentinel Defense" } );
+        }
+
+        // Banshee - Incorporeal Movement Passive
+        if (card.name === "Banshee") {
+            addEffectToMonster(card, { effect: "Can move through other creatures and objects as if they were difficult terrain. Takes 1d10 force damage if ending its turn in an object.", type: "positive", source: "Incorporeal Movement" } );
+        }
+
+        // Chuul - Amphibious Passive
+        if (card.name === "Chuul") {
+            addEffectToMonster(card, { effect: "Can breathe air and water.", type: "positive", source: "Amphibious" } );
+        }
+
+        // Fire Elemental - Water Susceptibility Passive
+        if (card.name === "Fire Elemental") {
+            addEffectToMonster(card, { effect: "Takes 1 cold damage for every 5 feet it movesw in water/every gallon of water splashed on it.", type: "negative", source: "Water Susceptibility" } );
+        }
+
+        // Gelatinous Cube - Ooze Cube Passive
+        if (card.name === "Gelatinous Cube") {
+            addEffectToMonster(card, { effect: "Other creatures that enter its space are subjected to Engulf with disadvantage on the saving throw.", type: "positive", source: "Ooze Cube" } );
+        }
+
+        // Giant Eagle - Keen Sight Passive
+        if (card.name === "Giant Eagle") {
+            addEffectToMonster(card, { effect: "Has advantage on Perception checks that rely on sight.", type: "positive", source: "Keen Sight" } );
+        }
+
+        // Grick - Stone Camouflage Passive
+        if (card.name === "Grick") {
+            addEffectToMonster(card, { effect: "Has advantage on Stealth checks when hiding in rocky terrain.", type: "positive", source: "Stone Camouflage" } );
+        }
         
         // Lizardfolk Shaman - Tribal Wisdom Passive
         for (let c in currentMonsters) {
@@ -519,6 +603,22 @@ function summonMonster(card) {
                     }
                 }
             }
+        }
+
+        // Merrow - Amphibious and Aquatic Hunter Passives
+        if (card.name === "Merrow") {
+            addEffectToMonster(card, { effect: "Can breathe air and water.", type: "positive", source: "Amphibious" } );
+            addEffectToMonster(card, { effect: "It and alles within 10 feet gain advantage on attack rolls while in water.", type: "positive", source: "Aquatic Hunter" } );
+        }
+
+        // Minotaur - Labyrinthine Fury Passive
+        if (card.name === "Minotaur") {
+            addEffectToMonster(card, { effect: "Has advantage on attack rolls against creatures within 10 feet of a wall or obstacle.", type: "positive", source: "Labyrinthine Fury" } );
+        }
+
+        // Mummy - Dreadful Presence Passive
+        if (card.name === "Mummy") {
+            addEffectToMonster(card, { effect: "Enemies within 10 feet have disadvantage on saving throws against being frightened.", type: "positive", source: "Dreadful Presence" } );
         }
 
         // Myconid Sovereign - Spore Leader Passive
@@ -536,11 +636,66 @@ function summonMonster(card) {
             }
         }
 
-        // Archmage - Preparations Passive
+        // Owlbear - Keen Sight and Smell Passive
+        if (card.name === "Owlbear") {
+            addEffectToMonster(card, { effect: "Has advantage on Perception checks that rely on sight and smell.", type: "positive", source: "Keen Sight and Smell" } );
+        }
+
+        // Phase Spider - Ethereal Jaunt, Spider Climb, and Web Walker Passives
+        if (card.name === "Phase Spider") {
+            addEffectToMonster(card, { effect: "Can shift into the Etheral Plane as a bonus action.", type: "positive", source: "Ethereal Jaunt" } );
+            addEffectToMonster(card, { effect: "Can climb difficult surfaces without needing to make an ability check.", type: "positive", source: "Spider Climb" } );
+            addEffectToMonster(card, { effect: "Ignores movement restrictions caused by webs.", type: "positive", source: "Web Walker" } );
+        }
+
+        // Winter Wolf - Pack Tactics and Snow Camouflage Passives
+        if (card.name === "Winter Wolf") {
+            addEffectToMonster(card, { effect: "Has advantage on attack rolls if a non-incapacitated ally is within 5 feet.", type: "positive", source: "Pack Tactics" } );
+            addEffectToMonster(card, { effect: "Has advantage on Stealth checks when hiding in snowy terrain.", type: "positive", source: "Snow Camouflage" } );
+        }
+
+        // Adult Black Dragon - Amphibious Passive
+        if (card.name === "Adult Black Dragon") {
+            addEffectToMonster(card, { effect: "Can breathe air and water.", type: "positive", source: "Amphibious" } );
+        }
+
+        // Archmage - Preparations and Magic Resistance Passives
         if (card.name === "Archmage") {
             addEffectToMonster(card, { effect: "Mage Armor - This monster's AC is 13 + its DEX modifier." , type: "positive", source: "Preparations" });
             addEffectToMonster(card, { effect: "Stoneskin - This monster has resistance to slashing, piercing, and bludgeoning damage." , type: "positive", source: "Preparations" });
             addEffectToMonster(card, { effect: "Mind Blank - This monster is immune to psychic damage, the charmed condition, and any effects that sense its emotions or thoughts." , type: "positive", source: "Preparations" });
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against spells and other magical effects." , type: "positive", source: "Magic Resistance" });
+        }
+
+        // Iron Golem - Fire Absorbption and Immutable Form Passives
+        if (card.name === "Iron Golem") {
+            addEffectToMonster(card, { effect: "Takes no fire damage and heals the damage dealt.", type: "positive", source: "Fire Absorption" } );
+            addEffectToMonster(card, { effect: "Immune to all conditions except blinded, deafened, and paralyzed.", type: "positive", source: "Immutable Form" } );
+        }
+
+        // Lich - Turn Resistance Passive
+        if (card.name === "Lich") {
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against turn undead effects.", type: "positive", source: "Turn Resistance" } );
+        }
+
+        // Mind Flayer - Magic Resistance Passive
+        if (card.name === "Mind Flayer") {
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against spells and other magical effects." , type: "positive", source: "Magic Resistance" });
+        }
+
+        // Roc - Keen Sight Passive
+        if (card.name === "Roc") {
+            addEffectToMonster(card, { effect: "Has advantage on Perception checks that rely on sight.", type: "positive", source: "Keen Sight" } );
+        }
+
+        // Stone Golem - Immutable Form Passive
+        if (card.name === "Stone Golem") {
+            addEffectToMonster(card, { effect: "Immune to being charmed, paralyzed, and petrified, and has advantage on saving throws against spells and other magical effects.", type: "positive", source: "Immutable Form" } );
+        }
+
+        // Treant - Siege Monster Passive
+        if (card.name === "Treant") {
+            addEffectToMonster(card, { effect: "Deals double damage to objects and structures.", type: "positive", source: "Siege Monster" } );
         }
     }, 500);
 } 
