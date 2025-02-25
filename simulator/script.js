@@ -388,6 +388,11 @@ function addToDiscardPile(card) {
     cardDiv.classList.add("card");
     cardDiv.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
     discardPileView.append(cardDiv);
+
+    cardDiv.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        displayCardPopup(card);
+    });
 }
 
 function rerenderDiscard() {
