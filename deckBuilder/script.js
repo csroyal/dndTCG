@@ -15,6 +15,8 @@ let user_collection = JSON.parse(localStorage.getItem("DNDTCG_USER_COLLECTION"))
 let user_decks = JSON.parse(localStorage.getItem("DNDTCG_USER_DECKS"));
 let currentDeck;
 
+let maxRcards = 30, maxSRcards = 10, maxSSRcards = 5;
+
 if (user_decks) {
     user_decks.forEach(deck => {
         addDeckToDecklist(deck);
@@ -141,16 +143,16 @@ function addToCardCollection(card) {
             return;
         }
 
-        if (card.rarity === "R" && currentRarityCount >= 15) {
-            alert("You can only have up to 15 R rarity cards in a deck.");
+        if (card.rarity === "R" && currentRarityCount >= maxRcards) {
+            alert(`You can only have up to ${maxRcards} R rarity cards in a deck.`);
             return;
         }
-        else if (card.rarity === "SR" && currentRarityCount >= 10) {
-            alert("You can only have up to 10 SR rarity cards in a deck.");
+        else if (card.rarity === "SR" && currentRarityCount >= maxSRcards) {
+            alert(`You can only have up to ${maxSRcards} SR rarity cards in a deck.`);
             return;
         }
-        else if (card.rarity === "SSR" && currentRarityCount >= 5) {
-            alert("You can only have up to 5 SSR rarity cards in a deck.");
+        else if (card.rarity === "SSR" && currentRarityCount >= maxSSRcards) {
+            alert(`You can only have up to ${maxSSRcards} SSR rarity cards in a deck.`);
             return;
         }
 
