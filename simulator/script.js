@@ -500,6 +500,11 @@ function summonMonster(card) {
             addEffectToMonster(card, { effect: "Has advantage on attack rolls if a non-incapacitated ally is within 5 feet.", type: "positive", source: "Pack Tactics" } );
         }
 
+        // Ghoul - Unholy Hunger Passive
+        if (card.name === "Ghoul") {
+            addEffectToMonster(card, { effect: "Has advantage on attack rolls against creatures missing HP.", type: "positive", source: "Unholy Hunger" } );
+        }
+
         // Pixie - Innate Magic Passive
         if (card.name === "Pixie") {
             displayChoices([
@@ -528,6 +533,18 @@ function summonMonster(card) {
         if (card.name === "Shadow") {
             addEffectToMonster(card, { effect: "Can Hide as a bonus action in dim light or darkness.", type: "positive", source: "Shadow Stealth" } );
             addEffectToMonster(card, { effect: "Has disadvantage on attack rolls, ability checks, and saving throws while in sun.", type: "negative", source: "Sunlight Weakness" } );
+        }
+
+        // Skeleton - Hollow Resilience Passive
+        if (card.name === "Skeleton") {
+            addEffectToMonster(card, { effect: "Takes half damage from piercing damage.", type: "positive", source: "Hollow Resilience" } );
+            addEffectToMonster(card, { effect: "Takes double damage from bludgeoning damage.", type: "negative", source: "Hollow Resilience" } );
+        }
+
+        // Swarm of Insects - Swarm Tactics Passive
+        if (card.name === "Swarm of Insects") {
+            addEffectToMonster(card, { effect: "Can occupy another creature's space and vice versa.", type: "positive", source: "Swarm Tactics" } );
+            addEffectToMonster(card, { effect: "Can't regain HP or gain temporary HP.", type: "negative", source: "Swarm Tactics" } );
         }
 
         // Tridrone - Multi-tasking Strike Passive
@@ -566,6 +583,7 @@ function summonMonster(card) {
         // Animated Armor - Living Armor and Sentinel Defense Passives
         if (card.name === "Animated Armor") {
             addEffectToMonster(card, { effect: "Has resistance to non-magical attacks.", type: "positive", source: "Living Armor" } );
+            addEffectToMonster(card, { effect: "Has advantage on saving throws against being charmed or frightened.", type: "positive", source: "Living Armor" } );
             addEffectToMonster(card, { effect: "When an enemy moves within 5 feet of this monster, it must make a DC 13 STR saving throw or have its movement reduced to 0 until the end of the turn.", type: "positive", source: "Sentinel Defense" } );
         }
 
@@ -653,6 +671,11 @@ function summonMonster(card) {
             addEffectToMonster(card, { effect: "Ignores movement restrictions caused by webs.", type: "positive", source: "Web Walker" } );
         }
 
+        // Vortex Serpent - Coiled in the Void Passive
+        if (card.name === "Winter Wolf") {
+            addEffectToMonster(card, { effect: "Can move through obstacles and cannot be grappled or restrained.", type: "positive", source: "Coiled in the Void" } );
+        }
+
         // Winter Wolf - Pack Tactics and Snow Camouflage Passives
         if (card.name === "Winter Wolf") {
             addEffectToMonster(card, { effect: "Has advantage on attack rolls if a non-incapacitated ally is within 5 feet.", type: "positive", source: "Pack Tactics" } );
@@ -698,9 +721,10 @@ function summonMonster(card) {
             addEffectToMonster(card, { effect: "Immune to being charmed, paralyzed, and petrified, and has advantage on saving throws against spells and other magical effects.", type: "positive", source: "Immutable Form" } );
         }
 
-        // Treant - Siege Monster Passive
+        // Treant - Siege Monster and Rooted Resilience Passives
         if (card.name === "Treant") {
             addEffectToMonster(card, { effect: "Deals double damage to objects and structures.", type: "positive", source: "Siege Monster" } );
+            addEffectToMonster(card, { effect: "Gains +2 AC until its next turn if it does not move.", type: "positive", source: "Rooted Resilience" } );
         }
     }, 500);
 } 
@@ -786,6 +810,11 @@ function damageMonster(card, damage) {
         document.querySelector("#monsterZone" + (card.currentZone + 1)).classList.add("damage-animation");
         setTimeout(() => {
             document.querySelector("#monsterZone" + (card.currentZone + 1)).classList.remove("damage-animation");
+
+            // Swarm of Insects - Swarm Tactics Passive
+            if (card.name === "Swarm of Insects" && Number(health.innerHTML) <= card.hp / 2) {
+                addEffectToMonster(card, { effect: "This monsters attacks deal half damage." , type: "negative", source: "Pack Tactics"});
+            }
 
             // Owlbear - Monstrous Frenzy Passive
             if (card.name === "Owlbear" && Number(health.innerHTML) <= card.hp / 2) {
