@@ -472,49 +472,49 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You conjure a shimmering green arrow of acid that strikes a creature you can see within 60 feet. Make a ranged spell attack against the target. On a hit, the target takes 2d4 acid damage immediately and an additional 2d4 acid damage at the start of its next turn."
+        "description": "Choose a creature within 60 feet and make a ranged spell attack. On a hit, the target takes 2d4 acid damage immediately and an additional 2d4 acid damage at the start of its next turn."
     },
     {
         "name": "Bane",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Up to three creatures of your choice that you can see within 30 feet must make CHA saving throws. A target that fails this saving throw must roll a d4 and subtract the number rolled from their next two attack rolls or saving throws."
+        "description": "Choose up to three creatures within 30 feet. Each must make a CHA saving throw. On a failure, the target rolls a d4 and subtracts the result from its next two attack rolls or saving throws."
     },
     {
         "name": "Bless",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You bless up to three creatures of your choice within 30 feet. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw."
+        "description": "Choose up to three creatures within 30 feet. Whenever a target makes an attack roll or saving throw, it may roll a d4 and add the result to the total. A target can only add this bonus once."
     },
     {
         "name": "Blindness/Deafness",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You can blind or deafen a foe. Choose one creature that you can see within range to make a CON saving throw. If it fails, the target is either blinded or deafened (your choice) for 1 minute. At the end of each of its turns, the target can make a CON saving throw. On a success, the spell ends."
+        "description": "Choose one creature within 30 feet. It must make a CON saving throw. On a failure, the target is blinded or deafened (your choice) for 1 minute. It may repeat the save at the end of each of its turns to end the effect early."
     },
     {
         "name": "Burning Hands",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a DEX saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one.<br><br>The fire ignites any flammable objects in the area that aren't being worn or carried."
+        "description": "A 15-foot cone of fire erupts from your hands. Each creature in the area must make a DEX saving throw. On a failure, they take 3d6 fire damage. On a success, they take half damage. Flammable objects in the area ignite unless they are being worn or carried."
     },
     {
         "name": "Charm Person",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A humanoid you see within range must make a WIS saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you for 1 hour or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you."
+        "description": "Choose one humanoid within 30 feet. It must make a WIS saving throw (with advantage if it is fighting you). On a failure, the target is charmed for 1 hour, considering you a friendly acquaintance. The effect ends if you or your allies harm it."
     },
     {
         "name": "Chromatic Orb",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You hurl a sphere of energy at a creature that you can see within range. You choose acid, cold, fire, lightning, poison, or thunder for the type of orb you create, and then make a ranged spell attack against the target. If the attack hits, the creature takes 3d8 damage of the type you chose."
+        "description": "Choose acid, cold, fire, lightning, poison, or thunder. Then, make a ranged spell attack against a creature within 90 feet. On a hit, the target takes 3d8 damage of the chosen type."
     },
     {
         "name": "Cure Wounds",
@@ -528,84 +528,84 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "For 10 minutes, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any."
+        "description": "For 1 minute, you can sense the presence of magic within 30 feet. You can see a faint aura around any magical creature or object and identify its school of magic."
     },
     {
         "name": "Earth Tremor",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You cause a tremor in the ground within 10 feet. Each creature other than you in that area must make a DEX saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone. If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared."
+        "description": "The ground shakes violently in a 10-foot radius around you. All creatures except you must make a DEX saving throw. On a failure, they take 1d6 bludgeoning damage and are knocked prone."
     },
     {
         "name": "Earthbind",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Choose one creature you can see within 300 feet. Yellow strips of magical energy loop around the creature. The target must succeed on a STR saving throw, or its flying speed (if any) is reduced to 0 feet for 1 minute. An airborne creature affected by this spell safely descends at 60 feet per round until it reaches the ground or the spell ends."
+        "description": "Choose one creature within 300 feet. It must make a STR saving throw or have its flying speed reduced to 0 for 1 minute. An affected creature descends safely at 60 feet per round until it reaches the ground."
     },
     {
         "name": "Feather Fall",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Choose up to five falling creatures within 60 feet. A falling creature's rate of descent slows to 60 feet per round for 1 minute. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature."
+        "description": "Choose up to five creatures within 60 feet that are falling. Their descent slows to 60 feet per round for 1 minute. If a creature lands before the spell ends, it takes no falling damage and lands on its feet."
     },
     {
         "name": "Grease",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Nonflammable grease covers the ground in a 10-foot square centered on a point within 60 feet and turns it into Difficult Terrain for 1 minute.<br><br>When the grease appears, each creature standing in its area must succeed on a DEX saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone."
+        "description": "Cover a 10-foot square within 60 feet in slippery, non-flammable grease for 1 minute. The area becomes difficult terrain. Creatures in the area must make a DEX saving throw or fall prone. A creature that enters or ends its turn in the area must also save or fall prone."
     },
     {
         "name": "Heroism",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A willing creature you touch is imbued with bravery. For 1 minute, the creature is immune to the Frightened condition and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns."
+        "description": "Choose one willing creature you can touch. For 1 minute, it is immune to the Frightened condition and gains temporary HP equal to your spellcasting modifier at the start of each of its turns."
     },
     {
         "name": "Hold Person",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Choose a humanoid that you can see within 60 feet. The target must succeed on a WIS saving throw or be paralyzed for 1 minute. At the end of each of its turns, the target can make another WIS saving throw. On a success, the spell ends on the target."
+        "description": "Choose one humanoid within 60 feet. It must make a WIS saving throw or be paralyzed for 1 minute. The target may repeat the save at the end of each of its turns to end the effect early."
     },
     {
         "name": "Magic Missile",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You create four glowing darts of magical force. Each dart hits a creature of your choice that you can see within 120 feet. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several."
+        "description": "Create four magical darts that strike one or multiple creatures within 120 feet. The darts strike simultaneously and can be split among multiple targets. Each dart automatically hits and deals 1d4 + 1 force damage."
     },
     {
         "name": "Mage Armor",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it for 8 hours. The target's base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action."
+        "description": "Touch one willing creature without armor. For 8 hours, its base AC becomes 13 + its DEX modifier. The spell ends if the target puts on armor or if you dismiss it as an action."
     },
     {
         "name": "Shield of Faith",
         "rarity": "R",
         "actionCost": "Bonus Action",
         "cardType": "Spell",
-        "description": "A shimmering field appears and surrounds a creature of your choice within 60 feet, granting it a +2 bonus to AC for 10 minutes."
+        "description": "Choose one creature within 60 feet. For 10 minutes, it gains +2 AC as a shimmering magical barrier surrounds it."
     },
     {
         "name": "Thorn Whip",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You create a long, vine-like whip covered in thorns that lashes out at your command toward a creature in range. Make a melee spell attack against the target. If the attack hits, the creature takes 1d6 piercing damage, and if the creature is Large or smaller, you pull the creature up to 10 feet closer to you."
+        "description": "Make a melee spell attack against a creature within 30 feet. On a hit, it takes 1d6 piercing damage. If the target is Large or smaller, it is pulled up to 10 feet closer to you."
     },
     {
         "name": "Thunderwave",
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a CON saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.<br><br>In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet."
+        "description": "Release a 15-foot cube of thunderous force. All creatures in the area must make a CON saving throw. On a failure, they take 2d8 thunder damage and are pushed 10 feet away. On a success, they take half damage and are not pushed. Unsecured objects in the area are pushed 10 feet, and a thunderous boom is audible within 300 feet."
     },
     {
         "name": "Web",
