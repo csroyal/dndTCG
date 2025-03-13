@@ -4,12 +4,18 @@ let cardFunctions = {
     "Bane": () => {},
     "Bless": () => {},
     "Blindness/Deafness": () => {},
-    "Burning Hands": () => {},
+    "Burning Hands": () => {
+        let dmg = rollMultiDice(3, 6);
+        alert("Burning Hands deals " + dmg + " fire damage against failed saves, or half as much against successful ones!");
+    },
     "Charm Person": () => {},
     "Chromatic Orb": () => {},
     "Cure Wounds": () => {},
     "Detect Magic": () => {},
-    "Earth Tremor": () => {},
+    "Earth Tremor": () => {
+        let dmg = rollMultiDice(1, 6);
+        alert("Earth Tremor deals " + dmg + " bludgeoning damage and knocks prone against failed saves!");
+    },
     "Earthbind": () => {},
     "Feather Fall": () => {},
     "Grease": () => {},
@@ -19,28 +25,50 @@ let cardFunctions = {
     "Mage Armor": () => {},
     "Shield of Faith": () => {},
     "Thorn Whip": () => {},
-    "Thunderwave": () => {},
+    "Thunderwave": () => {
+        let dmg = rollMultiDice(2, 8);
+        alert("Thunderwave deals " + dmg + " thunder damage and pushes targets back 10 feet against failed saves, or half as much damage against successful ones!");
+    },
     "Web": () => {},
     // SPELL - SR
     "Banishment": () => {},
     "Black Tentacles": () => {},
-    "Cone of Cold": () => {},
-    "Fireball": () => {},
+    "Cone of Cold": () => {
+        let dmg = rollMultiDice(8, 8);
+        alert("Cone of Cold deals " + dmg + " cold damage against failed saves, or half as much against successful ones!");
+    },
+    "Fireball": () => {
+        let dmg = rollMultiDice(8, 6);
+        alert("Fireball deals " + dmg + " fire damage against failed saves, or half as much against successful ones!");
+    },
     "Immolation": () => {},
     "Insect Plague": () => {},
-    "Lightning Bolt": () => {},
+    "Lightning Bolt": () => {
+        let dmg = rollMultiDice(8, 6);
+        alert("Lightning Bolt deals " + dmg + " lightning damage against failed saves, or half as much against successful ones!");
+    },
     "Maelstrom": () => {},
     "Misty Step": () => {},
-    "Soul Drain": () => {},
+    "Soul Drain": () => {
+        let dmg = rollMultiDice(4, 8);
+        alert("Soul Drain deals " + dmg + " necrotic damage and you heal " + dmg / 2 + " HP against failed saves, or half as much damage against successful ones!");
+    },
     "Soul Shackles": () => {},
     "Speak with Dead": () => {},
     "Stoneskin": () => {},
     // SPELL - SSR
-    "Chain Lightning": () => {},
+    "Chain Lightning": () => {
+        let dmg = rollMultiDice(10, 8);
+        alert("Chain Lightning deals " + dmg + " lightning damage against failed saves, or half as much against successful ones!");
+    },
     "Invulnerability": () => {},
-    "Meteor Swarm": () => {},
+    "Meteor Swarm": () => {
+        let fireDmg = rollMultiDice(6, 6);
+        let bludDmg = rollMultiDice(6, 6);
+        alert("Meteor Swarm deals " + fireDmg + " fire damage and " + bludDmg + " bludgeoning damage against failed saves, or half as much against successful ones!");
+    },
     "Power Word Kill": () => {},
-    "Prismatic Spray": () => {},
+    "Prismatic Spray": () => { prismaticSpray(); },
     "Regenerate": () => { regenerate(); },
     // REACTION - SR
     "Necromancer's Gravecall": () => { necromancersGravecall(); },
@@ -186,6 +214,45 @@ function addEffectToMonster(card, effect) {
             effectAnim(card, effect.type);
             return;
         }
+    }
+}
+
+function prismaticSpray() {
+    let targets = prompt("How many targets?");
+    for (let t in targets) {
+        let roll = rollDice(8);
+        setTimeout(() => {
+            if (roll < 6) {
+                let dmgTypes = ["fire", "acid", "lightning", "poison", "cold"]
+                let dmg = rollMultiDice(6, 6);
+                alert("Prismatic Spray deals " + dmg + + " " + dmgTypes[roll - 1] + " damage to target " + t + " on a failed save, or half as much on a successful one!");
+            } else if (roll === 6) {
+                alert("Prismatic Spray has restrained target " + t + "! It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.");
+            } else if (roll === 7) {
+                alert("Prismatic Spray has blinded target " + t + "! It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.");
+            } else {
+                let newRolls = [rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim(), rollDiceNoAnim()];
+                alert("Target " + t + " is hit by 2 rays!");
+                let rayNum = 1;
+                for (r in newRolls) {
+                    if (newRolls[r] !== 8) {
+                        if (roll < 6) {
+                            let dmgTypes = ["fire", "acid", "lightning", "poison", "cold"]
+                            let dmg = rollMultiDice(6, 6);
+                            alert("Ray " + rayNum + " deals " + dmg + + " " + dmgTypes[roll - 1] + " damage to target " + t + " on a failed save, or half as much on a successful one!");
+                        } else if (roll === 6) {
+                            alert("Ray " + rayNum + " has restrained target " + t + "! It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.");
+                        } else if (roll === 7) {
+                            alert("Ray " + rayNum + " has blinded target " + t + "! It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.");
+                        }
+                        rayNum++;
+                    }
+                    if (rayNum >= 3) {
+                        break;
+                    }
+                }
+            }
+        }, 3000);
     }
 }
 

@@ -770,6 +770,24 @@ let monsterActions = {
         }
     },
     // SSR RARITY
+    "Aboleth": {
+        "Tentacle Lash": {
+            "text": "Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 3d6 + 6 bludgeoning damage.",
+            "function": () => { attack(10, 3, 6, 6, "Aboleth", "Tentacle Lash", "bludgeoning"); }
+        },
+        "Enslave": {
+            "text": "Choose one enemy creature within 30 feet of this monster. It must make a DC 17 WIS save or be Charmed for 1 minute.",
+            "function": () => { alert("Choose one enemy creature within 30 feet of this monster. It must make a DC 17 WIS save or be Charmed for 1 minute."); }
+        },
+        "Psychic Drain (1/S)": {
+            "once": true,
+            "text": "Choose one Charmed enemy creature within 60 feet of this monster. The target takes 3d6 psychic damage, and this monster heals HP equal to the damage dealt.",
+            "function": () => {
+                let dmg = rollMultiDice(3, 6);
+                alert(`Aboleth's Psychic Drain deals ${dmg} psychic damage, and Aboleth heals ${Math.floor(dmg / 2)} HP!`);
+            }
+        }
+    },
     "Adult Black Dragon": {
         "Multiattack (1/S)": {
             "once": true,
@@ -843,9 +861,9 @@ let monsterActions = {
     },
     "Lich": {
         "Soulfreezing Touch": {
-            "text": "Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d10 necrotic damage. The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.",
+            "text": "Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 2d10 necrotic damage. The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.",
             "function": () => {
-                attack(12, 3, 10, 0, "Lich", "Soulfreezing Touch", "necrotic").then((hit) => {
+                attack(12, 2, 10, 0, "Lich", "Soulfreezing Touch", "necrotic").then((hit) => {
                     if (hit) {
                         alert("The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.");
                     }

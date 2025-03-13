@@ -972,6 +972,7 @@ function rollDice(sides) {
 
     setTimeout(() => {
         dice.textContent = randomRoll;
+        console.log("Rolled", randomRoll);
         
         setTimeout(() => {
             diceContainer.style.visibility = "hidden";
@@ -982,7 +983,9 @@ function rollDice(sides) {
 }
 
 function rollDiceNoAnim(sides) {
-    return Math.floor(Math.random() * sides) + 1;
+    let roll = Math.floor(Math.random() * sides) + 1;
+    console.log("Rolled", roll);
+    return roll;
 }
 
 function rollMultiDice(amount, sides) {

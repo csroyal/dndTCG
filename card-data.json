@@ -387,6 +387,15 @@
         "description": "<b>Pack Tactics</b>. This monster has advantage on attack rolls against a creature if at least one of the monster's allies is within 5 feet of the creature and the ally isn't incapacitated.<br><br><b>Snow Camouflage</b>. This monster has advantage on Stealth checks made to hide in snowy terrain.<br><br><u>Actions</u><br><br><b>Frostbite Fangs</b>. Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 2d6 + 4 piercing damage plus 1d6 cold damage.<br><br><b>Cold Breath (1/S)</b>. Exhales a 15-foot cone of freezing cold. Each creature in the area must make a DC 14 DEX saving throw or take 3d6 cold damage and have their movement speed halved until the end of their next turn."
     },
     {
+        "name": "Aboleth",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Monster",
+        "monsterType": "Aberration",
+        "hp": 135,
+        "description": "<b>Amphibious</b>. This monster can breathe air and water.<br><br><u>Actions</u><br><br><b>Tentacle Lash</b>. Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 3d6 + 6 bludgeoning damage.<br><br><b>Enslave</b>. Choose one enemy creature within 30 feet of this monster. It must make a DC 17 WIS save or be Charmed for 1 minute.<br><br><b>Psychic Drain (1/S)</b>. Choose one Charmed enemy creature within 60 feet of this monster. The target takes 3d6 psychic damage, and this monster heals HP equal to the damage dealt."
+    },
+    {
         "name": "Adult Black Dragon",
         "rarity": "SSR",
         "actionCost": "Action",
@@ -420,7 +429,7 @@
         "cardType": "Monster",
         "monsterType": "Undead",
         "hp": 135,
-        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Soulfreezing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 3d10 necrotic damage. The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.<br><br><b>Master of Necromancy (1/S)</b>. This monster casts a spell using a Spell card from your discard pile."
+        "description": "<b>Spellcasting</b>. This monster can use its action to cast any spell played from your hand. Use INT spell save DC 17 and +9 to hit with spell attacks for any spells used from this monster.<br><br><b>Turn Resistance</b>. This monster has advantage on saving throws against any effect that turns undead.<br><br><u>Actions</u><br><br><b>Soulfreezing Touch</b>. Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 2d10 necrotic damage. The target must succeed on a DC 16 CON saving throw or be paralyzed for 1 minute.<br><br><b>Master of Necromancy (1/S)</b>. This monster casts a spell using a Spell card from your discard pile."
     },
     {
         "name": "Mind Flayer",
@@ -612,140 +621,140 @@
         "rarity": "R",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You conjure a mass of sticky webbing at a point within 60 feet. The webs fill a 20-foot Cube there for 1 hour. The webs are Difficult Terrain, and the area within them is Lightly Obscured.<br><br>The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a DEX saving throw or have the Restrained condition while in the webs or until it breaks free.<br><br>A creature Restrained by the webs can take an action to make a STR (Athletics) check against your spell save DC. If it succeeds, it is no longer Restrained.<br><br>The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire."
+        "description": "Conjure a mass of sticky webs in a 20-foot cube within 60 feet. The area becomes difficult terrain and is lightly obscured for 1 hour. Creatures entering or starting their turn in the area must make a DEX saving throw or be restrained until they escape. A restrained creature can use an action to make a STR (Athletics) check against your spell save DC to break free. The webs are flammable. A 5-foot cube of webs burns in 1 round, dealing 2d4 fire damage to creatures in the area."
     },
     {
         "name": "Banishment",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "One creature that you can see within 30 feet must succeed on a CHA saving throw or be transported to a harmless demiplane for 1 minute. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied."
+        "description": "Choose one creature within 30 feet. It must make a CHA saving throw or be banished to a harmless demiplane for 1 minute. While banished, the creature is incapacitated and removed from combat. When the spell ends, the target returns to its original space or the nearest unoccupied space."
     },
     {
         "name": "Black Tentacles",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Squirming, ebony tentacles fill a 20-foot square on ground that you can see within 90 feet. For 1 minute, these tentacles turn the ground in the area into difficult terrain.<br><br>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a DEX saving throw or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage.<br><br>A Restrained creature can take an action to make a STR (Athletics) check against your spell save DC, ending the condition on itself on a success."
+        "description": "Summon squirming ebony tentacles in a 20-foot square within 90 feet. The area becomes difficult terrain for 1 minute. Creatures entering or starting their turn in the area must make a DEX saving throw or take 3d6 bludgeoning damage and be restrained. Restrained creatures take 3d6 bludgeoning damage at the start of their turns. A restrained creature can use an action to make a STR (Athletics) check to escape."
     },
     {
         "name": "Cone of Cold",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a CON saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.<br><Br>A creature killed by this spell becomes a frozen statue until it thaws."
+        "description": "Release a blast of freezing air in a 60-foot cone. All creatures in the area must make a CON saving throw. They take 8d8 cold damage on a failed save, or half as much on a success. Creatures killed by this spell become frozen statues until they thaw."
     },
     {
         "name": "Fireball",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A bright streak flashes from your pointing finger to a point you choose within 150 feet and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a DEX saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. It ignites flammable objects in the area that aren't being worn or carried."
+        "description": "A 20-foot-radius explosion erupts at a point within 150 feet. All creatures in the area must make a DEX saving throw. They take 8d6 fire damage on a failed save, or half as much on a success. Flammable objects ignite unless they are worn or carried."
     },
     {
         "name": "Immolation",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Flames wreathe one creature you can see within 90 feet. The target must make a DEX saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for 1 minute. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can't be extinguished by nonmagical means.<br><br>If damage from this spell kills a target, the target is turned to ash."
+        "description": "Choose one creature within 90 feet. It must make a DEX saving throw. The target takes 8d6 fire damage and burns for 1 minute on a failed save, or takes half as much damage and does not burn on a success. While burning, the target sheds bright light in a 30-foot radius and dim light for another 30 feet. At the end of each of its turns, it repeats the DEX saving throw. On a failure, it takes 4d6 fire damage. On a success, the flames are extinguished. These flames cannot be put out by non-magical means. If this spell kills the target, it is reduced to ash."
     },
     {
         "name": "Insect Plague",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Swarming locusts fill a 20-foot-radius Sphere centered on a point you choose within 300 feet. The Sphere remains for 10 minutes, and its area is Lightly Obscured and Difficult Terrain.<br><br>When the area appears, each creature in it must make a CON saving throw. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there."
+        "description": "Summon a 20-foot-radius swarm of locusts within 300 feet. The area lasts 10 minutes, becoming difficult terrain and lightly obscured. When the swarm appears, all creatures in the area must make a CON saving throw. They take 4d10 piercing damage on a failed save, or half as much on a success. Any creature that enters or ends its turn in the area must repeat this saving throw."
     },
     {
         "name": "Lightning Bolt",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a DEX saving throw. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one. The lightning ignites flammable objects in the area that aren't being worn or carried."
+        "description": "A 100-foot-long, 5-foot-wide lightning blast erupts from you. All creatures in its path must make a DEX saving throw. They take 8d6 lightning damage on a failed save, or half as much on a success. Flammable objects ignite unless they are worn or carried."
     },
     {
         "name": "Maelstrom",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within 120 feet. The point must be on the ground or in a body of water. After 1 minute or until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a STR saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center."
+        "description": "A 30-foot-radius vortex of 5-foot-deep swirling water appears at a point within 120 feet. The area is difficult terrain for 1 minute. Any creature that starts its turn in the area must make a STR saving throw. It takes 6d6 bludgeoning damage and is pulled 10 feet toward the center on a failed save."
     },
     {
         "name": "Misty Step",
         "rarity": "SR",
         "actionCost": "Bonus Action",
         "cardType": "Spell",
-        "description": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see."
+        "description": "Instantly teleport up to 30 feet to an unoccupied space you can see."
     },
     {
         "name": "Soul Drain",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You sap the vitality from a creature, using it to restore your own strength. Choose one creature within 30 feet. The target must make a CON saving throw. On a failed save, the target takes 4d8 necrotic damage, and you regain hit points equal to half the damage dealt. On a successful save, the target takes half as much damage, and you regain no hit points."
+        "description": "Choose one creature within 30 feet. It must make a CON saving throw. It takes 4d8 necrotic damage, and you regain HP equal to half the damage dealt on a failed save, or it takes half as much damage and you regain no HP on a success."
     },
     {
         "name": "Soul Shackles",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You bind a creature's soul with shadowy chains, hindering its ability to act. Choose one creature within 30 feet. The target must make a WIS saving throw. On a failed save, it is paralyzed until the end of its next turn. While paralyzed in this way, the target takes 2d6 necrotic damage at the start of each of its turns.<br><br>At the start of each of its turns, the target can make another WIS saving throw, ending the effect on a success."
+        "description": "Choose one creature within 30 feet. It must make a WIS saving throw. On a failed save, it is paralyzed for 1 minute and takes 2d6 necrotic damage at the start of each of its turns. At the start of each of its turns, it may repeat the WIS save to end the effect early."
     },
     {
         "name": "Speak with Dead",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You grant the semblance of life and intelligence to a corpse of your choice within 10 feet, allowing it to answer the questions you pose. The corpse must still have a mouth and can't be undead. The spell fails if the corpse was the target of this spell within the last 10 days.<br><br>For 10 minutes, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are hostile to it or it recognizes you as an enemy. This spell doesn't return the creature's soul to its body, only its animating spirit. Thus, the corpse can't learn new information, doesn't comprehend anything that has happened since it died, and can't speculate about future events."
+        "description": "Choose a corpse within 10 feet that has a mouth and is not undead. For 10 minutes, you may ask it up to five questions. The corpse only remembers what it knew in life and answers briefly, cryptically, or repetitively. It is not compelled to tell the truth if it recognizes you as an enemy. The corpse cannot learn new information, understand events after its death, or predict the future. This spell fails if the corpse was targeted by this spell in the last 10 days."
     },
     {
         "name": "Stoneskin",
         "rarity": "SR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "This spell turns the flesh of a willing creature you touch as hard as stone. For 1 hour or until the spell ends, the target has resistance to non-magical bludgeoning, piercing, and slashing damage."
+        "description": "Touch one willing creature. For 1 hour, it gains resistance to non-magical bludgeoning, piercing, and slashing damage."
     },
     {
         "name": "Chain Lightning",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You create a bolt of lightning that arcs toward a target of your choice that you can see within 150 feet. Three bolts then leap from that target to as many as three other targets, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.<br><br>A target must make a DEX saving throw. The target takes 10d8 lightning damage on a failed save, or half as much damage on a successful one."
+        "description": "Choose one creature or object within 150 feet. A lightning bolt arcs towards that target, and three additional bolts arc to up to three different targets within 30 feet of the first. Each target must make a DEX saving throw. Targets take 10d8 lightning damage on a failed save, or half as much on a success. A bolt cannot target a creature more than once."
     },
     {
         "name": "Invulnerability",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You are immune to all damage for 10 minutes or until the spell ends."
+        "description": "You become immune to all damage for 1 minute or until the spell ends."
     },
     {
         "name": "Meteor Swarm",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Blazing orbs of fire plummet to the ground at four different points you can see within 1 mile. Each creature in a 40-foot-radius sphere centered on each point you choose must make a DEX saving throw. The sphere spreads around corners. A creature takes 20d6 fire damage and 20d6 bludgeoning damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once.<br><br>The spell damages objects in the area and ignites flammable objects that aren't being worn or carried."
+        "description": "Summon three blazing meteors, each impacting a 40-foot-radius sphere within 1 mile. Each creature in the area must make a DEX saving throw. On a failed save, they take 6d6 fire damage and 6d6 bludgeoning damage, or half as much on a success. A creature in multiple impact zones is only hit once. Flammable objects ignite, and the spell damages all objects in the area."
     },
     {
         "name": "Power Word Kill",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "You utter a word of power that can compel one creature you can see within 60 feet to die instantly. If the creature you choose has 100 hit points or fewer, it dies. Otherwise, the spell has no effect."
+        "description": "Choose one creature within 60 feet. If it has 100 HP or fewer, it dies instantly. If it has more than 100 HP, the spell has no effect."
     },
     {
         "name": "Prismatic Spray",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a DEX saving throw. For each target, roll a d8 to determine which color ray affects it. On a 1-5 on the roll, the target takes 10d6 damage on a failed save, or half as much damage on a successful one.<br><br>1. <b>Red</b>. The target takes fire damage.<br><br>2. <b>Orange</b>. The target takes acid damage.<br><br>3. <b>Yellow</b>. The target takes lightning damage.<br><br>4. <b>Green</b>. The target takes poison damage.<br><br>5. <b>Blue</b>. The target takes cold damage.<br><br>6. <b>Indigo</b>. On a failed save, the target is restrained. It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.<br><br>7. <b>Violet</b>. On a failed save, the target is blinded. It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.<br><br>8. <b>Special</b>. The target is struck by two rays. Roll twice more, rerolling any 8."
+        "description": "A 60-foot cone of multicolored rays erupts from your hand. Each creature in the area must make a DEX saving throw. Roll a d8 for each target to determine the effect:<br><br>1. <b>Red</b>: 10d6 fire damage.<br><br>2. <b>Orange</b>: 10d6 acid damage.<br><br>3. <b>Yellow</b>: 10d6 lightning damage.<br><br>4. <b>Green</b>: 10d6 poison damage.<br><br>5. <b>Blue</b>: 10d6 cold damage.<br><br>6. <b>Indigo</b>: The target becomes restrained. It must then make a CON saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive; keep track of both until the target collects three of a kind.<br><br>7. <b>Violet</b>: The target is blinded. It must then make a WIS saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the GM's choosing and is no longer blinded.<br><br>8. <b>Special</b>: The target is struck by 2 rays. Roll twice more, rerolling any 8."
     },
     {
         "name": "Regenerate",
         "rarity": "SSR",
         "actionCost": "Action",
         "cardType": "Spell",
-        "description": "A creature you touch regains 4d8 + 15 HP. For 1 hour, the target regains 1 HP at the start of each of its turns."
+        "description": "Touch one creature. It regains 4d8 + 15 HP instantly. For 1 hour, the target regains 1 HP at the start of each of its turns."
     },
     {
         "name": "Blood Price",
@@ -816,7 +825,7 @@
         "rarity": "SR",
         "actionCost": "Reaction",
         "cardType": "Reaction",
-        "description": "The connection is severed and the teleportation fails, dealing 4d8 force damage to the creature.",
+        "description": "The connection is severed and the teleportation fails. The target takes 4d8 force damage.",
         "reactionTrigger": "A creature teleports or moves between planes"
     },
     {
