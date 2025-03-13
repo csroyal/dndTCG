@@ -18,6 +18,7 @@ let cardFunctions = {
     },
     "Earthbind": () => {},
     "Feather Fall": () => {},
+    "Fog Cloud": () => {},
     "Grease": () => {},
     "Heroism": () => {},
     "Hold Person": () => {},
@@ -67,9 +68,17 @@ let cardFunctions = {
         let bludDmg = rollMultiDice(6, 6);
         alert("Meteor Swarm deals " + fireDmg + " fire damage and " + bludDmg + " bludgeoning damage against failed saves, or half as much against successful ones!");
     },
+    "Oblivion Pulse": () => {
+        let dmg = rollMultiDice(10, 8);
+        alert("Oblivion Pulse deals " + dmg + " necrotic damage and cannot regain HP for 3 turns against failed saves, or half as much against successful ones! If this spell reduces a creature to 0 HP, they are erased from existence.");
+    },
     "Power Word Kill": () => {},
     "Prismatic Spray": () => { prismaticSpray(); },
     "Regenerate": () => { regenerate(); },
+    "Tsunami": () => {
+        let dmg = rollMultiDice(8, 8);
+        alert("Tsunami deals " + dmg + " bludgeoning damage, knocks prone, and pushes 20 feet away against failed saves, or half as much against successful ones! The area remains difficult terrain for 2 turns.");
+    },
     // REACTION - SR
     "Necromancer's Gravecall": () => { necromancersGravecall(); },
     "Siphon Life": () => { siphonLife(); },

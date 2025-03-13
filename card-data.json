@@ -561,6 +561,13 @@
         "description": "Choose up to five creatures within 60 feet that are falling. Their descent slows to 60 feet per round for 1 minute. If a creature lands before the spell ends, it takes no falling damage and lands on its feet."
     },
     {
+        "name": "Fog Cloud",
+        "rarity": "R",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Create a 20-foot-radius sphere of fog centered on a point within 120 feet. The area is heavily obscured. The fog dissipates in strong wind or lasts for 1 minute."
+    },
+    {
         "name": "Grease",
         "rarity": "R",
         "actionCost": "Action",
@@ -736,6 +743,13 @@
         "description": "Summon three blazing meteors, each impacting a 40-foot-radius sphere within 1 mile. Each creature in the area must make a DEX saving throw. On a failed save, they take 6d6 fire damage and 6d6 bludgeoning damage, or half as much on a success. A creature in multiple impact zones is only hit once. Flammable objects ignite, and the spell damages all objects in the area."
     },
     {
+        "name": "Oblivion Pulse",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Unleash a 50-foot-radius shockwave of void energy centered on you. All creatures in range must make a CON saving throw. On a failure, they take 10d8 necrotic damage and cannot regain HP for 3 turns. On a success, they take half damage. If this spell reduces a creature to 0 HP, they are completely erased from existence."
+    },
+    {
         "name": "Power Word Kill",
         "rarity": "SSR",
         "actionCost": "Action",
@@ -755,6 +769,13 @@
         "actionCost": "Action",
         "cardType": "Spell",
         "description": "Touch one creature. It regains 4d8 + 15 HP instantly. For 1 hour, the target regains 1 HP at the start of each of its turns."
+    },
+    {
+        "name": "Tsunami",
+        "rarity": "SSR",
+        "actionCost": "Action",
+        "cardType": "Spell",
+        "description": "Summon a 50-foot-wide wall of water that crashes through the battlefield in a straight line up to 120 feet long. All creatures in its path must make a STR saving throw. On a failure, they take 8d8 bludgeoning damage and are knocked prone and pushed 20 feet away, or half as much damage on a success and are not pushed. The area remains flooded for 2 turns, making movement difficult terrain."
     },
     {
         "name": "Blood Price",
