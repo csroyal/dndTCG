@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceTyper</title>
+    <meta name="description" content="A sleek text-to-speech app with custom styling">
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes content to top and bottom */
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        #output {
+            width: 90%;
+            max-width: 600px;
+            height: 60vh; /* Takes up most of the screen height */
+            padding: 15px;
+            font-size: 18px;
+            line-height: 1.5;
+            resize: vertical;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+        #output:focus {
+            outline: none;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        #micButton {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+        #micButton:hover {
+            transform: scale(1.05);
+            background-color: #c0392b;
+        }
+        #micButton.recording {
+            background-color: #27ae60;
+        }
+        #micButton.recording:hover {
+            background-color: #219653;
+        }
+        .button-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 10px; /* Space from bottom edge */
+        }
+        button {
+            padding: 15px 30px; /* Larger touch target */
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        #vioButton {
+            background-color: #3498db;
+            color: white;
+        }
+        #vioButton:hover {
+            background-color: #2980b9;
+        }
+        #exportButton {
+            background-color: #f1c40f;
+            color: #2c3e50;
+        }
+        #exportButton:hover {
+            background-color: #d4ac0d;
+        }
+        @media (max-width: 480px) {
+            #output {
+                width: 100%;
+                font-size: 16px;
+                height: 50vh; /* Slightly smaller on small screens */
+            }
+            #micButton {
+                width: 110px;
+                height: 110px;
+            }
+            button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+            .button-group {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <textarea id="output" placeholder="your text will appear here"></textarea>
+    <button id="micButton">🎤 Start</button>
+    <div class="button-group">
+        <button id="vioButton">Vio</button>
+        <button id="exportButton">Export</button>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const micButton = document.getElementById('micButton');
+        const vioButton = document.getElementById('vioButton');
+        const exportButton = document.getElementById('exportButton');
+        let recognition;
+        let isRecording = false;
+
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onresult = (event) => {
+                let transcript = event.results[0][0].transcript;
+                transcript = applyMyStyle(transcript);
+                output.value = transcript;
+            };
+
+            recognition.onend = () => {
+                micButton.textContent = '🎤 Start';
+                micButton.classList.remove('recording');
+                isRecording = false;
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                micButton.textContent = '🎤 Start';
+                micButton.classList.remove('recording');
+                isRecording = false;
+            };
+        } else {
+            alert('Speech recognition not supported in this browser.');
+            micButton.disabled = true;
+        }
+
+        micButton.addEventListener('click', () => {
+            if (!isRecording) {
+                recognition.start();
+                micButton.textContent = '🎤 Stop';
+                micButton.classList.add('recording');
+                isRecording = true;
+            } else {
+                recognition.stop();
+            }
+        });
+
+        function applyMyStyle(text) {
+            let result = text.toLowerCase();
+            result = result.replace(/\b(i|im)\b/g, (match) => match === 'i' ? 'I' : 'Im');
+            result = result.replace(/'/g, '');
+            result = result.replace(/\byoure\b/g, 'youre');
+            result = result.replace(/\bdo not\b/g, 'dont');
+            result = result.replace(/\bi am\b/g, 'Im');
+            result = result.replace(/\bi dont know\b/g, 'idk');
+            result = result.replace(/\bi guess\b/g, 'ig');
+            result = result.replace(/\blaughing out loud\b/g, 'lol');
+            result = result.replace(/\bquestion mark\b/g, '?');
+            result = result.replace(/\bexclamation point\b/g, '!');
+            result = result.replace(/ comma\b/g, ',');
+            result = result.replace(/smile$/g, ':)');
+            result = result.replace(/\bcolon capital d\b/g, ':D');
+            result = result.replace(/\.\s*$/, '');
+            result = result.replace(/\s+([?!])/g, '$1');
+            return result;
+        }
+
+        vioButton.addEventListener('click', () => {
+            let text = output.value;
+            text = text.replace(/\b(bee bee|bebe)\b/g, 'bb');
+            text = text.replace(/\bheart\b/g, '♥');
+            text = text.replace(/\bmwah long\b/g, randomMwah());
+            text = text.replace(/crying$/g, ';-;');
+            text = text.replace(/\b(see|c|colon c|c colon)$/g, 'c:');
+            text = text.replace(/\b(aw|a w)\b/g, 'aww');
+            text = text.replace(/(\w+)\s+([:;][-\w]+|♥)$/g, '$1$2');
+            output.value = text;
+        });
+
+        function randomMwah() {
+            const letters = ['m', 'w', 'a', 'h'];
+            let result = '';
+            const length = Math.floor(Math.random() * 12) + 4;
+            for (let i = 0; i < length; i++) {
+                result += letters[Math.floor(Math.random() * letters.length)];
+            }
+            return result;
+        }
+
+        exportButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(output.value).then(() => {
+                alert('text copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy text:', err);
+            });
+        });
+
+        // if ('serviceWorker' in navigator) {
+        //     navigator.serviceWorker.register('service-worker.js')
+        //         .then(() => console.log('Service Worker registered'))
+        //         .catch(err => console.error('Service Worker registration failed:', err));
+        // }
+    </script>
+</body>
+</html>
