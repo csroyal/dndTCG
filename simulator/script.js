@@ -748,8 +748,8 @@ function addMonsterOverlay(card, zone) {
 
     let action = document.createElement("div");
     action.classList.add("monster-overlay-action");
-    action.dataset.used = "true";
-    action.innerHTML = "⏳";
+    action.dataset.used = "false";
+    action.innerHTML = "⚔️";
     action.addEventListener("click", () => {
         if (action.dataset.used === "true") return;
         if (confirm("Use this monster's action?")) {
