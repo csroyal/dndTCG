@@ -55,3 +55,47 @@ function preloadImage(url) {
     const img = new Image();
     img.src = url;
 }
+
+if (document.getElementById("cardPopupModal")) {
+    let cardPopupModal = document.getElementById("cardPopupModal");
+    let cardPopupImage = document.getElementById("cardPopupImage");
+    let cardPopupDescription = document.getElementById("cardPopupDescription");
+
+    function openCardPopup(card) {
+        cardPopupModal.style.display = "flex";
+        cardPopupImage.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
+        cardPopupDescription.innerHTML = card.description;
+
+        var drawSound = new Audio('../assets/draw.mp3');
+        drawSound.volume = 0.75;
+        drawSound.play();
+
+        if (card.cardType !== "Utility") {
+            let cardPopupImageFacingFront = true;
+            cardPopupImage.onclick = () => {
+                var flipSound = new Audio('../assets/flip.mp3');
+                flipSound.volume = 0.55;
+                flipSound.play();
+                if (cardPopupImageFacingFront) {
+                    cardPopupImage.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}-back.png)`;
+                } else {
+                    cardPopupImage.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
+                }
+                cardPopupImageFacingFront = !cardPopupImageFacingFront;
+            };
+        } else {
+            cardPopupImage.onclick = () => {};
+        }
+    }
+
+    function closeCardPopup() {
+        cardPopupModal.style.display = "none";
+    }
+
+    cardPopupModal.addEventListener("click", (e) => {
+        if (e.target.id === "cardPopupModal") {
+            closeCardPopup();
+        }
+    });
+
+}

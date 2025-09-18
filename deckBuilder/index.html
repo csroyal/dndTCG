@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="./style.css">
     <title>Deck Builder - DnD TCG</title>
 </head>
-<body>
+<body oncontextmenu="return false;">
+    <div class="bg"></div>
+    <div class="bg-overlay"></div>
     <div id="startContainer">
         <a id="backToMain" href="../index.html"><i class="bi bi-arrow-left"></i> Back</a>
         <h1>Deck Builder</h1>
         <div id="userDeckList">
-            <div id="createNewDeck"><i class="bi bi-plus-circle"></i> Create a new deck</div>
+            <div id="createNewDeck" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create a new deck</div>
         </div>
     </div>
     <div id="deckEditor">

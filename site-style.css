@@ -3,11 +3,140 @@
 
 html, body {
     margin: 0;
-    background-color: rgb(25,25,25);
+    /* background-color: rgb(25,25,25); */
+    /* background-image: url(./assets/bg.png);
+    background-repeat: no-repeat;
+    background-position: center; */
+    background-size: cover;
     font-family: "Montserrat", sans-serif;
+}
+
+#backToMain {
+    color: white;
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -2;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: -1;
 }
 
 h1 {
     color: white;
     text-align: center;
+    margin-top: 0;
+    padding-top: 1em;
+}
+
+.btn {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+}
+
+.btn i {
+    margin-right: 4px;
+}
+
+.btn.btn-primary {
+    background-color: #5a5a5a;
+    color: white;
+}
+
+.btn.btn-primary:hover {
+    background-color: rgb(125,125,125);
+}
+
+.btn.btn-secondary {
+
+}
+
+.btn.btn-danger {
+    background-color: rgb(200,45,45);
+    color: white;
+    border: 1px solid black;
+    font-size: 18px;
+}
+
+#clearCollection:hover {
+    background-color: rgb(225,70,70);
+}
+
+#cardPopupModal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.75);
+}
+
+#cardPopupImage {
+    width: 362px;
+    height: 508px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 2px solid black;
+    border-radius: 4px;
+    transition: all 0.25s;
+}
+
+#cardPopupDescription {
+    max-width: 750px;
+    max-height: 200px;
+    background: white;
+    border: 2px solid black;
+    padding: 16px;
+    overflow-y: auto;
+    font-size: 24px;
+    margin-top: 32px;
+}
+
+#cardPopupImage:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    #cardPopupImage {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 362 / 508;
+    }
+
+    #cardPopupDescription {
+        font-size: 16px;
+        max-width: 85%;
+        max-height: 15%;
+        margin-top: 48px;
+    }
 }

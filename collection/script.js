@@ -1,9 +1,11 @@
 let addToCollection = document.getElementById("addToCollection");
 let addToCollectionModalContainer = document.getElementById("addToCollectionModalContainer");
+let addAllToCollection = document.getElementById("addAllToCollection");
 let saveToCollection = document.getElementById("saveToCollection");
 let cardCollection = document.getElementById("cardCollection");
 let noCards = document.getElementById("noCards");
 let cardList = document.getElementById("cardList");
+let removeFromCollectionBtn = document.getElementById("removeFromCollection");
 
 fetch('../card-data.json')
     .then((response) => response.json())
@@ -47,7 +49,8 @@ function addToCardCollection(card) {
     newCardDiv.classList.add("card-collection-card");
     newCardDiv.style.backgroundImage = `url(../assets/cards/${cardNameToImageName(card.name)}.png)`;
     newCardDiv.addEventListener("click", () => {
-        if (confirm("Remove " + card.name + " from your collection?")) removeFromCollection(card);
+        openCardPopup(card);
+        currentCard = card;
     });
 
     cardCollection.append(newCardDiv);
@@ -83,6 +86,17 @@ saveToCollection.addEventListener("click", () => {
         return;
     }
     if (confirm("Add selected cards to collection?")) {
+        saveAndDisplayCollection();
+    }
+});
+
+addAllToCollection.addEventListener("click", () => {
+    if (confirm("Add all cards to collection?")) {
+        cardData.forEach(card => {
+            if (!user_collection.some(c => c.name === card.name)) {
+                user_collection.push(card);
+            }
+        });
         saveAndDisplayCollection();
     }
 });
@@ -139,4 +153,17 @@ function saveAndDisplayCollection() {
 function removeFromCollection(card) {
     user_collection = user_collection.filter(obj => obj !== card);
     saveAndDisplayCollection();
+    closeCardPopup();
 }
+
+let currentCard = null;
+
+removeFromCollectionBtn.addEventListener("click", () => {
+    if (cardPopupModal.style.display === "flex") {
+        if (confirm("Are you sure you want to remove this card from your collection?")) {
+            removeFromCollection(currentCard);
+        }
+    }
+});
+
+document.getElementById("backToTop").addEventListener("click", backToTop);

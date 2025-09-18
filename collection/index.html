@@ -7,25 +7,41 @@
     <link rel="stylesheet" href="./style.css">
     <title>Your Collection - DnD TCG</title>
 </head>
-<body>
+<body oncontextmenu="return false;">
+    <div class="bg"></div>
+    <div class="bg-overlay"></div>
     <a id="backToMain" href="../index.html"><i class="bi bi-arrow-left"></i> Back</a>
     <h1>Your Collection</h1>
     <div id="collectionContainer">
         <div id="collectionFunctions">
             <div class="spacer"></div>
-            <div id="addToCollection"><i class="bi bi-plus-circle"></i> Add cards to your Collection</div>
-            <div id="clearCollection"><i class="bi bi-trash"></i> Clear Collection</div>
+            <div id="addToCollection" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add cards to your Collection</div>
+            <div id="clearCollection" class="btn btn-danger"><i class="bi bi-trash"></i> Clear Collection</div>
         </div>
         <div id="noCards">You have no cards in your collection.</div>
         <div id="cardCollection"></div>
     </div>
+    <div id="backToTop">Back to Top</div>
     <div id="addToCollectionModalContainer">
         <div id="addToCollectionModal">
+            <h2>Add Cards to Collection</h2>
             <div id="cardList">
     
             </div>
-            <div id="saveToCollection"><i class="bi bi-floppy"></i> Save to Collection</div>
+            <div class="buttons-container">
+                <div id="addAllToCollection" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add All to Collection</div>
+                <div id="saveToCollection" class="btn btn-primary"><i class="bi bi-floppy"></i> Save to Collection</div>
+            </div>
         </div>
+    </div>
+    <div id="cardPopupModal">
+        <div id="cardPopupImage">
+
+        </div>
+        <div id="cardPopupDescription">
+
+        </div>
+        <div id="removeFromCollection" class="btn btn-danger"><i class="bi bi-trash"></i> Remove from Collection</div>
     </div>
     <script src="../index.js"></script>
     <script src="./script.js"></script>

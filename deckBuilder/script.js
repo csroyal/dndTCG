@@ -49,7 +49,7 @@ createNewDeck.addEventListener("click", () => {
 
 function addDeckToDecklist(deck) {
     let deckDiv = document.createElement("div");
-    deckDiv.classList.add("user-deck");
+    deckDiv.classList.add("user-deck", "btn", "btn-primary");
     deckDiv.innerHTML = deck.name;
     deckDiv.addEventListener("click", (e) => {
         if (e.target.classList.contains("user-deck")) {
@@ -65,6 +65,7 @@ function addDeckToDecklist(deck) {
             } else {
                 noCards.style.display = "none";
                 goToCollectionBtn.style.display = "none";
+                cardCollection.innerHTML = "";
                 user_collection = masterSort(user_collection);
                 user_collection.forEach(card => {
                     addToCardCollection(card);
