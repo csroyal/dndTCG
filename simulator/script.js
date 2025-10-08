@@ -375,8 +375,8 @@ function playCardAnimation(card) {
         document.body.style.pointerEvents = "all";
         setTimeout(() => {
             card.remove();
-        }, 1000);
-    }, 1000);
+        }, 1150);
+    }, 850);
 }
 
 function addToDiscardPile(card) {
