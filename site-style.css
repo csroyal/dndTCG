@@ -79,7 +79,7 @@ h1 {
     background-color: rgb(200,45,45);
     color: white;
     border: 1px solid black;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 #clearCollection:hover {
@@ -89,7 +89,7 @@ h1 {
 #cardPopupModal {
     display: none;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     position: fixed;
     top: 0;
@@ -118,7 +118,7 @@ h1 {
     padding: 16px;
     overflow-y: auto;
     font-size: 24px;
-    margin-top: 32px;
+    /* margin-top: 32px; */
 }
 
 #cardPopupImage:hover {
@@ -139,4 +139,34 @@ h1 {
         max-height: 15%;
         margin-top: 48px;
     }
+}
+
+/* Scroll bar */
+
+body {
+  --sb-track-color: #232e33;
+  --sb-thumb-color: #a2a2a2;
+  --sb-size: 10px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 12px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
 }

@@ -13,8 +13,19 @@
     <div id="startContainer">
         <a id="backToMain" href="../index.html"><i class="bi bi-arrow-left"></i> Back</a>
         <h1>Deck Builder</h1>
-        <div id="userDeckList">
-            <div id="createNewDeck" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create a new deck</div>
+        <div id="deckBuilderMain">
+            <div id="userDeckList">
+                <div id="createNewDeck" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create a new deck</div>
+            </div>
+            <div id="deckPreviewPanel" style="display:none;">
+                <h2 id="deckPreviewName"></h2>
+                <div id="deckPreviewActions" style="display:flex; gap:10px; margin-top:10px;">
+                    <button id="deckPreviewEditBtn" class="btn btn-secondary"><i class="bi bi-pencil-square" style="margin-right: 0;"></i> Edit</button>
+                    <button id="deckPreviewExportBtn" class="btn btn-secondary"><i class="bi bi-box-arrow-up"></i> Export</button>
+                    <button id="deckPreviewDeleteBtn" class="btn btn-danger"><i class="bi bi-trash" style="margin-right: 0;"></i> Delete</button>
+                </div>
+                <div id="deckPreviewCards"></div>
+            </div>
         </div>
     </div>
     <div id="deckEditor">
@@ -22,19 +33,44 @@
             <a id="backToDeckList"><i class="bi bi-arrow-left"></i> Back to Deck List</a>
             <div>
                 <h1>Editing: <span id="deckEditorName"></span></h1>
-                <div id="deckCount"><span id="currentDeckCount">0</span> / 30</div>
-                <div id="rarityCounts"><span id="rarityR">0</span> R, <span id="raritySR">0</span> SR, <span id="raritySSR">0</span> SSR</div>
             </div>
             <div id="saveDeck"><i class="bi bi-floppy"></i> Save</div>
         </div>
         <div id="deckEditorBody">
-            <div id="currentDeckListing">
-            </div>
             <div id="cardCollection">
                 <div id="noCards">You have no cards in your collection. </div>
                 <a id="goToCollectionBtn" href="../collection/index.html">Go to Collection</a>
             </div>
+            <div id="deckListingContainer">
+                <div id="deckListingHeader">
+                    <div class="deck-list-row deck-list-row1">
+                        <div id="deckCount"><span id="currentDeckCount">0</span> / 30</div>
+                    </div>
+                    <div class="deck-list-row deck-list-row2">
+                        <div id="rarityR">0</div>
+                        <div id="raritySR">0</div>
+                        <div id="raritySSR">0</div>
+                    </div>
+                    <div class="deck-list-row deck-list-row3">
+                        <div id="typeMonster">0</div>
+                        <div id="typeSpell">0</div>
+                        <div id="typeReaction">0</div>
+                        <div id="typeUtility">0</div>
+                        <div id="typeArtifact">0</div>
+                    </div>
+                </div>
+                <div id="currentDeckListing"></div>
+            </div>
         </div>
+    </div>
+    <div id="cardPopupModal">
+        <div id="cardPopupImage">
+
+        </div>
+        <div id="cardPopupDescription">
+
+        </div>
+        <div class="btn btn-primary" id="addCardToDeckBtn"><i class="bi bi-plus-circle-fill"></i>Add Card to Deck</div>
     </div>
     <script src="../index.js"></script>
     <script src="./script.js"></script>
