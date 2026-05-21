@@ -3,82 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./site-style.css">
-    <title>DnD TCG Simulator</title>
-    <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
-        #btnContainer {
-            position: absolute;
-            top: 7.5%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0px 64px;
-            width: 100%;
-            height: 90%;
-        }
-
-        button {
-            width: 30%;
-            height: 30%;
-            color: white;
-            background-color: #5a5a5a;
-            border: 2px solid lightgray;
-            font-size: 48px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        button:hover {
-            transform: scale(1.05);
-            border: 6px solid lightgray;
-        }
-
-        #rules {
-            position: absolute;
-            bottom: 8px;
-            margin: auto;
-            padding: 12px;
-            font-size: 20px;
-            color: white;
-            text-underline-offset: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all 0.2s
-        }
-
-        #rules:hover {
-            color: lightgray;
-        }
-    </style>
+    <title>DnD TCG</title>
+    <link rel="stylesheet" href="./styles/main.css">
 </head>
-<body oncontextmenu="return false;">
-    <div class="bg"></div>
-    <div class="bg-overlay"></div>
-    <h1>DnD TCG</h1>
-    <div id="btnContainer">
-        <button id="encyclopedia">Encyclopedia</button>
-        <button id="collection">Collection</button>
-        <button id="deckBuilder">Deck Builder</button>
-        <button id="simulator">Simulator</button>
-        <button id="sleeve">Sleeve</button>
+<body>
+    <div id="header">
+        <div id="profileIcon">
+            <i class="bi bi-person-fill"></i>
+            <img id="profilePictureImage">
+            <div id="profileEntry" class="tooltip">
+                <div id="profileInfo">
+                    <p>Welcome, <span></span>!</p>
+                    <button id="uploadProfilePictureButton">Upload Profile Picture</button>
+                    <input type="file" id="profilePictureInput" hidden accept="image/*">
+                    <button id="addBaseSetToBinderButton">Add Base Set to Binder</button>
+                    <button id="addAllCardsToBinderButton">Add All Cards to Binder</button>
+                    <button id="logOutButton">Log Out</button>
+                </div>
+                <div id="profileLogin">
+                    <input id="profileEntryInput" type="text" placeholder="Profile Name">
+                    <button id="logInButton">Log In</button>
+                </div>
+            </div>
+        </div>
+        <div id="darkModeButton"><i class="bi bi-moon-fill"></i></div>
     </div>
-    <a href="https://docs.google.com/document/d/1x-jrpnE3jDX6G8j2Baws41y_6H6R8l3xElEoxvOIzLs/edit?usp=sharing" target="_blank" id="rules">Rules</a>
-    <script src="index.js"></script>
-    <script>
-        let buttons = document.querySelectorAll("button");
+    <!-- <div id="menuHoverArea"></div> -->
+    <div id="menu">
+        <div class="menu-button" data-section="homeSection">
+            <i class="bi bi-house"></i>
+        </div>
+        <div class="menu-button" data-section="binderSection">
+            <i class="bi bi-journal-richtext"></i>
+        </div>
+        <div class="menu-button" data-section="decksSection">
+            <i class="bi bi-inboxes"></i>
+        </div>
+        <div class="menu-button" data-section="simulatorSection">
+            <i class="bi bi-controller"></i>
+        </div>
+        <div class="menu-button" data-section="sleeveSection">
+            <i class="bi bi-globe-americas"></i>
+        </div>
+    </div>
+    <div id="sectionsContainer">
+        <div id="homeSection" class="section active">
+            <h1>Home</h1>
+            <div id="packsWrapper">
+                <h2>Booster Pack Shop</h2>
+                <div id="packsContainer">
 
-        buttons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                window.location.href = `./${btn.id}`;
-            });
-        });
-    </script>
+                </div>
+            </div>
+        </div>
+        <div id="binderSection" class="section">
+            <h1>Binder</h1>
+            <input id="binderSearch" type="search" placeholder="Search for a card...">
+            <div id="binderContainer">
+
+            </div>
+        </div>
+        <div id="decksSection" class="section">
+            <h1>Decks</h1>
+            <p>Log in to create a deck.</p>
+            <div id="decksContainer">
+
+            </div>
+            <div id="deckBuilderContainer">
+                <div id="deckBuilderControls">
+                    <button id="deckBuilderBackButton"><i class="bi bi-arrow-return-left"></i> Back</button>
+                    <input type="text" id="deckBuilderNameEntry" value="New Deck 1" placeholder="Deck Name"> 
+                    <button id="deckBuilderSaveButton"><i class="bi bi-floppy2"></i> Save</button>
+                    <button id="deckBuilderDeleteButton"><i class="bi bi-trash"></i> Delete</button>
+                    <div>
+                        <i class="bi bi-file-richtext"></i><span id="deckBuilderCount">0</span> / 30
+                    </div>
+                </div>
+                <div id="deckBuilderMain">
+                    <div id="deckBuilderDeckList">
+
+                    </div>
+                    <div id="deckBuilderBinder">
+                        <div id="deckBuilderBinderControls">
+                            <input id="deckBuilderBinderSearch" type="search" placeholder="Search for a card...">
+                            <select id="deckBuilderBinderFilter">
+                                <option selected value="">All</option>
+                                <option value="Summon">Summon</option>
+                                <option value="Spell">Spell</option>
+                                <option value="Reaction">Reaction</option>
+                                <option value="Utility">Utility</option>
+                            </select>
+                        </div>
+                        <div id="deckBuilderBinderList">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="simulatorSection" class="section">
+            <h1>Simulator</h1>
+            <div id="simulatorContainer">
+                <div id="simulatorActionTracker" data-context="actionTracker">
+                    <h2 data-context="actionTracker">Turn <span id="simulatorTurnNum" data-context="actionTracker">1</span></h2>
+                    <div class="simulator-action-group" data-context="actionTracker">
+                        <h3 data-context="actionTracker">Action: </h3> <div class="action-pip" id="actionPip" data-context="actionTracker"></div>
+                    </div>
+                    <div class="simulator-action-group" data-context="actionTracker">
+                        <h3 data-context="actionTracker">Bonus Action: </h3> <div class="action-pip" id="bonusActionPip" data-context="actionTracker"></div>
+                    </div>
+                    <div class="simulator-action-group" data-context="actionTracker">
+                        <h3 data-context="actionTracker">Reaction: </h3> <div class="action-pip" id="reactionPip" data-context="actionTracker"></div>
+                    </div>
+                </div>
+                <div id="simulatorZones">
+                    <div id="simulatorSummonZone" data-context="summonZone">
+                        <h3 data-context="summonZone">Summon Zone</h3>
+                    </div>
+                    <div id="simulatorReactionZone" data-context="reactionZone">
+                        <h3 data-context="reactionZone">Reaction Zone</h3>
+                    </div>
+                </div>
+                <div id="simulatorCards">
+                    <div onclick="viewGraveyard()" id="simulatorGraveyard" class="empty" data-context="graveyard">
+                        <h3 data-context="graveyard">Graveyard</h3>
+                        <img src="./assets/card-art/back.png" data-context="graveyard" class="simulator-graveyard-card">
+                    </div>
+                    <div id="simulatorDeck" class="empty" data-context="deck">
+                        <h3 data-context="deck">Deck</h3>
+                        <img src="./assets/card-art/back.png" data-context="deck" class="simulator-deck-card">
+                    </div>
+                </div>
+                <div id="simulatorExtra">
+                    <div onclick="viewBanish()" id="simulatorBanish" data-context="banish">
+                        <h3 data-context="banish">Banish Zone</h3>
+                    </div>
+                    <div onclick="viewTokens()" id="simulatorTokens" data-context="tokens">
+                        <h3 data-context="tokens">Tokens</h3>
+                    </div>
+                </div>
+            </div>
+            <div id="simulatorHand">
+
+            </div>
+            <div id="simulatorDeckSelectContainer" class="modal-container">
+                <div class="modal">
+                    <h2>Select a Deck</h2>
+                    <div id="simulatorDeckSelect">
+
+                    </div>
+                    <button id="simulatorDeckSelectConfirm">Confirm</button>
+                </div>
+            </div>
+        </div>
+        <div id="sleeveSection" class="section">
+            <h1>Sleeve</h1>
+            <div id="sleevesContainer">
+                <div id="currentSleeve">
+
+                </div>
+                <div id="sleeveControls">
+                    <div id="sleeveCount"><i class="bi bi-file-richtext"></i> <span>0</span> / 12</div>
+                    <button id="createActiveSleeveButton"><i class="bi bi-shuffle"></i> Create Active Sleeve</button>
+                </div>
+                <div id="activeSleeve">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="packOpeningModalContainer" class="modal-container">
+        <div class="modal">
+            <img id="packOpeningPackImage">
+            <div id="packOpeningResults" class="slide-out-bottom">
+
+            </div>
+            <button id="packConfirmButton">Confirm</button>
+        </div>
+    </div>
+    <div id="simulatorModalContainer" class="modal-container">
+        <div class="modal">
+            <h2>Simulator</h2>
+            <div id="simulatorModalBody">
+
+            </div>
+            <button id="simulatorModalButton">Confirm</button>
+        </div>
+    </div>
+    <div id="simulatorTokensModalContainer" class="modal-container">
+        <div class="modal">
+            <h2>Tokens</h2>
+            <div id="simulatorTokensModalBody">
+
+            </div>
+            <button id="simulatorTokensModalButton">Close</button>
+        </div>
+    </div>
+    <div id="simulatorConditionalModalContainer" class="modal-container">
+        <div class="modal">
+            <h2>Conditional Draw</h2>
+            <div id="simulatorConditionalModalBody">
+                <div class="conditional-group">
+                    <label for="conditionalClassSelect">Class:</label>
+                    <select id="conditionalClassSelect">
+                        <option value="">-</option>
+                        <option value="Summon">Summon</option>
+                        <option value="Spell">Spell</option>
+                        <option value="Reaction">Reaction</option>
+                        <option value="Utility">Utility</option>
+                    </select>
+                </div>
+                <div class="conditional-group">
+                    <label for="conditionalTypeSelect">Type:</label>
+                    <select id="conditionalTypeSelect">
+                        <option value="">-</option>
+                        <option value="Beast">Beast</option>
+                        <option value="Dragon">Dragon</option>
+                        <option value="Entity">Entity</option>
+                        <option value="Fey">Fey</option>
+                        <option value="Fiend">Fiend</option>
+                        <option value="Humanoid">Humanoid</option>
+                        <option value="Machine">Machine</option>
+                        <option value="Plant">Plant</option>
+                        <option value="Undead">Undead</option>
+                    </select>
+                </div>
+                <div class="conditional-group">
+                    <label for="conditionalRaritySelect">Rarity:</label>
+                    <select id="conditionalRaritySelect">
+                        <option value="">-</option>
+                        <option value="Common">Common</option>
+                        <option value="Rare">Rare</option>
+                        <option value="Legendary">Legendary</option>
+                        <option value="Mythic">Mythic</option>
+                    </select>
+                </div>
+            </div>
+            <button id="simulatorConditionalModalButton" onclick="drawCardConditional()">Confirm</button>
+        </div>
+    </div>
+    <div id="cardViewModalContainer" class="modal-container">
+        <div class="modal">
+            <div class="card-wrapper">
+                <img class="card" draggable="false">
+            </div>
+        </div>
+    </div>
+    <div id="simulatorContextMenu">
+        <ul data-context="actionTracker">
+            <div class="context-menu-group">
+                <li onclick="setActionState('action', false)">Use Action</li>
+                <li onclick="setActionState('bonusAction', false)">Use Bonus Action</li>
+                <li onclick="setActionState('reaction', false)">Use Reaction</li>
+            </div>
+            <div class="context-menu-group">
+                <li onclick="setActionState('action', true)">Restore Action</li>
+                <li onclick="setActionState('bonusAction', true)">Restore Bonus Action</li>
+                <li onclick="setActionState('reaction', true)">Restore Reaction</li>
+                <li onclick="setActionState('all', true)">Restore All</li>
+            </div>
+        </ul>
+        <ul data-context="summonZoneCard">
+            <div class="context-menu-group">
+                <li onclick="sendTargetedCardToGraveyard()">Send <span class="simulator-context-card-name"></span> to Graveyard</li>
+                <li onclick="sendTargetedCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
+                <li onclick="banishTargetedCard()">Banish <span class="simulator-context-card-name"></span></li>
+            </div>
+            <!-- <div class="context-menu-group">
+                <li onclick="">Adjust HP</li>
+            </div> -->
+        </ul>
+        <ul data-context="reactionZoneCard">
+            <div class="context-menu-group">
+                <li onclick="activateTargetedCard()">Activate <span class="simulator-context-card-name"></span></li>
+                <li onclick="sendTargetedCardToGraveyard()">Send <span class="simulator-context-card-name"></span> to Graveyard</li>
+                <li onclick="sendTargetedCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
+                <li onclick="banishTargetedCard()">Banish <span class="simulator-context-card-name"></span></li>
+            </div>
+        </ul>
+        <ul data-context="graveyard">
+            <div class="context-menu-group">
+                <li onclick="viewGraveyard()">View</li>
+                <li onclick="searchGraveyard()">Search for Card</li>
+                <li onclick="shuffleGraveyardIntoDeck()">Shuffle Graveyard into Deck</li>
+            </div>
+            <div class="context-menu-group">
+                <li onclick="returnRandomCardFromGraveyard()">Return Random Card to Hand</li>
+                <li onclick="openConditionalModal('graveyard')">Return Random Card to Hand (Conditional)</li>
+            </div>
+        </ul>
+        <ul data-context="deck">
+            <div class="context-menu-group">
+                <li onclick="drawCard()">Draw Card</li>
+                <li onclick="drawCards()">Draw X Cards</li>
+                <li onclick="drawCardFromBottom()">Draw Card from Bottom of Deck</li>
+                <li onclick="drawRandomCard()">Draw Random Card</li>
+                <li onclick="openConditionalModal('deck')">Draw Random Card (Conditional)</li>
+            </div>
+            <div class="context-menu-group">
+                <!-- <li onclick="">View</li> -->
+                <li onclick="shuffleDeck()">Shuffle</li>
+                <li onclick="revealFromDeck('top')">Reveal Top X Cards</li>
+                <li onclick="">Rearrange Top X Cards</li>
+                <li onclick="revealFromDeck('bottom')">Reveal Bottom X Cards</li>
+                <li onclick="searchDeck()">Search for Card</li>
+            </div>
+            <div class="context-menu-group">
+                <li onclick="banishRandomCard()">Banish Random Card</li>
+            </div>
+        </ul>
+        <ul data-context="banish">
+            <div class="context-menu-group">
+                <li onclick="viewBanish()">View</li>
+            </div>
+        </ul>
+        <ul data-context="tokens">
+            <div class="context-menu-group">
+                <li onclick="viewTokens()">View</li>
+            </div>
+        </ul>
+        <ul data-context="hand">
+            <div class="context-menu-group">
+                <li onclick="playCard()">Play <span class="simulator-context-card-name"></span></li>
+                <li onclick="sendTargetedCardToGraveyard()">Discard <span class="simulator-context-card-name"></span></li>
+                <li onclick="banishTargetedCard()">Banish <span class="simulator-context-card-name"></span></li>
+            </div>
+            <div class="context-menu-group">
+                <li onclick="shuffleTargetedCardIntoDeck()">Shuffle <span class="simulator-context-card-name"></span> into Deck</li>
+                <li onclick="putTargetedCardOnDeck('top')">Put <span class="simulator-context-card-name"></span> on Top of Deck</li>
+                <li onclick="putTargetedCardOnDeck('bottom')">Put <span class="simulator-context-card-name"></span> on Bottom of Deck</li>
+            </div>
+            <div class="context-menu-group">
+                <li onclick="discardHand()">Discard Hand</li>
+                <li onclick="shuffleHandIntoDeck()">Shuffle Hand into Deck</li>
+            </div>
+        </ul>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.10.0/firebase-storage-compat.js"></script>
+    <script src="./scripts/util.js"></script>
+    <script src="./scripts/firebase-config.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/home.js"></script>
+    <script src="./scripts/binder.js"></script>
+    <script src="./scripts/decks.js"></script>
+    <script src="./scripts/simulator.js"></script>
+    <script src="./scripts/sleeve.js"></script>
 </body>
 </html>

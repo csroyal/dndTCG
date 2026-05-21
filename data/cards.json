@@ -1,0 +1,1926 @@
+[
+    {
+        "id": "001",
+        "name": "Animated Flying Sword",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 7,
+            "actions": [
+                {
+                    "name": "Slash",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d8 slashing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "002",
+        "name": "Flameskull",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Fiend",
+        "tags": [],
+        "summonInfo": {
+            "hp": 9,
+            "actions": [
+                {
+                    "name": "Fire Ray",
+                    "description": "Melee or Ranged Attack Roll: +5, reach 5 ft. or 60 ft. Hit: 1d6 + 3 fire damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "003",
+        "name": "Gas Spore Fungus",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Plant",
+        "tags": [],
+        "summonInfo": {
+            "hp": 3,
+            "traits": [
+                {
+                    "name": "Death Burst",
+                    "description": "The gas spore bursts when it dies. CON saving throw: DC 10, each creature in a 20-foot sphere. Failure: Target takes 2d6 poison damage and has the Poisoned condition. "
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Tendril",
+                    "description": "Melee Attack Roll: +0, reach 5 ft. Hit: 1 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "004",
+        "name": "Giant Bat",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 12,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d6 + 3 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "005",
+        "name": "Goblin Minion",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Fey",
+        "tags": [],
+        "summonInfo": {
+            "hp": 7,
+            "actions": [
+                {
+                    "name": "Dagger",
+                    "description": "Melee or Ranged Attack Roll: +4, reach 5 ft. or range 20/60 ft. Hit: 1d4 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "006",
+        "name": "Kobold Warrior",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 7,
+            "actions": [
+                {
+                    "name": "Dagger",
+                    "description": "Melee or Ranged Attack Roll: +4, reach 5 ft. or range 20/60 ft. Hit: 1d4 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "007",
+        "name": "Monodrone",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "actions": [
+                {
+                    "name": "Gear",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d8 force damage."
+                },
+                {
+                    "name": "Gear Flinger",
+                    "description": "Ranged Attack Roll: +4, range 120 ft. Hit: 1d8 force damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "008",
+        "name": "Skeleton",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Undead",
+        "tags": [],
+        "summonInfo": {
+            "hp": 13,
+            "actions": [
+                {
+                    "name": "Shortsword",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d4 + 3 piercing damage."
+                },
+                {
+                    "name": "Shortbow",
+                    "description": "Ranged Attack Roll: +5, range 80/320 ft. Hit: 1d4 + 3 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "009",
+        "name": "Wolf",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 11,
+            "traits": [
+                {
+                    "name": "Pack Tactics",
+                    "description": "This summon has Advantage on attack rolls against a creature if at least one of this summon's allies is within 5 feet of the creature and the ally is not Incapacitated."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d6 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "010",
+        "name": "Compelled Duel",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "You try to compel a creature into a duel. One creature that you can see within 30 feet makes a WIS saving throw. On a failed save, the target has Disadvantage on attack rolls against creatures other than you, and it can't willingly move to a space that is more than 30 feet away from you. The spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target."
+    },
+    {
+        "id": "011",
+        "name": "Grease",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Machine",
+        "tags": [],
+        "description": "Nonflammable grease covers the ground in a 10-foot square centered on a point within 60 feet and turns it into Difficult Terrain for 1 minute. When the grease appears, each creature standing in its area must succeed on a DEX saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone."
+    },
+    {
+        "id": "012",
+        "name": "Magic Missile",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within 120 feet. A dart deals 1d4 Force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several."
+    },
+    {
+        "id": "013",
+        "name": "Misty Step",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Fey",
+        "tags": [],
+        "description": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see."
+    },
+    {
+        "id": "014",
+        "name": "Ray of Frost",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "A frigid beam of blue-white light streaks toward a creature within 60 feet. Make a ranged spell attack against the target. On a hit, it takes 1d8 Cold damage, and its Speed is reduced by 10 feet until the start of your next turn."
+    },
+    {
+        "id": "015",
+        "name": "Thorn Whip",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Plant",
+        "tags": [],
+        "description": "You create a vine-like whip covered in thorns that lashes out at your command toward a creature within 30 feet. Make a melee spell attack against the target. On a hit, the target takes 1d6 Piercing damage, and if it is Large or smaller, you can pull it up to 10 feet closer to you."
+    },
+    {
+        "id": "016",
+        "name": "Thunderwave",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a CON saving throw. On a failed save, a creature takes 1d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only. In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet."
+    },
+    {
+        "id": "016",
+        "name": "Thunderwave",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a CON saving throw. On a failed save, a creature takes 1d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only. In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet."
+    },
+    {
+        "id": "017",
+        "name": "Charm Person",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "One Humanoid you can see within range makes a WIS saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition for 1 hour or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you."
+    },
+    {
+        "id": "018",
+        "name": "Dancing Lights",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You create up to four torch-size lights within 120 feet, making them appear as torches, lanterns, or glowing orbs that hover for 1 minute. Alternatively, you combine the four lights into one glowing Medium form that is vaguely humanlike. Whichever form you choose, each light sheds Dim Light in a 10-foot radius. As a Bonus Action, you can move the lights up to 60 feet to a space within 120 feet. A light must be within 20 feet of another light created by this spell, and a light vanishes if it exceeds the spell's range."
+    },
+    {
+        "id": "019",
+        "name": "Darkvision",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "For 1 hour, a willing creature you touch has Darkvision with a range of 150 feet."
+    },
+    {
+        "id": "020",
+        "name": "Detect Magic",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "For 1 minute, you sense the presence of magical effects within 30 feet of yourself. If you sense such effects, you can take the Magic action to see a faint aura around any visible creature or object in the area that bears the magic, and if an effect was created by a spell, you learn the spell's school of magic."
+    },
+    {
+        "id": "021",
+        "name": "Disguise Self",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends. You can seem 1 foot shorter or taller and can appear heavier or lighter. You must adopt a form that has the same basic arrangement of limbs as you have. Otherwise, the extent of the illusion is up to you. The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing."
+    },
+    {
+        "id": "022",
+        "name": "Knock",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "Choose an object that you can see within 60 feet. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access. A target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked. If the target is held shut by Arcane Lock, that spell is suppressed for 10 minutes, during which time the target can be opened and closed. When you cast the spell, a loud knock, audible up to 300 feet away, emanates from the target."
+    },
+    {
+        "id": "023",
+        "name": "Hellish Rebuke",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "A creature deals damage to you.",
+        "description": "The creature that damaged you is momentarily surrounded by green flames. It makes a DEX saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one."
+    },
+    {
+        "id": "024",
+        "name": "Pit Trap",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "A creature moves within 10 feet of you or an ally.",
+        "description": "The creature that moved falls into a spiked pit trap. The creature must make a DEX saving throw. It takes 1d8 piercing damage and its movement speed is reduced to 0 on a failed save, or half as much damage and no movement speed reduction on a success."
+    },
+    {
+        "id": "025",
+        "name": "Reroll",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "Any player rolls a die.",
+        "description": "The player that just rolled rerolls a die involved in the roll."
+    },
+    {
+        "id": "026",
+        "name": "Shield",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "You are hit by an attack roll or targeted by Magic Missile.",
+        "description": "An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile."
+    },
+    {
+        "id": "027",
+        "name": "Field Rations",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "All of your Humanoid and Beast summons the field, as well as all of your allies, are healed for 1d4 damage."
+    },
+    {
+        "id": "028",
+        "name": "Lucky Coin Flip",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Flip a coin. If heads, heal 10 HP. If tails, lose 10 HP."
+    },
+    {
+        "id": "029",
+        "name": "Monster Sacrifice",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Destroy one of your summoned monsters on the field. Then, put a random monster of the same rarity as the monster you destroyed from your deck into your hand. Shuffle your deck afterward."
+    },
+    {
+        "id": "030",
+        "name": "Speed Potion",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "One of your allies or summons on the field gains 10 extra movement speed until the end of their next turn."
+    },
+    {
+        "id": "031",
+        "name": "Dire Wolf",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 54,
+            "traits": [
+                {
+                    "name": "Pack Tactics",
+                    "description": "This summon has Advantage on attack rolls against a creature if at least one of this summon's allies is within 5 feet of the creature and the ally is not Incapacitated."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 2d10 + 3 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "032",
+        "name": "Dwarf Barbarian",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 47,
+            "actions": [
+                {
+                    "name": "Greataxe",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d12 + 4 slashing damage."
+                }
+            ],
+            "bonusActions": [
+                {
+                    "name": "Rage",
+                    "description": "This summon gains the Rage effect. Until the end your next turn, this summon's attacks deal +2 bonus damage. If this summon makes an attack roll against an enemy, the duration is extended for another turn."
+                }
+            ]
+        }
+    },
+    {
+        "id": "033",
+        "name": "Elf Ranger",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 26,
+            "actions": [
+                {
+                    "name": "Longbow",
+                    "description": "Ranged Attack Roll: +9, range 150/600 ft. Hit: 1d8 + 4 piercing damage."
+                }
+            ],
+            "bonusActions": [
+                {
+                    "name": "Hunter's Mark",
+                    "description": "A target is marked for this summon. This summon deals an extra 1d6 force damage to the marked target."
+                }
+            ]
+        }
+    },
+    {
+        "id": "034",
+        "name": "Fire Bird",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 27,
+            "traits": [
+                {
+                    "name": "Pack Tactics",
+                    "description": "This summon has Advantage on attack rolls against a creature if at least one of this summon's allies is within 5 feet of the creature and the ally is not Incapacitated."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Beak",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 2d8 + 4 piercing damage."
+                },
+                {
+                    "name": "Fire Bolt",
+                    "description": "Ranged Spell Attack Roll: +4, range 120 ft. Hit: 2d10 fire damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "035",
+        "name": "Orc Wizard",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 25,
+            "actions": [
+                {
+                    "name": "Fire Bolt",
+                    "description": "Ranged Spell Attack Roll: +7, range 120 ft. Hit: 1d10 fire damage."
+                },
+                {
+                    "name": "Chromatic Orb",
+                    "description": "Ranged Spell Attack Roll: +7, range 90 ft. Hit: 3d8 damage. If you roll the same number on two or more of the d8s, the orb leaps to a different target of your choice within 30 ft. of the target. Make an attack roll against the new target, and make a new damage roll."
+                },
+                {
+                    "name": "Spellcasting",
+                    "description": "1/S. Put a random Spell card from your deck into your hand. Shuffle your deck afterward."
+                }
+            ]
+        }
+    },
+    {
+        "id": "036",
+        "name": "Phase Spider",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 45,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d10 + 3 piercing damage plus 1d8 poison damage."
+                },
+                {
+                    "name": "Ethereal Jaunt",
+                    "description": "This summon teleports 20 feet to a space it can see. If there is an enemy within 5 feet of the space it teleports to, it may make a Bite attack against them."
+                }
+            ]
+        }
+    },
+    {
+        "id": "037",
+        "name": "Blight",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "A creature that you can see within range makes a CON saving throw, taking 4d8 Necrotic damage on a failed save or half as much damage on a successful one. A Plant creature automatically fails the save."
+    },
+    {
+        "id": "038",
+        "name": "Chain Lightning",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You launch a lightning bolt toward a target you can see within 150 feet. Three bolts then leap from that target to as many as three other targets of your choice, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts. Each target makes a DEX saving throw, taking 3d8 Lightning damage on a failed save or half as much damage on a successful one."
+    },
+    {
+        "id": "039",
+        "name": "Eyebite",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "For the duration, your eyes become an inky void. One creature of your choice within 60 feet of you that you can see must succeed on a WIS saving throw or be affected by one of the following effects of your choice for the duration.<br><br><i>Asleep</i>. The target has the Unconscious condition. It wakes up if it takes any damage or if another creature takes an action to shake it awake.<br><br><i>Panicked</i>. The target has the Frightened condition. On each of its turns, the Frightened target must take the Dash action and move away from you by the safest and shortest route available. If the target moves to a space at least 60 feet away from you where it can't see you, this effect ends.<br><br><i>Sickened</i>. The target has the Poisoned condition."
+    },
+    {
+        "id": "040",
+        "name": "Fireball",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Fiend",
+        "tags": [],
+        "description": "A bright streak flashes from you to a point you choose within 150 feet and then blossoms with a low roar into a fiery explosion. Each creature in a 20-foot-radius Sphere centered on that point makes a DEX saving throw, taking 6d6 Fire damage on a failed save or half as much damage on a successful one. Flammable objects in the area that aren't being worn or carried start burning."
+    },
+    {
+        "id": "041",
+        "name": "Wall of Stone",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "A nonmagical wall of solid stone springs into existence at a point you choose within 120 feet. The wall is 6 inches thick and is composed of ten 10-foot-by-10-foot panels. If the wall cuts through a creature's space when it appears, the creature is pushed to one side of the wall (you choose which side). If a creature would be surrounded on all sides by the wall (or the wall and another solid surface), that creature can make a DEX saving throw. On a success, it can use its Reaction to move up to its Speed so that it is no longer enclosed by the wall. The wall can have any shape you desire, though it can't occupy the same space as a creature or object. The wall doesn't need to be vertical or rest on a firm foundation. It must, however, merge with and be solidly supported by existing stone. Thus, you can use this spell to bridge a chasm or create a ramp. If you create a span greater than 20 feet in length, you must halve the size of each panel to create supports. You can crudely shape the wall to create battlements and the like. The wall is an object made of stone that can be damaged and thus breached. Each panel has AC 15 and 30 Hit Points per inch of thickness. Reducing a panel to 0 Hit Points destroys it and might cause connected panels to collapse at the DM's discretion."
+    },
+    {
+        "id": "042",
+        "name": "Scrying",
+        "rarity": "Rare",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You can see and hear a creature you choose that is on the same plane of existence as you. The target makes a WIS saving throw. The target doesn't know what it is making the save against, only that it feels uneasy. On a successful save, the target isn't affected, and you can't use this spell on it again for 24 hours. On a failed save, the spell creates an Invisible, intangible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the duration. If something can see the sensor, it appears as a luminous orb about the size of your fist. Instead of targeting a creature, you can target a location you have seen. When you do so, the sensor appears at that location and doesn't move."
+    },
+    {
+        "id": "043",
+        "name": "Stone Shape",
+        "rarity": "Rare",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You touch a stone object of Medium size or smaller or a section of stone no more than 5 feet in any dimension and form it into any shape you like. For example, you could shape a large rock into a weapon, statue, or coffer, or you could make a small passage through a wall that is 5 feet thick. You could also shape a stone door or its frame to seal the door shut. The object you create can have up to two hinges and a latch, but finer mechanical detail isn't possible."
+    },
+    {
+        "id": "044",
+        "name": "Counterspell",
+        "rarity": "Rare",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "A creature casts a spell.",
+        "description": "You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect. If it is casting a spell of 4th level or higher, make an ability check using your spellcasting ability. The DC equals 10 + the spell's level. On a success, the creature's spell fails and has no effect."
+    },
+    {
+        "id": "045",
+        "name": "Siphon Life",
+        "rarity": "Rare",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "One of your summons on the field is hit by an attack",
+        "description": "You siphon the life of your own wicked servants, unsatisfied with their performance. The summon that was just attacked receives 2d8 necrotic damage and you draw 1 card."
+    },
+    {
+        "id": "046",
+        "name": "Call of the Beast",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Look at the top card of your deck. If it is a Beast-type card, put it into your hand. Otherwise, put it on the bottom of your deck."
+    },
+    {
+        "id": "047",
+        "name": "Final Will & Testament",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "You can only play this card if one of your Summons died on the field last turn. Draw 1 card."
+    },
+    {
+        "id": "048",
+        "name": "Gambler",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Shuffle your hand into your deck, then roll a d20. On an 11 or higher, draw 5 cards. On a 10 or lower, draw 1 card."
+    },
+    {
+        "id": "049",
+        "name": "Luminous Crystal",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Look at the bottom 2 cards of your deck. Put one of them on top of your deck and return the other to the bottom."
+    },
+    {
+        "id": "050",
+        "name": "Reanimate",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard a card from your hand. Then, put a random Summon from your graveyard into your hand."
+    },
+    {
+        "id": "051",
+        "name": "Aberrant Zealot",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 93,
+            "actions": [
+                {
+                    "name": "Psychic Rend",
+                    "description": "Melee or Ranged Spell Attack Roll: +7, reach 15 ft. or 120 ft. Hit: 3d6 + 4 psychic damage."
+                },
+                {
+                    "name": "Mind Blast",
+                    "description": "1/S. INT Saving Throw: DC 15, each creature in a 60-foot cone. Failure: 4d8 + 4 psychic damage and Stunned for 1 minute."
+                }
+            ],
+            "bonusActions": [
+                {
+                    "name": "Void Warp",
+                    "description": "1/S. This summon teleports to an unoccupied space it can see within 120 ft. STR Saving Throw: DC 15, each creature within 30 feet of the space it left. Failure: 4d8 force damage and pulled 5 feet inwards to the space. Failure: Half damage and no pull."
+                }
+            ]
+        }
+    },
+    {
+        "id": "052",
+        "name": "Giant Crocodile",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 85,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +8, reach 5 ft. Hit: 3d10 + 5 piercing damage."
+                },
+                {
+                    "name": "Tail",
+                    "description": "Melee Attack Roll: +8, reach 10 ft. Hit: 2d8 + 5 bludgeoning damage. If the target is a Large or smaller creature, it is knocked Prone."
+                }
+            ]
+        }
+    },
+    {
+        "id": "053",
+        "name": "Rat King",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 124,
+            "traits": [
+                {
+                    "name": "Swarm",
+                    "description": "If this summon is under half HP, its attack damage is halved."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Slam",
+                    "description": "Melee Attack Roll: +10, reach 10 ft. Hit: 3d10 + 6 bludgeoning damage."
+                },
+                {
+                    "name": "Engulf",
+                    "description": "DEX Saving Throw: DC 16, one creature within 10 ft. Failure: Target creature is blinded and restrained and takes 2d10 piercing damage at the start of each of your turns. Target creature can repeat the saving throw on their turn to attempt to escape. If this summon takes at least 25 damage before your next turn, it must make a DC 15 CON saving throw or it releases the creature."
+                },
+                {
+                    "name": "Rally to the King!",
+                    "description": "1/S. Sacrifice any amount of Beast-type Summons in play or Beast-type cards from your hand. This summon regains 10 HP for each card sacrificed in this way."
+                }
+            ]
+        }
+    },
+    {
+        "id": "054",
+        "name": "Earthquake",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "Choose a point on the ground that you can see within 500 feet. For 1 minute, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point. The ground there is Difficult Terrain. When you cast this spell and at the end of each of your turns for the duration, each creature on the ground in the area makes a DEX saving throw. On a failed save, a creature has the Prone condition, and its Concentration is broken. You can also cause the effects below.<br><br><i>Fissures</i>. A total of 1d6 fissures open in the spell's area at the end of the turn you cast it. You choose the fissures' locations, which can't be under structures. Each fissure is 1d10 × 10 feet deep and 10 feet wide, and it extends from one edge of the spell's area to another edge. A creature in the same space as a fissure must succeed on a DEX saving throw or fall in. A creature that successfully saves moves with the fissure's edge as it opens.<br><br><i>Structures</i>. The tremor deals 50 Bludgeoning damage to any structure in contact with the ground in the area when you cast the spell and at the end of each of your turns until the spell ends. If a structure drops to 0 Hit Points, it collapses.<br><br>A creature within a distance from a collapsing structure equal to half the structure's height makes a DEX saving throw. On a failed save, the creature takes 12d6 Bludgeoning damage, has the Prone condition, and is buried in the rubble, requiring a DC 20 STR (Athletics) check as an action to escape. On a successful save, the creature takes half as much damage only."
+    },
+    {
+        "id": "055",
+        "name": "Finger of Death",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "You unleash negative energy toward a creature you can see within 60 feet. The target makes a CON saving throw, taking 7d8 + 30 Necrotic damage on a failed save or half as much damage on a successful one.<br>A Humanoid killed by this spell rises at the start of your next turn as a Zombie that follows your verbal orders."
+    },
+    {
+        "id": "056",
+        "name": "Prismatic Spray",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Fey",
+        "tags": [],
+        "description": "Eight rays of light flash from you in a 60-foot Cone. Each creature in the Cone makes a Dexterity saving throw. For each target, roll 1d8 to determine which color ray affects it, consulting the Prismatic Rays table.<br><br><table><thead><tr><th>1d8</th><th>Ray</th></tr></thead><tbody><tr><td>1</td><td>Red. Failed Save: 12d6 Fire damage. Successful Save: Half as much damage.</td></tr><tr><td>2</td><td>Orange. Failed Save: 12d6 Acid damage. Successful Save: Half as much damage.</td></tr><tr><td>3</td> <td>Yellow. Failed Save: 12d6 Lightning damage. Successful Save: Half as much damage.</td></tr><tr><td>4</td><td>Green. Failed Save: 12d6 Poison damage. Successful Save: Half as much damage.</td></tr><tr><td>5</td><td>Blue. Failed Save: 12d6 Cold damage. Successful Save: Half as much damage.</td></tr><tr><td>6</td><td>Indigo. Failed Save: The target has the Restrained condition and makes a CON saving throw at the end of each of its turns. If it successfully saves three times, the condition ends. If it fails three times, it has the Petrified condition until it is freed by an effect like the Greater Restoration spell. The successes and failures needn't be consecutive; keep track of both until the target collects three of a kind.</td></tr><tr><td>7</td><td>Violet. Failed Save: The target has the Blinded condition and makes a WIS saving throw at the start of your next turn. On a successful save, the condition ends. On a failed save, the condition ends, and the creature teleports to another plane of existence (DM's choice).</td></tr><tr><td>8</td><td>Red. Failed Save: 12d6 Fire damage. Successful Save: Half as much damage.</td></tr></tbody></table>"
+    },
+    {
+        "id": "057",
+        "name": "Teleport",
+        "rarity": "Legendary",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "This spell instantly transports you and up to eight willing creatures that you can see within 10 feet, or a single object that you can see within 10 feet, to a destination you select. If you target an object, it must be Large or smaller, and it can't be held or carried by an unwilling creature. The destination you choose must be known to you, and it must be on the same plane of existence as you. Your familiarity with the destination determines whether you arrive there successfully."
+    },
+    {
+        "id": "058",
+        "name": "Summoner's Directive",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Search your deck for a Summon and put it into your hand. Shuffle your deck afterward."
+    },
+    {
+        "id": "059",
+        "name": "Iron Golem",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 252,
+            "specialSummon": "Sacrifice 1 Machine-type Summon in play, 1 Machine-type card from your hand, and 1 Spell of any type from your hand.",
+            "traits": [
+                {
+                    "name": "Magic Resistance",
+                    "description": "This summon has Advantage on saving throws against spells and magical effects."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bladed Arm",
+                    "description": "Melee Attack Roll: +12, reach 10 ft. Hit: 3d8 + 7 slashing damage plus 3d6 fire damage."
+                },
+                {
+                    "name": "Fiery Bolt",
+                    "description": "Ranged Attack Roll: +10, range 120 ft. Hit: 8d8 force damage."
+                },
+                {
+                    "name": "Poison Breath",
+                    "description": "1/S. CON Saving Throw: DC 18, each creature in a 60-foot cone. Failure: 10d10 poison damage. Success: Half damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "060",
+        "name": "Meteor Swarm",
+        "rarity": "Mythic",
+        "class": "Spell",
+        "type": "Fiend",
+        "tags": [],
+        "description": "Blazing orbs of fire plummet to the ground at four different points you can see within 1 mile. Each creature in a 40-foot-radius Sphere centered on each of those points makes a DEX saving throw. A creature takes 20d6 Fire damage and 20d6 Bludgeoning damage on a failed save or half as much damage on a successful one. A creature in the area of more than one fiery Sphere is affected only once. A nonmagical object that isn't being worn or carried also takes the damage if it's in the spell's area, and the object starts burning if it's flammable."
+    },
+    {
+        "id": "061",
+        "name": "Crocodile",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 13,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d8 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "062",
+        "name": "Dragonling",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 7,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d4 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "063",
+        "name": "Flying Snake",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1 piercing damage plus 1d4 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "064",
+        "name": "Lizard",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 2,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +2, reach 5 ft. Hit: 1 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "065",
+        "name": "Pseudodragon",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 10,
+            "actions": [
+                {
+                    "name": "Sting",
+                    "description": "CON Saving Throw: DC 12, one creature within 5 ft. Failure: 2d4 poison damage and the target has the Poisoned condition for 1 hour."
+                }
+            ]
+        }
+    },
+    {
+        "id": "066",
+        "name": "Venomous Snake",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d4 + 2 piercing damage plus 1d6 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "067",
+        "name": "Draconic Echo",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You manifest a shimmering after‑image of draconic power that trails your movements. Until the spell ends, you gain the following benefits:<br><br><i>Echo Step</i>. When you move, you can leave behind a faint draconic silhouette. The first attack made against you each round has disadvantage as the attacker strikes the echo instead of you.<br><br><i>Scaled Reflex</i>. You gain a +5 bonus to Stealth checks as your form blurs with draconic shimmer.<br><br><i>Draconic Feint</i>. Once per turn when you make an attack roll, you can impose disadvantage on the target's next attack roll against you."
+    },
+    {
+        "id": "068",
+        "name": "Dragon's Breath",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. For 1 minute, the target can take a Magic action to exhale a 15-foot Cone. Each creature in that area makes a DEX saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one."
+    },
+    {
+        "id": "069",
+        "name": "Lizard Breath",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "A tiny mote of flame puffs from your mouth towards a creature you target, dealing 1d4 fire damage and 1d4 acid damage."
+    },
+    {
+        "id": "070",
+        "name": "Scale Shimmer",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "Your skin briefly takes on the sheen of draconic scales. Until the start of your next turn, you gain a +1 bonus to AC."
+    },
+    {
+        "id": "071",
+        "name": "Alter Self",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again. Its effects last for 1 hour."
+    },
+    {
+        "id": "072",
+        "name": "Draco Sight",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "A brief shimmer of draconic instinct sharpens your awareness. Until the start of your next turn, you gain the following effect: You can sense whether any creature within 10 feet of you is magical in nature or currently affected by a spell or magical effect. This sense does not reveal the creature's identity, location, type, or the nature of the magic—only that magic is present."
+    },
+    {
+        "id": "073",
+        "name": "Enthrall",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You weave a distracting string of words, causing creatures of your choice that you can see within range to make a Wisdom saving throw. Any creature you or your companions are fighting automatically succeeds on this save. On a failed save, a target has a −10 penalty to Perception checks and Passive Perception until the spell ends."
+    },
+    {
+        "id": "074",
+        "name": "Oops! All Lizards",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "All summons on the field become a \"Lizard\"."
+    },
+    {
+        "id": "075",
+        "name": "Rekindle the Ancient Scale",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard a Dragon-type card from your hand. Then, put a random Dragon-type card from your graveyard into your hand."
+    },
+    {
+        "id": "076",
+        "name": "Brass Dragon Wyrmling",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 44,
+            "actions": [
+                {
+                    "name": "Rend",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d10 + 4 slashing damage."
+                },
+                {
+                    "name": "Fire Breath",
+                    "description": "1/S. DEX Saving Throw: DC 11, each creature in a 20-foot-long, 5-foot-wide line. Failure: 4d6 fire damage. Success: Half damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "077",
+        "name": "Dragon Frog",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 73,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit 1d10 piercing damage plus 1d10 poison damage."
+                },
+                {
+                    "name": "Tongue",
+                    "description": "Melee Attack Roll: +5 , reach 30 ft., one target. Hit 1d8 bludgeoning damage plus 1d6 acid damage. STR Saving Throw: DC 14. Failure: Target is grappled and pulled to an unoccupied space within 5 feet."
+                }
+            ]
+        }
+    },
+    {
+        "id": "078",
+        "name": "Dragonelle",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 45,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 2d6 + 4 piercing damage."
+                },
+                {
+                    "name": "Smoke Breath",
+                    "description": "1/S. Exhales a poisonous black smoke filling a 15-foot radius sphere around it. The area is heavily obscured for 1 minute. Any creature that starts its turn in the area must make a DC 13 CON saving throw or take 1d10 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "079",
+        "name": "Sky Drake",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 32,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 3d8 + 3 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "080",
+        "name": "Cauldron of the Wyrm",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You summon a massive spectral pot that hovers beside you, forged from shimmering draconic essence and warm hearth‑magic. The brew within glows like molten amber and bubbles with a soft, steady heat. The cauldron follows you around while you move. For 3 rounds, you may use a free action to command the cauldron to produce one of the following effects:<br><br><i>Eruption</i>. The cauldron releases a controlled burst of radiant‑fire in a 20‑foot cone. Each creature in the area must make a DEX saving throw, taking 3d8 fire damage on a failed save, or half as much on a successful one.<br><br><i>Comfort</i>. The cauldron exhales a warm, fragrant mist that spreads in a 20‑foot radius centered on it. Allies in the area regain 2d8 hit points."
+    },
+    {
+        "id": "081",
+        "name": "Polymorph",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You attempt to transform a creature that you can see within range into a Beast. The target must succeed on a WIS saving throw or shape-shift into Beast form for the duration. That form can be any Beast you choose that has a Challenge Rating equal to or less than the target's (or the target's level if it doesn't have a Challenge Rating). The target's game statistics are replaced by the stat block of the chosen Beast, but the target retains its alignment, personality, creature type, Hit Points, and Hit Point Dice.<br><br>The target gains a number of Temporary Hit Points equal to the Hit Points of the Beast form. These Temporary Hit Points vanish if any remain when the spell ends. The spell ends early on the target if it has no Temporary Hit Points left.<br><br>The target is limited in the actions it can perform by the anatomy of its new form, and it can't speak or cast spells.<br><br>The target's gear melds into the new form. The creature can't use or otherwise benefit from any of that equipment."
+    },
+    {
+        "id": "082",
+        "name": "Tyrant's Gravitic Roar",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You unleash a roar infused with the crushing authority of an ancient dragon. Choose a point you can see within 50 feet; a 30‑foot radius sphere centered on that point becomes a zone of warped gravity and draconic dominance. When a creature enters the area for the first time on a turn or starts its turn there, it must make a STR saving throw.On a failure, the creature is affected by one of the following effects of your choice:<br><br><i>Drag Down</i>. The creature is pulled up to 20 feet toward the center of the zone and knocked prone.<br><br><i>Hurl Away</i>. The creature is pushed up to 20 feet in a direction you choose and takes 3d6 bludgeoning damage.<br><br><i>Pin in Place</i>. The creature's speed becomes 0 until the start of its next turn.<br><br>A creature that succeeds on its saving throw is unaffected but must repeat the save if it remains in the area. Allies in the zone can choose to automatically succeed on the saving throw and are never knocked prone."
+    },
+    {
+        "id": "083",
+        "name": "Wyrm's Dominion",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You unleash the overwhelming presence of a mighty dragon. Creatures of your choice within 20 feet of you must succeed on a Wisdom saving throw or become frightened of you for the duration. A creature frightened in this way can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+    },
+    {
+        "id": "084",
+        "name": "Cut One Head, Two Take Its Place",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard a Dragon-type card form your hand. Then, draw 2 random Dragon-type cards from your deck."
+    },
+    {
+        "id": "085",
+        "name": "Dragonfire Divination",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard any amount of Dragon-type cards from your hand. Then, draw that same amount of cards."
+    },
+    {
+        "id": "086",
+        "name": "Gold Dragon",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 126,
+            "actions": [
+                {
+                    "name": "Rend",
+                    "description": "Melee Attack Roll: +14, reach 10 ft. Hit: 2d8 + 8 slashing damage plus 1d8 fire damage."
+                },
+                {
+                    "name": "Fire Breath",
+                    "description": "1/S. DEX Saving Throw: DC 21, each creature in a 60-foot cone. Failure: 8d8 fire damage. Success: Half damage."
+                },
+                {
+                    "name": "Weakening Breath",
+                    "description": "1/S. STR Saving Throw: DC 21, each creature in a 60-foot cone. Failure: The target has disadvantage on STR-based D20 tests and subtracts 1d6 from its damage rolls."
+                }
+            ]
+        }
+    },
+    {
+        "id": "087",
+        "name": "Gold Dragon",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 133,
+            "actions": [
+                {
+                    "name": "Rend",
+                    "description": "Melee Attack Roll: +14, reach 10 ft. Hit: 1d10 + 8 slashing damage plus 3d4 fire damage."
+                },
+                {
+                    "name": "Fire Breath",
+                    "description": "1/S. DEX Saving Throw: DC 21, each creature in a 60-foot cone. Failure: 9d6 fire damage. Success: Half damage."
+                },
+                {
+                    "name": "Spellcasting",
+                    "description": "1/S. Search your deck for a \"Fireball\" card and add it to your hand. Shuffle your deck afterward."
+                }
+            ]
+        }
+    },
+    {
+        "id": "088",
+        "name": "Dragon's Edict",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Dragon",
+        "tags": [],
+        "description": "You call upon the divine authority of an ancient dragon deity, unleashing a beam of consecrated draconic power upon a creature you can see within 60 feet. The target must make a DEX saving throw. On a failed save, it takes 10d10 radiant or elemental damage from dragon's breath. After the beam strikes, a spectral dragon head appears behind you and roars. Each creature within 20 feet must succeed a WIS saving throw or be Frightened until the end of your next turn."
+    },
+    {
+        "id": "089",
+        "name": "Wyrmcall Ritual",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard 2 cards from your hand. Then, search your deck for a Dragon-type Monster and Special Summon it to the field. Shuffle your deck afterward."
+    },
+    {
+        "id": "090",
+        "name": "Hydra",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Dragon",
+        "tags": [],
+        "summonInfo": {
+            "hp": 194,
+            "specialSummon": "Sacrifice 1 Dragon-type Summon in play and 2 Dragon-type cards from your hand.",
+            "traits": [
+                {
+                    "name": "Multiple Heads",
+                    "description": "This summon can take the Bite action up to three times per turn."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +8, reach 10 ft. Hit: 3d10 + 5 piercing damage."
+                },
+                {
+                    "name": "Triple Breath",
+                    "description": "1/S. 3 DEX Saving Throws: DC 27, each creature in a 100-foot cone. Each failure: 5d12 fire damage. Each success: Half damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "091",
+        "name": "Cat",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 4,
+            "actions": [
+                {
+                    "name": "Scratch",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 3 slashing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "092",
+        "name": "Draft Horse",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 15,
+            "actions": [
+                {
+                    "name": "Hooves",
+                    "description": "Melee Attack Roll: +6, reach 5 ft. Hit: 1d4 + 4 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "093",
+        "name": "Owl",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 8,
+            "traits": [
+                {
+                    "name": "Flyby",
+                    "description": "This summon doesn't provoke Opportunity Attacks when it flies out of an enemy's reach."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Talons",
+                    "description": "Melee Attack Roll: +3, reach 5 ft. Hit: 1d4 slashing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "094",
+        "name": "Swarm of Wasps",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 19,
+            "traits": [
+                {
+                    "name": "Swarm",
+                    "description": "This summon can occupy another creature's space and vice versa, and can move through any opening large enough for a Tiny insect. This summon can't regain HP or gain temporary HP. If this summon is under half HP, its attack damage is halved."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bites",
+                    "description": "Melee Attack Roll: +3, reach 5 ft. Hit: 2d4 + 2 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "095",
+        "name": "Arms of Hadar",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "Invoking Hadar, you cause tendrils to erupt from yourself. Each creature in a 10-foot Emanation originating from you makes a STR saving throw. On a failed save, a target takes 2d6 Necrotic damage and can’t take Reactions until the start of its next turn. On a successful save, a target takes half as much damage only."
+    },
+    {
+        "id": "096",
+        "name": "Beast Sense",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You touch a willing Beast. For 1 hour, you can perceive through the Beast's senses as well as your own. When perceiving through the Beast's senses, you benefit from any special senses it has."
+    },
+    {
+        "id": "097",
+        "name": "Catnap",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You make a calming gesture, and up to three willing creatures of your choice that you can see within 30 feet fall unconscious for 10 minutes. The spell ends on a target early if it takes damage or someone uses an action to shake or slap it awake. If a target remains unconscious for the full duration, that target gains the benefit of a short rest, and it can't be affected by this spell again until it finishes a long rest."
+    },
+    {
+        "id": "098",
+        "name": "Clue",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "When you cast this spell, all footprints and fingerprints within a 45-foot radius of a point you touch become highlighted and glow faintly for 10 minutes. At the time of casting, choose any period of time up to the last 10 days to the present; only footprints and fingerprints left within that time will be highlighted. Each creature whose footprints or fingerprints are detected by the spell is assigned a unique color, but are not otherwise identified. Any creature that moves or touches objects in the area will also leave colorful footprints and fingerprints, which might reveal invisible creatures in the area."
+    },
+    {
+        "id": "099",
+        "name": "Dispel Magic",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "Choose one creature, object, or magical effect within 120 feet. Any ongoing spell of level 3 or lower on the target ends. For each ongoing spell of level 4 or higher on the target, make an ability check using your spellcasting ability (DC 10 plus that spell’s level). On a successful check, the spell ends."
+    },
+    {
+        "id": "100",
+        "name": "Healer's Resonance",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "An ally is healed.",
+        "description": "Grant the ally that was just healed an additional 1d8 healing."
+    },
+    {
+        "id": "101",
+        "name": "Blind Faith",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Banish a random card from your deck. You cannot see which card is banished."
+    },
+    {
+        "id": "102",
+        "name": "Essence Overrun",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "If you have three or more card types in your hand, discard all cards of the most represented type."
+    },
+    {
+        "id": "103",
+        "name": "Unhand Me!",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "If this card is in your hand, you must put it at the bottom of your deck. Gain 1 Hand token."
+    },
+    {
+        "id": "104",
+        "name": "Kael Hearthguard, The Son",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 24,
+            "traits": [
+                {
+                    "name": "Sibling Coordination",
+                    "description": "This summon's attacks do 3d6 bonus damage if within 10 feet of \"Lysa Hearthguard, The Daughter\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Dagger",
+                    "description": "Melee or Ranged Attack Roll: +5, reach 5 ft. or range 20/60 ft. Hit: 1d4 + 3 piercing damage."
+                },
+                {
+                    "name": "Dirty Trick",
+                    "description": "1/S. CON Saving Throw: DC 13, one creature within 10 feet. Failure: The target is blinded until the end of your next turn."
+                }
+            ]
+        }
+    },
+    {
+        "id": "105",
+        "name": "Lysa Hearthguard, The Daughter",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 20,
+            "traits": [
+                {
+                    "name": "Sibling Spark",
+                    "description": "This summon gains +2 to attack rolls if within 10 feet of \"Kael Hearthguard, The Son\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Fire Bolt",
+                    "description": "Ranged Spell Attack Roll: +5, range 120 ft. Hit: 2d10 fire damage."
+                },
+                {
+                    "name": "Arcane Pulse",
+                    "description": "1/S. CON Saving Throw: DC 13, each creature in a 10-foot radius at a point within 60 feet. Failure: 3d8 force damage. Success: Half damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "106",
+        "name": "Mara Hearthguard, The Mother",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 32,
+            "traits": [
+                {
+                    "name": "Light of the Hearth",
+                    "description": "Allied summons within 30 feet with \"Hearthguard\" in their name heal for 1d8 at the start of each of your turns."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Mace",
+                    "description": "Melee Attack Roll: +2 to hit, reach 5 ft. Hit: 1d6 + 1 bludgeoning damage."
+                },
+                {
+                    "name": "Cure Wounds",
+                    "description": "1/S. A creature within 5 feet of this summon heals for 1d8 + 5 Hit Points."
+                }
+            ]
+        }
+    },
+    {
+        "id": "107",
+        "name": "Tharic Hearthguard, The Father",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 40,
+            "traits": [
+                {
+                    "name": "Father Figure",
+                    "description": "Allied summons within 30 feet with \"Hearthguard\" in their name gain +2 AC."
+                },
+                {
+                    "name": "Undying Love",
+                    "description": "This summon has advantage on saving throws against being frightened or charmed if within 30 feet of \"Mara Hearthguard, The Mother\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Shield Bash",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 2d6 + 3 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "108",
+        "name": "Witch",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 33,
+            "actions": [
+                {
+                    "name": "Dagger",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d4 + 1 piercing damage."
+                },
+                {
+                    "name": "Witchfire",
+                    "description": "Ranged Spell Attack Roll: +6, range 60 feet. Hit: 2d6 fire damage plus 2d6 necrotic damage."
+                },
+                {
+                    "name": "Spellcasting",
+                    "description": "1/S. Put a random Spell card from your deck into your hand. Shuffle your deck afterward."
+                }
+            ]
+        }
+    },
+    {
+        "id": "109",
+        "name": "Charm Monster",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "One creature you can see within 30 feet makes a WIS saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you."
+    },
+    {
+        "id": "110",
+        "name": "Commune",
+        "rarity": "Rare",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "You contact a deity or a divine proxy and ask up to three questions that can be answered with yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question. Divine beings aren't necessarily omniscient, so you might receive “unclear” as an answer if a question pertains to information that lies beyond the deity's knowledge. In a case where a one-word answer could be misleading or contrary to the deity's interests, the DM might offer a short phrase as an answer instead."
+    },
+    {
+        "id": "111",
+        "name": "Take Five",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Put one of your summons on the field that has damage on it into your hand."
+    },
+    {
+        "id": "112",
+        "name": "Group Hug",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "All creatures within 30 feet of you gain advantage on their next attack."
+    },
+    {
+        "id": "113",
+        "name": "Clean Slate",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Discard your hand. Then, draw the same amount of cards that you discarded."
+    },
+    {
+        "id": "114",
+        "name": "Forest Queen",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Fey",
+        "tags": [],
+        "summonInfo": {
+            "hp": 107,
+            "traits": [
+                {
+                    "name": "Forest Friendship",
+                    "description": "All allied creatures within 30 feet of this summon gain 1d4 to attack and damage rolls."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Vine Lash",
+                    "description": "Melee Attack Roll: +6, reach 10 ft. Hit: 1d8 + 4 slashing damage."
+                },
+                {
+                    "name": "Thorn Burst",
+                    "description": "Ranged Attack Roll: +6, range 60 ft. Hit: 1d6 + 4 piercing damage."
+                },
+                {
+                    "name": "Tree Stride",
+                    "description": "1/S. Teleports up to 60 ft. to an unoccupied space within 5 ft. of a damaged ally. Upon reaching the ally, they are healed by 4d8 damage and are cured from all conditions."
+                }
+            ]
+        }
+    },
+    {
+        "id": "115",
+        "name": "Mass Heal",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Fey",
+        "tags": [],
+        "description": "A flood of healing energy flows from you into creatures around you. You restore up to 400 Hit Points, divided as you choose among any number of creatures that you can see within 60 feet. Creatures healed by this spell also have the Blinded, Deafened, and Poisoned conditions removed from them."
+    },
+    {
+        "id": "116",
+        "name": "Lucky Break",
+        "rarity": "Legendary",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "Your next dice roll is an automatic critical success."
+    },
+    {
+        "id": "117",
+        "name": "Spring Cleaning",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Shuffle all cards in your graveyard back into your deck."
+    },
+    {
+        "id": "118",
+        "name": "Dream",
+        "rarity": "Mythic",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "Speak your desire and it comes true."
+    },
+    {
+        "id": "119",
+        "name": "Time Jr.",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 1,
+            "traits": [
+                {
+                    "name": "Free Time",
+                    "description": "This summon can be summoned as a free action."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Time Advance",
+                    "description": "Flip a coin and call it. If called correctly, search your deck for a \"Mr. Time\" card and replace it with this summon. Regardless of the result, send this summon to the graveyard afterward."
+                }
+            ]
+        }
+    },
+    {
+        "id": "120",
+        "name": "Burning Hands",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a DEX saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried."
+    },
+    {
+        "id": "121",
+        "name": "Chill Touch",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "Channeling the chill of the grave, make a melee spell attack against a target within 120 feet. On a hit, the target takes 1d10 Necrotic damage, and it can’t regain Hit Points until the end of your next turn."
+    },
+    {
+        "id": "122",
+        "name": "Clock Up",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Machine",
+        "tags": [],
+        "description": "Increase your tempo and unleash a flurry of blows when attacking. You or an ally you touch gain one additional attack for 1 minute."
+    },
+    {
+        "id": "123",
+        "name": "Haste",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "Choose a willing creature that you can see within 30 feet. Until the spell ends, the target's Speed is doubled, it gains a +2 bonus to Armor Class, it has Advantage on DEX saving throws, and it gains an additional action on each of its turns. That action can be used to take only the Attack (one attack only), Dash, Disengage, Hide, or Utilize action. When the spell ends, the target is Incapacitated and has a Speed of 0 until the end of its next turn, as a wave of lethargy washes over it."
+    },
+    {
+        "id": "124",
+        "name": "Finger Guns",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "You extend your forefinger and thumb, a dangerous gesture mimicking a gun. For 1 minute, your hand counts as a Simple Ranged weapon with a range of 60/240 feet and the Slow mastery property. You can use your spellcasting ability instead of DEX for the attack rolls of this weapon. On a hit, the weapon deals 2d6 Force damage and doesn't add your ability modifier to damage."
+    },
+    {
+        "id": "125",
+        "name": "Slow",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You alter time around up to six creatures of your choice in a 40-foot Cube within 120 feet. Each target must succeed on a WIS saving throw or be affected by this spell for 1 minute.<br><br>An affected target's Speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can't take Reactions. On its turns, it can take either an action or a Bonus Action, not both, and it can make only one attack if it takes the Attack action. If it casts a spell with a Somatic component, there is a 25 percent chance the spell fails as a result of the target making the spell's gestures too slowly.<br><br>An affected target repeats the save at the end of each of its turns, ending the spell on itself on a success."
+    },
+    {
+        "id": "126",
+        "name": "Mage Hand",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "A spectral, floating hand appears at a point you choose within 30 feet. The hand lasts for 1 minute. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.<br><br>When you cast the spell, you can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial.<br><br>As a Magic action on your later turns, you can control the hand thus again. As part of that action, you can move the hand up to 30 feet.<br><br>The hand can't attack, activate magic items, or carry more than 10 pounds."
+    },
+    {
+        "id": "127",
+        "name": "Finger Out",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Count the amount of cards remaining in your deck. Gain 1 Hand token."
+    },
+    {
+        "id": "128",
+        "name": "Hand, Foot, and Mouth",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Lose 1 Hand token. Gain 1 Foot token. You must verbally express your discomfort."
+    },
+    {
+        "id": "129",
+        "name": "Hand Me!",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Search your deck for an \"Unhand Me!\" card and put it into your hand. Shuffle your deck afterward. Gain 1 Hand token."
+    },
+    {
+        "id": "130",
+        "name": "Rehand Me!",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Search your deck for a \"Hand Me!\" card and put it into your hand. Shuffle your deck afterward. Gain 1 Hand token."
+    },
+    {
+        "id": "131",
+        "name": "Taste De Feet",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Lose any amount of Foot tokens. For each Foot token lost, deal 1d8 bludgeoning damage to a creature in range."
+    },
+    {
+        "id": "132",
+        "name": "Unfoot Me!",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "If this card is in your hand, you must put it at the bottom of your deck. Gain 1 Foot token."
+    },
+    {
+        "id": "133",
+        "name": "Giant Crawling Hand",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Undead",
+        "tags": [],
+        "summonInfo": {
+            "hp": 36,
+            "actions": [
+                {
+                    "name": "Claw",
+                    "description": "Melee Attack Roll: +6, reach 5 ft. Hit: 2d8 + 4 slashing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "134",
+        "name": "Lil' Hands",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 20,
+            "traits": [
+                {
+                    "name": "Many Hands",
+                    "description": "For each Hand token you have, this summon gains 10 Hit Points (up to a maximum of 50 Hit Points)."
+                },
+                {
+                    "name": "A Little Hand",
+                    "description": "When this summon is destroyed and sent to the graveyard, gain 1 Hand token."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Hand Frenzy",
+                    "description": "Melee Attack Roll: +3, reach 5 ft. Hit: 2d10 bludgeoning damage. This attack gains +1 to the attack roll (up to a maximum of +6) and +1d10 bludgeoning damage (up to a maximum of 5d10 bludgeoning damage) for each Hand token you have."
+                }
+            ]
+        }
+    },
+    {
+        "id": "135",
+        "name": "Mr. Time",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 30,
+            "actions": [
+                {
+                    "name": "Time Bomb",
+                    "description": "Flip a coin and call it. If called correctly, all enemies in a 30 foot radius of this summon lose 100 Hit Points. If called incorrectly, you lose 100 Hit Points. Regardless of the result, send this summon to the graveyard afterwards."
+                }
+            ]
+        }
+    },
+    {
+        "id": "136",
+        "name": "Bigby's Hand",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You create a Large hand of shimmering magical energy in an unoccupied space that you can see within 120 feet. The hand lasts for 1 minute, and it moves at your command, mimicking the movements of your own hand. The hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn't occupy its space.<br><br>When you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:<br><br><i>Clenched Fist</i>. The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.<br><br><i>Forceful Hand</i>. The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a STR saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.<br><br><i>Grasping Hand</i>. The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a DEX saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.<br><br><i>Interposing Hand</i>. The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies."
+    },
+    {
+        "id": "137",
+        "name": "Black Hand",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Undead",
+        "tags": [],
+        "description": "You gather the powers of darkness into your fist and fling paralyzing, dark flame at a target within 30 feet. With a successful ranged spell attack, this spell siphons vitality from the target into you. For 1 minute, the target has disadvantage and you have advantage on attacks, ability checks, and saving throws made with STR, DEX, and CON. An affected target makes a CON saving throw (with disadvantage) at the end of its turn, ending the effect with a success."
+    },
+    {
+        "id": "138",
+        "name": "Helpful Hand",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "You extend a small pulse of warm, encouraging mana toward a creature you can see within 30 feet. A faint shimmer surrounds their hands or weapon, guiding their movements with subtle precision. For 1 minute, the target deals an extra 1d4 damage of the same type as the attack or spell whenever they hit a creature with a weapon attack or damaging spell. If the target is reduced to 0 hit points, the spell ends early."
+    },
+    {
+        "id": "139",
+        "name": "Wall of Sand",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You conjure up a wall of swirling sand on the ground at a point you can see within 90 feet. You can make the wall up to 30 feet long, 10 feet high, and 10 feet thick, and it vanishes when the spell ends. It blocks line of sight but not movement. A creature is blinded while in the wall's space and must spend 3 feet of movement for every 1 foot it moves there."
+    },
+    {
+        "id": "140",
+        "name": "Arm and a Leg",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Lose 1 Foot token. Gain 1 Hand token."
+    },
+    {
+        "id": "141",
+        "name": "Hand-Me-Down",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Lose 1 Hand token. Then, draw a card."
+    },
+    {
+        "id": "142",
+        "name": "Hand Off",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Give a card of Legendary rarity or lower from your hand to one of your allies within 30 feet. That ally must activate the effect of that card on their next turn. Banish that card afterward. Gain 1 Hand token."
+    },
+    {
+        "id": "143",
+        "name": "Abishai",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Fiend",
+        "tags": [],
+        "summonInfo": {
+            "hp": 117,
+            "specialSummon": "Lose 5 Hand tokens.",
+            "traits": [
+                {
+                    "name": "Magic Resistance",
+                    "description": "This summon has Advantage on saving throws against spells and magical effects."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Fiendish Claw",
+                    "description": "Melee Attack Roll: +9, reach 5 ft. Hit: 2d8 + 3 force damage. CON Saving Throw: DC 18. Failure: 3d10 poison damage and Poisoned for 1 minute."
+                },
+                {
+                    "name": "Incite Fanaticism",
+                    "description": "Choose up to four other creatures within 60 feet of this summon that can see it. Until the end of your next turn, each of those creatures makes attack rolls with advantage and can't be frightened."
+                }
+            ]
+        }
+    },
+    {
+        "id": "144",
+        "name": "Ticking Time Bomb",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 90,
+            "traits": [
+                {
+                    "name": "Self-Destruct",
+                    "description": "After 3 turns on the field, this summon explodes in a massive fireball. DEX Saving Throw: DC 20, each creature in a 20-foot radius. Failure: 14d6 fire damage. Success: Half damage. This summon is then sent to the graveyard."
+                }
+            ]
+        }
+    },
+    {
+        "id": "145",
+        "name": "Fast Forward",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Take another turn after this one. Your summons on the field can't take any actions during this extra turn."
+    },
+    {
+        "id": "146",
+        "name": "Helping Hand",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Choose an ally within 30 feet. That ally's next attack roll is a critical hit. Gain 1 Hand token."
+    },
+    {
+        "id": "147",
+        "name": "Mr. Hands",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 1,
+            "traits": [
+                {
+                    "name": "Many Hands",
+                    "description": "For each Hand token you have, this summon gains 10 Hit Points (up to a maximum of 200 Hit Points)."
+                },
+                {
+                    "name": "No Feet",
+                    "description": "For every Foot token you have, this summon smells a little worse (this has no effect on gameplay)."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Slap",
+                    "description": "Melee Attack Roll: +6, reach 10 ft. Hit: 1 force damage. This attack gains +1 to the attack roll (up to a maximum of +26) and +10 force damage (up to a maximum of 200 force damage) for each Hand token you have."
+                }
+            ]
+        }
+    }
+]

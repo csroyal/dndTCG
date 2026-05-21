@@ -1,0 +1,14 @@
+- Simulator Functionality:
+ - Remaining context menu function
+ - Missing sound effects?
+ - Blister Packs
+ - Adjusting individual card amounts in binder
+Once all functionality is finished:
+- Better design site-wide
+- Better effects and anims site-wide
+- Simulator backgrounds
+- More stuff on Home Page? not sure what
+- Pack opening effects
+- Any missing sound effects?
+- Deck Builder/Binder: Sort by card type and rarity
+- Animated Banish Zone when card is banished

@@ -1,0 +1,7 @@
+{
+  "name": "dndtcg",
+  "private": true,
+  "scripts": {
+    "build-config": "node scripts/build-firebase-config.js"
+  }
+}
