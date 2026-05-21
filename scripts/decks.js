@@ -70,7 +70,7 @@ function loadDeck(deck) {
     sortDeckBuilderDeckList();
 
     for (b in binder) {
-        // console.log(b, binder[b]);
+        // console.log(b, binder[b]); 
         if (getObjectById(cards, b).class === "Sleeve") continue;
         let cardEl = createCardEl(getObjectById(cards, b), (e) => {
             let cardID = e.target.dataset.cardId;
