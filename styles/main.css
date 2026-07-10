@@ -414,7 +414,6 @@ input {
 }
 
 #binderContainer .pack-container:hover {
-    transform: translateY(-2px);
     box-shadow: 0 18px 36px rgba(0,0,0,0.28);
     border-color: #333;
 }
@@ -587,8 +586,9 @@ input {
 }
 
 .card-wrapper:hover {
-    scale: 1.1;
-    z-index: 2;
+    transform: scale(1.04);
+    transform-origin: center center;
+    z-index: 3;
 }
 
 .card-wrapper .badge {
@@ -605,7 +605,7 @@ input {
     font-size: 10px;
     border-radius: 0 25% 0 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 4;
 }
 
 .modal-container {
@@ -639,6 +639,56 @@ input {
 
 #cardViewModalContainer .modal img {
     cursor: pointer;
+}
+
+#cardViewModalContainer .modal {
+    background-color: #121212;
+    padding: 24px;
+    border-radius: 24px;
+    max-width: 560px;
+    width: min(100%, 560px);
+    box-shadow: 0 28px 72px rgba(0,0,0,0.45);
+}
+
+#cardViewModalContainer .card-view-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#cardViewModalContainer .card-view-controls button {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    border: 1px solid #333;
+    background: #1d1d1d;
+    color: #f7f7f7;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#cardViewModalContainer .card-view-controls button:hover {
+    background: #2d2d2d;
+    transform: translateY(-1px);
+}
+
+#cardViewModalContainer .card-view-controls button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+#cardViewModalContainer .card-view-controls span {
+    color: #f7f7f7;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+#cardViewModalContainer .card-view-label {
+    color: #a7a7a7;
+    font-size: 0.88rem;
 }
 
 #decksSection .section-header {

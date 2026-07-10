@@ -199,17 +199,89 @@ function createCardEl(card, func, includeBadge = true, sleeveCount = false, deck
     return cardWrapper;
 }
 
+let cardViewCountDisplay = document.getElementById("cardViewCountDisplay");
+let cardViewCountDecrease = document.getElementById("cardViewCountDecrease");
+let cardViewCountIncrease = document.getElementById("cardViewCountIncrease");
+
 function openInCardViewModal(cardID) {
     playSound("draw");
     cardViewImg.src = "./assets/card-art/" + cardID + ".jpg";
     cardViewImg.setAttribute("data-card-id", cardID);
     cardViewImg.setAttribute("data-rarity", getObjectById(cards, cardID).rarity);
-    if (binder && binder[cardID] && binder[cardID] >= 1) {
+    let ownedCount = binder && binder[cardID] ? binder[cardID] : 0;
+    cardViewCountDisplay.textContent = ownedCount;
+    updateCardViewButtons(ownedCount, cardID);
+
+    if (ownedCount >= 1) {
         cardViewImg.classList.add("owned");
-    } 
-    else cardViewImg.classList.remove("owned");
+    } else {
+        cardViewImg.classList.remove("owned");
+    }
 
     cardViewModalContainer.classList.add("active");
+}
+
+function updateCardViewButtons(count, cardID) {
+    cardViewCountDecrease.disabled = count <= 0;
+    cardViewCountIncrease.disabled = false;
+    cardViewCountDecrease.title = count > 0 ? "Remove one copy" : "No copies to remove";
+    cardViewCountIncrease.title = "Add one copy";
+}
+
+cardViewCountDecrease.addEventListener("click", () => {
+    let cardID = cardViewImg.dataset.cardId;
+    let currentCount = binder[cardID] || 0;
+    if (currentCount <= 0) return;
+    currentCount--;
+    if (currentCount > 0) binder[cardID] = currentCount;
+    else delete binder[cardID];
+    cardViewCountDisplay.textContent = currentCount;
+    updateCardViewButtons(currentCount, cardID);
+    cardViewImg.classList.toggle("owned", currentCount > 0);
+    updateBinderCardDisplay(cardID, currentCount);
+    if (currentProfile) {
+        db.collection("profiles").doc(toKebabCase(currentProfile)).update({ binder: binder });
+    }
+});
+
+cardViewCountIncrease.addEventListener("click", () => {
+    let cardID = cardViewImg.dataset.cardId;
+    let currentCount = binder[cardID] || 0;
+    currentCount++;
+    binder[cardID] = currentCount;
+    cardViewCountDisplay.textContent = currentCount;
+    updateCardViewButtons(currentCount, cardID);
+    cardViewImg.classList.add("owned");
+    updateBinderCardDisplay(cardID, currentCount);
+    if (currentProfile) {
+        db.collection("profiles").doc(toKebabCase(currentProfile)).update({ binder: binder });
+    }
+});
+
+function updateBinderCardDisplay(cardID, count) {
+    let cardWrapper = document.querySelector(`.card-wrapper:has(img[data-card-id="${cardID}"])`);
+    if (!cardWrapper) return;
+    let badge = cardWrapper.querySelector(".badge");
+    if (!badge) return;
+    badge.textContent = count;
+    let cardEl = cardWrapper.querySelector(".card");
+    if (count > 0) cardEl.classList.add("owned");
+    else cardEl.classList.remove("owned");
+
+    // update pack owned count if visible
+    document.querySelectorAll(".pack-container").forEach(pack => {
+        let cardEls = pack.querySelectorAll(".card-wrapper");
+        let ownedCards = 0;
+        cardEls.forEach(wrapper => {
+            let id = wrapper.querySelector("img.card").dataset.cardId;
+            if (binder[id] && binder[id] >= 1) ownedCards++;
+        });
+        let packCount = pack.querySelector(".pack-header > div:last-child");
+        if (packCount) {
+            let total = cardEls.length;
+            packCount.innerHTML = `<i class="bi bi-file-richtext"></i> <span>${ownedCards}</span> / ${total}`;
+        }
+    });
 }
 
 cardViewModalContainer.addEventListener("click", (e) => {
