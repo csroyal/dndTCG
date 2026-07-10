@@ -20,6 +20,7 @@ fetch("./data/cards.json")
 let menuButtons = document.querySelectorAll("#menu .menu-button");
 let cardViewModalContainer = document.getElementById("cardViewModalContainer");
 let cardViewImg = cardViewModalContainer.querySelector("img");
+let cardViewControls = document.querySelector(".card-view-controls");
 
 if (localStorage.getItem("DND_TCG_LATEST_SECTION")) {
     document.querySelector("#sectionsContainer .section.active").classList.remove("active");
@@ -217,6 +218,9 @@ function openInCardViewModal(cardID) {
     } else {
         cardViewImg.classList.remove("owned");
     }
+
+    let activeSection = document.querySelector("#sectionsContainer .section.active");
+    cardViewControls.style.display = activeSection && activeSection.id === "binderSection" ? "flex" : "none";
 
     cardViewModalContainer.classList.add("active");
 }

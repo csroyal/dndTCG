@@ -22,20 +22,146 @@ function buildPacks() {
     packsContainer.innerHTML = '';
     packs.forEach(pack => {
         if (!pack.canBuyFromShop) return;
-        // console.log(pack);
 
-        let packEl = document.createElement("img");
-        packEl.src = `./assets/pack-art/${pack.id}.png`;
+        let packCard = document.createElement("div");
+        packCard.classList.add("pack-card");
 
-        packEl.addEventListener("click", () => {
+        let packImg = document.createElement("img");
+        packImg.src = `./assets/pack-art/${pack.id}.png`;
+        packImg.setAttribute("draggable", false);
+        packCard.append(packImg);
+
+        let packTitle = document.createElement("h3");
+        packTitle.classList.add("pack-title");
+        packTitle.textContent = pack.name;
+        packCard.append(packTitle);
+
+        let packMeta = document.createElement("div");
+        packMeta.classList.add("pack-meta");
+        packMeta.innerHTML = `<i class="bi bi-box-seam"></i> ${pack.cardPool.length} cards`;
+        if (pack.limited) packMeta.innerHTML += ` · Limited Edition`;
+
+        let ownedCount = 0;
+        if (binder) {
+            pack.cardPool.forEach(cardID => {
+                if (binder[cardID] && binder[cardID] > 0) ownedCount++;
+            });
+        }
+        let uniqueOwned = document.createElement("div");
+        uniqueOwned.classList.add("pack-meta");
+        uniqueOwned.textContent = ownedCount === pack.cardPool.length ? "Complete set" : `${ownedCount} owned`;
+
+        packCard.append(packMeta);
+        packCard.append(uniqueOwned);
+
+        let packCta = document.createElement("div");
+        packCta.classList.add("pack-cta");
+        packCta.innerHTML = `<i class="bi bi-gift-fill"></i> Open Pack`;
+        packCard.append(packCta);
+
+        packCard.addEventListener("click", () => {
             if (confirm(`Open a ${pack.name} booster pack?`)) {
                 openPack(pack.id);
             }
         });
 
-        packsContainer.append(packEl);
+        packCard.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            openPackPreview(pack.id);
+        });
+
+        packsContainer.append(packCard);
     });
 }
+
+let packPreviewModalContainer = document.getElementById("packPreviewModalContainer");
+let packPreviewClose = document.getElementById("packPreviewClose");
+let packPreviewLogo = document.getElementById("packPreviewLogo");
+let packPreviewTitle = document.getElementById("packPreviewTitle");
+let packPreviewStats = document.getElementById("packPreviewStats");
+let packPreviewList = document.getElementById("packPreviewList");
+
+function openPackPreview(packId) {
+    let pack = getObjectById(packs, packId);
+    let uniqueOwned = 0;
+    pack.cardPool.forEach(cardID => {
+        let card = getObjectById(cards, cardID);
+        if (!card) return;
+        if (binder[cardID] && binder[cardID] > 0) uniqueOwned++;
+    });
+
+    packPreviewLogo.src = `./assets/pack-art/${pack.id}-logo.png`;
+    packPreviewLogo.alt = `${pack.name} logo`;
+    packPreviewLogo.hidden = false;
+
+    packPreviewTitle.textContent = pack.name;
+    packPreviewStats.innerHTML = `
+        <div><i class="bi bi-box-seam"></i> ${pack.cardPool.length} unique cards</div>
+        <div><i class="bi bi-check2-circle"></i> ${uniqueOwned} owned</div>
+    `;
+
+    // precompute rarity counts from the pack for average odds
+    let rarityCounts = { Common: 0, Rare: 0, Legendary: 0, Mythic: 0 };
+    pack.cardPool.forEach(cardID => {
+        let card = getObjectById(cards, cardID);
+        if (!card) return;
+        if (rarityCounts[card.rarity] === undefined) rarityCounts[card.rarity] = 0;
+        rarityCounts[card.rarity]++;
+    });
+
+    packPreviewList.innerHTML = '';
+    pack.cardPool.forEach(cardID => {
+        let card = getObjectById(cards, cardID);
+        if (!card) return;
+        let cardEl = document.createElement("div");
+        cardEl.classList.add("pack-preview-card");
+        cardEl.classList.add(`rarity-${card.rarity.toLowerCase()}`);
+
+        let odds = 0;
+        if (card.rarity === "Common" && rarityCounts.Common > 0) {
+            let p = 1 / rarityCounts.Common;
+            odds = 1 - Math.pow(1 - p, 3);
+        } else if (card.rarity === "Rare" && rarityCounts.Rare > 0) {
+            let p = 1 / rarityCounts.Rare;
+            odds = 1 - Math.pow(1 - p, 2) * (1 - 0.8 * p);
+        } else if (card.rarity === "Legendary" && rarityCounts.Legendary > 0) {
+            odds = 0.15 / rarityCounts.Legendary;
+        } else if (card.rarity === "Mythic" && rarityCounts.Mythic > 0) {
+            odds = 0.05 / rarityCounts.Mythic;
+        }
+        let oddsText = odds > 0 ? `${(odds * 100).toFixed(2)}% avg pack odds` : "—";
+
+        cardEl.innerHTML = `
+            <img src="./assets/card-art/${card.id}.jpg" alt="${card.name}">
+            <div class="pack-preview-card-details">
+                <div class="pack-preview-card-name">${card.name}</div>
+                <div class="pack-preview-card-meta">
+                    <span class="pack-preview-card-rarity">${card.rarity}</span>
+                    <span class="pack-preview-card-odds">${oddsText}</span>
+                </div>
+            </div>
+        `;
+
+        cardEl.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            openInCardViewModal(card.id);
+        });
+
+        packPreviewList.append(cardEl);
+    });
+
+    packPreviewModalContainer.classList.add("active");
+}
+
+packPreviewClose.addEventListener("click", () => {
+    packPreviewModalContainer.classList.remove("active");
+});
+
+packPreviewModalContainer.addEventListener("click", (event) => {
+    if (event.target.id === "packPreviewModalContainer") {
+        packPreviewModalContainer.classList.remove("active");
+    }
+});
 
 function openPack(packId) {
     packResults = [];

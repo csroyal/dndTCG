@@ -51,9 +51,8 @@
             <h1>Home</h1>
             <div id="packsWrapper">
                 <h2>Booster Pack Shop</h2>
-                <div id="packsContainer">
-
-                </div>
+                <p class="packs-description">Browse themed booster packs, open them to reveal new cards, and build your collection.</p>
+                <div id="packsContainer"></div>
             </div>
         </div>
         <div id="binderSection" class="section">
@@ -204,6 +203,22 @@
 
             </div>
             <button id="packConfirmButton">Confirm</button>
+        </div>
+    </div>
+    <div id="packPreviewModalContainer" class="modal-container">
+        <div class="modal">
+            <div class="pack-preview-header">
+                <img id="packPreviewLogo" class="pack-preview-logo" src="" alt="Pack logo" hidden>
+                <div>
+                    <h2 id="packPreviewTitle">Pack Preview</h2>
+                </div>
+                <button id="packPreviewClose" class="danger">Close</button>
+            </div>
+            <div class="pack-preview-summary">
+                <div id="packPreviewStats"></div>
+                <div id="packRarityTable" style="display:none;"></div>
+            </div>
+            <div class="pack-preview-list" id="packPreviewList"></div>
         </div>
     </div>
     <div id="simulatorModalContainer" class="modal-container">
