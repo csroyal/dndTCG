@@ -88,7 +88,7 @@ function unloadProfile() {
     decksContainer.querySelector("p").style.display = "none";
 }
 
-function createCardEl(card, func, includeBadge = true, sleeveCount = false) {
+function createCardEl(card, func, includeBadge = true, sleeveCount = false, deckIconSelectable = false) {
     let cardWrapper = document.createElement("div");
     cardWrapper.classList.add("card-wrapper");
 
@@ -113,6 +113,22 @@ function createCardEl(card, func, includeBadge = true, sleeveCount = false) {
         cardWrapper.append(ownershipBadge);
     } else {
         cardEl.classList.add("owned");
+    }
+
+    if (deckIconSelectable) {
+        let iconButton = document.createElement("button");
+        iconButton.type = "button";
+        iconButton.classList.add("deck-icon-select-button");
+        iconButton.innerHTML = `<i class="bi bi-pin-angle-fill"></i>`;
+        iconButton.title = "Set this card as deck icon";
+        if (typeof isDeckIconSelected === "function" && isDeckIconSelected(card.id)) {
+            iconButton.classList.add("selected");
+        }
+        iconButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (typeof setDeckIcon === "function") setDeckIcon(card.id);
+        });
+        cardWrapper.append(iconButton);
     }
 
     if (sleeveCount) {

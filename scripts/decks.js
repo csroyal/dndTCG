@@ -25,7 +25,8 @@ function buildDecks() {
         activeDeck = {
             "id": generateUID(),
             "name": "New Deck " + (Number(decks.length) + 1),
-            "deckList": {}
+            "deckList": {},
+            "icon": null
         }
 
         loadDeck(activeDeck);
@@ -40,7 +41,22 @@ function buildDecks() {
 
     decks.forEach(deck => {
         let deckPreview = document.createElement("div");
-        deckPreview.innerHTML = deck.name;
+        deckPreview.classList.add("deck-card-preview");
+
+        let iconImg = document.createElement("img");
+        iconImg.classList.add("deck-card-icon");
+        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : "./assets/card-art/back.png";
+        if (!deck.icon) iconImg.classList.add("placeholder");
+
+        let nameEl = document.createElement("div");
+        nameEl.classList.add("deck-preview-name");
+        nameEl.innerHTML = deck.name;
+
+        let countEl = document.createElement("div");
+        countEl.classList.add("deck-preview-count");
+        countEl.innerHTML = `${getCountDeck(deck)} cards`;
+
+        deckPreview.append(iconImg, nameEl, countEl);
 
         deckPreview.onclick = () => {
             activeDeck = deck;
@@ -64,7 +80,7 @@ function loadDeck(deck) {
         for (let i = 0; i < deck.deckList[c]; i++) {
             deckBuilderDeckList.append(createCardEl(getObjectById(cards, c), (e) => {
                 removeCardFromDeckList(e.target);
-            }, false));
+            }, false, false, true));
         }
     }
     sortDeckBuilderDeckList();
@@ -103,14 +119,16 @@ function loadDeck(deck) {
     }
     
     deckBuilderCount.innerHTML = deckBuilderDeckList.childElementCount;
+    updateDeckIconPreview();
 }
 
 function addToDeckList(cardID) {
     console.log(cardID);
     deckBuilderDeckList.append(createCardEl(getObjectById(cards, cardID), (e) => {
         removeCardFromDeckList(e.target);
-    }, false));
+    }, false, false, true));
     deckBuilderCount.innerHTML = deckBuilderDeckList.childElementCount;
+    saveActiveDeck();
 }
 
 function removeCardFromDeckList(el) {
@@ -119,12 +137,71 @@ function removeCardFromDeckList(el) {
     binderCard.querySelector(".badge").innerHTML = Number(binderCard.querySelector(".badge").innerHTML) + 1;
     binderCard.querySelector(".card").classList.add("owned");
 
-    activeDeck.deckList[el.dataset.cardId] = activeDeck.deckList[el.dataset.cardId] - 1;
-    if (activeDeck.deckList[el.dataset.cardId] === 0) delete activeDeck.deckList[el.dataset.cardId];
+    if (confirm(`Remove ${getObjectById(cards, el.dataset.cardId).name} from ${activeDeck.name}?`)) {
+        if (activeDeck.deckList[el.dataset.cardId] > 1) {
+            activeDeck.deckList[el.dataset.cardId] -= 1;
+        } else {
+            delete activeDeck.deckList[el.dataset.cardId];
+        }
+        if (activeDeck.icon === el.dataset.cardId && !activeDeck.deckList[el.dataset.cardId]) {
+            delete activeDeck.icon;
+            updateDeckIconPreview();
+        }
 
-    el.parentElement.remove();
+        el.parentElement.remove();
 
-    deckBuilderCount.innerHTML = deckBuilderDeckList.childElementCount;
+        deckBuilderCount.innerHTML = deckBuilderDeckList.childElementCount;
+        updateDeckIconPreview();
+        saveActiveDeck();
+    }
+}
+
+function updateDeckIconPreview() {
+    let preview = document.getElementById("deckBuilderIconPreview");
+    if (!preview) return;
+    preview.innerHTML = "";
+    preview.style.cursor = "default";
+    preview.onclick = null;
+
+    if (activeDeck && activeDeck.icon) {
+        let img = document.createElement("img");
+        img.src = `./assets/card-art/${activeDeck.icon}.jpg`;
+        preview.append(img);
+        preview.style.cursor = "pointer";
+        preview.title = "Click to remove deck icon";
+        preview.onclick = () => {
+            delete activeDeck.icon;
+            updateDeckIconPreview();
+            saveActiveDeck();
+        };
+    } else {
+        preview.innerHTML = "<span>Select an icon</span>";
+        preview.title = "";
+    }
+    refreshDeckIconSelection();
+}
+
+function setDeckIcon(cardId) {
+    if (!activeDeck) return;
+    activeDeck.icon = cardId;
+    updateDeckIconPreview();
+    saveActiveDeck();
+}
+
+function isDeckIconSelected(cardId) {
+    return activeDeck && activeDeck.icon === cardId;
+}
+
+function refreshDeckIconSelection() {
+    let buttons = deckBuilderDeckList.querySelectorAll(".deck-icon-select-button");
+    buttons.forEach(btn => {
+        let cardId = btn.parentElement.querySelector("img.card").dataset.cardId;
+        if (activeDeck && activeDeck.icon === cardId) {
+            btn.classList.add("selected");
+        } else {
+            btn.classList.remove("selected");
+        }
+    });
 }
 
 function sortDeckBuilderBinder() {
@@ -182,6 +259,7 @@ function getRarityCountFromDeckList(rarity) {
 
 deckBuilderNameEntry.addEventListener("input", () => {
     activeDeck.name = deckBuilderNameEntry.value;
+    saveActiveDeck();
 });
 
 deckBuilderBackButton.addEventListener("click", () => {
@@ -191,15 +269,6 @@ deckBuilderBackButton.addEventListener("click", () => {
     deckBuilderContainer.style.display = "none";
 });
 
-deckBuilderSaveButton.addEventListener("click", () => {
-    for (d in decks) {
-        if (decks[d].id === activeDeck.id) decks[d] = activeDeck;
-        break;
-    }
-    db.collection("profiles").doc(toKebabCase(currentProfile)).update({
-        decks: decks
-    });
-});
 
 deckBuilderDeleteButton.addEventListener("click", () => {
     if (confirm(`Delete ${activeDeck.name}?`)) {
@@ -244,10 +313,31 @@ deckBuilderBinderFilter.addEventListener("change", () => {
     });
 });
 
+function saveActiveDeck() {
+    if (!activeDeck || !currentProfile) return;
+    for (d in decks) {
+        if (decks[d].id === activeDeck.id) {
+            decks[d] = activeDeck;
+            break;
+        }
+    }
+    db.collection("profiles").doc(toKebabCase(currentProfile)).update({
+        decks: decks
+    });
+}
+
 function getCountActiveDeck() {
     let count = 0;
     for (c in activeDeck.deckList) {
         count += activeDeck.deckList[c];
+    }
+    return count;
+}
+
+function getCountDeck(deck) {
+    let count = 0;
+    for (c in deck.deckList) {
+        count += deck.deckList[c];
     }
     return count;
 }

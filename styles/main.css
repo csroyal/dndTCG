@@ -13,10 +13,34 @@
 
 html, body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     overflow: hidden;
     margin: 0;
     color: #000;
+}
+
+#sectionsContainer {
+    position: absolute;
+    top: 65px;
+    left: 150px;
+    width: calc(100% - 150px);
+    height: calc(100% - 85px);
+}
+
+#decksSection {
+    padding-bottom: 16px;
+    overflow: hidden;
+}
+
+#decksSection .section-header,
+#deckBuilderHeader,
+#deckBuilderDeckPanel,
+#deckBuilderBinder {
+    min-height: 0;
+}
+
+#deckBuilderContainer {
+    overflow: hidden;
 }
 
 
@@ -346,54 +370,133 @@ input {
 }
 
 #binderSection #binderSearch {
-    margin-bottom: 8px;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #f2f2f2;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    margin-bottom: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#binderSection #binderSearch:focus {
+    border-color: #5a9cff;
+    box-shadow: 0 0 0 1px rgba(90,156,255,0.35);
+    background: #151515;
+}
+
+#binderSection #binderSearch::placeholder {
+    color: #7f7f7f;
 }
 
 #binderContainer {
     width: 100%;
-    height: calc(100% - 86px);
+    height: calc(100% - 102px);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 10px 0;
+    padding: 16px 0 24px;
+}
+
+#binderContainer .pack-container {
+    width: 100%;
+    max-width: 95%;
+    margin: 0 auto 28px;
+    border-radius: 20px;
+    background: #161616;
+    border: 1px solid #2f2f2f;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.22);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+#binderContainer .pack-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.28);
+    border-color: #333;
 }
 
 #binderContainer .pack-container .pack-header {
-    position: relative;
-    width: 80%;
-    margin: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px 0;
-    margin-bottom: 40px;
+    width: 100%;
+    padding: 22px 28px 18px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 100%);
 }
 
-#binderContainer .pack-container:not(:first-child) .pack-header {
-    margin-top: 40px;
+#binderContainer .pack-container:not(:first-child) {
+    margin-top: 18px;
 }
 
 #binderContainer .pack-container .pack-header img {
-    width: 25%;
+    width: auto;
+    max-width: 240px;
+    height: 92px;
+    object-fit: contain;
+}
+
+#binderContainer .pack-container .pack-header > div:last-child {
+    order: 2;
+    margin-left: auto;
 }
 
 #binderContainer .pack-container .pack-header .pack-accordion {
-    position: absolute;
-    bottom: 10px;
-    right: 20px;
-    font-size: 24px;
+    order: 3;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 22px;
     cursor: pointer;
+    transition: transform 0.3s ease, background 0.25s ease;
+    flex-shrink: 0;
+}
+
+#binderContainer .pack-container .pack-header .pack-accordion:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+#binderContainer .pack-container.collapse .pack-header .pack-accordion {
+    transform: rotate(180deg);
 }
 
 #binderContainer .pack-container.collapse .cards-container {
     min-height: 0;
-    height: 0;
     max-height: 0;
     padding: 0;
+    opacity: 0;
     overflow: hidden;
+    transition: max-height 0.32s ease, opacity 0.32s ease, padding 0.32s ease;
+}
+
+#binderContainer .cards-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    padding: 18px 20px 20px;
+    transition: opacity 0.32s ease, padding 0.32s ease;
+    opacity: 1;
+    height: auto;
+    max-height: none;
+}
+
+#binderContainer .card-wrapper {
+    width: 100%;
+    min-width: 0;
+}
+
+#binderContainer .pack-container.collapse .cards-container {
+    padding: 0 20px;
 }
 
 .cards-container {
@@ -538,113 +641,469 @@ input {
     cursor: pointer;
 }
 
-#decksSection p {
-    margin-bottom: 8px;
+#decksSection .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+#decksSection .section-header h1 {
+    margin: 0;
+}
+
+#decksSection .section-header p {
+    margin: 6px 0 0;
+    color: #888;
+    max-width: 620px;
 }
 
 #decksContainer {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
 #decksContainer > div {
-    width: 20%;
-    aspect-ratio: 1 / 1;
-    padding: 8px;
+    min-height: 180px;
+    padding: 14px;
     border: 1px solid #444;
-    border-radius: 8px;
+    border-radius: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    gap: 15px;
+    text-align: center;
+    background: #171717;
+    color: #f7f7f7;
+    gap: 10px;
     cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+#decksContainer > div:hover {
+    transform: translateY(-3px);
+    border-color: #777;
+    background: #1f1f1f;
 }
 
 #decksContainer > div i {
-    font-size: 28px;
+    font-size: 22px;
+}
+
+#decksContainer > div .deck-card-icon {
+    width: 60%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+#decksContainer > div .deck-card-icon.placeholder {
+    opacity: 0.4;
+}
+
+.deck-preview-name {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    word-break: break-word;
+}
+
+.deck-preview-count {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+#simulatorDeckSelect div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#simulatorDeckSelect div .deck-card-icon {
+    width: 48px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #888;
+}
+
+#simulatorDeckSelect div .deck-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+#simulatorDeckSelect div.selected {
+    background-color: #fff;
 }
 
 #deckBuilderContainer {
     display: none;
     flex-direction: column;
+    gap: 12px;
+    max-height: calc(100vh - 120px);
+    overflow: hidden;
+    padding-bottom: 10px;
 }
 
-#deckBuilderControls {
+#deckBuilderHeader {
     display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid #444;
+    border-radius: 16px;
+    background: #1c1c1c;
+}
+
+#deckBuilderBackButton,
+button.danger {
+    background: #2f2f2f;
+    color: #fff;
+    border: 1px solid #3f3f3f;
+    border-radius: 12px;
+    padding: 6px 12px;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-weight: 600;
 }
 
-#deckBuilderCount {
-    margin-left: 4px;
+#deckBuilderDeleteButton {
+    background: #8b1f1f;
+    border: 1px solid #9b2b2b;
+}
+
+#deckBuilderBackButton:hover,
+button.danger:hover {
+    background: #383838;
+}
+
+#deckBuilderHeader button,
+#deckBuilderHeader .deck-builder-field {
+    min-width: 0;
+}
+
+#deckBuilderHeader button {
+    flex-shrink: 0;
+}
+
+#deckBuilderMeta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+}
+
+#deckBuilderMeta > * {
+    min-width: 0;
+}
+
+#deckBuilderIconSelector {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0;
+}
+
+#deckBuilderIconPreview {
+    width: 52px;
+    height: 72px;
+}
+
+#deckBuilderIconSelector .deck-builder-field-helper {
+    max-width: 160px;
+}
+
+#deckBuilderMeta .deck-builder-field {
+    flex: 1 1 220px;
+}
+
+#deckBuilderMeta .deck-builder-stats {
+    flex: 0 0 auto;
+}
+
+#deckBuilderHeader .deck-builder-field input,
+#deckBuilderHeader .deck-builder-field select {
+    padding: 8px 10px;
+}
+
+#deckBuilderHeader .deck-builder-field label {
+    font-size: 0.78rem;
+}
+
+.deck-builder-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.deck-builder-field label {
+    font-size: 0.82rem;
+    color: #bbb;
+}
+
+.deck-builder-field input,
+.deck-builder-field select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #555;
+    background: #161616;
+    color: #f7f7f7;
+}
+
+.deck-builder-field input::placeholder {
+    color: #777;
+}
+
+#deckBuilderIconSelector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#deckBuilderIconPreview {
+    width: 60px;
+    height: 84px;
+    border: 1px solid #555;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#deckBuilderIconPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#deckBuilderIconPreview span {
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    text-align: center;
+    padding: 6px;
+}
+
+#deckBuilderIconSelector .deck-builder-field-label {
+    font-size: 0.82rem;
+    color: #bbb;
+}
+
+#deckBuilderIconSelector .deck-builder-field-helper {
+    font-size: 0.74rem;
+    color: #999;
+    max-width: 220px;
+}
+
+.deck-builder-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #ddd;
+    font-weight: 600;
+}
+
+.deck-builder-stats i {
+    font-size: 1rem;
+}
+
+button.danger {
+    background: #8b1f1f;
+    border: 1px solid #9b2b2b;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 12px;
+}
+
+button.danger:hover {
+    background: #a32b2b;
 }
 
 #deckBuilderMain {
     width: 99%;
-    height: calc(861px - 77px);
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    min-height: 0;
+}
+
+#deckBuilderDeckPanel,
+#deckBuilderBinder {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #202020;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+}
+
+#deckBuilderDeckPanel {
+    width: 62%;
+}
+
+.deck-builder-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 8px 8px 0;
-    gap: 10px;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #2f2f2f;
+}
+
+.deck-builder-panel-header h2 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.deck-builder-panel-header p {
+    margin: 4px 0 0;
+    color: #aaa;
+    font-size: 0.88rem;
+}
+
+.deck-builder-panel-note {
+    color: #999;
+    font-size: 0.8rem;
 }
 
 #deckBuilderDeckList {
-    background-color: #ddd;
-    width: 65%;
-    height: 100%;
+    padding: 12px;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     align-items: flex-start;
     justify-content: flex-start;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 18px;
-    padding: 8px;
-    border-radius: 8px;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: calc(100vh - 280px);
     overflow-y: auto;
 }
 
 #deckBuilderDeckList .card-wrapper {
-    width: 18%;
+    width: calc(20% - 12px);
 }
 
 #deckBuilderBinder {
-    background-color: #ddd;
-    width: 35%;
-    height: 100%;
-    padding: 8px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
+    width: 38%;
+    min-height: 0;
 }
 
 #deckBuilderBinderControls {
     width: 100%;
-    height: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    border-bottom: 1px solid #2f2f2f;
 }
 
 #deckBuilderBinderList {
-    padding-top: 8px;
-    width: 100%;
-    height: 95%;
+    padding: 12px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     align-items: flex-start;
     justify-content: flex-start;
-    align-content: flex-start;
-    flex-wrap: wrap;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: calc(100vh - 280px);
     overflow-y: auto;
-    gap: 8px 12px;
 }
 
 #deckBuilderBinderList .card-wrapper {
-    width: 17.5%;
+    width: calc(25% - 9px);
+}
+
+#deckBuilderBinderControls .deck-builder-field {
+    width: 100%;
+}
+
+.deck-icon-select-button {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.deck-icon-select-button:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+}
+
+.deck-icon-select-button.selected {
+    background: #0d6efd;
+    border-color: #0a58ca;
+}
+
+.deck-icon-select-button.selected {
+    background: #0d6efd;
+}
+
+@media (max-width: 1080px) {
+    #deckBuilderMain {
+        flex-direction: column;
+    }
+
+    #deckBuilderDeckPanel,
+    #deckBuilderBinder {
+        width: 100%;
+    }
+
+    #deckBuilderBinderControls {
+        grid-template-columns: 1fr;
+    }
+
+    #deckBuilderDeckList .card-wrapper,
+    #deckBuilderBinderList .card-wrapper {
+        width: calc(33.333% - 10px);
+    }
+}
+
+@media (max-width: 760px) {
+    #deckBuilderHeader,
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #deckBuilderMeta {
+        grid-template-columns: 1fr;
+    }
+
+    #deckBuilderDeckList .card-wrapper,
+    #deckBuilderBinderList .card-wrapper {
+        width: calc(50% - 10px);
+    }
 }
 
 #simulatorContainer {

@@ -64,39 +64,64 @@
             </div>
         </div>
         <div id="decksSection" class="section">
-            <h1>Decks</h1>
-            <p>Log in to create a deck.</p>
-            <div id="decksContainer">
-
+            <div class="section-header">
+                <div>
+                    <h1>Decks</h1>
+                    <p>Build and manage your decks. Click a card in the deck list to remove it, or pin one as the deck icon.</p>
+                </div>
             </div>
+            <div id="decksContainer"></div>
             <div id="deckBuilderContainer">
-                <div id="deckBuilderControls">
+                <div id="deckBuilderHeader">
                     <button id="deckBuilderBackButton"><i class="bi bi-arrow-return-left"></i> Back</button>
-                    <input type="text" id="deckBuilderNameEntry" value="New Deck 1" placeholder="Deck Name"> 
-                    <button id="deckBuilderSaveButton"><i class="bi bi-floppy2"></i> Save</button>
-                    <button id="deckBuilderDeleteButton"><i class="bi bi-trash"></i> Delete</button>
-                    <div>
-                        <i class="bi bi-file-richtext"></i><span id="deckBuilderCount">0</span> / 30
+                    <div id="deckBuilderMeta">
+                        <div class="deck-builder-field">
+                            <label for="deckBuilderNameEntry">Deck Name</label>
+                            <input type="text" id="deckBuilderNameEntry" value="New Deck 1" placeholder="Deck Name">
+                        </div>
+                        <div id="deckBuilderIconSelector">
+                            <div id="deckBuilderIconPreview"><span>Select icon</span></div>
+                            <div>
+                                <div class="deck-builder-field-label">Deck Icon</div>
+                                <div class="deck-builder-field-helper">Click the pin on a deck card, then tap this preview to clear it.</div>
+                            </div>
+                        </div>
+                        <div class="deck-builder-stats">
+                            <i class="bi bi-file-richtext"></i>
+                            <span id="deckBuilderCount">0</span> / 30
+                        </div>
                     </div>
+                    <button id="deckBuilderDeleteButton" class="danger"><i class="bi bi-trash"></i> Delete</button>
                 </div>
                 <div id="deckBuilderMain">
-                    <div id="deckBuilderDeckList">
-
+                    <div id="deckBuilderDeckPanel">
+                        <div class="deck-builder-panel-header">
+                            <div>
+                                <h2>Deck List</h2>
+                                <p>Cards currently in the active deck.</p>
+                            </div>
+                            <span class="deck-builder-panel-note">Click a card to remove it.</span>
+                        </div>
+                        <div id="deckBuilderDeckList"></div>
                     </div>
                     <div id="deckBuilderBinder">
                         <div id="deckBuilderBinderControls">
-                            <input id="deckBuilderBinderSearch" type="search" placeholder="Search for a card...">
-                            <select id="deckBuilderBinderFilter">
-                                <option selected value="">All</option>
-                                <option value="Summon">Summon</option>
-                                <option value="Spell">Spell</option>
-                                <option value="Reaction">Reaction</option>
-                                <option value="Utility">Utility</option>
-                            </select>
+                            <div class="deck-builder-field">
+                                <label for="deckBuilderBinderSearch">Search</label>
+                                <input id="deckBuilderBinderSearch" type="search" placeholder="Search binder cards...">
+                            </div>
+                            <div class="deck-builder-field">
+                                <label for="deckBuilderBinderFilter">Filter</label>
+                                <select id="deckBuilderBinderFilter">
+                                    <option selected value="">All</option>
+                                    <option value="Summon">Summon</option>
+                                    <option value="Spell">Spell</option>
+                                    <option value="Reaction">Reaction</option>
+                                    <option value="Utility">Utility</option>
+                                </select>
+                            </div>
                         </div>
-                        <div id="deckBuilderBinderList">
-
-                        </div>
+                        <div id="deckBuilderBinderList"></div>
                     </div>
                 </div>
             </div>

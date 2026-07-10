@@ -77,9 +77,26 @@ function buildDeckSelect() {
     simulatorDeckSelect.innerHTML = "";
 
     for (d in decks) {
+        let deck = decks[d];
         let container = document.createElement("div");
-        container.innerHTML = decks[d].name;
-        container.setAttribute("data-deck-id", decks[d].id);
+        container.setAttribute("data-deck-id", deck.id);
+
+        let iconImg = document.createElement("img");
+        iconImg.classList.add("deck-card-icon");
+        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : "./assets/card-art/back.png";
+        if (!deck.icon) iconImg.classList.add("placeholder");
+
+        let meta = document.createElement("div");
+        meta.classList.add("deck-meta");
+
+        let nameEl = document.createElement("div");
+        nameEl.textContent = deck.name;
+
+        let countEl = document.createElement("div");
+        countEl.textContent = `${getCountDeck(deck)} cards`;
+
+        meta.append(nameEl, countEl);
+        container.append(iconImg, meta);
 
         container.onclick = () => {
             if (simulatorDeckSelect.querySelector(".selected")) simulatorDeckSelect.querySelector(".selected").classList.remove("selected");
@@ -93,7 +110,9 @@ function buildDeckSelect() {
 }
 
 simulatorDeckSelectConfirm.addEventListener("click", () => {
-    let deck = getObjectById(decks, simulatorDeckSelect.querySelector("div.selected").dataset.deckId);
+    let selected = simulatorDeckSelect.querySelector("div.selected");
+    if (!selected) return;
+    let deck = getObjectById(decks, selected.dataset.deckId);
     simulatorDeckSelectContainer.classList.remove("active");
     buildSimDeck(deck);
 });
