@@ -1922,5 +1922,383 @@
                 }
             ]
         }
+    },
+    {
+        "id": "148",
+        "name": "Clockwork Beetle",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 4,
+            "traits": [
+                {
+                    "name": "Overload",
+                    "description": "When this summon's Hit Points are reduced to 0, all creatures within 5 feet take 1 fire damage."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +3, reach 5 ft. Hit: 1d6 slashing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "149",
+        "name": "Core of Marut",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": ["Piece of Marut"],
+        "summonInfo": {
+            "hp": 1,
+            "traits": [
+                {
+                    "name": "Unstable Mechanism",
+                    "description": "When summoned, this summon immediately explodes, dealing 2d8 damage to all creatures in a 15 foot radius."
+                },
+                {
+                    "name": "Marut Effect",
+                    "description": "If this card is in your hand, you may discard it and a random card from your hand. If you do, draw 2 cards."
+                }
+            ]
+        }
+    },
+    {
+        "id": "150",
+        "name": "Gears of Marut",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": ["Piece of Marut"],
+        "summonInfo": {
+            "hp": 4,
+            "traits": [
+                {
+                    "name": "Gears of War",
+                    "description": "A creature that touches this summon gains 5 feet of additional movement speed during their turn."
+                },
+                {
+                    "name": "Marut Effect",
+                    "description": "You may reveal the top card of your deck. If it is not a piece of Marut, shuffle your deck."
+                }
+            ]
+        }
+    },
+    {
+        "id": "151",
+        "name": "Tiny Servant",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "actions": [
+                {
+                    "name": "Slam",
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d4 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "152",
+        "name": "Shocking Grasp",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Humanoid",
+        "tags": [],
+        "description": "Lightning springs from you to a creature that you try to touch. Make a melee spell attack against the target. On a hit, the target takes 1d8 Lightning damage, and it can’t make Opportunity Attacks until the start of its next turn."
+    },
+    {
+        "id": "153",
+        "name": "Mending",
+        "rarity": "Common",
+        "class": "Sleeve",
+        "tags": [],
+        "description": "This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage. This spell can physically repair a magic item, but it can’t restore magic to such an object."
+    },
+    {
+        "id": "154",
+        "name": "Ventilation Mishap",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "One of your Machine-type summons on the field takes damage from an attack.",
+        "description": "A vent on your summon blows open, releasing a burst of steam. A 10-foot radius sphere of fog is created centered on the summon. The sphere is heavily obscured and lasts for 1 minute."
+    },
+    {
+        "id": "155",
+        "name": "Emergency Redirect",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Choose a creature within 30 feet. Move it 5 feet in any direction."
+    },
+    {
+        "id": "156",
+        "name": "Oil Can",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "One of your Machine-type summons on the field regains 1d8 Hit Points."
+    },
+    {
+        "id": "157",
+        "name": "Rewind",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Return a random card from your graveyard to the bottom of your deck."
+    },
+    {
+        "id": "158",
+        "name": "Take a Peek",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Reveal the top card of your deck."
+    },
+    {
+        "id": "159",
+        "name": "Tinkerer's Idea",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Roll a d6. • 1-2: You take 1d8 lightning damage. • 3-4: Nothing happens. • 5-6: Draw a card."
+    },
+    {
+        "id": "160",
+        "name": "Eye of Marut",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": ["Piece of Marut"],
+        "summonInfo": {
+            "hp": 14,
+            "traits": [
+                {
+                    "name": "Marut Effect",
+                    "description": "If this card is in your hand, you may discard it. If you do, search your deck for any piece of Marut and put it into your hand. Shuffle your deck afterward."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Eye Laser",
+                    "description": "Ranged Attack Roll: +6, range 120 ft, up to three creatures (a creature can be targeted multiple times). Hit: 1d10 force damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "161",
+        "name": "Grim Champion of Bloodshed",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Undead",
+        "tags": [],
+        "summonInfo": {
+            "hp": 22,
+            "traits": [
+                {
+                    "name": "Revolving Door",
+                    "description": "When this summon is sent to the graveyard, put a random card (that is not this one) from your graveyard into your hand."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Blazing Morningstar",
+                    "description": "Melee Attack Roll: +6, reach 5 ft. Hit: 1d8 + 6 piercing damage plus 1d6 fire damage. This summon's Hit Points are reduced to 0."
+                }
+            ]
+        }
+    },
+    {
+        "id": "162",
+        "name": "Grim Champion of Desolation",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Undead",
+        "tags": [],
+        "summonInfo": {
+            "hp": 32,
+            "traits": [
+                {
+                    "name": "Revolving Door",
+                    "description": "When this summon is sent to the graveyard, put a random card (that is not this one) from your graveyard into your hand."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Sacrificial Blade",
+                    "description": "Melee Attack Roll: +7, reach 5 ft. Hit: 2d6 + 6 slashing damage. This summon's Hit Points are reduced to 0."
+                }
+            ]
+        }
+    },
+    {
+        "id": "163",
+        "name": "Grim Champion of Pestilence",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Undead",
+        "tags": [],
+        "summonInfo": {
+            "hp": 16,
+            "traits": [
+                {
+                    "name": "Revolving Door",
+                    "description": "When this summon is sent to the graveyard, put a random card (that is not this one) from your graveyard into your hand."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Plague Bolt",
+                    "description": "Ranged Spell Attack Roll: +5, range 120 ft. Hit: 2d8 + 5 poison damage. This summon's Hit Points are reduced to 0."
+                }
+            ]
+        }
+    },
+    {
+        "id": "164",
+        "name": "Mini Marut",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 44,
+            "traits": [
+                {
+                    "name": "Reassembly",
+                    "description": "Reassembly. When this summon is destroyed, roll a d6. • 1-2: This card transforms into \"Core of Marut\". • 3-4: This card transforms into \"Gears of Marut\". • 5-6: This card transforms into \"Eye of Marut\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Slam",
+                    "description": "Melee Attack Roll: +7, reach 5 ft. Hit: 2d12 force damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "165",
+        "name": "Munson",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Humanoid",
+        "tags": [],
+        "summonInfo": {
+            "hp": 24,
+            "traits": [
+                {
+                    "name": "Search for Linda",
+                    "description": "When summoned, flip a coin. If heads, draw a card. If tails, discard a card from your hand."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Strike for Linda",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d6 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "166",
+        "name": "Ascension of Marut",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "When you draw this card, choose to either activate its effect immediately or banish it. If activated: Send all summons on the field, except for Marut or pieces of Marut, to the graveyard. Discard all cards, except for Marut or pieces of Marut, from your hand. Search your deck for \"Marut\" and put it into your hand. Shuffle your deck afterward."
+    },
+    {
+        "id": "167",
+        "name": "Risky Reels",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "You may lose 10% of your max Hit Points to draw a card. As many times as you want or until you drop to 0 Hit Points, you may lose 10% more of your max Hit Points to shuffle it back into your deck and draw a new card."
+    },
+    {
+        "id": "168",
+        "name": "Tag Out",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Return a summon on the field to your hand. Then, replace it with a random summon from your hand (that is not the original summon and can’t be a Special Summon)."
+    },
+    {
+        "id": "169",
+        "name": "The Sixth Seal",
+        "rarity": "Rare",
+        "class": "Utility",
+        "tags": [],
+        "description": "Roll a d6. On a 6, put a random piece of Marut from your deck into your hand."
+    },
+    {
+        "id": "170",
+        "name": "Chassis of Marut",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": ["Piece of Marut"],
+        "summonInfo": {
+            "hp": 80
+        }
+    },
+    {
+        "id": "171",
+        "name": "Counter-Target Cache",
+        "rarity": "Legendary",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "One of your allies (that you choose when setting this card) is targeted by an attack.",
+        "description": "Draw 2 cards. Shuffle your deck afterward."
+    },
+    {
+        "id": "172",
+        "name": "Mirror of Echoed Power",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Create a copy of your last played card. If it is of Mythic rarity, shuffle it into your deck. Otherwise, put it into your hand. Banish this card afterward."
+    },
+    {
+        "id": "173",
+        "name": "Marut",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Machine",
+        "tags": [],
+        "summonInfo": {
+            "hp": 1,
+            "specialSummon": "If \"Chassis of Marut\" is on the field and you have 1 of each of \"Core of Marut\", \"Gears of Marut\", and \"Eye of Marut\" in your hand or on the field, you may special summon this summon from your hand or from your deck. Send any piece of Marut on the field or in your hand used in this special summon to the graveyard afterward.",
+            "traits": [
+                {
+                    "name": "Mythical Resistance",
+                    "description": "This summon is immune to all status conditions and damage. This summon only takes damage and effects from instant kills."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Unnering Slam",
+                    "description": "Melee Attack Roll: +14, reach 5 ft. Hit: 5d12 force damage. If the target is a Huge or smaller creature, it is pushed up to 5 feet away."
+                },
+                {
+                    "name": "Rivet Up",
+                    "description": "This summon's next attack is a critical hit."
+                },
+                {
+                    "name": "Blazing Edict",
+                    "description": "Each creature in a 60 foot cube centered on this summon takes 45 radiant damage. WIS Saving Throw: DC 20, each creature hit. Failure: Stunned until the end of your next turn."
+                }
+            ]
+        }
     }
 ]
