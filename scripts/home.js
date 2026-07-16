@@ -116,6 +116,8 @@ function openPackPreview(packId) {
         let cardEl = document.createElement("div");
         cardEl.classList.add("pack-preview-card");
         cardEl.classList.add(`rarity-${card.rarity.toLowerCase()}`);
+        let owned = binder[cardID] && binder[cardID] > 0;
+        if (!owned) cardEl.classList.add("missing");
 
         let odds = 0;
         if (card.rarity === "Common" && rarityCounts.Common > 0) {
@@ -185,14 +187,14 @@ function openPack(packId) {
         packOpeningPackImage.onclick = () => {};
         packResults = generatePack(packId);
         console.log(packResults);
-        for (c in packResults) {
+        for (let idx = 0; idx < packResults.length; idx++) {
+            const c = idx;
             // console.log(getObjectById(cards, packResults[c]));
-
             let cardEl = document.createElement("div");
             cardEl.classList.add("flip-card");
             if (packResults[c] === "GT") {
                 cardEl.innerHTML = `
-                    <div class="flip-card-content" data-card-id="${packResults[c]}" data-rarity="Mythic">
+                    <div class="flip-card-content" data-card-id="${packResults[c]}" data-rarity="GT">
                         <div class="front">
                             <img src="./assets/card-art/back.png">
                         </div>
@@ -214,12 +216,33 @@ function openPack(packId) {
                 `;
             }
 
+            cardEl.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+                let content = cardEl.querySelector(".flip-card-content");
+                if (content && content.dataset.cardId) {
+                    openInCardViewModal(content.dataset.cardId);
+                }
+            });
+
+            // detect newly acquired card (previously 0 -> now 1)
+            const cardId = packResults[c];
+            const content = cardEl.querySelector('.flip-card-content');
+            let prevCount = 0;
+            if (cardId !== 'GT') prevCount = binder[cardId] || 0;
+
+            // append card element to DOM
             packOpeningResults.append(cardEl);
-            if (packResults[c] === "GT") {
-                
-            } else {
-                if (binder[packResults[c]]) binder[packResults[c]] = binder[packResults[c]] + 1;
-                else binder[packResults[c]] = 1;
+
+            if (cardId !== 'GT') {
+                binder[cardId] = prevCount + 1;
+                if (prevCount === 0) {
+                    // mark as NEW on the back side of the flip card (visible after flipping)
+                    const badge = document.createElement('div');
+                    badge.classList.add('new-badge');
+                    badge.textContent = 'NEW!';
+                    const backEl = cardEl.querySelector('.back');
+                    if (backEl) backEl.appendChild(badge);
+                }
             }
         }
         db.collection("profiles").doc(toKebabCase(currentProfile)).update({
@@ -231,7 +254,19 @@ function openPack(packId) {
             // console.log(nextCardEl);
             nextCardEl.classList.add("flipped");
             playSound("flip");
-            playSound(`pull-${nextCardEl.dataset.rarity.toLowerCase()}`)
+            // use mythic sound for Golden Ticket (GT)
+            const soundRarity = nextCardEl.dataset.rarity === 'GT' ? 'mythic' : nextCardEl.dataset.rarity.toLowerCase();
+            playSound(`pull-${soundRarity}`)
+
+            // spawn particle burst on high rarity pulls
+            try {
+                const rarity = nextCardEl.dataset.rarity;
+                if (rarity === 'Legendary' || rarity === 'Mythic' || rarity === 'GT') {
+                    // map GT to mythic particle effects (more spectacular)
+                    const particleType = (rarity === 'GT') ? 'mythic' : rarity.toLowerCase();
+                    spawnParticlesAtElement(nextCardEl, particleType);
+                }
+            } catch (err) { console.warn('particle spawn failed', err); }
 
             packResults.shift();
             if (packResults.length === 0) {
@@ -295,6 +330,40 @@ function generatePack(packId) {
 
     return results;
 }
+
+    function ensureParticleLayer() {
+        let layer = document.getElementById('particleLayer');
+        if (!layer) {
+            layer = document.createElement('div');
+            layer.id = 'particleLayer';
+            layer.className = 'particle-layer';
+            document.body.appendChild(layer);
+        }
+        return layer;
+    }
+
+    function spawnParticlesAtElement(el, type) {
+        const rect = el.getBoundingClientRect();
+        const layer = ensureParticleLayer();
+            const count = type === 'legendary' ? 22 : 18;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle ' + (type === 'legendary' ? 'legendary' : type === 'mythic' ? 'mythic' : '');
+            // slight spread from center
+            const rx = rect.left + rect.width / 2 + (Math.random() - 0.5) * rect.width * 1.6;
+            const ry = rect.top + rect.height / 2 + (Math.random() - 0.5) * rect.height * 1.6;
+            p.style.left = rx + 'px';
+            p.style.top = ry + 'px';
+            const size = (type === 'mythic' ? 8 + Math.random() * 18 : 6 + Math.random() * 12);
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            // random rotation for variety
+            p.style.transform = `translate(-50%, -50%) rotate(${Math.random()*360}deg)`;
+            layer.appendChild(p);
+                // no extra mythic-only sparkles; mythic uses same particle behavior as legendary
+            setTimeout(() => { if (p && p.parentNode) p.remove(); }, 1200);
+        }
+    }
 
 packConfirmButton.addEventListener("click", () => {
     packOpeningModalContainer.classList.remove("active");

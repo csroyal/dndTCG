@@ -39,7 +39,7 @@ function buildBinder(cards, packs) {
 
         pack.cardPool.forEach(cardID => {
             let card = getObjectById(cards, cardID);
-            // console.log(card);
+            if (!card) return;
 
             cardsContainer.append(createCardEl(card, () => {
                 openInCardViewModal(cardID);

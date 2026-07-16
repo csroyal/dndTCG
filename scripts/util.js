@@ -93,6 +93,14 @@ function createCardEl(card, func, includeBadge = true, sleeveCount = false, deck
     let cardWrapper = document.createElement("div");
     cardWrapper.classList.add("card-wrapper");
 
+    if (!card) {
+        let missing = document.createElement("div");
+        missing.classList.add("missing-card");
+        missing.textContent = "Missing card data";
+        cardWrapper.append(missing);
+        return cardWrapper;
+    }
+
     let cardEl = document.createElement("img");
     cardEl.src = "./assets/card-art/" + card.id + ".jpg";
     cardEl.classList.add("card");
