@@ -12,7 +12,7 @@ let packOpeningRarityTable = {
     2: { "Common": 100 },
     3: { "Rare": 100 },
     4: { "Rare": 100 },
-    5: { "Rare": 80, "Legendary": 15, "Mythic": 5 }
+    5: { "Rare": 5, "Legendary": 5, "Mythic": 90 }
 }
 
 let packResults = [];
@@ -80,6 +80,9 @@ let packPreviewLogo = document.getElementById("packPreviewLogo");
 let packPreviewTitle = document.getElementById("packPreviewTitle");
 let packPreviewStats = document.getElementById("packPreviewStats");
 let packPreviewList = document.getElementById("packPreviewList");
+let packPreviewUseTicketButton = document.getElementById("packPreviewUseTicketButton");
+let activeGoldenTicketPackId = null;
+let selectedGoldenTicketCardId = null;
 
 function openPackPreview(packId) {
     let pack = getObjectById(packs, packId);
@@ -94,11 +97,25 @@ function openPackPreview(packId) {
     packPreviewLogo.alt = `${pack.name} logo`;
     packPreviewLogo.hidden = false;
 
+    const ticketCount = goldenTickets[pack.id] || 0;
     packPreviewTitle.textContent = pack.name;
     packPreviewStats.innerHTML = `
         <div><i class="bi bi-box-seam"></i> ${pack.cardPool.length} unique cards</div>
         <div><i class="bi bi-check2-circle"></i> ${uniqueOwned} owned</div>
+        <div><i class="bi bi-ticket-perforated-fill"></i> ${ticketCount} Golden Ticket${ticketCount === 1 ? "" : "s"}</div>
     `;
+
+    packPreviewUseTicketButton.hidden = ticketCount <= 0;
+    packPreviewUseTicketButton.disabled = ticketCount <= 0;
+    if (activeGoldenTicketPackId === packId && selectedGoldenTicketCardId) {
+        let selectedCard = getObjectById(cards, selectedGoldenTicketCardId);
+        packPreviewUseTicketButton.textContent = selectedCard ? `Confirm ${selectedCard.name}` : "Use Golden Ticket";
+    } else if (activeGoldenTicketPackId === packId) {
+        packPreviewUseTicketButton.textContent = `Pick a card from ${pack.name}`;
+    } else {
+        packPreviewUseTicketButton.textContent = ticketCount > 0 ? `Use Golden Ticket (${ticketCount})` : "Use Golden Ticket";
+    }
+    packPreviewUseTicketButton.dataset.packId = packId;
 
     // precompute rarity counts from the pack for average odds
     let rarityCounts = { Common: 0, Rare: 0, Legendary: 0, Mythic: 0 };
@@ -118,6 +135,9 @@ function openPackPreview(packId) {
         cardEl.classList.add(`rarity-${card.rarity.toLowerCase()}`);
         let owned = binder[cardID] && binder[cardID] > 0;
         if (!owned) cardEl.classList.add("missing");
+        if (activeGoldenTicketPackId === pack.id && selectedGoldenTicketCardId === card.id) {
+            cardEl.classList.add("selected");
+        }
 
         let odds = 0;
         if (card.rarity === "Common" && rarityCounts.Common > 0) {
@@ -144,6 +164,19 @@ function openPackPreview(packId) {
             </div>
         `;
 
+        cardEl.addEventListener("click", () => {
+            if (activeGoldenTicketPackId === pack.id) {
+                selectedGoldenTicketCardId = card.id;
+                packPreviewList.querySelectorAll(".pack-preview-card.selected").forEach((el) => {
+                    el.classList.remove("selected");
+                });
+                cardEl.classList.add("selected");
+                packPreviewUseTicketButton.textContent = `Confirm ${card.name}`;
+                return;
+            }
+            openInCardViewModal(card.id);
+        });
+
         cardEl.addEventListener("contextmenu", (event) => {
             event.preventDefault();
             openInCardViewModal(card.id);
@@ -154,6 +187,51 @@ function openPackPreview(packId) {
 
     packPreviewModalContainer.classList.add("active");
 }
+
+function spendGoldenTicket(packId, cardId) {
+    if (!currentProfile) return;
+    if (!goldenTickets[packId] || goldenTickets[packId] <= 0) {
+        alert("You do not have a Golden Ticket for this pack.");
+        return;
+    }
+
+    if (!binder[cardId]) binder[cardId] = 0;
+    binder[cardId] += 1;
+
+    goldenTickets[packId] -= 1;
+    if (goldenTickets[packId] <= 0) delete goldenTickets[packId];
+
+    db.collection("profiles").doc(toKebabCase(currentProfile)).update({
+        binder: binder,
+        goldenTickets: goldenTickets
+    });
+
+    activeGoldenTicketPackId = null;
+    selectedGoldenTicketCardId = null;
+    packPreviewUseTicketButton.textContent = "Use Golden Ticket";
+    openPackPreview(packId);
+    buildBinder(cards, packs);
+    buildPacks();
+}
+
+packPreviewUseTicketButton.addEventListener("click", () => {
+    const packId = packPreviewUseTicketButton.dataset.packId;
+    if (!packId) return;
+    if (!goldenTickets[packId] || goldenTickets[packId] <= 0) {
+        alert("You do not have any Golden Tickets for this pack.");
+        return;
+    }
+
+    if (activeGoldenTicketPackId === packId && selectedGoldenTicketCardId) {
+        spendGoldenTicket(packId, selectedGoldenTicketCardId);
+        return;
+    }
+
+    activeGoldenTicketPackId = packId;
+    selectedGoldenTicketCardId = null;
+    packPreviewUseTicketButton.textContent = `Pick a card from ${getObjectById(packs, packId).name}`;
+    openPackPreview(packId);
+});
 
 packPreviewClose.addEventListener("click", () => {
     packPreviewModalContainer.classList.remove("active");
@@ -193,6 +271,7 @@ function openPack(packId) {
             let cardEl = document.createElement("div");
             cardEl.classList.add("flip-card");
             if (packResults[c] === "GT") {
+                goldenTickets[pack.id] = (goldenTickets[pack.id] || 0) + 1;
                 cardEl.innerHTML = `
                     <div class="flip-card-content" data-card-id="${packResults[c]}" data-rarity="GT">
                         <div class="front">
@@ -246,7 +325,8 @@ function openPack(packId) {
             }
         }
         db.collection("profiles").doc(toKebabCase(currentProfile)).update({
-            binder: binder
+            binder: binder,
+            goldenTickets: goldenTickets
         });
         packOpeningResults.onclick = (e) => {
             // console.log(packResults);
@@ -375,4 +455,5 @@ packConfirmButton.addEventListener("click", () => {
     packConfirmButton.classList.remove("active");
 
     buildBinder(cards, packs);
+    buildPacks();
 });

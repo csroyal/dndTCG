@@ -1,6 +1,7 @@
 let cards;
 let packs;
 let binder = {};
+let goldenTickets = {};
 let decks = [];
 let sleeve = {};
 
@@ -52,6 +53,11 @@ function loadProfile(profileName) {
             binder = doc.data().binder;
             buildBinder(cards, packs);
         }
+        if (doc.data().goldenTickets) {
+            goldenTickets = doc.data().goldenTickets;
+        } else {
+            goldenTickets = {};
+        }
         if (doc.data().decks) {
             decks = doc.data().decks;
         }
@@ -69,7 +75,8 @@ function loadProfile(profileName) {
 
 function createProfile(profileName) {
     db.collection("profiles").doc(toKebabCase(profileName)).set({
-        name: profileName
+        name: profileName,
+        goldenTickets: {}
     }).then(() => {
         console.log("New profile created:", profileName);
     })
@@ -84,6 +91,7 @@ function unloadProfile() {
     document.querySelector("#profileIcon i").style.display = "block";
     document.querySelector("#profilePictureImage").style.display = "none";
     binder = {};
+    goldenTickets = {};
     buildBinder(cards, packs);
     decksContainer.innerHTML = '';
     decksContainer.querySelector("p").style.display = "none";

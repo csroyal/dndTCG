@@ -530,6 +530,34 @@ input {
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
 }
 
+#packPreviewModalContainer .pack-preview-card.selected {
+    outline: 2px solid #f7c75a;
+    box-shadow: 0 0 0 3px rgba(247, 199, 90, 0.25), 0 10px 24px rgba(0, 0, 0, 0.28);
+    transform: translateY(-2px);
+}
+
+#packPreviewUseTicketButton {
+    background: #2f2f2f;
+    color: #fff;
+    border: 1px solid #3f3f3f;
+    border-radius: 12px;
+    padding: 8px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 -4px 8px rgba(255,255,255,0.02);
+}
+
+#packPreviewUseTicketButton:hover:not(:disabled) {
+    background: #383838;
+}
+
+#packPreviewUseTicketButton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
 #packPreviewModalContainer .pack-preview-card-details {
     display: grid;
     gap: 4px;
