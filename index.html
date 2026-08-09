@@ -8,59 +8,101 @@
 </head>
 <body>
     <div id="header">
-        <div id="profileIcon">
-            <i class="bi bi-person-fill"></i>
-            <img id="profilePictureImage">
-            <div id="profileEntry" class="tooltip">
-                <div id="profileInfo">
-                    <p>Welcome, <span></span>!</p>
-                    <button id="uploadProfilePictureButton">Upload Profile Picture</button>
-                    <input type="file" id="profilePictureInput" hidden accept="image/*">
-                    <button id="addBaseSetToBinderButton">Add Base Set to Binder</button>
-                    <button id="addAllCardsToBinderButton">Add All Cards to Binder</button>
-                    <button id="logOutButton">Log Out</button>
-                </div>
-                <div id="profileLogin">
-                    <input id="profileEntryInput" type="text" placeholder="Profile Name">
-                    <button id="logInButton">Log In</button>
+        <span class="header-title">DnD TCG</span>
+        <div class="header-actions">
+            <div id="darkModeButton"><i class="bi bi-moon-fill"></i></div>
+            <div id="profileIcon">
+                <i class="bi bi-person-fill"></i>
+                <img id="profilePictureImage">
+                <div id="profileEntry" class="tooltip">
+                    <div id="profileInfo">
+                        <p>Welcome, <span></span>!</p>
+                        <button id="uploadProfilePictureButton"><i class="bi bi-image"></i> Upload Profile Picture</button>
+                        <input type="file" id="profilePictureInput" hidden accept="image/*">
+                        <button id="addBaseSetToBinderButton"><i class="bi bi-collection"></i> Add Base Set to Binder</button>
+                        <button id="addAllCardsToBinderButton"><i class="bi bi-collection-fill"></i> Add All Cards to Binder</button>
+                        <div id="simBgSection">
+                            <div class="profile-section-label"><i class="bi bi-controller"></i> Simulator Background</div>
+                            <div id="simBgPicker">
+                                <button class="sim-bg-swatch active" data-bg="" title="Default" style="background: linear-gradient(135deg, #1e1e2e 0%, #141420 100%);">
+                                    <i class="bi bi-slash-circle"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="stars" title="Starfield" style="background: radial-gradient(ellipse at 50% 50%, #0a0a20 0%, #02020d 70%);">
+                                    <i class="bi bi-stars" style="color:rgba(255,255,255,0.6);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="snow" title="Snowfall" style="background: radial-gradient(ellipse at 50% 0%, #0d2040 0%, #03080f 70%);">
+                                    <i class="bi bi-snow" style="color:rgba(200,230,255,0.65);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="arcane" title="Arcane Vault" style="background: radial-gradient(ellipse at 35% 60%, #4c1d95 0%, #0a0616 65%);">
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="ember" title="Emberfall" style="background: radial-gradient(ellipse at 50% 120%, #c2410c 0%, #0d0200 55%);">
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="rift" title="Rift" style="background: #010005;">
+                                </button>
+                            </div>
+                            <div id="simBgLabel" class="sim-bg-name">Default</div>
+                        </div>
+                        <button id="logOutButton"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+                    </div>
+                    <div id="profileLogin">
+                        <input id="profileEntryInput" type="text" placeholder="Profile Name">
+                        <button id="logInButton"><i class="bi bi-person-check"></i> Log In</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="darkModeButton"><i class="bi bi-moon-fill"></i></div>
     </div>
     <!-- <div id="menuHoverArea"></div> -->
     <div id="menu">
         <div class="menu-button" data-section="homeSection">
             <i class="bi bi-house"></i>
+            <span>Home</span>
         </div>
         <div class="menu-button" data-section="binderSection">
             <i class="bi bi-journal-richtext"></i>
+            <span>Binder</span>
         </div>
         <div class="menu-button" data-section="decksSection">
             <i class="bi bi-inboxes"></i>
+            <span>Decks</span>
         </div>
         <div class="menu-button" data-section="simulatorSection">
             <i class="bi bi-controller"></i>
+            <span>Sim</span>
         </div>
         <div class="menu-button" data-section="sleeveSection">
             <i class="bi bi-globe-americas"></i>
+            <span>Sleeve</span>
         </div>
     </div>
     <div id="sectionsContainer">
         <div id="homeSection" class="section active">
-            <h1>Home</h1>
             <div id="packsWrapper">
                 <h2>Booster Pack Shop</h2>
                 <p class="packs-description">Browse themed booster packs, open them to reveal new cards, and build your collection.</p>
                 <div id="packsContainer"></div>
+                <div id="pullHistory" class="pull-history" style="display:none">
+                    <div class="pull-history-header">
+                        <span><i class="bi bi-clock-history"></i> Recent Pulls</span>
+                        <button id="pullHistoryToggle" class="btn-ghost">Hide</button>
+                    </div>
+                    <div id="pullHistoryStrip" class="pull-history-strip"></div>
+                </div>
             </div>
         </div>
         <div id="binderSection" class="section">
-            <h1>Binder</h1>
-            <input id="binderSearch" type="search" placeholder="Search for a card...">
-            <div id="binderContainer">
-
+            <div class="binder-toolbar">
+                <input id="binderSearch" type="search" placeholder="Search for a card...">
+                <div class="binder-toolbar-actions">
+                    <button id="binderMissingToggle" class="btn-ghost"><i class="bi bi-eye-slash"></i> Missing Only</button>
+                    <div class="binder-view-toggle">
+                        <button data-view="pack" class="active">By Pack</button>
+                        <button data-view="rarity">By Rarity</button>
+                    </div>
+                </div>
             </div>
+            <div id="binderContainer"></div>
+            <div id="binderFlatView"></div>
         </div>
         <div id="decksSection" class="section">
             <div class="section-header">
@@ -85,10 +127,6 @@
                                 <div class="deck-builder-field-helper">Click the pin on a deck card, then tap this preview to clear it.</div>
                             </div>
                         </div>
-                        <div class="deck-builder-stats">
-                            <i class="bi bi-file-richtext"></i>
-                            <span id="deckBuilderCount">0</span> / 30
-                        </div>
                     </div>
                     <button id="deckBuilderDeleteButton" class="danger"><i class="bi bi-trash"></i> Delete</button>
                 </div>
@@ -99,7 +137,18 @@
                                 <h2>Deck List</h2>
                                 <p>Cards currently in the active deck.</p>
                             </div>
-                            <span class="deck-builder-panel-note">Click a card to remove it.</span>
+                            <div class="deck-builder-stats-wrap">
+                                <div class="deck-stats-top">
+                                    <div class="deck-builder-stats">
+                                        <i class="bi bi-file-richtext"></i>
+                                        <span id="deckBuilderCount">0</span> / 30
+                                    </div>
+                                    <div id="deckBuilderRarityStats" class="deck-rarity-stats"></div>
+                                </div>
+                                <div class="deck-progress-bar">
+                                    <div id="deckProgressFill" class="deck-progress-fill"></div>
+                                </div>
+                            </div>
                         </div>
                         <div id="deckBuilderDeckList"></div>
                     </div>
@@ -139,6 +188,14 @@
                     <div class="simulator-action-group" data-context="actionTracker">
                         <h3 data-context="actionTracker">Reaction: </h3> <div class="action-pip" id="reactionPip" data-context="actionTracker"></div>
                     </div>
+                    <div class="sim-ctrl-buttons">
+                        <button class="sim-ctrl-btn primary" onclick="nextTurn()">
+                            <i class="bi bi-arrow-right-circle"></i> Next Turn
+                        </button>
+                        <button class="sim-ctrl-btn" onclick="resetSimulator()">
+                            <i class="bi bi-arrow-counterclockwise"></i> New Game
+                        </button>
+                    </div>
                 </div>
                 <div id="simulatorZones">
                     <div id="simulatorSummonZone" data-context="summonZone">
@@ -156,6 +213,7 @@
                     <div id="simulatorDeck" class="empty" data-context="deck">
                         <h3 data-context="deck">Deck</h3>
                         <img src="./assets/card-art/back.png" data-context="deck" class="simulator-deck-card">
+                        <div id="simDeckCountLabel" class="sim-deck-count-label"></div>
                     </div>
                 </div>
                 <div id="simulatorExtra">
@@ -176,7 +234,7 @@
                     <div id="simulatorDeckSelect">
 
                     </div>
-                    <button id="simulatorDeckSelectConfirm">Confirm</button>
+                    <button id="simulatorDeckSelectConfirm" class="btn-accent">Confirm</button>
                 </div>
             </div>
         </div>
@@ -207,17 +265,19 @@
     </div>
     <div id="packPreviewModalContainer" class="modal-container">
         <div class="modal">
-            <div class="pack-preview-header">
-                <img id="packPreviewLogo" class="pack-preview-logo" src="" alt="Pack logo" hidden>
-                <div>
-                    <h2 id="packPreviewTitle">Pack Preview</h2>
+            <div class="pack-preview-sticky">
+                <div class="pack-preview-header">
+                    <img id="packPreviewLogo" class="pack-preview-logo" src="" alt="Pack logo" hidden>
+                    <div>
+                        <h2 id="packPreviewTitle">Pack Preview</h2>
+                    </div>
+                    <button id="packPreviewClose" class="btn-ghost">Close</button>
                 </div>
-                <button id="packPreviewClose" class="danger">Close</button>
-            </div>
-            <div class="pack-preview-summary">
-                <div id="packPreviewStats"></div>
-                <button id="packPreviewUseTicketButton" hidden>Use Golden Ticket</button>
-                <div id="packRarityTable" style="display:none;"></div>
+                <div class="pack-preview-summary">
+                    <div id="packPreviewStats"></div>
+                    <button id="packPreviewUseTicketButton" hidden>Use Golden Ticket</button>
+                    <div id="packRarityTable" style="display:none;"></div>
+                </div>
             </div>
             <div class="pack-preview-list" id="packPreviewList"></div>
         </div>
@@ -228,7 +288,7 @@
             <div id="simulatorModalBody">
 
             </div>
-            <button id="simulatorModalButton">Confirm</button>
+            <button id="simulatorModalButton" class="btn-accent">Confirm</button>
         </div>
     </div>
     <div id="simulatorTokensModalContainer" class="modal-container">
@@ -237,7 +297,7 @@
             <div id="simulatorTokensModalBody">
 
             </div>
-            <button id="simulatorTokensModalButton">Close</button>
+            <button id="simulatorTokensModalButton" class="btn-ghost">Close</button>
         </div>
     </div>
     <div id="simulatorConditionalModalContainer" class="modal-container">
@@ -280,13 +340,18 @@
                     </select>
                 </div>
             </div>
-            <button id="simulatorConditionalModalButton" onclick="drawCardConditional()">Confirm</button>
+            <button id="simulatorConditionalModalButton" class="btn-accent" onclick="drawCardConditional()">Confirm</button>
         </div>
     </div>
     <div id="cardViewModalContainer" class="modal-container">
         <div class="modal">
             <div class="card-wrapper">
                 <img class="card" draggable="false">
+            </div>
+            <div id="cardViewForms" class="card-view-forms" style="display:none">
+                <button id="cardViewFormPrev" type="button"><i class="bi bi-chevron-left"></i></button>
+                <span id="cardViewFormLabel"></span>
+                <button id="cardViewFormNext" type="button"><i class="bi bi-chevron-right"></i></button>
             </div>
             <div class="card-view-controls">
                 <button id="cardViewCountDecrease" type="button">-</button>
@@ -316,9 +381,9 @@
                 <li onclick="sendTargetedCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
                 <li onclick="banishTargetedCard()">Banish <span class="simulator-context-card-name"></span></li>
             </div>
-            <!-- <div class="context-menu-group">
-                <li onclick="">Adjust HP</li>
-            </div> -->
+            <div class="context-menu-group">
+                <li onclick="transformTargetedCard()">Transform <span class="simulator-context-card-name"></span>...</li>
+            </div>
         </ul>
         <ul data-context="reactionZoneCard">
             <div class="context-menu-group">
@@ -351,12 +416,19 @@
                 <!-- <li onclick="">View</li> -->
                 <li onclick="shuffleDeck()">Shuffle</li>
                 <li onclick="revealFromDeck('top')">Reveal Top X Cards</li>
-                <li onclick="">Rearrange Top X Cards</li>
+                <li onclick="rearrangeTopCards()">Rearrange Top X Cards</li>
                 <li onclick="revealFromDeck('bottom')">Reveal Bottom X Cards</li>
                 <li onclick="searchDeck()">Search for Card</li>
             </div>
             <div class="context-menu-group">
+                <li onclick="banishTopCard()">Banish Top Card</li>
                 <li onclick="banishRandomCard()">Banish Random Card</li>
+            </div>
+        </ul>
+        <ul data-context="graveyardCard">
+            <div class="context-menu-group">
+                <li onclick="returnGraveyardCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
+                <li onclick="copyGraveyardCardToHand()">Copy <span class="simulator-context-card-name"></span> to Hand</li>
             </div>
         </ul>
         <ul data-context="banish">
@@ -383,6 +455,7 @@
             <div class="context-menu-group">
                 <li onclick="discardHand()">Discard Hand</li>
                 <li onclick="shuffleHandIntoDeck()">Shuffle Hand into Deck</li>
+                <li onclick="discardRandomFromHand()">Discard Random Card</li>
             </div>
         </ul>
     </div>
@@ -397,5 +470,6 @@
     <script src="./scripts/decks.js"></script>
     <script src="./scripts/simulator.js"></script>
     <script src="./scripts/sleeve.js"></script>
+    <div id="toastContainer"></div>
 </body>
 </html>

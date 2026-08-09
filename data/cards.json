@@ -2300,5 +2300,133 @@
                 }
             ]
         }
+    },
+    {
+        "id": "PR1-1",
+        "name": "Suspicious Slime",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "forms": ["PR1-1", "PR1-2", "PR1-3", "PR1-4"],
+        "summonInfo": {
+            "hp": 11,
+            "traits": [
+                {
+                    "name": "Mold Jelly",
+                    "description": "When this summon's Hit Points are reduced to 0, it transforms into \"Suspicious Jelly\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Pseudopod",
+                    "description": "Melee Attack Roll: +3, reach 5 feet. Hit: 1d4 + 1 acid damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "PR1-2",
+        "name": "Suspicious Jelly",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 33,
+            "actions": [
+                {
+                    "name": "Pseudopod",
+                    "description": "Melee Attack Roll: +4, reach 5 feet. Hit: 2d8 + 1 acid damage."
+                }
+            ],
+            "reactions": [
+                {
+                    "name": "Jelly Wall",
+                    "description": "As a reaction to an ally within 30 feet being targeted by a spell, this summon can move to the ally's position and take the full damage of the spell instead. If this summon's Hit Points aren't reduced to 0, it transforms into \"Suspicious Ooze\"."
+                }
+            ]
+        }
+    },
+    {
+        "id": "PR1-3",
+        "name": "Suspicious Ooze",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 63,
+            "traits": [
+                {
+                    "name": "Ooze Cube",
+                    "description": "If this summon deals at least 24 damage in a single hit, it transforms into \"The Oblex\"."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Pseudopod",
+                    "description": "Melee Attack Roll: +5, reach 5 feet. Hit: 3d6 + 3 acid damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "PR1-4",
+        "name": "The Oblex",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 170,
+            "traits": [
+                {
+                    "name": "Amorphous",
+                    "description": "This summon can take two reactions in one turn."
+                },
+                {
+                    "name": "Manipulate",
+                    "description": "This summon can have up to three different creatures grappled at once, and can move any creature it has grappled 10 feet in any direction as a free action. Grappled targets take 3d6 acid damage at the start of each of your turns while they remain grappled."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Engulf",
+                    "description": "Melee Attack Roll: +11, reach 15 feet. Hit: 4d6 + 3 bludgeoning damage plus 2d6 psychic damage. DEX Saving Throw: DC 24. Failure: Target is grappled."
+                }
+            ],
+            "reactions": [
+                {
+                    "name": "Corrosion",
+                    "description": "As a reaction to an ally within 30 feet making a damage roll, this summon can add a d8 corrosion die to the damage roll."
+                },
+                {
+                    "name": "Blockade",
+                    "description": "As a reaction to an ally within 10 feet taking damage, this summon can move to the ally's location and take the damage instead."
+                }
+            ]
+        }
+    },
+    {
+        "id": "PR2",
+        "name": "King Flumph",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Entity",
+        "tags": [],
+        "summonInfo": {
+            "hp": 56,
+            "actions": [
+                {
+                    "name": "Tentacle",
+                    "description": "Melee Attack Roll: +4, reach 5 feet. Hit: 1d4 + 2 acid damage."
+                },
+                {
+                    "name": "Advanced Telepathy",
+                    "description": "Reveal the top 3 cards of your deck and put them back on top in any order. This action can be used prior to drawing at the start of your turn."
+                }
+            ]
+        }
     }
 ]

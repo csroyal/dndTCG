@@ -6,6 +6,7 @@ let simulatorSummonZone = document.getElementById("simulatorSummonZone");
 let simulatorReactionZone = document.getElementById("simulatorReactionZone");
 let simulatorGraveyard = document.getElementById("simulatorGraveyard");
 let simulatorDeck = document.getElementById("simulatorDeck");
+let simDeckCountLabel = document.getElementById("simDeckCountLabel");
 let simulatorHand = document.getElementById("simulatorHand");
 let simulatorBanish = document.getElementById("simulatorBanish");
 let simulatorModalContainer = document.getElementById("simulatorModalContainer");
@@ -39,37 +40,49 @@ document.addEventListener("click", function () {
 });
 
 document.addEventListener("contextmenu", function (e) {
-    if (document.getElementById("simulatorSection").classList.contains("active") && document.getElementById("simulatorSection").contains(e.target)) {
-        e.preventDefault();
+    const simSection = document.getElementById("simulatorSection");
+    if (!simSection.classList.contains("active")) return;
 
-        if (e.target.dataset.context) renderSimulatorContextMenu(e.target, e.pageX, e.pageY);
-        if (e.target.dataset.cardId) {
-            let contextMenuCardNameSpans = document.querySelectorAll(".simulator-context-card-name");
-            contextMenuCardNameSpans.forEach(span => {
-                span.innerHTML = getObjectById(cards, e.target.dataset.cardId).name;
+    // Use closest() so clicks on children of context elements (and cards in
+    // modal containers outside #simulatorSection) still find the right target.
+    const contextEl = e.target.closest('[data-context]');
+    const inSection = simSection.contains(e.target);
+
+    if (!inSection && !contextEl) return;
+
+    e.preventDefault();
+
+    if (contextEl) {
+        renderSimulatorContextMenu(contextEl, e.pageX, e.pageY);
+        if (contextEl.dataset.cardId) {
+            document.querySelectorAll(".simulator-context-card-name").forEach(span => {
+                span.innerHTML = getObjectById(cards, contextEl.dataset.cardId).name;
             });
         }
-        return false;
     }
+
+    return false;
 });
 
 function renderSimulatorContextMenu(target, x, y) {
     targetedCard = target;
-    let contextMenuOptions = simulatorContextMenu.querySelectorAll("ul");
-    contextMenuOptions.forEach(item => {
-        if (item.dataset.context === target.dataset.context) {
-            item.style.display = "block";
-        } else item.style.display = "none";
+
+    // Show the matching ul, hide all others
+    simulatorContextMenu.querySelectorAll("ul").forEach(item => {
+        item.style.display = item.dataset.context === target.dataset.context ? "block" : "none";
     });
 
-    if (y + simulatorContextMenu.clientHeight > window.innerHeight) {
-        simulatorContextMenu.style.top = 'unset';
-        simulatorContextMenu.style.bottom = `${window.innerHeight - y}px`;
-    } else {
-        simulatorContextMenu.style.top = `${y}px`;
-        simulatorContextMenu.style.bottom = 'unset';
-    }
-    simulatorContextMenu.style.left = `${x}px`;
+    // Read height after determining which ul is shown (element is rendered but transparent)
+    const mh = simulatorContextMenu.offsetHeight;
+    const mw = simulatorContextMenu.offsetWidth || 220;
+
+    // Clamp so menu never goes off-screen (CSS max-height handles overflow scroll)
+    const cx = Math.min(x, window.innerWidth  - mw - 8);
+    const cy = Math.min(y, window.innerHeight - mh - 8);
+
+    simulatorContextMenu.style.left   = `${Math.max(4, cx)}px`;
+    simulatorContextMenu.style.top    = `${Math.max(4, cy)}px`;
+    simulatorContextMenu.style.bottom = 'unset';
     simulatorContextMenu.classList.add("active");
 }
 
@@ -98,9 +111,16 @@ function buildDeckSelect() {
         meta.append(nameEl, countEl);
         container.append(iconImg, meta);
 
-        container.onclick = () => {
-            if (simulatorDeckSelect.querySelector(".selected")) simulatorDeckSelect.querySelector(".selected").classList.remove("selected");
-            container.classList.add("selected");
+        const deckCount = getCountDeck(deck);
+        if (deckCount < DECK_LIMIT) {
+            container.classList.add('deck-select-incomplete');
+            countEl.textContent = `${deckCount} / ${DECK_LIMIT} cards — incomplete`;
+            container.onclick = () => showToast(`"${deck.name}" needs ${DECK_LIMIT} cards to play.`, 'error');
+        } else {
+            container.onclick = () => {
+                if (simulatorDeckSelect.querySelector(".selected")) simulatorDeckSelect.querySelector(".selected").classList.remove("selected");
+                container.classList.add("selected");
+            };
         }
 
         simulatorDeckSelect.append(container);
@@ -194,6 +214,76 @@ function buildTokensModal() {
 }
 buildTokensModal();
 
+/* DECK COUNT LABEL */
+
+let deckCountTimeout = null;
+
+simulatorDeck.addEventListener('click', () => {
+    if (simulatorDeck.classList.contains('empty')) return;
+    if (deckCountTimeout) clearTimeout(deckCountTimeout);
+    simDeckCountLabel.textContent = `${activeSimDeck.length} left`;
+    simDeckCountLabel.classList.add('show');
+    deckCountTimeout = setTimeout(() => {
+        simDeckCountLabel.classList.remove('show');
+        deckCountTimeout = null;
+    }, 2500);
+});
+
+/* NEXT TURN */
+
+async function nextTurn() {
+    const confirmed = await showConfirm('End your turn and draw a card?');
+    if (!confirmed) return;
+    const turnEl = document.getElementById('simulatorTurnNum');
+    turnEl.textContent = parseInt(turnEl.textContent, 10) + 1;
+    setActionState('all', true);
+    if (activeSimDeck.length > 0) drawCard();
+}
+
+/* RESET / NEW GAME */
+
+function resetSimulator() {
+    activeSimDeck = [];
+    activeHand = [];
+    activeGraveyard = [];
+    activeSummons = [];
+    activeReactions = [];
+    activeBanish = [];
+
+    simulatorHand.innerHTML = '';
+
+    Array.from(simulatorSummonZone.children).forEach(el => { if (el.tagName === 'IMG') el.remove(); });
+    document.querySelector('#simulatorSummonZone h3').style.display = 'block';
+
+    Array.from(simulatorReactionZone.children).forEach(el => { if (el.tagName === 'IMG') el.remove(); });
+    document.querySelector('#simulatorReactionZone h3').style.display = 'block';
+
+    simulatorDeck.classList.add('empty');
+    updateGraveyard();
+    setActionState('all', true);
+    document.getElementById('simulatorTurnNum').textContent = '1';
+
+    if (deckCountTimeout) { clearTimeout(deckCountTimeout); deckCountTimeout = null; }
+    simDeckCountLabel.classList.remove('show');
+
+    buildDeckSelect();
+}
+
+/* HAND LAYOUT SCALING */
+
+function updateHandLayout() {
+    const count = simulatorHand.querySelectorAll('img').length;
+    if (count <= 5 || simulatorHand.clientWidth === 0) {
+        simulatorHand.style.removeProperty('--hand-card-w');
+    } else {
+        const gap = 10 * (count - 1);
+        const maxW = Math.max(55, Math.floor((simulatorHand.clientWidth - gap) / count));
+        simulatorHand.style.setProperty('--hand-card-w', maxW + 'px');
+    }
+}
+
+new MutationObserver(updateHandLayout).observe(simulatorHand, { childList: true });
+
 /* CONTEXT MENU FUNCTIONS */
 
 let targetCardID;
@@ -209,55 +299,60 @@ function setActionState(actionType, actionState) {
 }
 
 function sendTargetedCardToGraveyard() {
-    let index = Array.from(targetedCard.parentNode.children).indexOf(targetedCard) - 1;
-    handleRemovingTargetedCard(index);
-    if (targetedCard.parentElement === simulatorHand) {
-        index++;
-    }
-    targetedCard.remove();
-    activeGraveyard.push(targetedCard.dataset.cardId);
-    updateGraveyard();
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    _removeCardFromContext(targetedCard, 'down', () => {
+        activeGraveyard.push(cardID);
+        updateGraveyard();
+        showToast(`${name} sent to graveyard.`, 'info');
+    });
 }
 
 function sendTargetedCardToHand() {
-    let index = Array.from(targetedCard.parentNode.children).indexOf(targetedCard) - 1;
-    handleRemovingTargetedCard(index);
-    targetedCard.remove();
-    activeHand.push(targetedCard.dataset.cardId);
-    simulatorHand.append(createSimulatorCard(targetedCard.dataset.cardId));
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    _removeCardFromContext(targetedCard, 'vanish', () => {
+        activeHand.push(cardID);
+        simulatorHand.append(createSimulatorCard(cardID));
+        showToast(`${name} returned to hand.`, 'success');
+    });
 }
 
 function banishTargetedCard() {
-    let index = Array.from(targetedCard.parentNode.children).indexOf(targetedCard) - 1;
-    handleRemovingTargetedCard(index);
-    if (targetedCard.parentElement === simulatorHand) {
-        index++;
-    }
-    targetedCard.remove();
-    activeBanish.push(targetedCard.dataset.cardId);
-    animateBanish();
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    _removeCardFromContext(targetedCard, 'shrink', () => {
+        activeBanish.push(cardID);
+        animateBanish();
+        showToast(`${name} banished.`, 'info');
+    });
 }
 
 function activateTargetedCard() {
-    // play animation
-    sendTargetedCardToGraveyard();
+    const card = targetedCard;
+    const cardID = card.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    const arrIdx = Array.from(card.parentNode.children).indexOf(card) - 1;
+    activeReactions.splice(arrIdx, 1);
+    activeGraveyard.push(cardID);
+    animatePlayCard(cardID);
+    _fadeOut(card, 300, 'vanish', () => {
+        updateActiveReactions();
+        updateGraveyard();
+        showToast(`${name} activated.`, 'info');
+    });
 }
 
 function viewGraveyard() {
     simulatorModalContainer.querySelector("h2").innerHTML = "Graveyard";
-
     simulatorModalBody.innerHTML = "";
 
-    for (g in activeGraveyard) {
-        simulatorModalBody.append(createSimulatorCard(activeGraveyard[g]));
+    for (const g in activeGraveyard) {
+        simulatorModalBody.append(createSimulatorCard(activeGraveyard[g], "graveyardCard"));
     }
 
     simulatorModalButton.innerHTML = "Close";
-
-    simulatorModalButton.onclick = () => {
-        simulatorModalContainer.classList.remove("active");
-    }
-
+    simulatorModalButton.onclick = () => { simulatorModalContainer.classList.remove("active"); };
     simulatorModalContainer.classList.add("active");
 }
 
@@ -277,23 +372,27 @@ function searchGraveyard() {
     simulatorModalButton.innerHTML = "Confirm";
 
     simulatorModalButton.onclick = () => {
+        const name = getObjectById(cards, targetCardID)?.name ?? targetCardID;
         activeGraveyard.splice(activeGraveyard.indexOf(targetCardID), 1);
         activeHand.push(targetCardID);
         simulatorHand.append(createSimulatorCard(targetCardID));
         simulatorModalContainer.classList.remove("active");
         updateGraveyard();
+        showToast(`${name} added to hand.`, 'success');
     }
 
     simulatorModalContainer.classList.add("active");
 }
 
 function shuffleGraveyardIntoDeck() {
+    const count = activeGraveyard.length;
     for (g in activeGraveyard) {
         activeSimDeck.push(activeGraveyard[g]);
     }
     activeGraveyard = [];
     updateGraveyard();
     shuffleDeck();
+    showToast(`${count} card${count !== 1 ? 's' : ''} shuffled into deck.`, 'info');
 }
 
 function returnRandomCardFromGraveyard() {
@@ -303,6 +402,8 @@ function returnRandomCardFromGraveyard() {
     playSound("draw");
     simulatorHand.append(createSimulatorCard(card));
     updateGraveyard();
+    const name = getObjectById(cards, card)?.name ?? card;
+    showToast(`${name} returned to hand.`, 'success');
 }
 
 let conditionalPullFrom;
@@ -342,7 +443,7 @@ function drawCardConditional() {
     }
 
     if (optionsArr.length === 0) {
-        alert("No possible cards with these conditions.");
+        showToast('No cards match those conditions.', 'error');
         simulatorConditionalModalContainer.classList.add("active");
         return;
     }
@@ -380,9 +481,18 @@ function drawCard() {
     }, 500);
 }
 
-function drawCards(count = 0) {
-    let drawAmount = count ? count : prompt(`Draw how many cards?`);
-    for (var i = 0; i < drawAmount; i++) {
+async function drawCards(count = 0) {
+    let drawAmount = count;
+    if (!drawAmount) {
+        const input = await showInput('Draw how many cards?', '1', '1');
+        if (input === null) return;
+        drawAmount = parseInt(input, 10);
+        if (isNaN(drawAmount) || drawAmount < 1) {
+            showToast('Please enter a valid number.', 'error');
+            return;
+        }
+    }
+    for (let i = 0; i < drawAmount; i++) {
         setTimeout(drawCard, i * 250);
     }
 }
@@ -393,8 +503,10 @@ function drawCardFromBottom() {
     activeHand.push(card);
     animateCardDraw();
     playSound("draw");
+    const name = getObjectById(cards, card)?.name ?? card;
     setTimeout(() => {
         simulatorHand.append(createSimulatorCard(card));
+        showToast(`Drew ${name}.`, 'success');
     }, 500);
 }
 
@@ -404,8 +516,10 @@ function drawRandomCard() {
     activeHand.push(card);
     animateCardDraw();
     playSound("draw");
+    const name = getObjectById(cards, card)?.name ?? card;
     setTimeout(() => {
         simulatorHand.append(createSimulatorCard(card));
+        showToast(`Drew ${name}.`, 'success');
     }, 500);
 }
 
@@ -415,21 +529,93 @@ function shuffleDeck() {
     playSound("shuffle");
 }
 
-function revealFromDeck(direction) {
-    let revealAmount = prompt(`Reveal how many cards from ${direction} of deck?`);
-    if (!isNumeric(revealAmount)) {
-        alert("Entry is not a numeric value.");
+async function revealFromDeck(direction) {
+    const input = await showInput(`Reveal how many cards from ${direction} of deck?`, '1', '1');
+    if (input === null) return;
+    const revealAmount = parseInt(input, 10);
+    if (isNaN(revealAmount) || revealAmount < 1) {
+        showToast('Please enter a valid number.', 'error');
         return;
     }
-    let str = "";
-    for (var i = 0; i < revealAmount; i++) {
-        if (direction === "top") {
-            str += activeSimDeck[i] + " ";
-        } else if (direction === "bottom") {
-            str += activeSimDeck[activeSimDeck.length - 1 - i] + " ";
-        }
+
+    simulatorModalContainer.querySelector('h2').innerHTML = `Reveal from ${direction === 'top' ? 'Top' : 'Bottom'} of Deck`;
+    simulatorModalBody.innerHTML = '';
+
+    const count = Math.min(revealAmount, activeSimDeck.length);
+    for (let i = 0; i < count; i++) {
+        const cardID = direction === 'top'
+            ? activeSimDeck[i]
+            : activeSimDeck[activeSimDeck.length - 1 - i];
+        simulatorModalBody.append(createSimulatorCard(cardID));
     }
-    alert(str);
+
+    simulatorModalButton.innerHTML = 'Close';
+    simulatorModalButton.onclick = () => simulatorModalContainer.classList.remove('active');
+    simulatorModalContainer.classList.add('active');
+}
+
+async function rearrangeTopCards() {
+    const input = await showInput('Rearrange how many top cards?', '3', '3');
+    if (input === null) return;
+    const n = parseInt(input, 10);
+    if (isNaN(n) || n < 2) { showToast('Enter at least 2.', 'error'); return; }
+    const count = Math.min(n, activeSimDeck.length);
+    if (count < 2) { showToast('Not enough cards in deck.', 'error'); return; }
+
+    let working = activeSimDeck.slice(0, count);
+    let selectedIdx = null;
+
+    simulatorModalContainer.querySelector('h2').textContent = `Rearrange Top ${count} Cards`;
+    simulatorModalBody.classList.add('rearrange-body');
+
+    function renderSlots() {
+        simulatorModalBody.innerHTML = '';
+        const hint = document.createElement('p');
+        hint.className = 'rearrange-hint';
+        hint.textContent = 'Click a card to select it, then click another to swap positions.';
+        simulatorModalBody.append(hint);
+
+        working.forEach((cardID, i) => {
+            const slot = document.createElement('div');
+            slot.className = 'rearrange-slot';
+
+            const img = document.createElement('img');
+            img.src = `./assets/card-art/${cardID}.jpg`;
+            if (selectedIdx === i) img.classList.add('rearrange-selected');
+
+            const lbl = document.createElement('div');
+            lbl.className = 'rearrange-label';
+            lbl.textContent = i === 0 ? '▲ Top' : `#${i + 1}`;
+
+            slot.append(img, lbl);
+            slot.addEventListener('click', () => {
+                if (selectedIdx === null) {
+                    selectedIdx = i;
+                    img.classList.add('rearrange-selected');
+                } else if (selectedIdx === i) {
+                    selectedIdx = null;
+                    img.classList.remove('rearrange-selected');
+                } else {
+                    [working[selectedIdx], working[i]] = [working[i], working[selectedIdx]];
+                    selectedIdx = null;
+                    renderSlots();
+                }
+            });
+            simulatorModalBody.append(slot);
+        });
+    }
+
+    renderSlots();
+
+    simulatorModalButton.textContent = 'Confirm Order';
+    simulatorModalButton.onclick = () => {
+        for (let i = 0; i < count; i++) activeSimDeck[i] = working[i];
+        simulatorModalBody.classList.remove('rearrange-body');
+        simulatorModalContainer.classList.remove('active');
+        showToast('Top cards rearranged.', 'success');
+    };
+
+    simulatorModalContainer.classList.add('active');
 }
 
 function searchDeck() {
@@ -462,6 +648,104 @@ function banishRandomCard() {
     activeSimDeck.splice(activeSimDeck.indexOf(card), 1);
     activeBanish.push(card);
     animateBanish();
+    const name = getObjectById(cards, card)?.name ?? card;
+    showToast(`${name} banished.`, 'info');
+}
+
+function banishTopCard() {
+    if (activeSimDeck.length === 0) { showToast('Deck is empty.', 'error'); return; }
+    const cardID = activeSimDeck.shift();
+    activeBanish.push(cardID);
+    animateBanish();
+    showToast(`Top card banished.`, 'info');
+}
+
+function discardRandomFromHand() {
+    if (activeHand.length === 0) { showToast('Hand is empty.', 'error'); return; }
+    const randIdx = Math.floor(Math.random() * activeHand.length);
+    const cardID = activeHand.splice(randIdx, 1)[0];
+    activeGraveyard.push(cardID);
+    const handCards = Array.from(simulatorHand.children);
+    if (handCards[randIdx]) {
+        _fadeOut(handCards[randIdx], 185, 'down', () => updateGraveyard());
+    } else {
+        updateGraveyard();
+    }
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    showToast(`Discarded: ${name}`, 'info');
+}
+
+function returnGraveyardCardToHand() {
+    if (!targetedCard) return;
+    const cardID = targetedCard.dataset.cardId;
+    activeGraveyard.splice(activeGraveyard.indexOf(cardID), 1);
+    activeHand.push(cardID);
+    simulatorHand.append(createSimulatorCard(cardID));
+    simulatorModalContainer.classList.remove('active');
+    updateGraveyard();
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    showToast(`${name} returned to hand.`, 'success');
+}
+
+function copyGraveyardCardToHand() {
+    if (!targetedCard) return;
+    const cardID = targetedCard.dataset.cardId;
+    activeHand.push(cardID);
+    simulatorHand.append(createSimulatorCard(cardID));
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    showToast(`Copied ${name} to hand.`, 'success');
+}
+
+function transformTargetedCard() {
+    const card     = targetedCard;
+    const parent   = card.parentElement;
+    const domIdx   = Array.from(parent.children).indexOf(card);
+    const arrIdx   = domIdx - 1;
+
+    simulatorModalContainer.querySelector('h2').textContent = 'Transform Into...';
+    simulatorModalBody.innerHTML = '';
+
+    const searchWrap = document.createElement('div');
+    searchWrap.className = 'sim-modal-search-wrap';
+    const searchEl = document.createElement('input');
+    searchEl.type = 'text';
+    searchEl.placeholder = 'Search by name or class...';
+    searchEl.className = 'sim-modal-search';
+    searchWrap.append(searchEl);
+    simulatorModalBody.append(searchWrap);
+
+    let selectedTransformID = null;
+
+    cards.filter(c => c.class !== 'Sleeve').forEach(c => {
+        const img = createSimulatorCard(c.id, '', e => {
+            const prev = simulatorModalBody.querySelector('.selected-card');
+            if (prev) prev.classList.remove('selected-card');
+            e.target.classList.add('selected-card');
+            selectedTransformID = e.target.dataset.cardId;
+        });
+        simulatorModalBody.append(img);
+    });
+
+    searchEl.addEventListener('input', () => {
+        const q = searchEl.value.toLowerCase();
+        simulatorModalBody.querySelectorAll('img[data-card-id]').forEach(img => {
+            const c = getObjectById(cards, img.dataset.cardId);
+            const hit = !q || !!(c && (c.name.toLowerCase().includes(q) || (c.class || '').toLowerCase().includes(q)));
+            img.style.display = hit ? '' : 'none';
+        });
+    });
+
+    simulatorModalButton.textContent = 'Transform';
+    simulatorModalButton.onclick = () => {
+        if (!selectedTransformID) { showToast('Select a card to transform into.', 'error'); return; }
+        activeSummons[arrIdx] = selectedTransformID;
+        simulatorModalContainer.classList.remove('active');
+        updateActiveSummons();
+        showToast('Transformed!', 'success');
+    };
+
+    simulatorModalContainer.classList.add('active');
+    setTimeout(() => searchEl.focus(), 50);
 }
 
 function viewBanish() {
@@ -487,65 +771,125 @@ function viewTokens() {
 }
 
 function playCard() {
-    console.log(targetedCard);
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
     targetedCard.remove();
 
-    activeHand.splice(activeHand.indexOf(targetedCard.dataset.cardId), 1);
+    activeHand.splice(activeHand.indexOf(cardID), 1);
 
-    animatePlayCard(targetedCard.dataset.cardId);
+    animatePlayCard(cardID);
+    showToast(`${name} played.`, 'success');
 
     setTimeout(() => {
         if (targetedCard.dataset.cardClass === "Spell" || targetedCard.dataset.cardClass === "Utility") {
-            activeGraveyard.push(targetedCard.dataset.cardId);
+            activeGraveyard.push(cardID);
             updateGraveyard();
         } else if (targetedCard.dataset.cardClass === "Summon") {
-            activeSummons.push(targetedCard.dataset.cardId);
+            activeSummons.push(cardID);
             updateActiveSummons();
         } else if (targetedCard.dataset.cardClass === "Reaction") {
-            activeReactions.push(targetedCard.dataset.cardId);
+            activeReactions.push(cardID);
             updateActiveReactions();
         }
     }, 1500);
 }
 
 function shuffleTargetedCardIntoDeck() {
-    let index = Array.from(targetedCard.parentNode.children).indexOf(targetedCard);
-    activeSimDeck.push(targetedCard.dataset.cardId);
-    activeHand.splice(index, 1);
-    targetedCard.remove();
-    shuffleDeck();
+    const domIdx = Array.from(simulatorHand.children).indexOf(targetedCard);
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    activeSimDeck.push(cardID);
+    activeHand.splice(domIdx, 1);
+    _fadeOut(targetedCard, 185, 'up', () => {
+        shuffleDeck();
+        showToast(`${name} shuffled into deck.`, 'info');
+    });
 }
 
 function putTargetedCardOnDeck(direction) {
-    let index = Array.from(targetedCard.parentNode.children).indexOf(targetedCard);
-    if (direction === "top") {
-        activeSimDeck.unshift(targetedCard.dataset.cardId);
-    } else if (direction === "bottom") {
-        activeSimDeck.push(targetedCard.dataset.cardId);
-    }
-    activeHand.splice(index, 1);
-    targetedCard.remove();
+    const domIdx = Array.from(simulatorHand.children).indexOf(targetedCard);
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    if (direction === "top") activeSimDeck.unshift(cardID);
+    else if (direction === "bottom") activeSimDeck.push(cardID);
+    activeHand.splice(domIdx, 1);
+    _fadeOut(targetedCard, 185, 'up', () => {
+        showToast(`${name} placed on ${direction} of deck.`, 'info');
+    });
 }
 
 function discardHand() {
-    for (h in activeHand) {
-        activeGraveyard.push(activeHand[h]);
-    }
+    const count = activeHand.length;
+    for (const h of activeHand) activeGraveyard.push(h);
     activeHand = [];
-    simulatorHand.innerHTML = "";
-    updateGraveyard();
+    const handEls = Array.from(simulatorHand.children);
+    handEls.forEach((card, i) => {
+        setTimeout(() => {
+            card.style.transition = 'transform 0.18s ease, opacity 0.18s ease';
+            requestAnimationFrame(() => {
+                card.style.transform = 'translateY(20px) scale(0.8)';
+                card.style.opacity = '0';
+            });
+        }, i * 35);
+    });
+    setTimeout(() => {
+        simulatorHand.innerHTML = '';
+        updateGraveyard();
+        showToast(`Discarded ${count} card${count !== 1 ? 's' : ''}.`, 'info');
+    }, 220 + handEls.length * 35);
 }
 
 function shuffleHandIntoDeck() {
-    for (h in activeHand) {
-        activeSimDeck.push(activeHand[h]);
-    }
+    const count = activeHand.length;
+    for (const h of activeHand) activeSimDeck.push(h);
     activeHand = [];
-    simulatorHand.innerHTML = "";
-    shuffleDeck();
+    const handEls = Array.from(simulatorHand.children);
+    handEls.forEach((card, i) => {
+        setTimeout(() => {
+            card.style.transition = 'transform 0.18s ease, opacity 0.18s ease';
+            requestAnimationFrame(() => {
+                card.style.transform = 'translateY(-20px) scale(0.8)';
+                card.style.opacity = '0';
+            });
+        }, i * 35);
+    });
+    setTimeout(() => {
+        simulatorHand.innerHTML = '';
+        shuffleDeck();
+        showToast(`${count} card${count !== 1 ? 's' : ''} shuffled into deck.`, 'info');
+    }, 220 + handEls.length * 35);
 }
 
 /* HELPERS */
+
+function _fadeOut(el, ms, direction, cb) {
+    const transforms = {
+        down:   'translateY(22px) scale(0.82)',
+        up:     'translateY(-22px) scale(0.82)',
+        vanish: 'scale(0.55) rotate(-8deg)',
+        shrink: 'scale(0.08) rotate(90deg)',
+    };
+    el.style.transition = `transform ${ms}ms ease, opacity ${ms}ms ease`;
+    requestAnimationFrame(() => {
+        el.style.transform = transforms[direction] ?? transforms.vanish;
+        el.style.opacity = '0';
+    });
+    setTimeout(() => { el.remove(); if (cb) cb(); }, ms + 25);
+}
+
+function _removeCardFromContext(card, direction, cb) {
+    const parent = card.parentElement;
+    const domIdx = Array.from(parent.children).indexOf(card);
+    const arrIdx = (parent === simulatorHand) ? domIdx : domIdx - 1;
+    if (parent === simulatorHand)             activeHand.splice(arrIdx, 1);
+    else if (parent === simulatorSummonZone)   activeSummons.splice(arrIdx, 1);
+    else if (parent === simulatorReactionZone) activeReactions.splice(arrIdx, 1);
+    _fadeOut(card, 185, direction, () => {
+        if (parent === simulatorSummonZone)   updateActiveSummons();
+        if (parent === simulatorReactionZone) updateActiveReactions();
+        if (cb) cb();
+    });
+}
 
 function animateCardDraw() {
     let tempCard = document.createElement("img");
@@ -592,6 +936,40 @@ function animateBanish() {
     playSound('banish');
     simulatorBanish.classList.add("banish-anim");
     simulatorBanish.querySelector("h3").style.opacity = "0";
+
+    const rect = simulatorBanish.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            const ring = document.createElement('div');
+            ring.className = 'banish-shockwave';
+            ring.style.left = cx + 'px';
+            ring.style.top = cy + 'px';
+            ring.style.animationDuration = (520 + i * 140) + 'ms';
+            document.body.appendChild(ring);
+            setTimeout(() => ring.remove(), 540 + i * 140);
+        }, i * 110);
+    }
+
+    const COLORS = ['#b060ff', '#7030e0', '#e080ff', '#ffffff', '#5020c0'];
+    for (let i = 0; i < 12; i++) {
+        const p = document.createElement('div');
+        p.className = 'banish-particle';
+        const angle = (i / 12) * 360;
+        const dist = 65 + Math.random() * 55;
+        p.style.setProperty('--dx', (Math.cos(angle * Math.PI / 180) * dist) + 'px');
+        p.style.setProperty('--dy', (Math.sin(angle * Math.PI / 180) * dist) + 'px');
+        p.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+        p.style.setProperty('--color', COLORS[i % COLORS.length]);
+        p.style.left = cx + 'px';
+        p.style.top = cy + 'px';
+        p.style.animationDuration = (480 + Math.random() * 280) + 'ms';
+        p.style.animationDelay = (Math.random() * 60) + 'ms';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 900);
+    }
 
     setTimeout(() => {
         simulatorBanish.classList.remove("banish-anim");
@@ -645,7 +1023,10 @@ function handleRemovingTargetedCard(index) {
 }
 
 simulatorModalContainer.addEventListener("click", (e) => {
-    if (e.target.id === "simulatorModalContainer") simulatorModalContainer.classList.remove("active");
+    if (e.target.id === "simulatorModalContainer") {
+        simulatorModalContainer.classList.remove("active");
+        simulatorModalBody.classList.remove('rearrange-body');
+    }
 });
 
 simulatorTokensModalContainer.addEventListener("click", (e) => {
