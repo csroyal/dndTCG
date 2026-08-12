@@ -192,11 +192,7 @@ function createCardEl(card, func, includeBadge = true, sleeveCount = false, deck
             if (!checkSleeveRestrictions(card)) return;
             let span = sleeveOverlay.querySelector("span");
             if (Number(span.innerHTML) >= binder[card.id]) {
-                alert("You don't have any more copies of this card.");
-                return;
-            }
-            if (Number(sleeveCountSpan.innerHTML) >= SLEEVE_LIMIT) {
-                alert("You can only have up to 12 cards in your current sleeve.");
+                showToast("No more copies of this card available.", "error");
                 return;
             }
             span.innerHTML = Number(span.innerHTML) + 1;

@@ -65,11 +65,14 @@ document.addEventListener("contextmenu", function (e) {
 });
 
 function renderSimulatorContextMenu(target, x, y) {
+    const matchingUl = simulatorContextMenu.querySelector(`ul[data-context="${target.dataset.context}"]`);
+    if (!matchingUl) return;
+
     targetedCard = target;
 
     // Show the matching ul, hide all others
     simulatorContextMenu.querySelectorAll("ul").forEach(item => {
-        item.style.display = item.dataset.context === target.dataset.context ? "block" : "none";
+        item.style.display = item === matchingUl ? "block" : "none";
     });
 
     // Read height after determining which ul is shown (element is rendered but transparent)
@@ -164,7 +167,50 @@ function createSimulatorCard(cardID, zone = "hand", func = "") {
 
     if (!func) el.addEventListener("click", () => { openInCardViewModal(cardID); });
     else { el.addEventListener("click", func); }
-    
+
+    if (zone === "summonZoneCard") {
+        const wrap = document.createElement("div");
+        wrap.className = "summon-card-wrap";
+        wrap.append(el);
+
+        const defaultHp = card.summonInfo?.hp ?? 0;
+
+        const hpBar = document.createElement("div");
+        hpBar.className = "summon-hp-bar";
+        hpBar.classList.toggle("hp-danger", defaultHp <= 0);
+
+        const heart = document.createElement("i");
+        heart.className = "bi bi-heart-fill summon-hp-heart";
+
+        const hpVal = document.createElement("span");
+        hpVal.className = "summon-hp-val";
+        hpVal.textContent = defaultHp;
+        hpVal.title = "Click to edit HP";
+        hpVal.onclick = (e) => {
+            e.stopPropagation();
+            const input = document.createElement("input");
+            input.type = "text";
+            input.inputMode = "numeric";
+            input.className = "summon-hp-input";
+            input.value = hpVal.textContent;
+            hpVal.replaceWith(input);
+            input.focus();
+            input.select();
+            const commit = () => {
+                const v = parseInt(input.value) ?? defaultHp;
+                hpVal.textContent = isNaN(v) ? defaultHp : v;
+                hpBar.classList.toggle("hp-danger", Number(hpVal.textContent) <= 0);
+                input.replaceWith(hpVal);
+            };
+            input.onblur = commit;
+            input.onkeydown = (ev) => { if (ev.key === "Enter") { ev.preventDefault(); commit(); } };
+        };
+
+        hpBar.append(heart, hpVal);
+        wrap.append(hpBar);
+        return wrap;
+    }
+
     return el;
 }
 
@@ -183,8 +229,9 @@ function buildTokensModal() {
         let minusButton = document.createElement("button");
         minusButton.innerHTML = "-";
         minusButton.onclick = () => {
-            tokenAmt.innerHTML = Number(tokenAmt.innerHTML) - 1 < 0 ? 0 : Number(tokenAmt.innerHTML) - 1;
+            if (activeTokens[t] <= 0) return;
             activeTokens[t]--;
+            tokenAmt.innerHTML = activeTokens[t];
         }
 
         let trackerGroup = document.createElement("div");
@@ -196,6 +243,7 @@ function buildTokensModal() {
         tokenNameSpan.innerHTML = t + " Tokens";
 
         let tokenAmt = document.createElement("div");
+        tokenAmt.className = "token-amt";
         tokenAmt.innerHTML = "0";
 
         trackerGroup.append(tokenImg, tokenNameSpan, tokenAmt);
@@ -249,10 +297,12 @@ function resetSimulator() {
     activeSummons = [];
     activeReactions = [];
     activeBanish = [];
+    for (const t in activeTokens) activeTokens[t] = 0;
+    simulatorTokensModalBody.querySelectorAll('.token-amt').forEach(div => div.innerHTML = 0);
 
     simulatorHand.innerHTML = '';
 
-    Array.from(simulatorSummonZone.children).forEach(el => { if (el.tagName === 'IMG') el.remove(); });
+    Array.from(simulatorSummonZone.children).forEach(el => { if (el.tagName === 'IMG' || el.classList.contains('summon-card-wrap')) el.remove(); });
     document.querySelector('#simulatorSummonZone h3').style.display = 'block';
 
     Array.from(simulatorReactionZone.children).forEach(el => { if (el.tagName === 'IMG') el.remove(); });
@@ -335,8 +385,8 @@ function activateTargetedCard() {
     const arrIdx = Array.from(card.parentNode.children).indexOf(card) - 1;
     activeReactions.splice(arrIdx, 1);
     activeGraveyard.push(cardID);
-    animatePlayCard(cardID);
-    _fadeOut(card, 300, 'vanish', () => {
+    animateReactionActivate(card);
+    _fadeOut(card, 420, 'fade', () => {
         updateActiveReactions();
         updateGraveyard();
         showToast(`${name} activated.`, 'info');
@@ -696,6 +746,18 @@ function copyGraveyardCardToHand() {
     showToast(`Copied ${name} to hand.`, 'success');
 }
 
+function banishGraveyardCard() {
+    if (!targetedCard) return;
+    const cardID = targetedCard.dataset.cardId;
+    const name = getObjectById(cards, cardID)?.name ?? cardID;
+    activeGraveyard.splice(activeGraveyard.indexOf(cardID), 1);
+    activeBanish.push(cardID);
+    simulatorModalContainer.classList.remove('active');
+    updateGraveyard();
+    animateBanish();
+    showToast(`${name} banished.`, 'info');
+}
+
 function transformTargetedCard() {
     const card     = targetedCard;
     const parent   = card.parentElement;
@@ -754,7 +816,7 @@ function viewBanish() {
     simulatorModalBody.innerHTML = "";
 
     for (b in activeBanish) {
-        simulatorModalBody.append(createSimulatorCard(activeBanish[b]));
+        simulatorModalBody.append(createSimulatorCard(activeBanish[b], "banishCard"));
     }
 
     simulatorModalButton.innerHTML = "Close";
@@ -868,6 +930,7 @@ function _fadeOut(el, ms, direction, cb) {
         up:     'translateY(-22px) scale(0.82)',
         vanish: 'scale(0.55) rotate(-8deg)',
         shrink: 'scale(0.08) rotate(90deg)',
+        fade:   'scale(1)',
     };
     el.style.transition = `transform ${ms}ms ease, opacity ${ms}ms ease`;
     requestAnimationFrame(() => {
@@ -878,13 +941,15 @@ function _fadeOut(el, ms, direction, cb) {
 }
 
 function _removeCardFromContext(card, direction, cb) {
-    const parent = card.parentElement;
-    const domIdx = Array.from(parent.children).indexOf(card);
+    const wrap = card.parentElement?.classList.contains('summon-card-wrap') ? card.parentElement : null;
+    const el = wrap ?? card;
+    const parent = el.parentElement;
+    const domIdx = Array.from(parent.children).indexOf(el);
     const arrIdx = (parent === simulatorHand) ? domIdx : domIdx - 1;
     if (parent === simulatorHand)             activeHand.splice(arrIdx, 1);
     else if (parent === simulatorSummonZone)   activeSummons.splice(arrIdx, 1);
     else if (parent === simulatorReactionZone) activeReactions.splice(arrIdx, 1);
-    _fadeOut(card, 185, direction, () => {
+    _fadeOut(el, 185, direction, () => {
         if (parent === simulatorSummonZone)   updateActiveSummons();
         if (parent === simulatorReactionZone) updateActiveReactions();
         if (cb) cb();
@@ -919,7 +984,32 @@ function animateDeckShuffle() {
             temp.remove();
         });
         document.querySelector(".simulator-deck-card").classList.remove("card-shuffle");
-    }, 2000);
+    }, 2600);
+}
+
+function animateReactionActivate(el) {
+    playSound('activate');
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    const flash = document.createElement('div');
+    flash.className = 'reaction-activate-flash';
+    flash.style.cssText = `left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;height:${rect.height}px;`;
+    document.body.appendChild(flash);
+    setTimeout(() => flash.remove(), 600);
+
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            const ring = document.createElement('div');
+            ring.className = 'reaction-activate-ring';
+            ring.style.left = cx + 'px';
+            ring.style.top = cy + 'px';
+            ring.style.animationDuration = (460 + i * 110) + 'ms';
+            document.body.appendChild(ring);
+            setTimeout(() => ring.remove(), 560 + i * 110);
+        }, i * 85);
+    }
 }
 
 function animatePlayCard(id) {
@@ -979,10 +1069,8 @@ function animateBanish() {
 
 function updateActiveSummons() {
     // console.log(activeSummons);
-    for (el of Array.from(simulatorSummonZone.children)) {
-        console.log(el);
-        if (el.tagName !== "IMG") continue;
-        el.remove();
+    for (const el of Array.from(simulatorSummonZone.children)) {
+        if (el.tagName === 'IMG' || el.classList.contains('summon-card-wrap')) el.remove();
     }
     if (!activeSummons.length) document.querySelector("#simulatorSummonZone h3").style.display = "block";
     else document.querySelector("#simulatorSummonZone h3").style.display = "none";

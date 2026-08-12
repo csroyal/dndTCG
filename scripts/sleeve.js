@@ -8,20 +8,18 @@ const ACTIVE_SLEEVE_COUNT = 6;
 let sleeveRarityRestrictions = { "Legendary": 1, "Mythic": 1 };
 
 function buildSleeve() {
+    let sleeveCardCount = 0;
     for (c in binder) {
         if (c === "undefined") continue;
         let card = getObjectById(cards, c);
         if (card && card.class && card.class !== "Sleeve") continue;
+        sleeveCardCount++;
         currentSleeve.append(createCardEl(card, (e) => {
             if (!checkSleeveRestrictions(card)) return;
             let sleeveOverlay = e.target.parentElement.querySelector(".sleeve-overlay");
             let span = sleeveOverlay.querySelector("span");
             if (Number(span.innerHTML) >= binder[c]) {
-                alert("You don't have any more copies of this card.");
-                return;
-            }
-            if (Number(sleeveCountSpan.innerHTML) >= SLEEVE_LIMIT) {
-                alert("You can only have up to 12 cards in your current sleeve.");
+                showToast("No more copies of this card available.", "error");
                 return;
             }
             span.innerHTML = Number(span.innerHTML) + 1;
@@ -31,11 +29,18 @@ function buildSleeve() {
             db.collection("profiles").doc(toKebabCase(currentProfile)).update({
                 sleeve: sleeve
             });
-
             sleeveOverlay.style.display = "flex";
         }, true, true));
     }
     sortCurrentSleeve();
+
+    if (sleeveCardCount === 0) {
+        const empty = document.createElement("p");
+        empty.id = "sleeveEmptyState";
+        empty.style.cssText = "color: var(--text-muted); font-style: italic; padding: 12px; width: 100%; text-align: center;";
+        empty.textContent = "You don't own any sleeve cards yet. Open packs to find them!";
+        currentSleeve.append(empty);
+    }
 
     let sleeveCount = 0;
     for (c in sleeve) {
@@ -83,30 +88,39 @@ createActiveSleeveButton.addEventListener("click", () => {
     sleeveA = getRandomElementsFromArray(createSleeveArray(), ACTIVE_SLEEVE_COUNT);
     sleeveReserve = createSleeveArray();
 
-    for (c in sleeveA) {
-        let card = getObjectById(cards, sleeveA[c]);
-        sleeveReserve.splice(sleeveReserve.indexOf(sleeveA[c]), 1);
-        activeSleeve.append(createCardEl(card, (e) => {
-            activateSleeveCard(e.target.parentElement, c);
-        }, false));
-        sortActiveSleeve();
-    }
-    console.log(sleeveA, sleeveReserve);
+    sleeveA.forEach((cardID, i) => {
+        const card = getObjectById(cards, cardID);
+        sleeveReserve.splice(sleeveReserve.indexOf(cardID), 1);
+        const cardEl = createCardEl(card, (e) => {
+            activateSleeveCard(e.target.parentElement, cardID);
+        }, false);
+        cardEl.classList.add("sleeve-enter");
+        cardEl.style.animationDelay = (i * 55) + "ms";
+        activeSleeve.append(cardEl);
+    });
+    sortActiveSleeve();
 });
 
-function activateSleeveCard(el, sleeveIndex) {
+function activateSleeveCard(el, cardID) {
     playSound("activate");
-    el.classList.add("puff-out-center");
-    sleeveA.splice(sleeveIndex, 1);
+    el.classList.remove("sleeve-enter");
+    el.classList.add("sleeve-use");
+    const idx = sleeveA.indexOf(cardID);
+    if (idx !== -1) sleeveA.splice(idx, 1);
     setTimeout(() => {
         el.remove();
-        if (sleeveReserve.length === 0) return;
+        if (sleeveReserve.length === 0) {
+            showToast("Sleeve exhausted — no cards left in reserve.", "info");
+            return;
+        }
         let newCard = getRandomElementsFromArray(sleeveReserve, 1)[0];
         sleeveReserve.splice(sleeveReserve.indexOf(newCard), 1);
-        activeSleeve.append(createCardEl(getObjectById(cards, newCard), (e) => {
-            activateSleeveCard(e.target.parentElement, sleeveA.indexOf(newCard));
-        }, false));
-    }, 1500);
+        const newCardEl = createCardEl(getObjectById(cards, newCard), (e) => {
+            activateSleeveCard(e.target.parentElement, newCard);
+        }, false);
+        newCardEl.classList.add("sleeve-enter");
+        activeSleeve.append(newCardEl);
+    }, 400);
 }
 
 function createSleeveArray() {
@@ -121,15 +135,15 @@ function createSleeveArray() {
 
 function checkSleeveRestrictions(card) {
     if (getCountCurrentSleeve() + 1 > SLEEVE_LIMIT) {
-        alert(`Can not have more than ${SLEEVE_LIMIT} cards in your sleeve.`);
+        showToast(`Sleeve is full (${SLEEVE_LIMIT} cards max).`, "error");
         return false;
     }
     if (card.rarity !== "Common" && getRarityCountFromSleeve(card.rarity) + 1 > sleeveRarityRestrictions[card.rarity]) {
-        alert(`Can not have more than ${sleeveRarityRestrictions[card.rarity]} ${card.rarity} cards in your sleeve.`)
+        showToast(`Max ${sleeveRarityRestrictions[card.rarity]} ${card.rarity} card${sleeveRarityRestrictions[card.rarity] !== 1 ? 's' : ''} per sleeve.`, "error");
         return false;
     }
     if ((card.rarity === "Mythic" || card.rarity === "Legendary") && sleeve[card.id]) {
-        alert("Can only have 1 copy of this card in your sleeve.");
+        showToast("Only 1 copy of this card allowed in your sleeve.", "error");
         return false;
     }
     return true;
