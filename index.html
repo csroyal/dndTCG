@@ -42,6 +42,7 @@
                             </div>
                             <div id="simBgLabel" class="sim-bg-name">Default</div>
                         </div>
+                        <button id="muteSoundButton" onclick="toggleMuteSound()"><i class="bi bi-volume-up-fill"></i> <span>Mute Sounds</span></button>
                         <button id="logOutButton"><i class="bi bi-box-arrow-right"></i> Log Out</button>
                     </div>
                     <div id="profileLogin">
@@ -291,6 +292,47 @@
             <button id="simulatorModalButton" class="btn-accent">Confirm</button>
         </div>
     </div>
+    <div id="summonNotesModalContainer" class="modal-container">
+        <div class="modal">
+            <h2 id="summonNotesModalTitle">Notes</h2>
+            <textarea id="summonNotesTextarea" rows="6" placeholder="Write notes for this summon…"></textarea>
+            <button id="summonNotesModalClose" class="btn-ghost">Close</button>
+        </div>
+    </div>
+    <div id="diceRollerModal" class="modal-container">
+        <div class="modal dice-roller-modal">
+            <h2>Dice Roller</h2>
+            <div class="dice-type-grid" id="diceTypeGrid">
+                <button class="dice-btn" onclick="setDie(4)">d4</button>
+                <button class="dice-btn" onclick="setDie(6)">d6</button>
+                <button class="dice-btn" onclick="setDie(8)">d8</button>
+                <button class="dice-btn" onclick="setDie(10)">d10</button>
+                <button class="dice-btn" onclick="setDie(12)">d12</button>
+                <button class="dice-btn dice-btn-active" onclick="setDie(20)">d20</button>
+                <button class="dice-btn" onclick="setDie(100)">d100</button>
+            </div>
+            <div class="dice-count-row">
+                <span>Number of dice</span>
+                <input type="number" id="diceCount" value="1" min="1" max="20">
+            </div>
+            <div id="diceResult" class="dice-result"></div>
+            <div class="sim-tool-actions">
+                <button class="btn-accent" onclick="rollDice()">Roll</button>
+                <button class="btn-ghost" id="diceRollerClose">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="counterModal" class="modal-container">
+        <div class="modal counter-modal">
+            <h2>Counters</h2>
+            <div id="counterList" class="counter-list"></div>
+            <div class="counter-add-row">
+                <input type="text" id="counterNameInput" placeholder="Counter name…">
+                <button class="btn-accent" onclick="addCounter()">Add</button>
+            </div>
+            <button class="btn-ghost" id="counterModalClose">Close</button>
+        </div>
+    </div>
     <div id="simulatorTokensModalContainer" class="modal-container">
         <div class="modal">
             <h2>Tokens</h2>
@@ -384,6 +426,9 @@
             <div class="context-menu-group">
                 <li onclick="transformTargetedCard()">Transform <span class="simulator-context-card-name"></span>...</li>
             </div>
+            <div class="context-menu-group">
+                <li onclick="openSummonNotes()">Notes</li>
+            </div>
         </ul>
         <ul data-context="reactionZoneCard">
             <div class="context-menu-group">
@@ -440,6 +485,13 @@
         <ul data-context="tokens">
             <div class="context-menu-group">
                 <li onclick="viewTokens()">View</li>
+            </div>
+        </ul>
+        <ul data-context="simTools">
+            <div class="context-menu-group">
+                <li onclick="openDiceRoller()">Roll Dice</li>
+                <li onclick="flipCoin()">Flip Coin</li>
+                <li onclick="openCounterModal()">Counters</li>
             </div>
         </ul>
         <ul data-context="hand">

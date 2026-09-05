@@ -26,6 +26,7 @@ let activeSimDeck = [];
 let activeHand = [];
 let activeGraveyard = [];
 let activeSummons = [];
+let activeSummonNotes = [];
 let activeReactions = [];
 let activeBanish = [];
 let activeTokens = {
@@ -59,6 +60,8 @@ document.addEventListener("contextmenu", function (e) {
                 span.innerHTML = getObjectById(cards, contextEl.dataset.cardId).name;
             });
         }
+    } else if (inSection) {
+        renderSimulatorContextMenu({ dataset: { context: 'simTools' } }, e.pageX, e.pageY);
     }
 
     return false;
@@ -295,7 +298,9 @@ function resetSimulator() {
     activeHand = [];
     activeGraveyard = [];
     activeSummons = [];
+    activeSummonNotes = [];
     activeReactions = [];
+    _counters = [];
     activeBanish = [];
     for (const t in activeTokens) activeTokens[t] = 0;
     simulatorTokensModalBody.querySelectorAll('.token-amt').forEach(div => div.innerHTML = 0);
@@ -848,6 +853,7 @@ function playCard() {
             updateGraveyard();
         } else if (targetedCard.dataset.cardClass === "Summon") {
             activeSummons.push(cardID);
+            activeSummonNotes.push('');
             updateActiveSummons();
         } else if (targetedCard.dataset.cardClass === "Reaction") {
             activeReactions.push(cardID);
@@ -947,7 +953,7 @@ function _removeCardFromContext(card, direction, cb) {
     const domIdx = Array.from(parent.children).indexOf(el);
     const arrIdx = (parent === simulatorHand) ? domIdx : domIdx - 1;
     if (parent === simulatorHand)             activeHand.splice(arrIdx, 1);
-    else if (parent === simulatorSummonZone)   activeSummons.splice(arrIdx, 1);
+    else if (parent === simulatorSummonZone) { activeSummons.splice(arrIdx, 1); activeSummonNotes.splice(arrIdx, 1); }
     else if (parent === simulatorReactionZone) activeReactions.splice(arrIdx, 1);
     _fadeOut(el, 185, direction, () => {
         if (parent === simulatorSummonZone)   updateActiveSummons();
@@ -985,6 +991,155 @@ function animateDeckShuffle() {
         });
         document.querySelector(".simulator-deck-card").classList.remove("card-shuffle");
     }, 2600);
+}
+
+const summonNotesModal     = document.getElementById('summonNotesModalContainer');
+const summonNotesTextarea  = document.getElementById('summonNotesTextarea');
+const summonNotesTitle     = document.getElementById('summonNotesModalTitle');
+document.getElementById('summonNotesModalClose').onclick = () => {
+    if (summonNotesModal._idx !== undefined) activeSummonNotes[summonNotesModal._idx] = summonNotesTextarea.value;
+    summonNotesModal.classList.remove('active');
+};
+
+function openSummonNotes() {
+    const card = targetedCard;
+    const wrap = card.parentElement;
+    const domIdx = Array.from(simulatorSummonZone.children).indexOf(wrap);
+    const arrIdx = domIdx - 1;
+    const name = getObjectById(cards, card.dataset.cardId)?.name ?? card.dataset.cardId;
+    summonNotesTitle.textContent = `Notes — ${name}`;
+    summonNotesTextarea.value = activeSummonNotes[arrIdx] ?? '';
+    summonNotesModal._idx = arrIdx;
+    summonNotesModal.classList.add('active');
+    setTimeout(() => summonNotesTextarea.focus(), 50);
+}
+
+/* ============================================================
+   SIM TOOLS — DICE, COIN, COUNTERS
+============================================================ */
+
+// --- Dice Roller ---
+let _selectedDie = 20;
+let _diceRolling = false;
+
+document.getElementById('diceRollerClose').onclick = () => document.getElementById('diceRollerModal').classList.remove('active');
+
+function openDiceRoller() {
+    document.getElementById('diceRollerModal').classList.add('active');
+}
+
+function setDie(sides) {
+    _selectedDie = sides;
+    document.querySelectorAll('.dice-btn').forEach(btn => {
+        btn.classList.toggle('dice-btn-active', btn.textContent === `d${sides}`);
+    });
+}
+
+function rollDice() {
+    if (_diceRolling) return;
+    const count = Math.min(Math.max(parseInt(document.getElementById('diceCount').value) || 1, 1), 20);
+    const resultEl = document.getElementById('diceResult');
+    _diceRolling = true;
+    resultEl.className = 'dice-result dice-rolling';
+
+    const rolls = Array.from({ length: count }, () => Math.floor(Math.random() * _selectedDie) + 1);
+    const total = rolls.reduce((a, b) => a + b, 0);
+
+    let tick = 0;
+    const interval = setInterval(() => {
+        const fake = Math.floor(Math.random() * _selectedDie * count) + count;
+        resultEl.textContent = fake;
+        tick++;
+    }, 55);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        _diceRolling = false;
+
+        let extraClass = '';
+        let label = '';
+        if (count === 1 && _selectedDie === 20) {
+            if (rolls[0] === 1)  { extraClass = 'dice-nat1';  label = 'Critical Failure!'; }
+            if (rolls[0] === 20) { extraClass = 'dice-nat20'; label = 'Natural 20!'; }
+        }
+
+        const breakdown = count > 1 ? `<div class="dice-breakdown">${rolls.join(' + ')} =</div>` : '';
+        resultEl.className = `dice-result dice-reveal ${extraClass}`;
+        resultEl.innerHTML = `${breakdown}<span class="dice-total">${total}</span>${label ? `<div class="dice-label">${label}</div>` : ''}`;
+    }, 660);
+}
+
+// --- Coin Flip ---
+function flipCoin() {
+    const result = Math.random() < 0.5 ? 'Heads' : 'Tails';
+    const overlay = document.createElement('div');
+    overlay.className = 'coin-flip-overlay';
+    const coin = document.createElement('div');
+    coin.className = 'coin-flip-coin';
+    overlay.append(coin);
+    document.body.append(overlay);
+
+    setTimeout(() => {
+        coin.classList.add('coin-reveal');
+        coin.textContent = result;
+    }, 950);
+
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 0.35s ease';
+        setTimeout(() => overlay.remove(), 380);
+    }, 1700);
+}
+
+// --- Counters ---
+let _counters = [];
+
+document.getElementById('counterModalClose').onclick = () => document.getElementById('counterModal').classList.remove('active');
+document.getElementById('counterNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') addCounter(); });
+
+function openCounterModal() {
+    _renderCounters();
+    document.getElementById('counterModal').classList.add('active');
+}
+
+function _renderCounters() {
+    const list = document.getElementById('counterList');
+    if (_counters.length === 0) {
+        list.innerHTML = '<p class="counter-empty">No counters yet.</p>';
+        return;
+    }
+    list.innerHTML = '';
+    _counters.forEach((c, i) => {
+        const row = document.createElement('div');
+        row.className = 'counter-row';
+        row.innerHTML = `
+            <span class="counter-name">${c.name}</span>
+            <button class="counter-btn" onclick="_changeCounter(${i},-1)">−</button>
+            <span class="counter-val" id="cval${i}">${c.value}</span>
+            <button class="counter-btn" onclick="_changeCounter(${i},1)">+</button>
+            <button class="counter-remove" onclick="_removeCounter(${i})"><i class="bi bi-x"></i></button>
+        `;
+        list.append(row);
+    });
+}
+
+function addCounter() {
+    const input = document.getElementById('counterNameInput');
+    const name = input.value.trim() || 'Counter';
+    _counters.push({ name, value: 0 });
+    input.value = '';
+    _renderCounters();
+}
+
+function _changeCounter(i, delta) {
+    _counters[i].value += delta;
+    const el = document.getElementById(`cval${i}`);
+    if (el) el.textContent = _counters[i].value;
+}
+
+function _removeCounter(i) {
+    _counters.splice(i, 1);
+    _renderCounters();
 }
 
 function animateReactionActivate(el) {

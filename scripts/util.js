@@ -386,11 +386,29 @@ cardViewImg.addEventListener("click", () => {
     }
 });
 
+let _soundMuted = localStorage.getItem('soundMuted') === 'true';
+
 function playSound(soundName) {
+    if (_soundMuted) return;
     var sound = new Audio(`./assets/sounds/${soundName}.mp3`);
     sound.volume = 0.75;
     sound.play();
 }
+
+function toggleMuteSound() {
+    _soundMuted = !_soundMuted;
+    localStorage.setItem('soundMuted', _soundMuted);
+    _updateMuteButton();
+}
+
+function _updateMuteButton() {
+    const btn = document.getElementById('muteSoundButton');
+    if (!btn) return;
+    const icon = btn.querySelector('i');
+    icon.className = _soundMuted ? 'bi bi-volume-mute-fill' : 'bi bi-volume-up-fill';
+    btn.querySelector('span').textContent = _soundMuted ? 'Unmute Sounds' : 'Mute Sounds';
+}
+document.addEventListener('DOMContentLoaded', _updateMuteButton);
 
 function getObjectById(arr, id) {
     return arr.find(obj => obj.id === id);

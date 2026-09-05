@@ -874,6 +874,161 @@ input::placeholder { color: var(--text-3); }
     will-change: transform, opacity;
 }
 
+/* ============================================================
+   SIM TOOLS — DICE / COIN / COUNTERS
+============================================================ */
+.dice-roller-modal {
+    width: 360px;
+    padding: 28px 24px 20px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dice-type-grid {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.dice-btn {
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-input, rgba(255,255,255,0.06));
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+.dice-btn:hover   { background: var(--bg-hover, rgba(255,255,255,0.1)); }
+.dice-btn-active  { background: var(--accent, #6c5dd3); border-color: var(--accent, #6c5dd3); color: #fff; }
+.dice-count-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    width: 100%;
+    justify-content: center;
+}
+.dice-count-row input {
+    width: 56px;
+    text-align: center;
+    padding: 4px 6px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-input, rgba(255,255,255,0.06));
+    color: var(--text);
+    font-size: 0.88rem;
+}
+.dice-result {
+    min-height: 72px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-radius: var(--radius-lg);
+    background: var(--bg-input, rgba(255,255,255,0.04));
+    border: 1px solid var(--border);
+    transition: color 0.2s;
+    letter-spacing: -0.5px;
+}
+.dice-result.dice-rolling { color: var(--text-muted); animation: dice-cycle 0.1s steps(1) infinite; }
+.dice-result.dice-reveal  { animation: dice-pop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.dice-result.dice-nat20   { color: #f5c542; }
+.dice-result.dice-nat1    { color: #e05555; }
+.dice-breakdown { font-size: 0.72rem; color: var(--text-muted); font-weight: 400; margin-bottom: 2px; }
+.dice-total     { line-height: 1; }
+.dice-label     { font-size: 0.78rem; font-weight: 600; margin-top: 4px; letter-spacing: 0.03em; }
+.dice-nat20 .dice-label { color: #f5c542; }
+.dice-nat1  .dice-label { color: #e05555; }
+.sim-tool-actions { display: flex; gap: 8px; width: 100%; justify-content: center; }
+@keyframes dice-pop {
+    0%   { transform: scale(0.75); opacity: 0.4; }
+    100% { transform: scale(1);    opacity: 1;   }
+}
+
+/* Coin flip */
+.coin-flip-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    pointer-events: none;
+    animation: coin-bg-in 0.3s ease forwards;
+}
+.coin-flip-coin {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #e8c84a, #9a7a10);
+    border: 3px solid #c9a82c;
+    box-shadow: 0 4px 20px rgba(200,160,20,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    animation: coin-spin 0.95s cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+    transform-style: preserve-3d;
+}
+.coin-flip-coin.coin-reveal {
+    animation: coin-settle 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes coin-spin {
+    0%   { transform: rotateX(0deg)    scale(0.4); opacity: 0; }
+    12%  { opacity: 1; }
+    100% { transform: rotateX(1080deg) scale(1);   opacity: 1; }
+}
+@keyframes coin-settle {
+    0%   { transform: rotateX(1080deg) scale(1.12); }
+    100% { transform: rotateX(1080deg) scale(1);    }
+}
+@keyframes coin-bg-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Counters */
+.counter-modal {
+    width: 380px;
+    padding: 28px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.counter-list { display: flex; flex-direction: column; gap: 8px; width: 100%; min-height: 32px; }
+.counter-empty { color: var(--text-muted); font-style: italic; font-size: 0.85rem; text-align: center; margin: 0; }
+.counter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-input, rgba(255,255,255,0.05));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px 10px;
+}
+.counter-name  { flex: 1; font-size: 0.88rem; font-weight: 500; }
+.counter-val   { min-width: 2.2em; text-align: center; font-weight: 700; font-size: 1rem; }
+.counter-btn   { width: 28px; height: 28px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-hover, rgba(255,255,255,0.08)); color: var(--text); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.counter-btn:hover { background: var(--accent, #6c5dd3); border-color: var(--accent, #6c5dd3); color: #fff; }
+.counter-remove { margin-left: auto; width: 24px; height: 24px; border: none; background: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); }
+.counter-remove:hover { color: var(--danger, #e05555); }
+.counter-add-row { display: flex; gap: 8px; width: 100%; }
+.counter-add-row input { flex: 1; padding: 6px 10px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-input, rgba(255,255,255,0.06)); color: var(--text); font-size: 0.88rem; outline: none; }
+
 /* Reaction card activation */
 .reaction-activate-flash {
     position: fixed;
@@ -2282,6 +2437,25 @@ input::placeholder { color: var(--text-3); }
     gap: 18px;
     width: 380px;
     box-shadow: var(--shadow-lg);
+}
+/* Notes modal */
+#summonNotesModalContainer .modal {
+    padding: 28px 24px 20px;
+    width: 400px;
+}
+#summonNotesTextarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--bg-input, rgba(255,255,255,0.06));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    padding: 8px 10px;
+    resize: vertical;
+    outline: none;
+    min-height: 100px;
 }
 #simulatorTokensModalBody {
     width: 100%;
