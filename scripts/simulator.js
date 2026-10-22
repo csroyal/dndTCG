@@ -27,6 +27,7 @@ let activeHand = [];
 let activeGraveyard = [];
 let activeSummons = [];
 let activeSummonNotes = [];
+let activeSummonHP = [];   // current HP per summon, parallel to activeSummons
 let activeReactions = [];
 let activeBanish = [];
 let activeTokens = {
@@ -35,6 +36,12 @@ let activeTokens = {
 };
 
 let targetedCard;
+
+// While something is mid-animation (cards in flight between zones) the board isn't saved or undone.
+let simBusyUntil = 0;
+function simHold(ms) { simBusyUntil = Math.max(simBusyUntil, performance.now() + ms); }
+
+function summonDefaultHp(cardID) { return getObjectById(cards, cardID)?.summonInfo?.hp ?? 0; }
 
 document.addEventListener("click", function () {
     simulatorContextMenu.classList.remove("active");
@@ -54,12 +61,7 @@ document.addEventListener("contextmenu", function (e) {
     e.preventDefault();
 
     if (contextEl) {
-        renderSimulatorContextMenu(contextEl, e.pageX, e.pageY);
-        if (contextEl.dataset.cardId) {
-            document.querySelectorAll(".simulator-context-card-name").forEach(span => {
-                span.innerHTML = getObjectById(cards, contextEl.dataset.cardId).name;
-            });
-        }
+        openSimContextMenu(contextEl, e.pageX, e.pageY);
     } else if (inSection) {
         renderSimulatorContextMenu({ dataset: { context: 'simTools' } }, e.pageX, e.pageY);
     }
@@ -67,9 +69,55 @@ document.addEventListener("contextmenu", function (e) {
     return false;
 });
 
+// Opens the menu for a card or zone element and fills in the card's name.
+function openSimContextMenu(el, x, y, { focusFirst = false } = {}) {
+    if (!renderSimulatorContextMenu(el, x, y)) return false;
+    if (el.dataset.cardId) {
+        const name = getObjectById(cards, el.dataset.cardId)?.name ?? "";
+        document.querySelectorAll(".simulator-context-card-name").forEach(span => { span.textContent = name; });
+    }
+    if (focusFirst) visibleMenuItems()[0]?.focus();
+    return true;
+}
+
+// Left-click / Enter on a card: open its menu beside the card instead of at the cursor.
+function openSimContextMenuBeside(el) {
+    const rect = el.getBoundingClientRect();
+    const fitsRight = rect.right + 240 < window.innerWidth;
+    const x = fitsRight ? rect.right + 8 : rect.left - 8 - (simulatorContextMenu.offsetWidth || 230);
+    return openSimContextMenu(el, x, rect.top, { focusFirst: document.activeElement === el });
+}
+
+function visibleMenuItems() {
+    return Array.from(simulatorContextMenu.querySelectorAll("li")).filter(li => li.closest("ul").style.display !== "none");
+}
+
+// Keyboard: arrows move through the menu, Enter/Space picks.
+simulatorContextMenu.querySelectorAll("li").forEach(li => {
+    li.setAttribute("role", "menuitem");
+    li.setAttribute("tabindex", "-1");
+});
+simulatorContextMenu.addEventListener("keydown", (e) => {
+    const items = visibleMenuItems();
+    const idx = items.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const next = e.key === "ArrowDown" ? (idx + 1) % items.length : (idx - 1 + items.length) % items.length;
+        items[next]?.focus();
+    } else if ((e.key === "Enter" || e.key === " ") && idx !== -1) {
+        e.preventDefault();
+        items[idx].click();
+        simulatorContextMenu.classList.remove("active");
+    }
+});
+
+function viewTargetedCard() {
+    if (targetedCard?.dataset.cardId) openInCardViewModal(targetedCard.dataset.cardId);
+}
+
 function renderSimulatorContextMenu(target, x, y) {
     const matchingUl = simulatorContextMenu.querySelector(`ul[data-context="${target.dataset.context}"]`);
-    if (!matchingUl) return;
+    if (!matchingUl) return false;
 
     targetedCard = target;
 
@@ -90,12 +138,13 @@ function renderSimulatorContextMenu(target, x, y) {
     simulatorContextMenu.style.top    = `${Math.max(4, cy)}px`;
     simulatorContextMenu.style.bottom = 'unset';
     simulatorContextMenu.classList.add("active");
+    return true;
 }
 
 function buildDeckSelect() {
     simulatorDeckSelect.innerHTML = "";
 
-    for (d in decks) {
+    for (const d in decks) {
         let deck = decks[d];
         let container = document.createElement("div");
         container.setAttribute("data-deck-id", deck.id);
@@ -103,6 +152,7 @@ function buildDeckSelect() {
         let iconImg = document.createElement("img");
         iconImg.classList.add("deck-card-icon");
         iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : "./assets/card-art/back.png";
+        iconImg.alt = "";
         if (!deck.icon) iconImg.classList.add("placeholder");
 
         let meta = document.createElement("div");
@@ -129,6 +179,7 @@ function buildDeckSelect() {
             };
         }
 
+        makeActivatable(container, deck.name);
         simulatorDeckSelect.append(container);
     }
 
@@ -145,11 +196,13 @@ simulatorDeckSelectConfirm.addEventListener("click", () => {
 
 function buildSimDeck(deck) {
     activeSimDeck = [];
-    for (c in deck.deckList) {
+    for (const c in deck.deckList) {
         for (var i = 0; i < deck.deckList[c]; i++) activeSimDeck.push(c);
     }
     shuffleDeck();
-    console.log(activeSimDeck);
+    simStarted = true;
+    simGameId = generateUID();
+    simHold(3400); // the opening hand is dealt after a short pause
 
     simulatorDeck.classList.remove("empty");
 
@@ -158,18 +211,32 @@ function buildSimDeck(deck) {
     }, 2000);
 }
 
-function createSimulatorCard(cardID, zone = "hand", func = "") {
+function createSimulatorCard(cardID, zone = "hand", func = "", hp = null) {
     let card = getObjectById(cards, cardID);
     let el = document.createElement("img");
     el.src = `./assets/card-art/${cardID}.jpg`;
+    el.alt = card.name;
 
     el.setAttribute("data-context", zone);
     el.setAttribute("data-card-id", cardID);
     el.setAttribute("data-card-class", card.class);
     el.setAttribute("data-uid", generateUID());
+    el.setAttribute("draggable", "false");
 
-    if (!func) el.addEventListener("click", () => { openInCardViewModal(cardID); });
-    else { el.addEventListener("click", func); }
+    if (func) {
+        el.addEventListener("click", func);
+    } else if (simulatorContextMenu.querySelector(`ul[data-context="${zone}"]`)) {
+        // Cards with actions open their menu on click; "View" is the menu's first item.
+        el.addEventListener("click", (e) => {
+            if (el._suppressClick) { el._suppressClick = false; return; }
+            e.stopPropagation(); // the document-level click would close the menu straight away
+            openSimContextMenuBeside(el);
+        });
+        makeActivatable(el, `${card.name}: actions`);
+        if (zone === "hand") enableHandDrag(el);
+    } else {
+        el.addEventListener("click", () => { openInCardViewModal(cardID); });
+    }
 
     if (zone === "summonZoneCard") {
         const wrap = document.createElement("div");
@@ -177,17 +244,18 @@ function createSimulatorCard(cardID, zone = "hand", func = "") {
         wrap.append(el);
 
         const defaultHp = card.summonInfo?.hp ?? 0;
+        const startHp = hp ?? defaultHp;
 
         const hpBar = document.createElement("div");
         hpBar.className = "summon-hp-bar";
-        hpBar.classList.toggle("hp-danger", defaultHp <= 0);
+        hpBar.classList.toggle("hp-danger", startHp <= 0);
 
         const heart = document.createElement("i");
         heart.className = "bi bi-heart-fill summon-hp-heart";
 
         const hpVal = document.createElement("span");
         hpVal.className = "summon-hp-val";
-        hpVal.textContent = defaultHp;
+        hpVal.textContent = startHp;
         hpVal.title = "Click to edit HP";
         hpVal.onclick = (e) => {
             e.stopPropagation();
@@ -200,10 +268,16 @@ function createSimulatorCard(cardID, zone = "hand", func = "") {
             input.focus();
             input.select();
             const commit = () => {
-                const v = parseInt(input.value) ?? defaultHp;
-                hpVal.textContent = isNaN(v) ? defaultHp : v;
-                hpBar.classList.toggle("hp-danger", Number(hpVal.textContent) <= 0);
+                if (!input.isConnected) return; // blur after Enter already committed
+                const before = Number(hpVal.textContent);
+                const v = parseInt(input.value, 10);
+                const next = isNaN(v) ? before : v;
+                hpVal.textContent = next;
+                hpBar.classList.toggle("hp-danger", next <= 0);
                 input.replaceWith(hpVal);
+                const idx = Array.from(simulatorSummonZone.querySelectorAll(".summon-card-wrap")).indexOf(wrap);
+                if (idx !== -1) activeSummonHP[idx] = next;
+                if (next <= 0 && before > 0) promptSummonDeath(el);
             };
             input.onblur = commit;
             input.onkeydown = (ev) => { if (ev.key === "Enter") { ev.preventDefault(); commit(); } };
@@ -225,7 +299,7 @@ function updateGraveyard() {
 }
 
 function buildTokensModal() {
-    for (t in activeTokens) {
+    for (const t in activeTokens) {
         let container = document.createElement("div");
         container.classList.add("token-group");
         
@@ -247,6 +321,7 @@ function buildTokensModal() {
 
         let tokenAmt = document.createElement("div");
         tokenAmt.className = "token-amt";
+        tokenAmt.dataset.token = t;
         tokenAmt.innerHTML = "0";
 
         trackerGroup.append(tokenImg, tokenNameSpan, tokenAmt);
@@ -254,8 +329,8 @@ function buildTokensModal() {
         let plusButton = document.createElement("button");
         plusButton.innerHTML = "+";
         plusButton.onclick = () => {
-            tokenAmt.innerHTML = Number(tokenAmt.innerHTML) + 1;
             activeTokens[t]++;
+            tokenAmt.innerHTML = activeTokens[t];
         }
 
         container.append(minusButton, trackerGroup, plusButton);
@@ -282,9 +357,7 @@ simulatorDeck.addEventListener('click', () => {
 
 /* NEXT TURN */
 
-async function nextTurn() {
-    const confirmed = await showConfirm('End your turn and draw a card?');
-    if (!confirmed) return;
+function nextTurn() {
     const turnEl = document.getElementById('simulatorTurnNum');
     turnEl.textContent = parseInt(turnEl.textContent, 10) + 1;
     setActionState('all', true);
@@ -293,7 +366,11 @@ async function nextTurn() {
 
 /* RESET / NEW GAME */
 
-function resetSimulator() {
+function resetSimulator({ openDeckSelect = true } = {}) {
+    pendingSummons = 0;
+    simStarted = false;
+    simGameId = null;
+    activeSummonHP = [];
     activeSimDeck = [];
     activeHand = [];
     activeGraveyard = [];
@@ -321,7 +398,9 @@ function resetSimulator() {
     if (deckCountTimeout) { clearTimeout(deckCountTimeout); deckCountTimeout = null; }
     simDeckCountLabel.classList.remove('show');
 
-    buildDeckSelect();
+    _renderCounters();
+    if (openDeckSelect) buildDeckSelect();
+    else simulatorDeckSelectContainer.classList.remove("active");
 }
 
 /* HAND LAYOUT SCALING */
@@ -351,16 +430,71 @@ function setActionState(actionType, actionState) {
     } else {
         actionState ? document.getElementById(`${actionType}Pip`).classList.remove("used") : document.getElementById(`${actionType}Pip`).classList.add("used");
     }
+    syncActionPips();
 }
 
+/* ACTION PIPS — click a row to mark it used / available */
+
+function syncActionPips() {
+    document.querySelectorAll("#simulatorActionTracker .simulator-action-group").forEach(group => {
+        const used = group.querySelector(".action-pip").classList.contains("used");
+        const label = group.querySelector("h3").textContent.replace(":", "").trim();
+        group.setAttribute("aria-pressed", String(used));
+        group.title = used ? `${label} used. Click to restore` : `${label} available. Click to mark used`;
+    });
+}
+
+document.querySelectorAll("#simulatorActionTracker .simulator-action-group").forEach(group => {
+    makeActivatable(group);
+    group.addEventListener("click", () => {
+        group.querySelector(".action-pip").classList.toggle("used");
+        syncActionPips();
+    });
+});
+syncActionPips();
+
+/* ZONE MENUS — the ⋯ button opens the same menu as right-clicking the zone */
+
+document.querySelectorAll(".zone-menu-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // don't trigger the zone's own click (e.g. View Graveyard)
+        const zoneEl = btn.closest("[data-context]");
+        const rect = btn.getBoundingClientRect();
+        openSimContextMenu(zoneEl, rect.left, rect.bottom + 6, { focusFirst: e.detail === 0 });
+    });
+});
+
 function sendTargetedCardToGraveyard() {
-    const cardID = targetedCard.dataset.cardId;
+    const cardEl = targetedCard;
+    const cardID = cardEl.dataset.cardId;
     const name = getObjectById(cards, cardID)?.name ?? cardID;
-    _removeCardFromContext(targetedCard, 'down', () => {
+    const toGraveyard = () => _removeCardFromContext(cardEl, 'down', () => {
         activeGraveyard.push(cardID);
         updateGraveyard();
         showToast(`${name} sent to graveyard.`, 'info');
     });
+
+    // A summon leaving the field dies: it greys out and cracks before it goes.
+    const wrap = cardEl.closest('.summon-card-wrap');
+    if (!wrap) { toGraveyard(); return; }
+    simHold(900);
+    wrap.style.pointerEvents = 'none';
+    playSound('death');
+    playDeathEffect(cardEl);
+    wrap.animate([
+        { filter: 'none', transform: 'none' },
+        { filter: 'grayscale(1) brightness(0.5)', transform: 'translateY(6px) rotate(-4deg)' },
+    ], { duration: prefersReducedMotion.matches ? 1 : 560, easing: 'ease-in', fill: 'forwards' });
+    setTimeout(toGraveyard, prefersReducedMotion.matches ? 0 : 560);
+}
+
+// HP was edited down to 0: offer to send the summon to the graveyard.
+async function promptSummonDeath(cardEl) {
+    const name = getObjectById(cards, cardEl.dataset.cardId)?.name ?? 'This summon';
+    const confirmed = await showConfirm(`<strong>${escapeHTML(name)}</strong> is at 0 HP. Send it to the graveyard?`, { confirmLabel: 'Send to Graveyard' });
+    if (!confirmed || !cardEl.isConnected) return;
+    targetedCard = cardEl;
+    sendTargetedCardToGraveyard();
 }
 
 function sendTargetedCardToHand() {
@@ -391,6 +525,7 @@ function activateTargetedCard() {
     activeReactions.splice(arrIdx, 1);
     activeGraveyard.push(cardID);
     animateReactionActivate(card);
+    playCardEffect(getObjectById(cards, cardID), card);
     _fadeOut(card, 420, 'fade', () => {
         updateActiveReactions();
         updateGraveyard();
@@ -412,11 +547,12 @@ function viewGraveyard() {
 }
 
 function searchGraveyard() {
+    targetCardID = null;
     simulatorModalContainer.querySelector("h2").innerHTML = "Search Graveyard";
 
     simulatorModalBody.innerHTML = "";
 
-    for (g in activeGraveyard) {
+    for (const g in activeGraveyard) {
         simulatorModalBody.append(createSimulatorCard(activeGraveyard[g], "", (e) => {
             targetCardID = e.target.dataset.cardId;
             if (document.querySelector(".selected-card")) document.querySelector(".selected-card").classList.remove("selected-card");
@@ -427,6 +563,7 @@ function searchGraveyard() {
     simulatorModalButton.innerHTML = "Confirm";
 
     simulatorModalButton.onclick = () => {
+        if (!targetCardID) { showToast('Select a card first.', 'error'); return; }
         const name = getObjectById(cards, targetCardID)?.name ?? targetCardID;
         activeGraveyard.splice(activeGraveyard.indexOf(targetCardID), 1);
         activeHand.push(targetCardID);
@@ -441,7 +578,7 @@ function searchGraveyard() {
 
 function shuffleGraveyardIntoDeck() {
     const count = activeGraveyard.length;
-    for (g in activeGraveyard) {
+    for (const g in activeGraveyard) {
         activeSimDeck.push(activeGraveyard[g]);
     }
     activeGraveyard = [];
@@ -504,6 +641,7 @@ function drawCardConditional() {
     }
 
     let card = optionsArr[getRandomInt(0, optionsArr.length - 1)];
+    simHold(650);
     console.log(optionsArr, card);
     activeHand.push(card);
     playSound("draw");
@@ -525,7 +663,15 @@ function drawCardConditional() {
     return;
 }
 
+function deckIsEmpty() {
+    if (activeSimDeck.length > 0) return false;
+    showToast('Your deck is empty.', 'error');
+    return true;
+}
+
 function drawCard() {
+    if (deckIsEmpty()) return;
+    simHold(650);
     let card = activeSimDeck[0];
     activeSimDeck.shift();
     activeHand.push(card);
@@ -538,6 +684,7 @@ function drawCard() {
 
 async function drawCards(count = 0) {
     let drawAmount = count;
+    if (deckIsEmpty()) return;
     if (!drawAmount) {
         const input = await showInput('Draw how many cards?', '1', '1');
         if (input === null) return;
@@ -547,12 +694,18 @@ async function drawCards(count = 0) {
             return;
         }
     }
+    if (drawAmount > activeSimDeck.length) {
+        showToast(`Only ${activeSimDeck.length} card${activeSimDeck.length === 1 ? '' : 's'} left to draw.`, 'info');
+        drawAmount = activeSimDeck.length;
+    }
     for (let i = 0; i < drawAmount; i++) {
         setTimeout(drawCard, i * 250);
     }
 }
 
 function drawCardFromBottom() {
+    if (deckIsEmpty()) return;
+    simHold(650);
     let card = activeSimDeck[activeSimDeck.length - 1];
     activeSimDeck.pop();
     activeHand.push(card);
@@ -566,6 +719,8 @@ function drawCardFromBottom() {
 }
 
 function drawRandomCard() {
+    if (deckIsEmpty()) return;
+    simHold(650);
     let card = activeSimDeck[getRandomInt(0, activeSimDeck.length - 1)];
     activeSimDeck.splice(activeSimDeck.indexOf(card), 1);
     activeHand.push(card);
@@ -636,6 +791,7 @@ async function rearrangeTopCards() {
 
             const img = document.createElement('img');
             img.src = `./assets/card-art/${cardID}.jpg`;
+            img.alt = getObjectById(cards, cardID)?.name ?? '';
             if (selectedIdx === i) img.classList.add('rearrange-selected');
 
             const lbl = document.createElement('div');
@@ -674,11 +830,13 @@ async function rearrangeTopCards() {
 }
 
 function searchDeck() {
+    if (deckIsEmpty()) return;
+    targetCardID = null;
     simulatorModalContainer.querySelector("h2").innerHTML = "Search Deck";
 
     simulatorModalBody.innerHTML = "";
 
-    for (d in activeSimDeck) {
+    for (const d in activeSimDeck) {
         simulatorModalBody.append(createSimulatorCard(activeSimDeck[d], "", (e) => {
             targetCardID = e.target.dataset.cardId;
             if (document.querySelector(".selected-card")) document.querySelector(".selected-card").classList.remove("selected-card");
@@ -689,6 +847,7 @@ function searchDeck() {
     simulatorModalButton.innerHTML = "Confirm";
 
     simulatorModalButton.onclick = () => {
+        if (!targetCardID) { showToast('Select a card first.', 'error'); return; }
         activeSimDeck.splice(activeSimDeck.indexOf(targetCardID), 1);
         activeHand.push(targetCardID);
         simulatorHand.append(createSimulatorCard(targetCardID));
@@ -699,6 +858,7 @@ function searchDeck() {
 }
 
 function banishRandomCard() {
+    if (deckIsEmpty()) return;
     let card = activeSimDeck[getRandomInt(0, activeSimDeck.length - 1)];
     activeSimDeck.splice(activeSimDeck.indexOf(card), 1);
     activeBanish.push(card);
@@ -806,6 +966,7 @@ function transformTargetedCard() {
     simulatorModalButton.onclick = () => {
         if (!selectedTransformID) { showToast('Select a card to transform into.', 'error'); return; }
         activeSummons[arrIdx] = selectedTransformID;
+        activeSummonHP[arrIdx] = summonDefaultHp(selectedTransformID);
         simulatorModalContainer.classList.remove('active');
         updateActiveSummons();
         showToast('Transformed!', 'success');
@@ -820,7 +981,7 @@ function viewBanish() {
 
     simulatorModalBody.innerHTML = "";
 
-    for (b in activeBanish) {
+    for (const b in activeBanish) {
         simulatorModalBody.append(createSimulatorCard(activeBanish[b], "banishCard"));
     }
 
@@ -837,28 +998,47 @@ function viewTokens() {
     simulatorTokensModalContainer.classList.add("active");
 }
 
-function playCard() {
+const MAX_ACTIVE_SUMMONS = 3;
+let pendingSummons = 0; // summons mid play-animation, not yet in activeSummons
+
+// fromRect: where the card visually starts (its hand slot, or where a drag dropped it)
+function playCard(fromRect = null) {
     const cardID = targetedCard.dataset.cardId;
+    // read now: targetedCard may point at another card by the time the timeout fires
+    const cardClass = targetedCard.dataset.cardClass;
     const name = getObjectById(cards, cardID)?.name ?? cardID;
+    if (cardClass === "Summon" && activeSummons.length + pendingSummons >= MAX_ACTIVE_SUMMONS) {
+        showToast(`Your Summon Zone is full (${MAX_ACTIVE_SUMMONS} max).`, 'error');
+        return;
+    }
+    if (cardClass === "Summon") pendingSummons++;
+    fromRect = fromRect ?? targetedCard.getBoundingClientRect();
     targetedCard.remove();
 
     activeHand.splice(activeHand.indexOf(cardID), 1);
 
-    animatePlayCard(cardID);
+    animatePlayCard(cardID, fromRect, cardClass);
     showToast(`${name} played.`, 'success');
 
     setTimeout(() => {
-        if (targetedCard.dataset.cardClass === "Spell" || targetedCard.dataset.cardClass === "Utility") {
+        let landed = null;
+        if (cardClass === "Spell" || cardClass === "Utility") {
             activeGraveyard.push(cardID);
             updateGraveyard();
-        } else if (targetedCard.dataset.cardClass === "Summon") {
+        } else if (cardClass === "Summon") {
+            pendingSummons = Math.max(0, pendingSummons - 1);
             activeSummons.push(cardID);
             activeSummonNotes.push('');
+            activeSummonHP.push(summonDefaultHp(cardID));
             updateActiveSummons();
-        } else if (targetedCard.dataset.cardClass === "Reaction") {
+            landed = simulatorSummonZone.querySelector('.summon-card-wrap:last-of-type img');
+        } else if (cardClass === "Reaction") {
             activeReactions.push(cardID);
             updateActiveReactions();
+            landed = simulatorReactionZone.querySelector('img:last-of-type');
         }
+        if (cardClass === "Reaction") playReactionSetEffect(landed);
+        else playCardEffect(getObjectById(cards, cardID), landed);
     }, 1500);
 }
 
@@ -868,6 +1048,7 @@ function shuffleTargetedCardIntoDeck() {
     const name = getObjectById(cards, cardID)?.name ?? cardID;
     activeSimDeck.push(cardID);
     activeHand.splice(domIdx, 1);
+    simulatorDeck.classList.remove('empty');
     _fadeOut(targetedCard, 185, 'up', () => {
         shuffleDeck();
         showToast(`${name} shuffled into deck.`, 'info');
@@ -881,6 +1062,7 @@ function putTargetedCardOnDeck(direction) {
     if (direction === "top") activeSimDeck.unshift(cardID);
     else if (direction === "bottom") activeSimDeck.push(cardID);
     activeHand.splice(domIdx, 1);
+    simulatorDeck.classList.remove('empty');
     _fadeOut(targetedCard, 185, 'up', () => {
         showToast(`${name} placed on ${direction} of deck.`, 'info');
     });
@@ -891,6 +1073,7 @@ function discardHand() {
     for (const h of activeHand) activeGraveyard.push(h);
     activeHand = [];
     const handEls = Array.from(simulatorHand.children);
+    simHold(320 + handEls.length * 35);
     handEls.forEach((card, i) => {
         setTimeout(() => {
             card.style.transition = 'transform 0.18s ease, opacity 0.18s ease';
@@ -912,6 +1095,7 @@ function shuffleHandIntoDeck() {
     for (const h of activeHand) activeSimDeck.push(h);
     activeHand = [];
     const handEls = Array.from(simulatorHand.children);
+    simHold(320 + handEls.length * 35);
     handEls.forEach((card, i) => {
         setTimeout(() => {
             card.style.transition = 'transform 0.18s ease, opacity 0.18s ease';
@@ -921,6 +1105,7 @@ function shuffleHandIntoDeck() {
             });
         }, i * 35);
     });
+    if (count) simulatorDeck.classList.remove('empty');
     setTimeout(() => {
         simulatorHand.innerHTML = '';
         shuffleDeck();
@@ -938,6 +1123,7 @@ function _fadeOut(el, ms, direction, cb) {
         shrink: 'scale(0.08) rotate(90deg)',
         fade:   'scale(1)',
     };
+    simHold(ms + 80);
     el.style.transition = `transform ${ms}ms ease, opacity ${ms}ms ease`;
     requestAnimationFrame(() => {
         el.style.transform = transforms[direction] ?? transforms.vanish;
@@ -953,7 +1139,7 @@ function _removeCardFromContext(card, direction, cb) {
     const domIdx = Array.from(parent.children).indexOf(el);
     const arrIdx = (parent === simulatorHand) ? domIdx : domIdx - 1;
     if (parent === simulatorHand)             activeHand.splice(arrIdx, 1);
-    else if (parent === simulatorSummonZone) { activeSummons.splice(arrIdx, 1); activeSummonNotes.splice(arrIdx, 1); }
+    else if (parent === simulatorSummonZone) { activeSummons.splice(arrIdx, 1); activeSummonNotes.splice(arrIdx, 1); activeSummonHP.splice(arrIdx, 1); }
     else if (parent === simulatorReactionZone) activeReactions.splice(arrIdx, 1);
     _fadeOut(el, 185, direction, () => {
         if (parent === simulatorSummonZone)   updateActiveSummons();
@@ -1167,14 +1353,92 @@ function animateReactionActivate(el) {
     }
 }
 
-function animatePlayCard(id) {
-    let card = document.createElement("div");
-    card.classList.add("activating-card");
-    card.innerHTML = `<img src='./assets/card-art/${id}.jpg'>`;
-    document.body.append(card);
+const PLAY_DURATION = 1500; // keep in step with playCard's hand-off timeout
+const PLAY_GLOW = { Summon: '255,140,90', Spell: '110,230,160', Reaction: '110,170,255', Utility: '220,225,240' };
 
-    setTimeout(() => { playSound('activate') }, 525);
-    setTimeout(() => { card.remove(); }, 1500);
+// Rise from the hand to centre stage, flare on activation, then glide to the card's destination.
+function animatePlayCard(id, fromRect, cardClass) {
+    const overlay = document.createElement('div');
+    overlay.className = 'activating-card';
+    const glowRGB = PLAY_GLOW[cardClass] || '255,255,255';
+    overlay.style.setProperty('--play-glow', glowRGB);
+    overlay.innerHTML = `
+        <div class="activating-card-backdrop"></div>
+        <div class="activating-card-stage">
+            <div class="activating-card-burst"></div>
+            <img src="./assets/card-art/${id}.jpg" alt="">
+            <div class="activating-card-sheen"></div>
+        </div>`;
+    document.body.append(overlay);
+    setTimeout(() => { playSound('activate'); }, 525);
+    setTimeout(() => { overlay.remove(); }, PLAY_DURATION + 30);
+
+    const backdrop = overlay.querySelector('.activating-card-backdrop');
+    const stage = overlay.querySelector('.activating-card-stage');
+    const img = stage.querySelector('img');
+    if (prefersReducedMotion.matches) {
+        backdrop.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: PLAY_DURATION });
+        stage.animate([{ opacity: 1 }, { opacity: 1, offset: 0.8 }, { opacity: 0 }], { duration: PLAY_DURATION, fill: 'forwards' });
+        return;
+    }
+
+    // Express a viewport rect as a transform of the centred stage.
+    const home = stage.getBoundingClientRect();
+    const toRect = (r) => {
+        const dx = r.left + r.width / 2 - (home.left + home.width / 2);
+        const dy = r.top + r.height / 2 - (home.top + home.height / 2);
+        return `translate(${dx}px, ${dy}px) scale(${r.width / home.width})`;
+    };
+    const start = fromRect && fromRect.width ? toRect(fromRect) : 'translate(0px, 60px) scale(0.8)';
+
+    const destEl = cardClass === 'Summon' ? simulatorSummonZone
+                 : cardClass === 'Reaction' ? simulatorReactionZone
+                 : simulatorGraveyard;
+    const d = destEl.getBoundingClientRect();
+    const destH = Math.min(d.height * 0.82, d.width * 0.9 * (508 / 362));
+    const destW = destH * (362 / 508);
+    const finish = toRect({ left: d.left + (d.width - destW) / 2, top: d.top + (d.height - destH) / 2, width: destW, height: destH });
+
+    const P = 'perspective(1100px)';
+    stage.animate([
+        { transform: `${P} ${start} rotateY(-38deg)`,                      offset: 0,    easing: 'cubic-bezier(0.2, 0.75, 0.25, 1)' },
+        { transform: `${P} translate(0px, 0px) scale(1.05) rotateY(7deg)`,   offset: 0.24, easing: 'cubic-bezier(0.4, 0, 0.3, 1)' },
+        { transform: `${P} translate(0px, -4px) scale(1) rotateY(0deg)`,     offset: 0.34, easing: 'ease-in-out' },
+        { transform: `${P} translate(0px, -12px) scale(1.02) rotateY(0deg)`, offset: 0.62, easing: 'cubic-bezier(0.55, 0, 0.35, 1)' },
+        { transform: `${P} ${finish} rotateY(0deg)`,                         offset: 1 },
+    ], { duration: PLAY_DURATION, fill: 'forwards' });
+
+    // Glow builds into the activation beat (~525ms), then settles as the card leaves.
+    const glow = (blur, a, white) =>
+        `drop-shadow(0 0 ${blur}px rgba(${glowRGB},${a})) drop-shadow(0 0 ${Math.round(blur / 3)}px rgba(255,255,255,${white}))`;
+    img.animate([
+        { filter: glow(0, 0, 0),        opacity: 1, offset: 0 },
+        { filter: glow(6, 0.35, 0.15),  opacity: 1, offset: 0.24 },
+        { filter: glow(34, 0.95, 0.85), opacity: 1, offset: 0.36 },
+        { filter: glow(22, 0.7, 0.45),  opacity: 1, offset: 0.6 },
+        { filter: glow(8, 0.35, 0.1),   opacity: 1, offset: 0.82 },
+        { filter: glow(0, 0, 0),        opacity: 0, offset: 1 },
+    ], { duration: PLAY_DURATION, easing: 'ease-in-out', fill: 'forwards' });
+
+    stage.querySelector('.activating-card-sheen').animate([
+        { backgroundPosition: '130% 0', opacity: 0 },
+        { opacity: 1, offset: 0.25 },
+        { opacity: 1, offset: 0.75 },
+        { backgroundPosition: '-30% 0', opacity: 0 },
+    ], { duration: 560, delay: 430, easing: 'ease-in-out', fill: 'both' });
+
+    stage.querySelector('.activating-card-burst').animate([
+        { transform: 'scale(0.35)', opacity: 0 },
+        { transform: 'scale(1)',    opacity: 0.9, offset: 0.3 },
+        { transform: 'scale(1.5)',  opacity: 0 },
+    ], { duration: 900, delay: 400, easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)', fill: 'both' });
+
+    backdrop.animate([
+        { opacity: 0 },
+        { opacity: 1, offset: 0.2 },
+        { opacity: 1, offset: 0.65 },
+        { opacity: 0 },
+    ], { duration: PLAY_DURATION, easing: 'ease-in-out', fill: 'forwards' });
 }
 
 function animateBanish() {
@@ -1229,23 +1493,20 @@ function updateActiveSummons() {
     }
     if (!activeSummons.length) document.querySelector("#simulatorSummonZone h3").style.display = "block";
     else document.querySelector("#simulatorSummonZone h3").style.display = "none";
-    for (s in activeSummons) {
-        console.log(activeSummons[s]);
-        let card = getObjectById(cards, activeSummons[s]);
-        simulatorSummonZone.append(createSimulatorCard(card.id, "summonZoneCard"));
-    }
+    activeSummons.forEach((id, i) => {
+        simulatorSummonZone.append(createSimulatorCard(id, "summonZoneCard", "", activeSummonHP[i] ?? summonDefaultHp(id)));
+    });
 }
 
 function updateActiveReactions() {
     // console.log(activeReactions);
     for (let el of Array.from(simulatorReactionZone.children)) {
-        console.log(el);
-        if (el.innerHTML === "Reaction Zone") continue;
+        if (el.tagName === "H3") continue;
         el.remove();
     }
     if (!activeReactions.length) document.querySelector("#simulatorReactionZone h3").style.display = "block";
     else document.querySelector("#simulatorReactionZone h3").style.display = "none";
-    for (r in activeReactions) {
+    for (const r in activeReactions) {
         let card = getObjectById(cards, activeReactions[r]);
         simulatorReactionZone.append(createSimulatorCard(card.id, "reactionZoneCard"));
     }
@@ -1282,4 +1543,522 @@ simulatorConditionalModalContainer.addEventListener("click", (e) => {
 
 simulatorTokensModalButton.onclick = () => {
     simulatorTokensModalContainer.classList.remove("active");
+}
+/* ============================================================
+   DRAG & DROP — hand cards onto the board (pointer events, so touch works)
+============================================================ */
+
+const SIM_DRAG_THRESHOLD = 6;
+let simDrag = null;
+
+function enableHandDrag(el) {
+    el.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0) return;
+        const rect = el.getBoundingClientRect();
+        simDrag = {
+            el, active: false, hover: null,
+            startX: e.clientX, startY: e.clientY,
+            offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top,
+            width: rect.width,
+        };
+        try { el.setPointerCapture(e.pointerId); } catch { /* still works without capture */ }
+    });
+    el.addEventListener("pointermove", (e) => {
+        if (!simDrag || simDrag.el !== el) return;
+        if (!simDrag.active) {
+            if (Math.hypot(e.clientX - simDrag.startX, e.clientY - simDrag.startY) < SIM_DRAG_THRESHOLD) return;
+            startSimDrag();
+        }
+        moveSimDrag(e);
+    });
+    el.addEventListener("pointerup", (e) => {
+        if (!simDrag || simDrag.el !== el) return;
+        finishSimDrag(e);
+    });
+    el.addEventListener("pointercancel", () => {
+        if (simDrag && simDrag.el === el) endSimDrag();
+    });
+}
+
+function startSimDrag() {
+    simDrag.active = true;
+    window.__simDragActive = true; // tells the long-press helper to stand down
+    simulatorContextMenu.classList.remove("active");
+    const ghost = simDrag.el.cloneNode();
+    ghost.className = "sim-drag-ghost";
+    ghost.removeAttribute("data-context");
+    ghost.style.width = `${simDrag.width}px`;
+    document.body.append(ghost);
+    simDrag.ghost = ghost;
+    simDrag.el.classList.add("sim-dragging");
+    document.body.classList.add("sim-drag-active");
+}
+
+function moveSimDrag(e) {
+    const dx = e.clientX - simDrag.startX;
+    const tilt = Math.max(-12, Math.min(12, dx * 0.04));
+    simDrag.ghost.style.transform =
+        `translate(${e.clientX - simDrag.offsetX}px, ${e.clientY - simDrag.offsetY}px) rotate(${tilt}deg) scale(1.04)`;
+
+    const zone = document.elementFromPoint(e.clientX, e.clientY)?.closest("[data-drop]") ?? null;
+    if (zone !== simDrag.hover) {
+        simDrag.hover?.classList.remove("drop-hover");
+        zone?.classList.add("drop-hover");
+        simDrag.hover = zone;
+    }
+}
+
+function finishSimDrag() {
+    const { el, active, hover } = simDrag;
+    const dropRect = simDrag.ghost?.getBoundingClientRect() ?? null; // the play animation starts from the drop point
+    endSimDrag();
+    if (!active) return; // a plain click — the click handler opens the menu
+    el._suppressClick = true;
+    if (!hover) return;
+
+    targetedCard = el;
+    switch (hover.dataset.drop) {
+        case "play":      playCard(dropRect); break;
+        case "graveyard": sendTargetedCardToGraveyard(); break;
+        case "deck":      putTargetedCardOnDeck("top"); break;
+        case "banish":    banishTargetedCard(); break;
+    }
+}
+
+function endSimDrag() {
+    if (!simDrag) return;
+    simDrag.ghost?.remove();
+    simDrag.hover?.classList.remove("drop-hover");
+    simDrag.el.classList.remove("sim-dragging");
+    document.body.classList.remove("sim-drag-active");
+    simDrag = null;
+    setTimeout(() => { window.__simDragActive = false; }, 0);
+}
+
+/* ============================================================
+   SAVE + UNDO
+   The whole board is a small JSON snapshot. A ticker watches it: once a change has settled
+   (unchanged for one tick, nothing in flight) it is saved for this profile and the previous
+   settled snapshot goes onto the undo stack. Animated multi-step actions (draw 5, discard
+   hand...) therefore undo as one step.
+============================================================ */
+
+const SIM_SAVE_PREFIX = 'DND_TCG_SIM_STATE:';
+const SIM_UNDO_LIMIT = 40;
+const SIM_TICK_MS = 350;
+let simStarted = false;
+let simUndoStack = [];
+let simLastSettled = null;
+let simPrevTick = null;
+const simUndoButton = document.getElementById('simUndoButton');
+
+function simSaveKey() { return currentProfile ? SIM_SAVE_PREFIX + toKebabCase(currentProfile) : null; }
+
+function serializeSim() {
+    return JSON.stringify({
+        v: 1, started: simStarted, game: simGameId,
+        deck: activeSimDeck, hand: activeHand, graveyard: activeGraveyard, banish: activeBanish,
+        summons: activeSummons, notes: activeSummonNotes, hp: activeSummonHP, reactions: activeReactions,
+        tokens: activeTokens, counters: _counters,
+        turn: parseInt(document.getElementById('simulatorTurnNum').textContent, 10) || 1,
+        used: ['action', 'bonusAction', 'reaction'].filter(k => document.getElementById(`${k}Pip`).classList.contains('used')),
+    });
+}
+
+function simIsBusy() {
+    return !cards || pendingSummons > 0 || !!document.querySelector('.activating-card') || performance.now() < simBusyUntil;
+}
+
+function applySimState(state) {
+    const known = (ids) => (ids || []).filter(id => getObjectById(cards, id)); // skip cards removed from cards.json
+    simStarted = !!state.started;
+    simGameId = state.game || (simStarted ? generateUID() : null);
+    activeSimDeck = known(state.deck);
+    activeHand = known(state.hand);
+    activeGraveyard = known(state.graveyard);
+    activeBanish = known(state.banish);
+    activeReactions = known(state.reactions);
+    activeSummons = []; activeSummonNotes = []; activeSummonHP = [];
+    (state.summons || []).forEach((id, i) => {
+        if (!getObjectById(cards, id)) return;
+        activeSummons.push(id);
+        activeSummonNotes.push(state.notes?.[i] ?? '');
+        activeSummonHP.push(state.hp?.[i] ?? summonDefaultHp(id));
+    });
+    for (const t in activeTokens) activeTokens[t] = state.tokens?.[t] || 0;
+    simulatorTokensModalBody.querySelectorAll('.token-amt').forEach(el => { el.innerHTML = activeTokens[el.dataset.token] || 0; });
+    _counters = (state.counters || []).map(c => ({ name: c.name, value: c.value }));
+    _renderCounters();
+
+    document.getElementById('simulatorTurnNum').textContent = state.turn || 1;
+    setActionState('all', true);
+    (state.used || []).forEach(k => document.getElementById(`${k}Pip`)?.classList.add('used'));
+    syncActionPips();
+
+    simulatorHand.innerHTML = '';
+    activeHand.forEach(id => simulatorHand.append(createSimulatorCard(id)));
+    updateActiveSummons();
+    updateActiveReactions();
+    updateGraveyard();
+    simulatorDeck.classList.toggle('empty', !simStarted);
+    simulatorContextMenu.classList.remove('active');
+    if (simStarted) simulatorDeckSelectContainer.classList.remove('active');
+}
+
+function saveSim(snapshot) {
+    const key = simSaveKey();
+    if (!key) return;
+    try {
+        localStorage.setItem(key, snapshot);
+        localStorage.setItem(key + ':at', String(Date.now()));
+    } catch { /* storage full or blocked: keep playing */ }
+    scheduleBattleMirror(snapshot);
+}
+
+function markSimSettled() {
+    simLastSettled = simPrevTick = serializeSim();
+    updateUndoButton();
+}
+
+function updateUndoButton() {
+    if (!simUndoButton) return;
+    simUndoButton.disabled = simUndoStack.length === 0;
+    simUndoButton.title = simUndoStack.length ? `Undo (${simUndoStack.length} step${simUndoStack.length === 1 ? '' : 's'}) · Ctrl+Z` : 'Nothing to undo';
+}
+
+setInterval(() => {
+    if (!currentProfile || !cards) return;
+    const snap = serializeSim();
+    if (snap !== simPrevTick) { simPrevTick = snap; return; } // still changing
+    if (snap === simLastSettled || simIsBusy()) return;
+    if (simDropUndo) {
+        simUndoStack = [];
+        simDropUndo = false;
+    } else if (simLastSettled !== null) {
+        simUndoStack.push(simLastSettled);
+        if (simUndoStack.length > SIM_UNDO_LIMIT) simUndoStack.shift();
+    }
+    simLastSettled = snap;
+    saveSim(snap);
+    updateUndoButton();
+}, SIM_TICK_MS);
+
+// Catch anything that changed in the last moments before the tab closes.
+window.addEventListener('pagehide', () => {
+    if (currentProfile && cards && !simIsBusy()) saveSim(serializeSim());
+});
+
+function undoSim() {
+    if (simIsBusy()) { showToast('Hang on, cards are still moving.', 'info'); return; }
+    if (simDropUndo) { showToast("Your DM's changes can't be undone.", 'info'); return; }
+    // a change that hasn't settled yet counts as the latest step
+    const current = serializeSim();
+    if (current !== simLastSettled && simLastSettled !== null) simUndoStack.push(simLastSettled);
+    const prev = simUndoStack.pop();
+    if (!prev) { showToast('Nothing to undo.', 'info'); return; }
+    applySimState(JSON.parse(prev));
+    simLastSettled = simPrevTick = prev;
+    saveSim(prev);
+    updateUndoButton();
+    showToast('Undid the last action.', 'info');
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!(e.ctrlKey || e.metaKey) || e.shiftKey || e.key.toLowerCase() !== 'z') return;
+    if (!document.getElementById('simulatorSection').classList.contains('active')) return;
+    if (e.target.closest('input, textarea, [contenteditable]') || document.querySelector('.confirm-overlay, .modal-container.active')) return;
+    e.preventDefault();
+    undoSim();
+});
+
+// On login: pick up the saved game for this profile, or start fresh with the deck picker.
+function restoreOrStartSimulator(remote = null) {
+    simUndoStack = [];
+    simDropUndo = false;
+    let saved = null, localAt = 0;
+    try {
+        saved = JSON.parse(localStorage.getItem(simSaveKey()) || 'null');
+        localAt = Number(localStorage.getItem(simSaveKey() + ':at')) || 0;
+    } catch { saved = null; }
+    if (remote?.state && (remote.updatedAt || 0) > localAt + 1000) {
+        try { saved = JSON.parse(remote.state); } catch { /* keep the local copy */ }
+    }
+    if (saved && saved.started) {
+        applySimState(saved);
+        showToast('Picked up your last simulator game.', 'info');
+    } else {
+        resetSimulator();
+    }
+    markSimSettled();
+}
+
+/* ============================================================
+   SPECTATING
+   Every settled board is mirrored to the profile (`battle`), so admins can watch it in the
+   Spectate tab. Admins don't edit the board directly: they queue commands in `battleCommands`,
+   and this client applies them (with the usual animations), reports the outcome in `battleLog`,
+   and removes them. That keeps this client the only writer of the board.
+============================================================ */
+
+let simGameId = null;
+let simDropUndo = false;          // set after a DM change; the next settle clears the undo history
+let battleLog = [];               // outcomes of DM commands, newest last (shown to spectators)
+const BATTLE_LOG_LIMIT = 12;
+const battleCmdQueue = [];
+const battleCmdSeen = new Set();
+let battleCmdTimer = null;
+
+let battleMirrorTimer = null, battleMirrorPending = null, battleMirrorLast = null;
+
+function scheduleBattleMirror(snapshot) {
+    battleMirrorPending = snapshot;
+    if (battleMirrorTimer || !currentProfile) return;
+    const profile = currentProfile;
+    battleMirrorTimer = setTimeout(() => {
+        battleMirrorTimer = null;
+        const snap = battleMirrorPending;
+        if (snap === battleMirrorLast || currentProfile !== profile) return;
+        battleMirrorLast = snap;
+        let started = false;
+        try { started = !!JSON.parse(snap).started; } catch { /* ignore */ }
+        profileDoc(profile).update({ battle: { state: snap, started, game: simGameId, updatedAt: Date.now() } })
+            .catch(err => console.warn('battle mirror failed', err));
+    }, 600);
+}
+
+function simVisible() {
+    return document.getElementById('simulatorSection').classList.contains('active') && document.visibilityState === 'visible';
+}
+
+// brief purple pulse on a card the DM just touched
+function dmTouch(el) {
+    if (!el) return;
+    el.classList.remove('dm-touched');
+    void el.offsetWidth;
+    el.classList.add('dm-touched');
+    setTimeout(() => el.classList.remove('dm-touched'), 1700);
+}
+
+function queueBattleCommands(list) {
+    let added = false;
+    for (const cmd of list || []) {
+        if (!cmd?.id || battleCmdSeen.has(cmd.id)) continue;
+        battleCmdSeen.add(cmd.id);
+        battleCmdQueue.push(cmd);
+        added = true;
+    }
+    if (added) processBattleCommands();
+}
+
+function clearBattleCommands() {
+    battleCmdQueue.length = 0;
+    battleCmdSeen.clear();
+    clearTimeout(battleCmdTimer);
+    battleLog = [];
+    battleMirrorLast = null;
+}
+
+function processBattleCommands() {
+    clearTimeout(battleCmdTimer);
+    if (!battleCmdQueue.length || !currentProfile) return;
+    // wait for a quiet board (and the player's own pop-ups) before stepping in
+    if (!cards || simIsBusy() || document.querySelector('.confirm-overlay')) {
+        battleCmdTimer = setTimeout(processBattleCommands, 400);
+        return;
+    }
+    const cmd = battleCmdQueue.shift();
+    const by = cmd.by || 'Your DM';
+    let result;
+    if (!simStarted || (cmd.game && cmd.game !== simGameId)) {
+        result = { ok: false, quiet: true, log: 'Skipped: that game had already ended' };
+    } else {
+        try { result = applyBattleCommand(cmd); }
+        catch (err) { console.warn('DM command failed', err); result = { ok: false, log: 'Failed unexpectedly' }; }
+    }
+    if (result.ok) {
+        simDropUndo = true;
+        showToast(`${by} ${result.text}`, 'dm');
+        if (cmd.message) showToast(`${by}: "${cmd.message}"`, 'dm');
+    } else if (!result.quiet && result.text) {
+        showToast(`${by} tried to step in, but ${result.text}`, 'info');
+    }
+
+    battleLog = [...battleLog, { id: cmd.id, at: Date.now(), by: cmd.by || '', ok: !!result.ok, text: result.log }].slice(-BATTLE_LOG_LIMIT);
+    profileDoc(currentProfile).update({
+        battleCommands: firebase.firestore.FieldValue.arrayRemove(cmd),
+        battleLog,
+    }).catch(err => console.warn("couldn't clear the DM command", err));
+
+    battleCmdTimer = setTimeout(processBattleCommands, result.ok ? 700 : 50);
+}
+
+function applyBattleCommand(cmd) {
+    const seen = simVisible();
+    const name = (id) => getObjectById(cards, id)?.name ?? id;
+    const done = (text, log) => ({ ok: true, text, log });
+    const fail = (text, log) => ({ ok: false, text, log: log || `Failed: ${text}` });
+    // the board may have shifted since the DM looked: trust the index only if the card still matches
+    const find = (arr) => arr[cmd.index] === cmd.cardId ? cmd.index : arr.indexOf(cmd.cardId);
+    const removeSummonAt = (i) => { activeSummons.splice(i, 1); activeSummonNotes.splice(i, 1); activeSummonHP.splice(i, 1); };
+    const summonImg = (i) => simulatorSummonZone.querySelectorAll('.summon-card-wrap img')[i];
+
+    switch (cmd.type) {
+        case 'add': {
+            const card = getObjectById(cards, cmd.cardId);
+            if (!card) return fail('that card no longer exists.');
+            const n = card.name;
+            switch (cmd.to) {
+                case 'hand':
+                    activeHand.push(card.id);
+                    simulatorHand.append(createSimulatorCard(card.id));
+                    if (seen) dmTouch(simulatorHand.lastElementChild);
+                    return done(`put ${n} into your hand.`, `Added ${n} to hand`);
+                case 'deckTop':
+                    activeSimDeck.unshift(card.id);
+                    return done(`put ${n} on top of your deck.`, `Put ${n} on top of the deck`);
+                case 'deckBottom':
+                    activeSimDeck.push(card.id);
+                    return done(`put ${n} on the bottom of your deck.`, `Put ${n} on the bottom of the deck`);
+                case 'deckShuffle':
+                    activeSimDeck.push(card.id);
+                    shuffleDeck();
+                    return done(`shuffled ${n} into your deck.`, `Shuffled ${n} into the deck`);
+                case 'graveyard':
+                    activeGraveyard.push(card.id);
+                    updateGraveyard();
+                    return done(`put ${n} in your graveyard.`, `Put ${n} in the graveyard`);
+                case 'banish':
+                    activeBanish.push(card.id);
+                    if (seen) animateBanish();
+                    return done(`banished ${n}.`, `Banished ${n}`);
+                case 'summon':
+                    if (card.class !== 'Summon') return fail(`${n} isn't a Summon.`);
+                    if (activeSummons.length + pendingSummons >= MAX_ACTIVE_SUMMONS) return fail(`your Summon Zone is full.`, `Summon Zone full; ${n} not summoned`);
+                    activeSummons.push(card.id);
+                    activeSummonNotes.push('');
+                    activeSummonHP.push(summonDefaultHp(card.id));
+                    updateActiveSummons();
+                    if (seen) { const el = summonImg(activeSummons.length - 1); dmTouch(el?.parentElement); playCardEffect(card, el); }
+                    return done(`summoned ${n} onto your field.`, `Summoned ${n}`);
+                case 'reaction':
+                    if (card.class !== 'Reaction') return fail(`${n} isn't a Reaction.`);
+                    activeReactions.push(card.id);
+                    updateActiveReactions();
+                    if (seen) playReactionSetEffect(simulatorReactionZone.querySelector('img:last-of-type'));
+                    return done(`set ${n} in your Reaction Zone.`, `Set ${n} as a Reaction`);
+            }
+            return fail('that destination is unknown.');
+        }
+
+        case 'summon': {
+            const i = find(activeSummons);
+            if (i < 0) return fail('that summon had already left the field.', 'Summon was already gone');
+            const id = activeSummons[i], n = name(id);
+            switch (cmd.action) {
+                case 'kill':
+                    if (seen && summonImg(i)) { targetedCard = summonImg(i); sendTargetedCardToGraveyard(); }
+                    else { removeSummonAt(i); activeGraveyard.push(id); updateActiveSummons(); updateGraveyard(); }
+                    return done(`slew your ${n}.`, `Killed ${n}`);
+                case 'hp': case 'heal': {
+                    const hp = cmd.action === 'heal' ? summonDefaultHp(id) : Math.round(Number(cmd.hp) || 0);
+                    activeSummonHP[i] = hp;
+                    updateActiveSummons();
+                    if (seen) dmTouch(summonImg(i)?.parentElement);
+                    if (seen && hp <= 0) promptSummonDeath(summonImg(i));
+                    return done(cmd.action === 'heal' ? `healed your ${n} to full.` : `set your ${n} to ${hp} HP.`,
+                        cmd.action === 'heal' ? `Healed ${n} to ${hp} HP` : `Set ${n} to ${hp} HP`);
+                }
+                case 'toHand':
+                    removeSummonAt(i);
+                    activeHand.push(id);
+                    simulatorHand.append(createSimulatorCard(id));
+                    updateActiveSummons();
+                    if (seen) dmTouch(simulatorHand.lastElementChild);
+                    return done(`returned your ${n} to your hand.`, `Returned ${n} to hand`);
+                case 'banish':
+                    removeSummonAt(i);
+                    activeBanish.push(id);
+                    updateActiveSummons();
+                    if (seen) animateBanish();
+                    return done(`banished your ${n}.`, `Banished ${n}`);
+            }
+            return fail('that action is unknown.');
+        }
+
+        case 'reaction': {
+            const i = find(activeReactions);
+            if (i < 0) return fail('that Reaction had already left the field.', 'Reaction was already gone');
+            const id = activeReactions[i], n = name(id);
+            activeReactions.splice(i, 1);
+            updateActiveReactions();
+            if (cmd.action === 'toHand') { activeHand.push(id); simulatorHand.append(createSimulatorCard(id)); if (seen) dmTouch(simulatorHand.lastElementChild); return done(`returned your ${n} to your hand.`, `Returned ${n} to hand`); }
+            if (cmd.action === 'banish') { activeBanish.push(id); if (seen) animateBanish(); return done(`banished your ${n}.`, `Banished ${n}`); }
+            activeGraveyard.push(id);
+            updateGraveyard();
+            return done(`destroyed your ${n}.`, `Destroyed ${n}`);
+        }
+
+        case 'hand': {
+            const i = find(activeHand);
+            if (i < 0) return fail('that card had already left your hand.', 'Card was no longer in hand');
+            const id = activeHand[i], n = name(id);
+            const el = simulatorHand.children[i];
+            activeHand.splice(i, 1);
+            if (el) { if (seen) _fadeOut(el, 220, cmd.action === 'discard' ? 'down' : 'up'); else el.remove(); }
+            switch (cmd.action) {
+                case 'discard': activeGraveyard.push(id); updateGraveyard(); return done(`made you discard ${n}.`, `Discarded ${n}`);
+                case 'banish': activeBanish.push(id); if (seen) animateBanish(); return done(`banished ${n} from your hand.`, `Banished ${n} from hand`);
+                case 'deckTop': activeSimDeck.unshift(id); return done(`put ${n} back on top of your deck.`, `Put ${n} on top of the deck`);
+                default: activeSimDeck.push(id); shuffleDeck(); return done(`shuffled ${n} from your hand into your deck.`, `Shuffled ${n} into the deck`);
+            }
+        }
+
+        case 'graveyard': {
+            const i = find(activeGraveyard);
+            if (i < 0) return fail('that card had already left your graveyard.', 'Card was no longer in the graveyard');
+            const id = activeGraveyard[i], n = name(id);
+            activeGraveyard.splice(i, 1);
+            updateGraveyard();
+            if (cmd.action === 'toHand') { activeHand.push(id); simulatorHand.append(createSimulatorCard(id)); if (seen) dmTouch(simulatorHand.lastElementChild); return done(`returned ${n} from your graveyard to your hand.`, `Returned ${n} to hand`); }
+            if (cmd.action === 'banish') { activeBanish.push(id); if (seen) animateBanish(); return done(`banished ${n} from your graveyard.`, `Banished ${n} from the graveyard`); }
+            activeSimDeck.push(id);
+            shuffleDeck();
+            return done(`shuffled ${n} from your graveyard into your deck.`, `Shuffled ${n} into the deck`);
+        }
+
+        case 'deck': {
+            const n = Math.max(1, Math.min(20, Math.round(Number(cmd.n) || 1)));
+            if (!activeSimDeck.length) return fail('your deck is empty.', 'Deck was empty');
+            if (cmd.action === 'shuffle') { shuffleDeck(); return done('shuffled your deck.', 'Shuffled the deck'); }
+            const count = Math.min(n, activeSimDeck.length);
+            if (cmd.action === 'mill') {
+                activeGraveyard.push(...activeSimDeck.splice(0, count));
+                updateGraveyard();
+                return done(`sent the top ${count === 1 ? 'card' : `${count} cards`} of your deck to the graveyard.`, `Milled ${count}`);
+            }
+            for (let k = 0; k < count; k++) setTimeout(drawCard, k * 250);
+            return done(`made you draw ${count === 1 ? 'a card' : `${count} cards`}.`, `Drew ${count}`);
+        }
+
+        case 'actions': {
+            const labels = { action: 'Action', bonusAction: 'Bonus Action', reaction: 'Reaction' };
+            if (cmd.action === 'restore') { setActionState('all', true); return done('restored all your actions.', 'Restored all actions'); }
+            if (!labels[cmd.which]) return fail('that action is unknown.');
+            setActionState(cmd.which, cmd.action !== 'spend');
+            return done(`${cmd.action === 'spend' ? 'used up' : 'restored'} your ${labels[cmd.which]}.`, `${cmd.action === 'spend' ? 'Spent' : 'Restored'} ${labels[cmd.which]}`);
+        }
+
+        case 'tokens': {
+            if (!(cmd.token in activeTokens)) return fail('that token type is unknown.');
+            const d = Math.round(Number(cmd.delta) || 0);
+            activeTokens[cmd.token] = Math.max(0, activeTokens[cmd.token] + d);
+            simulatorTokensModalBody.querySelectorAll('.token-amt').forEach(el => { if (el.dataset.token === cmd.token) el.innerHTML = activeTokens[cmd.token]; });
+            return done(`${d >= 0 ? 'gave you' : 'took'} ${Math.abs(d)} ${cmd.token} token${Math.abs(d) === 1 ? '' : 's'}.`, `${d >= 0 ? '+' : '−'}${Math.abs(d)} ${cmd.token} token${Math.abs(d) === 1 ? '' : 's'}`);
+        }
+
+        case 'turn':
+            nextTurn();
+            return done('ended your turn.', 'Ended the turn');
+    }
+    return fail('that command is unknown.');
 }

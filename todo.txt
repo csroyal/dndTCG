@@ -1,6 +1,3 @@
-- Blister Packs
-Right click on empty simulator space for tool functions:
-- Roll dice
-- Flip coin
-Once all functionality is finished:
-- More stuff on Home Page? not sure what
+- Blister packs
+- admin system to track users and add cards or sets to their collection
+- spectate system that allows DM to add in cards or change things

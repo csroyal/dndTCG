@@ -8,50 +8,72 @@ const ACTIVE_SLEEVE_COUNT = 6;
 let sleeveRarityRestrictions = { "Legendary": 1, "Mythic": 1 };
 
 function buildSleeve() {
+    currentSleeve.innerHTML = "";
+
     let sleeveCardCount = 0;
-    for (c in binder) {
-        if (c === "undefined") continue;
-        let card = getObjectById(cards, c);
-        if (card && card.class && card.class !== "Sleeve") continue;
+    for (const id in binder) {
+        const card = getObjectById(cards, id);
+        if (!card || card.class !== "Sleeve") continue;
         sleeveCardCount++;
         currentSleeve.append(createCardEl(card, (e) => {
-            if (!checkSleeveRestrictions(card)) return;
-            let sleeveOverlay = e.target.parentElement.querySelector(".sleeve-overlay");
-            let span = sleeveOverlay.querySelector("span");
-            if (Number(span.innerHTML) >= binder[c]) {
-                showToast("No more copies of this card available.", "error");
-                return;
-            }
-            span.innerHTML = Number(span.innerHTML) + 1;
-            sleeveCountSpan.innerHTML = Number(sleeveCountSpan.innerHTML) + 1;
-            if (sleeve[card.id]) sleeve[card.id] = sleeve[card.id] + 1;
-            else sleeve[card.id] = 1;
-            db.collection("profiles").doc(toKebabCase(currentProfile)).update({
-                sleeve: sleeve
-            });
-            sleeveOverlay.style.display = "flex";
-        }, true, true));
+            addCardToSleeve(card, e.target.parentElement.querySelector(".sleeve-overlay"));
+        }, true, true, true));
     }
     sortCurrentSleeve();
 
     if (sleeveCardCount === 0) {
         const empty = document.createElement("p");
         empty.id = "sleeveEmptyState";
-        empty.style.cssText = "color: var(--text-muted); font-style: italic; padding: 12px; width: 100%; text-align: center;";
-        empty.textContent = "You don't own any sleeve cards yet. Open packs to find them!";
+        empty.className = "empty-state";
+        empty.textContent = currentProfile
+            ? "You don't own any sleeve cards yet. Open packs to find them!"
+            : "Log in to manage your sleeve.";
         currentSleeve.append(empty);
     }
 
-    let sleeveCount = 0;
-    for (c in sleeve) {
-        let cardWrapper = document.querySelector(`#currentSleeve .card-wrapper:has(img[data-card-id="${c}"])`);
-        cardWrapper.querySelector(".sleeve-overlay span").innerHTML = sleeve[c];
+    for (const id in sleeve) {
+        const cardWrapper = currentSleeve.querySelector(`.card-wrapper:has(img[data-card-id="${id}"])`);
+        if (!cardWrapper) continue; // sleeved card no longer in the binder
+        cardWrapper.querySelector(".sleeve-overlay span").innerHTML = sleeve[id];
         cardWrapper.querySelector(".sleeve-overlay").style.display = "flex";
-
-        sleeveCount += sleeve[c];
     }
 
-    sleeveCountSpan.innerHTML = sleeveCount;
+    refreshSleeveStats();
+}
+
+function addCardToSleeve(card, sleeveOverlay) {
+    if (!checkSleeveRestrictions(card)) return;
+    const span = sleeveOverlay.querySelector("span");
+    if (Number(span.innerHTML) >= binder[card.id]) {
+        showToast("No more copies of this card available.", "error");
+        return;
+    }
+    span.innerHTML = Number(span.innerHTML) + 1;
+    sleeve[card.id] = (sleeve[card.id] || 0) + 1;
+    db.collection("profiles").doc(toKebabCase(currentProfile)).update({
+        sleeve: sleeve
+    });
+    sleeveOverlay.style.display = "flex";
+    refreshSleeveStats();
+}
+
+// Keeps the count pill, the rule meters, and the shuffle button in sync with `sleeve`.
+function refreshSleeveStats() {
+    const total = getCountCurrentSleeve();
+    sleeveCountSpan.textContent = total;
+    document.getElementById("sleeveCount").classList.toggle("full", total >= SLEEVE_LIMIT);
+
+    document.querySelectorAll("#sleeveRules .sleeve-rule").forEach(row => {
+        const rarity = row.dataset.rarity;
+        const used = getRarityCountFromSleeve(rarity);
+        const max = sleeveRarityRestrictions[rarity];
+        row.querySelector(".sleeve-rule-val").textContent = `${used} / ${max}`;
+        row.classList.toggle("full", used >= max);
+    });
+
+    const canShuffle = total >= ACTIVE_SLEEVE_COUNT;
+    createActiveSleeveButton.disabled = !canShuffle;
+    createActiveSleeveButton.title = canShuffle ? "" : `Add at least ${ACTIVE_SLEEVE_COUNT} cards to your sleeve first`;
 }
 
 function sortCurrentSleeve() {
@@ -84,6 +106,10 @@ function sortActiveSleeve() {
 
 let sleeveA = [], sleeveReserve = [];
 createActiveSleeveButton.addEventListener("click", () => {
+    if (getCountCurrentSleeve() < ACTIVE_SLEEVE_COUNT) {
+        showToast(`Add at least ${ACTIVE_SLEEVE_COUNT} cards to your sleeve first.`, "error");
+        return;
+    }
     activeSleeve.innerHTML = "";
     sleeveA = getRandomElementsFromArray(createSleeveArray(), ACTIVE_SLEEVE_COUNT);
     sleeveReserve = createSleeveArray();
@@ -93,7 +119,7 @@ createActiveSleeveButton.addEventListener("click", () => {
         sleeveReserve.splice(sleeveReserve.indexOf(cardID), 1);
         const cardEl = createCardEl(card, (e) => {
             activateSleeveCard(e.target.parentElement, cardID);
-        }, false);
+        }, false, false, true);
         cardEl.classList.add("sleeve-enter");
         cardEl.style.animationDelay = (i * 55) + "ms";
         activeSleeve.append(cardEl);
@@ -117,7 +143,7 @@ function activateSleeveCard(el, cardID) {
         sleeveReserve.splice(sleeveReserve.indexOf(newCard), 1);
         const newCardEl = createCardEl(getObjectById(cards, newCard), (e) => {
             activateSleeveCard(e.target.parentElement, newCard);
-        }, false);
+        }, false, false, true);
         newCardEl.classList.add("sleeve-enter");
         activeSleeve.append(newCardEl);
     }, 400);
@@ -125,7 +151,7 @@ function activateSleeveCard(el, cardID) {
 
 function createSleeveArray() {
     let arr = [];
-    for (c in sleeve) {
+    for (const c in sleeve) {
         for (var i = 0; i < sleeve[c]; i++) {
             arr.push(c);
         }
@@ -151,16 +177,16 @@ function checkSleeveRestrictions(card) {
 
 function getRarityCountFromSleeve(rarity) {
     let count = 0;
-    for (c in sleeve) {
-        let card = getObjectById(cards, c);
-        if (card.rarity === rarity) count += sleeve[c];
+    for (const id in sleeve) {
+        const card = getObjectById(cards, id);
+        if (card && card.rarity === rarity) count += sleeve[id];
     }
     return count;
 }
 
 function getCountCurrentSleeve() {
     let count = 0;
-    for (c in sleeve) {
+    for (const c in sleeve) {
         count += sleeve[c];
     }
     return count;

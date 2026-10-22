@@ -32,42 +32,64 @@ if (typeof window.firebaseConfig === "undefined") {
 firebase.initializeApp(window.firebaseConfig);
 const db = firebase.firestore();
 
+function setProfileEntryShowing(showing) {
+    profileEntry.style.display = showing ? "flex" : "none";
+    profileEntryShowing = showing;
+    profileIcon.setAttribute("aria-expanded", String(showing));
+}
+
 profileIcon.addEventListener("click", (ev) => {
     if (profileEntry.contains(ev.target)) return;
     if (!profileEntryShowing) {
-        profileEntry.style.display = "flex";
-        profileEntryShowing = true;
+        setProfileEntryShowing(true);
         setTimeout(() => {
             document.body.addEventListener("click", function closeProfileEntry(e) {
                 if (profileEntry.contains(e.target)) return;
-                profileEntry.style.display = "none";
-                profileEntryShowing = false
+                setProfileEntryShowing(false);
                 document.body.removeEventListener("click", closeProfileEntry);
             });
+            (profileEntry.querySelector("#profileInfo").style.display === "flex"
+                ? profileEntry.querySelector("#profileInfo button")
+                : profileEntryInput).focus();
         }, 3);
     }
     else {
-        profileEntry.style.display = "none";
-        profileEntryShowing = false
+        setProfileEntryShowing(false);
     }
 });
 
+profileIcon.addEventListener("keydown", (e) => {
+    if (e.target !== profileIcon) return;
+    if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        profileIcon.click();
+    }
+});
+
+profileEntryInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") logInButton.click();
+});
+
 logInButton.addEventListener("click", () => {
-    let inputName = profileEntryInput.value;
-    let matchingProfileFound = false;
-    db.collection("profiles").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // console.log(doc.id, toKebabCase(inputName));
-            if (doc.id == toKebabCase(inputName)) matchingProfileFound = true;
-        });
-        // console.log(matchingProfileFound);
-        if (matchingProfileFound) {
-            loadProfile(inputName);
-        } else {
-            if (confirm("No profile with name " + inputName + " exists. Create a new one?")) {
-                createProfile(inputName);
-            }
+    const inputName = profileEntryInput.value.trim();
+    if (!toKebabCase(inputName)) {
+        showToast("Enter a profile name.", "error");
+        return;
+    }
+    // Read just this one profile instead of downloading the whole collection.
+    profileDoc(inputName).get().then(async (doc) => {
+        if (doc.exists) {
+            loadProfile(inputName, doc);
+            return;
         }
+        const create = await showConfirm(
+            `No profile named <strong>${escapeHTML(inputName)}</strong> exists. Create it?`,
+            { confirmLabel: "Create Profile", danger: false }
+        );
+        if (create) createProfile(inputName);
+    }).catch((error) => {
+        console.error("Error looking up profile:", error);
+        showToast("Couldn't reach the server.", "error");
     });
 });
 
@@ -79,56 +101,52 @@ uploadProfilePictureButton.addEventListener("click", () => {
 
 profilePictureInput.addEventListener("change", () => {
     const file = profilePictureInput.files[0];
-
-    if (!file) {
-        alert("Please select an image.");
-        return;
-    }
+    if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-        alert("Only image files are allowed.");
+        showToast("Only image files are allowed.", "error");
         profilePictureInput.value = "";
         return;
     }
 
-    const storageRef = firebase.storage().ref("profilePictures/" + file.name);
-    storageRef.put(file).then(snapshot => snapshot.ref.getDownloadURL()).then(url => {
+    // One picture per profile; re-uploading replaces your own, never someone else's.
+    const storageRef = firebase.storage().ref("profilePictures/" + toKebabCase(currentProfile));
+    storageRef.put(file, { contentType: file.type }).then(snapshot => snapshot.ref.getDownloadURL()).then(url => {
         db.collection("profiles").doc(toKebabCase(currentProfile)).update({
             profilePictureURL: url
         });
         document.querySelector("#profileIcon i").style.display = "none";
         document.querySelector("#profilePictureImage").src = url;
         document.querySelector("#profilePictureImage").style.display = "block";
-        // return snapshot.ref.getDownloadURL();
-    }).then(url => {
-        console.log("Image URL:", url);
+        showToast("Profile picture updated.", "success");
+    }).catch((error) => {
+        console.error("Upload failed:", error);
+        showToast("Upload failed.", "error");
+    }).finally(() => {
+        profilePictureInput.value = "";
     });
 });
 
-addAllCardsToBinderButton.addEventListener("click", () => {
-    if (confirm("Are you sure you want to add 1 copy of every card to your binder?")) {
-        for (c in cards) {
-            if (binder[cards[c].id]) binder[cards[c].id] = binder[cards[c].id] + 1;
-            else binder[cards[c].id] = 1;
-        }
-        db.collection("profiles").doc(toKebabCase(currentProfile)).update({
-            binder: binder
-        });
+function addCopiesToBinder(cardIds) {
+    cardIds.forEach(id => { binder[id] = (binder[id] || 0) + 1; });
+    db.collection("profiles").doc(toKebabCase(currentProfile)).update({ binder: binder });
+    buildBinder(cards, packs);
+    buildPacks();
+    showToast(`Added ${cardIds.length} cards to your binder.`, "success");
+}
+
+addAllCardsToBinderButton.addEventListener("click", async () => {
+    if (!isAdmin) return;
+    if (await showConfirm("Add 1 copy of <strong>every card</strong> to your binder?", { danger: false })) {
+        // alternate forms share their base card's copies, so they're skipped
+        addCopiesToBinder(cards.filter(c => ownershipId(c.id) === c.id).map(c => c.id));
     }
 });
 
-addBaseSetToBinderButton.addEventListener("click", () => {
-    if (confirm("Are you sure you want to add 1 copy of every card from Base Set to your binder?")) {
-        for (p in packs) {
-            if (packs[p].name !== "Base Set") continue;
-            for (c in packs[p].cardPool) {
-                if (binder[packs[p].cardPool[c]]) binder[packs[p].cardPool[c]] = binder[packs[p].cardPool[c]] + 1;
-                else binder[packs[p].cardPool[c]] = 1;
-            }
-        }
-        db.collection("profiles").doc(toKebabCase(currentProfile)).update({
-            binder: binder
-        });
+addBaseSetToBinderButton.addEventListener("click", async () => {
+    if (!isAdmin) return;
+    if (await showConfirm("Add 1 copy of every <strong>Base Set</strong> card to your binder?", { danger: false })) {
+        addCopiesToBinder(packs.filter(p => p.name === "Base Set").flatMap(p => p.cardPool));
     }
 });
 

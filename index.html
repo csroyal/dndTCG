@@ -8,19 +8,22 @@
 </head>
 <body>
     <div id="header">
-        <span class="header-title">DnD TCG</span>
+        <span class="header-title">
+            <span class="header-title-mark" aria-hidden="true"><i class="bi bi-suit-diamond-fill"></i></span>
+            DnD TCG
+        </span>
         <div class="header-actions">
-            <div id="darkModeButton"><i class="bi bi-moon-fill"></i></div>
-            <div id="profileIcon">
+            <button type="button" id="darkModeButton" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+            <div id="profileIcon" role="button" tabindex="0" aria-label="Account menu" aria-haspopup="true" aria-expanded="false">
                 <i class="bi bi-person-fill"></i>
-                <img id="profilePictureImage">
+                <img id="profilePictureImage" alt="">
                 <div id="profileEntry" class="tooltip">
                     <div id="profileInfo">
                         <p>Welcome, <span></span>!</p>
                         <button id="uploadProfilePictureButton"><i class="bi bi-image"></i> Upload Profile Picture</button>
                         <input type="file" id="profilePictureInput" hidden accept="image/*">
-                        <button id="addBaseSetToBinderButton"><i class="bi bi-collection"></i> Add Base Set to Binder</button>
-                        <button id="addAllCardsToBinderButton"><i class="bi bi-collection-fill"></i> Add All Cards to Binder</button>
+                        <button id="addBaseSetToBinderButton" class="admin-only" hidden><i class="bi bi-collection"></i> Add Base Set to Binder</button>
+                        <button id="addAllCardsToBinderButton" class="admin-only" hidden><i class="bi bi-collection-fill"></i> Add All Cards to Binder</button>
                         <div id="simBgSection">
                             <div class="profile-section-label"><i class="bi bi-controller"></i> Simulator Background</div>
                             <div id="simBgPicker">
@@ -34,15 +37,59 @@
                                     <i class="bi bi-snow" style="color:rgba(200,230,255,0.65);font-size:0.95rem;"></i>
                                 </button>
                                 <button class="sim-bg-swatch" data-bg="arcane" title="Arcane Vault" style="background: radial-gradient(ellipse at 35% 60%, #4c1d95 0%, #0a0616 65%);">
+                                    <i class="bi bi-magic" style="color:rgba(215,185,255,0.75);font-size:0.95rem;"></i>
                                 </button>
                                 <button class="sim-bg-swatch" data-bg="ember" title="Emberfall" style="background: radial-gradient(ellipse at 50% 120%, #c2410c 0%, #0d0200 55%);">
+                                    <i class="bi bi-fire" style="color:rgba(255,200,140,0.75);font-size:0.95rem;"></i>
                                 </button>
-                                <button class="sim-bg-swatch" data-bg="rift" title="Rift" style="background: #010005;">
+                                <button class="sim-bg-swatch" data-bg="rift" title="Rift" style="background: radial-gradient(ellipse at 50% 50%, #1b1340 0%, #010005 70%);">
+                                    <i class="bi bi-hurricane" style="color:rgba(175,200,255,0.75);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="glade" title="Firefly Glade" style="background: radial-gradient(ellipse at 50% 110%, #1f5230 0%, #050f09 70%);">
+                                    <i class="bi bi-tree-fill" style="color:rgba(205,255,140,0.7);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="rain" title="Rainstorm" style="background: linear-gradient(180deg, #2a3552 0%, #070b14 85%);">
+                                    <i class="bi bi-cloud-rain-heavy-fill" style="color:rgba(200,215,255,0.7);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="tavern" title="Hearthside Tavern" style="background: radial-gradient(ellipse at 15% 110%, #b4561c 0%, #1b100a 65%);">
+                                    <i class="bi bi-cup-hot-fill" style="color:rgba(255,215,160,0.75);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="aurora" title="Aurora" style="background: linear-gradient(170deg, #0b3a3a 0%, #071225 55%, #040814 100%);">
+                                    <i class="bi bi-moon-stars-fill" style="color:rgba(150,255,210,0.75);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="autumn" title="Autumn Woods" style="background: radial-gradient(ellipse at 50% 0%, #6b3416 0%, #1a0f08 70%);">
+                                    <i class="bi bi-tree" style="color:rgba(240,170,90,0.8);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="subter" title="Subter" style="background: radial-gradient(ellipse at 50% 120%, #1f4d5a 0%, #07060f 65%);">
+                                    <i class="bi bi-gem" style="color:rgba(130,230,220,0.8);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="moonsea" title="Moonlit Sea" style="background: linear-gradient(180deg, #0b1430 0%, #0d1838 42%, #050a1a 100%);">
+                                    <i class="bi bi-moon-fill" style="color:rgba(225,232,255,0.8);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="sunken" title="Sunken Temple" style="background: linear-gradient(180deg, #0f4a52 0%, #06222a 60%, #03121a 100%);">
+                                    <i class="bi bi-water" style="color:rgba(170,240,230,0.8);font-size:0.95rem;"></i>
+                                </button>
+                                <button class="sim-bg-swatch" data-bg="astral" title="Astral Sea" style="background: radial-gradient(ellipse at 40% 40%, #3b1d5e 0%, #0b0618 65%);">
+                                    <i class="bi bi-stars" style="color:rgba(220,200,255,0.8);font-size:0.95rem;"></i>
                                 </button>
                             </div>
                             <div id="simBgLabel" class="sim-bg-name">Default</div>
                         </div>
-                        <button id="muteSoundButton" onclick="toggleMuteSound()"><i class="bi bi-volume-up-fill"></i> <span>Mute Sounds</span></button>
+                        <div id="cardFxSection">
+                            <div class="profile-section-label"><i class="bi bi-stars"></i> Card Effects</div>
+                            <div id="cardFxToggle" class="segmented" role="radiogroup" aria-label="Card effects">
+                                <button type="button" role="radio" data-fx="full">Full</button>
+                                <button type="button" role="radio" data-fx="subtle">Subtle</button>
+                                <button type="button" role="radio" data-fx="off">Off</button>
+                            </div>
+                        </div>
+                        <div id="sfxVolumeSection">
+                            <label for="sfxVolume" class="profile-section-label">
+                                <i id="sfxVolumeIcon" class="bi bi-volume-up-fill"></i> Sound Effects
+                                <span id="sfxVolumeValue">75%</span>
+                            </label>
+                            <input type="range" id="sfxVolume" min="0" max="100" step="5" value="75">
+                        </div>
                         <button id="logOutButton"><i class="bi bi-box-arrow-right"></i> Log Out</button>
                     </div>
                     <div id="profileLogin">
@@ -55,26 +102,34 @@
     </div>
     <!-- <div id="menuHoverArea"></div> -->
     <div id="menu">
-        <div class="menu-button" data-section="homeSection">
+        <button type="button" class="menu-button" data-section="homeSection">
             <i class="bi bi-house"></i>
             <span>Home</span>
-        </div>
-        <div class="menu-button" data-section="binderSection">
+        </button>
+        <button type="button" class="menu-button" data-section="binderSection">
             <i class="bi bi-journal-richtext"></i>
             <span>Binder</span>
-        </div>
-        <div class="menu-button" data-section="decksSection">
+        </button>
+        <button type="button" class="menu-button" data-section="decksSection">
             <i class="bi bi-inboxes"></i>
             <span>Decks</span>
-        </div>
-        <div class="menu-button" data-section="simulatorSection">
+        </button>
+        <button type="button" class="menu-button" data-section="simulatorSection">
             <i class="bi bi-controller"></i>
             <span>Sim</span>
-        </div>
-        <div class="menu-button" data-section="sleeveSection">
+        </button>
+        <button type="button" class="menu-button" data-section="sleeveSection">
             <i class="bi bi-globe-americas"></i>
             <span>Sleeve</span>
-        </div>
+        </button>
+        <button type="button" class="menu-button admin-only" data-section="spectateSection" hidden>
+            <i class="bi bi-binoculars"></i>
+            <span>Spectate</span>
+        </button>
+        <button type="button" class="menu-button admin-only" data-section="adminSection" hidden>
+            <i class="bi bi-shield-lock"></i>
+            <span>Admin</span>
+        </button>
     </div>
     <div id="sectionsContainer">
         <div id="homeSection" class="section active">
@@ -89,6 +144,16 @@
                     </div>
                     <div id="pullHistoryStrip" class="pull-history-strip"></div>
                 </div>
+                <section id="blisterShelf" class="blister-shelf" hidden>
+                    <div class="blister-shelf-head">
+                        <div>
+                            <h2>Blister Packs</h2>
+                            <p class="packs-description">One-of-a-kind packs: a Common, a Rare, and a guaranteed promo. Each opens once, and they're only handed out by your DM.</p>
+                        </div>
+                        <span id="blisterShelfCount" class="blister-shelf-count"></span>
+                    </div>
+                    <div id="blisterContainer" class="blister-grid"></div>
+                </section>
             </div>
         </div>
         <div id="binderSection" class="section">
@@ -100,6 +165,27 @@
                         <button data-view="pack" class="active">By Pack</button>
                         <button data-view="rarity">By Rarity</button>
                     </div>
+                    <div class="binder-filters">
+                        <select id="binderClassFilter" aria-label="Filter by class">
+                            <option value="">All classes</option>
+                            <option value="Summon">Summon</option>
+                            <option value="Spell">Spell</option>
+                            <option value="Reaction">Reaction</option>
+                            <option value="Utility">Utility</option>
+                            <option value="Sleeve">Sleeve</option>
+                        </select>
+                        <select id="binderRarityFilter" aria-label="Filter by rarity">
+                            <option value="">All rarities</option>
+                            <option value="Common">Common</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Legendary">Legendary</option>
+                            <option value="Mythic">Mythic</option>
+                        </select>
+                        <select id="binderTypeFilter" aria-label="Filter by type">
+                            <option value="">All types</option>
+                        </select>
+                    </div>
+                    <div id="binderCollectionTotal" class="binder-collection-total"></div>
                 </div>
             </div>
             <div id="binderContainer"></div>
@@ -109,7 +195,7 @@
             <div class="section-header">
                 <div>
                     <h1>Decks</h1>
-                    <p>Build and manage your decks. Click a card in the deck list to remove it, or pin one as the deck icon.</p>
+                    <p>Build and manage your decks. Click a card in the deck list to remove a copy.</p>
                 </div>
             </div>
             <div id="decksContainer"></div>
@@ -121,14 +207,15 @@
                             <label for="deckBuilderNameEntry">Deck Name</label>
                             <input type="text" id="deckBuilderNameEntry" value="New Deck 1" placeholder="Deck Name">
                         </div>
-                        <div id="deckBuilderIconSelector">
-                            <div id="deckBuilderIconPreview"><span>Select icon</span></div>
-                            <div>
-                                <div class="deck-builder-field-label">Deck Icon</div>
-                                <div class="deck-builder-field-helper">Click the pin on a deck card, then tap this preview to clear it.</div>
-                            </div>
-                        </div>
+                        <button type="button" id="deckBuilderIconSelector" title="Choose this deck's icon">
+                            <span id="deckBuilderIconPreview"><span>No icon</span></span>
+                            <span class="deck-icon-selector-text">
+                                <span class="deck-builder-field-label">Deck Icon</span>
+                                <span class="deck-builder-field-helper"><i class="bi bi-images"></i> Choose</span>
+                            </span>
+                        </button>
                     </div>
+                    <button id="deckBuilderShareButton" class="btn-ghost" title="Copy a deck code you can import later"><i class="bi bi-share"></i> Share</button>
                     <button id="deckBuilderDeleteButton" class="danger"><i class="bi bi-trash"></i> Delete</button>
                 </div>
                 <div id="deckBuilderMain">
@@ -157,16 +244,32 @@
                         <div id="deckBuilderBinderControls">
                             <div class="deck-builder-field">
                                 <label for="deckBuilderBinderSearch">Search</label>
-                                <input id="deckBuilderBinderSearch" type="search" placeholder="Search binder cards...">
+                                <input id="deckBuilderBinderSearch" type="search" placeholder="Card name">
                             </div>
                             <div class="deck-builder-field">
-                                <label for="deckBuilderBinderFilter">Filter</label>
+                                <label for="deckBuilderBinderFilter">Class</label>
                                 <select id="deckBuilderBinderFilter">
                                     <option selected value="">All</option>
                                     <option value="Summon">Summon</option>
                                     <option value="Spell">Spell</option>
                                     <option value="Reaction">Reaction</option>
                                     <option value="Utility">Utility</option>
+                                </select>
+                            </div>
+                            <div class="deck-builder-field">
+                                <label for="deckBuilderRarityFilter">Rarity</label>
+                                <select id="deckBuilderRarityFilter">
+                                    <option selected value="">All</option>
+                                    <option value="Common">Common</option>
+                                    <option value="Rare">Rare</option>
+                                    <option value="Legendary">Legendary</option>
+                                    <option value="Mythic">Mythic</option>
+                                </select>
+                            </div>
+                            <div class="deck-builder-field">
+                                <label for="deckBuilderTypeFilter">Type</label>
+                                <select id="deckBuilderTypeFilter">
+                                    <option selected value="">All</option>
                                 </select>
                             </div>
                         </div>
@@ -193,35 +296,51 @@
                         <button class="sim-ctrl-btn primary" onclick="nextTurn()">
                             <i class="bi bi-arrow-right-circle"></i> Next Turn
                         </button>
+                        <button class="sim-ctrl-btn" id="simUndoButton" onclick="undoSim()" disabled title="Nothing to undo">
+                            <i class="bi bi-arrow-90deg-left"></i> Undo
+                        </button>
                         <button class="sim-ctrl-btn" onclick="resetSimulator()">
                             <i class="bi bi-arrow-counterclockwise"></i> New Game
                         </button>
                     </div>
+                    <div class="sim-deck-tools" role="group" aria-label="Deck tools">
+                        <div class="sim-tools-label">Deck</div>
+                        <div class="sim-tools-grid">
+                            <button type="button" class="sim-tool-btn" onclick="drawCard()" title="Draw the top card"><i class="bi bi-box-arrow-in-down"></i> Draw</button>
+                            <button type="button" class="sim-tool-btn" onclick="drawCards()" title="Draw several cards"><i class="bi bi-stack"></i> Draw X</button>
+                            <button type="button" class="sim-tool-btn" onclick="if (!deckIsEmpty()) shuffleDeck()" title="Shuffle the deck"><i class="bi bi-shuffle"></i> Shuffle</button>
+                            <button type="button" class="sim-tool-btn" onclick="searchDeck()" title="Search the deck for a card"><i class="bi bi-search"></i> Search</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="simulatorZones">
-                    <div id="simulatorSummonZone" data-context="summonZone">
+                    <div id="simulatorSummonZone" data-context="summonZone" data-drop="play" data-drop-label="Play">
                         <h3 data-context="summonZone">Summon Zone</h3>
                     </div>
-                    <div id="simulatorReactionZone" data-context="reactionZone">
+                    <div id="simulatorReactionZone" data-context="reactionZone" data-drop="play" data-drop-label="Play">
                         <h3 data-context="reactionZone">Reaction Zone</h3>
                     </div>
                 </div>
                 <div id="simulatorCards">
-                    <div onclick="viewGraveyard()" id="simulatorGraveyard" class="empty" data-context="graveyard">
+                    <div onclick="viewGraveyard()" id="simulatorGraveyard" class="empty" data-context="graveyard" data-drop="graveyard" data-drop-label="Discard">
+                        <button type="button" class="zone-menu-btn" data-zone-menu="graveyard" aria-label="Graveyard actions" title="Graveyard actions"><i class="bi bi-three-dots"></i></button>
                         <h3 data-context="graveyard">Graveyard</h3>
-                        <img src="./assets/card-art/back.png" data-context="graveyard" class="simulator-graveyard-card">
+                        <img src="./assets/card-art/back.png" data-context="graveyard" class="simulator-graveyard-card" alt="Top card of graveyard">
                     </div>
-                    <div id="simulatorDeck" class="empty" data-context="deck">
+                    <div id="simulatorDeck" class="empty" data-context="deck" data-drop="deck" data-drop-label="Top of deck">
+                        <button type="button" class="zone-menu-btn" data-zone-menu="deck" aria-label="Deck actions" title="Deck actions"><i class="bi bi-three-dots"></i></button>
                         <h3 data-context="deck">Deck</h3>
-                        <img src="./assets/card-art/back.png" data-context="deck" class="simulator-deck-card">
+                        <img src="./assets/card-art/back.png" data-context="deck" class="simulator-deck-card" alt="Deck">
                         <div id="simDeckCountLabel" class="sim-deck-count-label"></div>
                     </div>
                 </div>
                 <div id="simulatorExtra">
-                    <div onclick="viewBanish()" id="simulatorBanish" data-context="banish">
+                    <div onclick="viewBanish()" id="simulatorBanish" data-context="banish" data-drop="banish" data-drop-label="Banish">
+                        <button type="button" class="zone-menu-btn" data-zone-menu="banish" aria-label="Banish zone actions" title="Banish zone actions"><i class="bi bi-three-dots"></i></button>
                         <h3 data-context="banish">Banish Zone</h3>
                     </div>
                     <div onclick="viewTokens()" id="simulatorTokens" data-context="tokens">
+                        <button type="button" class="zone-menu-btn" data-zone-menu="tokens" aria-label="Token actions" title="Token actions"><i class="bi bi-three-dots"></i></button>
                         <h3 data-context="tokens">Tokens</h3>
                     </div>
                 </div>
@@ -247,6 +366,12 @@
                 </div>
                 <div id="sleeveControls">
                     <div id="sleeveCount"><i class="bi bi-file-richtext"></i> <span>0</span> / 12</div>
+                    <div id="sleeveRules" class="sleeve-rules">
+                        <div class="sleeve-rules-title">Sleeve rules</div>
+                        <div class="sleeve-rule rarity-legendary" data-rarity="Legendary"><span>Legendary</span><span class="sleeve-rule-val">0 / 1</span></div>
+                        <div class="sleeve-rule rarity-mythic" data-rarity="Mythic"><span>Mythic</span><span class="sleeve-rule-val">0 / 1</span></div>
+                        <p class="sleeve-rules-note">Up to 12 cards. Commons and Rares can repeat; Legendary and Mythic cards are one copy each. You need at least 6 to shuffle an active sleeve.</p>
+                    </div>
                     <button id="createActiveSleeveButton"><i class="bi bi-shuffle"></i> Create Active Sleeve</button>
                 </div>
                 <div id="activeSleeve">
@@ -254,14 +379,59 @@
                 </div>
             </div>
         </div>
+        <div id="spectateSection" class="section">
+            <div class="section-header">
+                <div>
+                    <h1>Spectate</h1>
+                    <p>Watch games as they happen and step in as the DM. Click any card on the board for options.</p>
+                </div>
+            </div>
+            <div class="admin-layout spec-layout">
+                <aside class="admin-users">
+                    <div class="spec-list-title">Battles</div>
+                    <div id="specBattleList" class="admin-user-list"></div>
+                </aside>
+                <section id="specView" class="admin-detail spec-view">
+                    <div class="empty-state">Pick a game on the left to watch it.</div>
+                </section>
+            </div>
+        </div>
+        <div id="adminSection" class="section">
+            <div class="section-header">
+                <div>
+                    <h1>Admin</h1>
+                    <p>Manage players' collections. Tick several players to give cards or tickets to the whole party at once.</p>
+                </div>
+                <button id="adminRefreshButton" class="btn-ghost" type="button"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+            </div>
+            <div class="admin-layout">
+                <aside class="admin-users">
+                    <input id="adminUserSearch" type="search" placeholder="Find a player">
+                    <div class="admin-users-bulk">
+                        <label><input type="checkbox" id="adminSelectAll"> Select all</label>
+                        <span id="adminSelectedCount"></span>
+                    </div>
+                    <div id="adminUserList" class="admin-user-list"></div>
+                </aside>
+                <section id="adminDetail" class="admin-detail">
+                    <div class="empty-state">Pick a player on the left.</div>
+                </section>
+            </div>
+        </div>
     </div>
     <div id="packOpeningModalContainer" class="modal-container">
-        <div class="modal">
-            <img id="packOpeningPackImage">
-            <div id="packOpeningResults" class="slide-out-bottom">
+        <div class="modal pack-stage">
+            <div class="pack-stage-aura" aria-hidden="true"></div>
+            <div class="pack-stage-rays" aria-hidden="true"></div>
+            <div class="pack-stage-motes" aria-hidden="true"></div>
+            <div class="pack-stage-content">
+                <img id="packOpeningPackImage" alt="Booster pack, click to open">
+                <div id="blisterOpeningPack" class="blister-stage" hidden></div>
+                <div id="packOpeningResults" class="slide-out-bottom">
 
+                </div>
+                <button id="packConfirmButton">Confirm</button>
             </div>
-            <button id="packConfirmButton">Confirm</button>
         </div>
     </div>
     <div id="packPreviewModalContainer" class="modal-container">
@@ -385,20 +555,36 @@
             <button id="simulatorConditionalModalButton" class="btn-accent" onclick="drawCardConditional()">Confirm</button>
         </div>
     </div>
+    <div id="deckIconModalContainer" class="modal-container">
+        <div class="modal deck-icon-modal" role="dialog" aria-modal="true" aria-labelledby="deckIconModalTitle">
+            <div class="deck-icon-modal-header">
+                <h2 id="deckIconModalTitle">Choose a deck icon</h2>
+                <p>Pick any card in this deck.</p>
+            </div>
+            <div id="deckIconPicker" class="deck-icon-picker"></div>
+            <div class="deck-icon-modal-actions">
+                <button type="button" id="deckIconClearButton" class="btn-ghost"><i class="bi bi-x-circle"></i> Remove icon</button>
+                <button type="button" id="deckIconCloseButton" class="btn-ghost">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="giftModalContainer" class="modal-container">
+        <div class="modal gift-modal" role="dialog" aria-modal="true" aria-labelledby="giftTitle"></div>
+    </div>
     <div id="cardViewModalContainer" class="modal-container">
         <div class="modal">
             <div class="card-wrapper">
-                <img class="card" draggable="false">
+                <img class="card" draggable="false" alt="">
             </div>
             <div id="cardViewForms" class="card-view-forms" style="display:none">
-                <button id="cardViewFormPrev" type="button"><i class="bi bi-chevron-left"></i></button>
+                <button id="cardViewFormPrev" type="button" aria-label="Previous form"><i class="bi bi-chevron-left"></i></button>
                 <span id="cardViewFormLabel"></span>
-                <button id="cardViewFormNext" type="button"><i class="bi bi-chevron-right"></i></button>
+                <button id="cardViewFormNext" type="button" aria-label="Next form"><i class="bi bi-chevron-right"></i></button>
             </div>
             <div class="card-view-controls">
-                <button id="cardViewCountDecrease" type="button">-</button>
+                <button id="cardViewCountDecrease" type="button" aria-label="Remove one copy">-</button>
                 <span id="cardViewCountDisplay">0</span>
-                <button id="cardViewCountIncrease" type="button">+</button>
+                <button id="cardViewCountIncrease" type="button" aria-label="Add one copy">+</button>
                 <span class="card-view-label">Owned</span>
             </div>
         </div>
@@ -419,6 +605,9 @@
         </ul>
         <ul data-context="summonZoneCard">
             <div class="context-menu-group">
+                <li onclick="viewTargetedCard()"><i class="bi bi-eye"></i> View <span class="simulator-context-card-name"></span></li>
+            </div>
+            <div class="context-menu-group">
                 <li onclick="sendTargetedCardToGraveyard()">Send <span class="simulator-context-card-name"></span> to Graveyard</li>
                 <li onclick="sendTargetedCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
                 <li onclick="banishTargetedCard()">Banish <span class="simulator-context-card-name"></span></li>
@@ -431,6 +620,9 @@
             </div>
         </ul>
         <ul data-context="reactionZoneCard">
+            <div class="context-menu-group">
+                <li onclick="viewTargetedCard()"><i class="bi bi-eye"></i> View <span class="simulator-context-card-name"></span></li>
+            </div>
             <div class="context-menu-group">
                 <li onclick="activateTargetedCard()">Activate <span class="simulator-context-card-name"></span></li>
                 <li onclick="sendTargetedCardToGraveyard()">Send <span class="simulator-context-card-name"></span> to Graveyard</li>
@@ -472,6 +664,9 @@
         </ul>
         <ul data-context="graveyardCard">
             <div class="context-menu-group">
+                <li onclick="viewTargetedCard()"><i class="bi bi-eye"></i> View <span class="simulator-context-card-name"></span></li>
+            </div>
+            <div class="context-menu-group">
                 <li onclick="returnGraveyardCardToHand()">Return <span class="simulator-context-card-name"></span> to Hand</li>
                 <li onclick="copyGraveyardCardToHand()">Copy <span class="simulator-context-card-name"></span> to Hand</li>
                 <li onclick="banishGraveyardCard()">Banish <span class="simulator-context-card-name"></span></li>
@@ -495,6 +690,9 @@
             </div>
         </ul>
         <ul data-context="hand">
+            <div class="context-menu-group">
+                <li onclick="viewTargetedCard()"><i class="bi bi-eye"></i> View <span class="simulator-context-card-name"></span></li>
+            </div>
             <div class="context-menu-group">
                 <li onclick="playCard()">Play <span class="simulator-context-card-name"></span></li>
                 <li onclick="sendTargetedCardToGraveyard()">Discard <span class="simulator-context-card-name"></span></li>
@@ -521,6 +719,10 @@
     <script src="./scripts/home.js"></script>
     <script src="./scripts/binder.js"></script>
     <script src="./scripts/decks.js"></script>
+    <script src="./scripts/effects.js"></script>
+    <script src="./scripts/admin.js"></script>
+    <script src="./scripts/spectate.js"></script>
+    <script src="./scripts/gifts.js"></script>
     <script src="./scripts/simulator.js"></script>
     <script src="./scripts/sleeve.js"></script>
     <div id="toastContainer"></div>

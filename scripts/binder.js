@@ -2,11 +2,52 @@ let binderContainer    = document.getElementById("binderContainer");
 let binderFlatView     = document.getElementById("binderFlatView");
 let binderSearch       = document.getElementById("binderSearch");
 let binderMissingBtn   = document.getElementById("binderMissingToggle");
+let binderClassFilter  = document.getElementById("binderClassFilter");
+let binderRarityFilter = document.getElementById("binderRarityFilter");
+let binderTypeFilter   = document.getElementById("binderTypeFilter");
+let binderCollectionTotal = document.getElementById("binderCollectionTotal");
 
 let binderMissingOnly  = false;
 let binderViewMode     = 'pack'; // 'pack' | 'rarity'
 
 const RARITY_ORDER = ['Mythic', 'Legendary', 'Rare', 'Common'];
+
+// Collapsed packs are remembered, since the binder is rebuilt after every pack opening.
+const BINDER_COLLAPSED_KEY = 'DND_TCG_BINDER_COLLAPSED';
+const binderCollapsed = new Set((() => {
+    try { return JSON.parse(localStorage.getItem(BINDER_COLLAPSED_KEY) || '[]'); }
+    catch { return []; }
+})());
+
+function setPackCollapsed(packContainer, packAccordion, collapsed, animate) {
+    const grid = packContainer.querySelector('.cards-container');
+    const packId = packContainer.dataset.packId;
+    if (collapsed) binderCollapsed.add(packId); else binderCollapsed.delete(packId);
+    localStorage.setItem(BINDER_COLLAPSED_KEY, JSON.stringify([...binderCollapsed]));
+    packAccordion.setAttribute('aria-expanded', String(!collapsed));
+
+    if (!animate || prefersReducedMotion.matches) {
+        packContainer.classList.toggle('collapse', collapsed);
+        return;
+    }
+    grid.getAnimations().forEach(a => a.cancel());
+    if (collapsed) {
+        const h = grid.offsetHeight;
+        grid.style.overflow = 'hidden';
+        const anim = grid.animate([{ height: `${h}px`, opacity: 1 }, { height: '0px', opacity: 0, paddingTop: '0px', paddingBottom: '0px' }],
+            { duration: 260, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+        packContainer.classList.add('collapse');
+        grid.style.display = 'grid'; // stay visible until the animation ends
+        anim.onfinish = anim.oncancel = () => { grid.style.display = ''; grid.style.overflow = ''; };
+    } else {
+        packContainer.classList.remove('collapse');
+        const h = grid.offsetHeight;
+        grid.style.overflow = 'hidden';
+        const anim = grid.animate([{ height: '0px', opacity: 0, paddingTop: '0px', paddingBottom: '0px' }, { height: `${h}px`, opacity: 1 }],
+            { duration: 280, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+        anim.onfinish = anim.oncancel = () => { grid.style.overflow = ''; };
+    }
+}
 
 function buildBinder(cards, packs) {
     binderContainer.innerHTML = '';
@@ -22,18 +63,18 @@ function buildBinder(cards, packs) {
 
         let packLogo = document.createElement("img");
         packLogo.src = "./assets/pack-art/" + pack.id + "-logo.png";
+        packLogo.alt = pack.name;
         packLogo.setAttribute("draggable", false);
         packHeader.append(packLogo);
 
         let packAccordion = document.createElement("div");
         packAccordion.classList.add("pack-accordion");
-        packAccordion.innerHTML = `<i class="bi bi-chevron-down"></i>`;
+        packAccordion.innerHTML = `<i class="bi bi-chevron-up"></i>`;
         packAccordion.onclick = () => {
-            packContainer.classList.toggle("collapse");
-            packAccordion.innerHTML = packContainer.classList.contains("collapse")
-                ? `<i class="bi bi-chevron-up"></i>`
-                : `<i class="bi bi-chevron-down"></i>`;
+            setPackCollapsed(packContainer, packAccordion, !packContainer.classList.contains("collapse"), true);
         };
+        makeActivatable(packAccordion, `Show or hide ${pack.name}`);
+        packAccordion.setAttribute("aria-expanded", "true");
         packHeader.append(packAccordion);
 
         let cardsContainer = document.createElement("div");
@@ -54,10 +95,35 @@ function buildBinder(cards, packs) {
         packContainer.append(packHeader);
         packContainer.append(cardsContainer);
         binderContainer.append(packContainer);
+        if (binderCollapsed.has(pack.id)) setPackCollapsed(packContainer, packAccordion, true, false);
     });
 
     buildFlatView(cards, packs);
+    populateBinderTypeFilter(cards);
+    refreshCollectionTotal();
     applyBinderFilters();
+}
+
+function binderCardIds() {
+    const ids = new Set();
+    packs.forEach(pack => { if (pack.showInBinder) pack.cardPool.forEach(id => ids.add(id)); });
+    return [...ids].filter(id => getObjectById(cards, id));
+}
+
+// "142 / 179 collected" across every card shown in the binder.
+function refreshCollectionTotal() {
+    if (!binderCollectionTotal || !cards || !packs) return;
+    const ids = binderCardIds();
+    const owned = ids.filter(id => binder && binder[id] >= 1).length;
+    const pct = ids.length ? Math.round((owned / ids.length) * 100) : 0;
+    binderCollectionTotal.innerHTML = `<i class="bi bi-collection"></i> <strong>${owned}</strong> / ${ids.length} collected <span>${pct}%</span>`;
+    binderCollectionTotal.classList.toggle('complete', ids.length > 0 && owned === ids.length);
+}
+
+function populateBinderTypeFilter(cards) {
+    if (binderTypeFilter.options.length > 1) return;
+    [...new Set(cards.map(c => c.type).filter(Boolean))].sort()
+        .forEach(type => binderTypeFilter.add(new Option(type, type)));
 }
 
 function buildFlatView(cards, packs) {
@@ -112,17 +178,24 @@ function buildFlatView(cards, packs) {
     });
 }
 
+function binderCardMatches(img, search) {
+    const card = getObjectById(cards, img.dataset.cardId);
+    if (!card) return false;
+    return (!search || card.name.toLowerCase().includes(search))
+        && (!binderMissingOnly || !img.classList.contains('owned'))
+        && (!binderClassFilter.value  || card.class === binderClassFilter.value)
+        && (!binderRarityFilter.value || card.rarity === binderRarityFilter.value)
+        && (!binderTypeFilter.value   || card.type === binderTypeFilter.value);
+}
+
 function applyBinderFilters() {
-    const search = binderSearch.value.toLowerCase();
+    const search = binderSearch.value.trim().toLowerCase();
 
     if (binderViewMode === 'pack') {
         document.querySelectorAll('#binderContainer .pack-container').forEach(pack => {
             let visible = 0;
             pack.querySelectorAll('.card-wrapper').forEach(wrapper => {
-                const card     = wrapper.querySelector('.card');
-                const nameMatch = !search || card.dataset.name.includes(search);
-                const isOwned   = card.classList.contains('owned');
-                const show      = nameMatch && (!binderMissingOnly || !isOwned);
+                const show      = binderCardMatches(wrapper.querySelector('.card'), search);
                 wrapper.style.display = show ? '' : 'none';
                 if (show) visible++;
             });
@@ -132,10 +205,7 @@ function applyBinderFilters() {
         document.querySelectorAll('#binderFlatView .binder-rarity-section').forEach(section => {
             let visible = 0;
             section.querySelectorAll('.card-wrapper').forEach(wrapper => {
-                const card     = wrapper.querySelector('.card');
-                const nameMatch = !search || card.dataset.name.includes(search);
-                const isOwned   = card.classList.contains('owned');
-                const show      = nameMatch && (!binderMissingOnly || !isOwned);
+                const show      = binderCardMatches(wrapper.querySelector('.card'), search);
                 wrapper.style.display = show ? '' : 'none';
                 if (show) visible++;
             });
@@ -167,5 +237,6 @@ binderMissingBtn.addEventListener('click', () => {
     applyBinderFilters();
 });
 
-// Search
+// Search + filters
 binderSearch.addEventListener("input", applyBinderFilters);
+[binderClassFilter, binderRarityFilter, binderTypeFilter].forEach(sel => sel.addEventListener("change", applyBinderFilters));
