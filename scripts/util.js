@@ -2270,7 +2270,10 @@ document.addEventListener("keydown", (e) => {
     const open = Array.from(document.querySelectorAll(".modal-container.active"))
         .filter(m => getComputedStyle(m).visibility !== "hidden");
     const top = open[open.length - 1];
-    if (!top) return;
+    if (!top) {
+        if (document.body.classList.contains("sim-fullscreen")) setSimFullscreen(false);
+        return;
+    }
     const handler = top.id in ESCAPE_HANDLERS ? ESCAPE_HANDLERS[top.id] : () => top.classList.remove("active");
     if (handler) handler();
 });

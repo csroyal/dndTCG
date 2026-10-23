@@ -42,6 +42,21 @@ let targetedCard;
 let simBusyUntil = 0;
 function simHold(ms) { simBusyUntil = Math.max(simBusyUntil, performance.now() + ms); }
 
+/* ---- Fullscreen: hide the header and side menu so the board fills the window ---- */
+const simFullscreenButton = document.getElementById('simFullscreenButton');
+function setSimFullscreen(on) {
+    if (document.body.classList.contains('sim-fullscreen') === on) return;
+    document.body.classList.toggle('sim-fullscreen', on);
+    simFullscreenButton.innerHTML = on ? '<i class="bi bi-fullscreen-exit"></i><span>Exit</span>' : '<i class="bi bi-arrows-fullscreen"></i><span>Fullscreen</span>';
+    simFullscreenButton.title = on ? 'Show the menus again (Esc)' : 'Hide the menus so the board fills the window';
+    simFullscreenButton.setAttribute('aria-pressed', String(on));
+    // the background and effects canvases are sized to the board, so let them re-measure
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+}
+simFullscreenButton.addEventListener('click', () => setSimFullscreen(!document.body.classList.contains('sim-fullscreen')));
+// anything that switches section (the menus are hidden, but code can still do it) leaves fullscreen
+menuButtons.forEach(btn => btn.addEventListener('click', () => setSimFullscreen(false)));
+
 function summonDefaultHp(cardID) { return getObjectById(cards, cardID)?.summonInfo?.hp ?? 0; }
 
 // A summon's state lives in parallel arrays; these keep them in step.
