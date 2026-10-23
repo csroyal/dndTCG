@@ -45,7 +45,7 @@
             "traits": [
                 {
                     "name": "Death Burst",
-                    "description": "The gas spore bursts when it dies. CON saving throw: DC 10, each creature in a 20-foot sphere. Failure: Target takes 2d6 poison damage and has the Poisoned condition. "
+                    "description": "The gas spore bursts when it dies. CON saving throw: DC 10, each creature in a 20-foot sphere. Failure: Target takes 2d6 poison damage and has the Poisoned condition."
                 }
             ],
             "actions": [
@@ -401,7 +401,7 @@
             "bonusActions": [
                 {
                     "name": "Rage",
-                    "description": "This summon gains the Rage effect. Until the end your next turn, this summon's attacks deal +2 bonus damage. If this summon makes an attack roll against an enemy, the duration is extended for another turn."
+                    "description": "This summon gains the Rage effect. Until the end of your next turn, this summon's attacks deal +2 bonus damage. If this summon makes an attack roll against an enemy, the duration is extended for another turn."
                 }
             ]
         }
@@ -578,7 +578,7 @@
         "rarity": "Rare",
         "class": "Reaction",
         "tags": [],
-        "reaction": "One of your summons on the field is hit by an attack",
+        "reaction": "One of your summons on the field is hit by an attack.",
         "description": "You siphon the life of your own wicked servants, unsatisfied with their performance. The summon that was just attacked receives 2d8 necrotic damage and you draw 1 card."
     },
     {
@@ -643,7 +643,7 @@
             "bonusActions": [
                 {
                     "name": "Void Warp",
-                    "description": "1/S. This summon teleports to an unoccupied space it can see within 120 ft. STR Saving Throw: DC 15, each creature within 30 feet of the space it left. Failure: 4d8 force damage and pulled 5 feet inwards to the space. Failure: Half damage and no pull."
+                    "description": "1/S. This summon teleports to an unoccupied space it can see within 120 ft. STR Saving Throw: DC 15, each creature within 30 feet of the space it left. Failure: 4d8 force damage and pulled 5 feet inwards to the space. Success: Half damage and no pull."
                 }
             ]
         }
@@ -995,11 +995,11 @@
             "actions": [
                 {
                     "name": "Bite",
-                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit 1d10 piercing damage plus 1d10 poison damage."
+                    "description": "Melee Attack Roll: +5, reach 5 ft. Hit: 1d10 piercing damage plus 1d10 poison damage."
                 },
                 {
                     "name": "Tongue",
-                    "description": "Melee Attack Roll: +5 , reach 30 ft., one target. Hit 1d8 bludgeoning damage plus 1d6 acid damage. STR Saving Throw: DC 14. Failure: Target is grappled and pulled to an unoccupied space within 5 feet."
+                    "description": "Melee Attack Roll: +5, reach 30 ft., one target. Hit: 1d8 bludgeoning damage plus 1d6 acid damage. STR Saving Throw: DC 14. Failure: Target is grappled and pulled to an unoccupied space within 5 feet."
                 }
             ]
         }
@@ -1067,7 +1067,7 @@
         "class": "Spell",
         "type": "Dragon",
         "tags": [],
-        "description": "You unleash a roar infused with the crushing authority of an ancient dragon. Choose a point you can see within 50 feet; a 30‑foot radius sphere centered on that point becomes a zone of warped gravity and draconic dominance. When a creature enters the area for the first time on a turn or starts its turn there, it must make a STR saving throw.On a failure, the creature is affected by one of the following effects of your choice:<br><br><i>Drag Down</i>. The creature is pulled up to 20 feet toward the center of the zone and knocked prone.<br><br><i>Hurl Away</i>. The creature is pushed up to 20 feet in a direction you choose and takes 3d6 bludgeoning damage.<br><br><i>Pin in Place</i>. The creature's speed becomes 0 until the start of its next turn.<br><br>A creature that succeeds on its saving throw is unaffected but must repeat the save if it remains in the area. Allies in the zone can choose to automatically succeed on the saving throw and are never knocked prone."
+        "description": "You unleash a roar infused with the crushing authority of an ancient dragon. Choose a point you can see within 50 feet; a 30‑foot radius sphere centered on that point becomes a zone of warped gravity and draconic dominance. When a creature enters the area for the first time on a turn or starts its turn there, it must make a STR saving throw.<br><br>On a failure, the creature is affected by one of the following effects of your choice:<br><br><i>Drag Down</i>. The creature is pulled up to 20 feet toward the center of the zone and knocked prone.<br><br><i>Hurl Away</i>. The creature is pushed up to 20 feet in a direction you choose and takes 3d6 bludgeoning damage.<br><br><i>Pin in Place</i>. The creature's speed becomes 0 until the start of its next turn.<br><br>A creature that succeeds on its saving throw is unaffected but must repeat the save if it remains in the area. Allies in the zone can choose to automatically succeed on the saving throw and are never knocked prone."
     },
     {
         "id": "083",
@@ -1084,7 +1084,7 @@
         "rarity": "Rare",
         "class": "Utility",
         "tags": [],
-        "description": "Discard a Dragon-type card form your hand. Then, draw 2 random Dragon-type cards from your deck."
+        "description": "Discard a Dragon-type card from your hand. Then, draw 2 random Dragon-type cards from your deck."
     },
     {
         "id": "085",
@@ -2287,7 +2287,7 @@
             ],
             "actions": [
                 {
-                    "name": "Unnering Slam",
+                    "name": "Unnerving Slam",
                     "description": "Melee Attack Roll: +14, reach 5 ft. Hit: 5d12 force damage. If the target is a Huge or smaller creature, it is pushed up to 5 feet away."
                 },
                 {
@@ -2296,7 +2296,430 @@
                 },
                 {
                     "name": "Blazing Edict",
-                    "description": "Each creature in a 60 foot cube centered on this summon takes 45 radiant damage. WIS Saving Throw: DC 20, each creature hit. Failure: Stunned until the end of your next turn."
+                    "description": "1/S. Each creature in a 60 foot cube centered on this summon takes 45 radiant damage. WIS Saving Throw: DC 20, each creature hit. Failure: Stunned until the end of your next turn."
+                }
+            ]
+        }
+    },
+    {
+        "id": "174",
+        "name": "Compsognathus",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 9,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d6 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "175",
+        "name": "Diplocaulus",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "actions": [
+                {
+                    "name": "Head Slam",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d6 + 1 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "176",
+        "name": "Hadrosaurus",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 16,
+            "actions": [
+                {
+                    "name": "Tail",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d10 bludgeoning damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "177",
+        "name": "Meganeura",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 5,
+            "traits": [
+                {
+                    "name": "Pack Tactics",
+                    "description": "This summon has Advantage on attack rolls against a creature if at least one of this summon's allies is within 5 feet of the creature and the ally is not Incapacitated."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d6 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "178",
+        "name": "Pteranodon",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 13,
+            "actions": [
+                {
+                    "name": "Beak",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d8 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "179",
+        "name": "Trilobite",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 2,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +0, reach 5 ft. Hit: 1d4 piercing damage."
+                },
+                {
+                    "name": "Curl",
+                    "description": "This summon curls up, rolling itself into a ball. While curled, this summon gains a +2 bonus to AC but its speed becomes 0 and it can't take any actions or reactions. It can uncurl itself to end this effect as a bonus action."
+                }
+            ]
+        }
+    },
+    {
+        "id": "180",
+        "name": "Velociraptor",
+        "rarity": "Common",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 10,
+            "traits": [
+                {
+                    "name": "Pack Tactics",
+                    "description": "This summon has Advantage on attack rolls against a creature if at least one of this summon's allies is within 5 feet of the creature and the ally is not Incapacitated."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Claws",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 1d8 + 2 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "181",
+        "name": "Acid Splash",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You create an acidic bubble at a point within 60 feet, where it explodes in a 5-foot-radius Sphere. Each creature in that Sphere must succeed on a DEX saving throw or take 1d6 acid damage."
+    },
+    {
+        "id": "182",
+        "name": "Sulfur Cloud",
+        "rarity": "Common",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "You create a 20-foot-radius sphere of sulfuric fog that emits from your mouth. The sphere spreads around corners, and its area is heavily obscured. It lasts for 1 hour, until the smoke is blown, or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it. When blown, all creatures within the cloud take 2d6 force damage and 2d6 fire damage, while creatures flanking the cloud take 1d6 force damage. Can be blown with any introduction to fire."
+    },
+    {
+        "id": "183",
+        "name": "Thick Hide",
+        "rarity": "Common",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "One of your Beast-type creatures takes damage.",
+        "description": "The beast's thick hide reduces the damage taken by 1d10."
+    },
+    {
+        "id": "184",
+        "name": "Dinosaur Bones",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "You may play this card from your hand to permanently increase the damage of an active \"Tar Pits\" by an extra 2d6 acid damage."
+    },
+    {
+        "id": "185",
+        "name": "Savage Intuition",
+        "rarity": "Common",
+        "class": "Utility",
+        "tags": [],
+        "description": "Name a card class, then reveal the top card of your deck. If the class of the card matches the class you named, you may put it into your hand."
+    },
+    {
+        "id": "186",
+        "name": "Allosaurus",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 51,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +6, reach 5 ft. Hit: 2d8 + 4 piercing damage."
+                },
+                {
+                    "name": "Claws",
+                    "description": "Melee Attack Roll: +6, reach 5 ft. Hit: 1d8 piercing damage. If this monster moved at least 30 feet straight toward the target before using this action, this summon can make one Bite attack against it as a free action."
+                }
+            ]
+        }
+    },
+    {
+        "id": "187",
+        "name": "Ankylosaurus",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 68,
+            "traits": [
+                {
+                    "name": "Plated Armor",
+                    "description": "This summon takes regular damage from critical hits."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Tail",
+                    "description": "Melee Attack Roll: +6, reach 10 ft. Hit: 1d10 + 4 bludgeoning damage. If the target is a Large or smaller creature, it must succeed a DC 13 DEX saving throw or be knocked Prone."
+                }
+            ]
+        }
+    },
+    {
+        "id": "188",
+        "name": "Brontosaurus",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 121,
+            "actions": [
+                {
+                    "name": "Tail",
+                    "description": "Melee Attack Roll: +8, reach 20 ft. Hit: 3d4 bludgeoning damage."
+                },
+                {
+                    "name": "Stomp",
+                    "description": "1/S. DEX Saving Throw: DC 14, each creature in a 10 foot square within 5 feet. Failure: 2d6 + 2 bludgeoning damage plus 2d6 thunder damage. Success: Half damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "189",
+        "name": "Dilophosaurus",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 38,
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +3, reach 5 ft. Hit: 1d6 + 1 piercing damage plus 2d4 poison damage."
+                },
+                {
+                    "name": "Venom Spit",
+                    "description": "Melee Attack Roll: +6, range 15/30 ft. Hit: 1d10 + 4 poison damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "190",
+        "name": "Dinosaur Egg",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 30,
+            "traits": [
+                {
+                    "name": "Brittle Shell",
+                    "description": "This summon cannot be healed."
+                },
+                {
+                    "name": "Hatch",
+                    "description": "At the end of its third turn on the field, this summon begins to hatch. Discard this summon and replace it with a Beast-type summon from your deck or hand to special summon it. If special summoned from the deck, shuffle your deck afterward."
+                }
+            ]
+        }
+    },
+    {
+        "id": "191",
+        "name": "Pachycephalosaurus",
+        "rarity": "Rare",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 39,
+            "actions": [
+                {
+                    "name": "Headbutt",
+                    "description": "Melee Attack Roll: +4, reach 5 ft. Hit: 3d6 + 3 bludgeoning damage. If this summon moved at least 15 feet straight towards the target, it must succeed on a DC 13 CON saving throw or be stunned until your next turn."
+                }
+            ]
+        }
+    },
+    {
+        "id": "192",
+        "name": "Dominate Beast",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Beast",
+        "tags": [],
+        "description": "One Beast you can see within 60 feet must succeed on a WIS saving throw or have the Charmed condition for 1 minute. The target has Advantage on the save if you or your allies are fighting it. Whenever the target takes damage, it repeats the save, ending the spell on itself on a success.\n\nYou have a telepathic link with the Charmed target while the two of you are on the same plane of existence. On your turn, you can use this link to issue commands to the target (no action required), such as “Attack that creature,” “Move over there,” or “Fetch that object.” The target does its best to obey on its turn. If it completes an order and doesn’t receive further direction from you, it acts and moves as it likes, focusing on protecting itself.\n\nYou can command the target to take a Reaction but must take your own Reaction to do so."
+    },
+    {
+        "id": "193",
+        "name": "Fossilize",
+        "rarity": "Rare",
+        "class": "Spell",
+        "type": "Plant",
+        "tags": [],
+        "description": "You channel ancient power to turn a target creature or object into a fossilized state. This spell affects a single target within 50 feet, and the target must make a CON saving throw. On a failed save, the target is petrified for 2 rounds. On a success, the target suffers no consequences.\n\nWhile petrified, the target becomes immobile and takes on a stony, fossilized appearance, effectively turning them into a statue. The petrified creature or object is immune to damage, conditions, and spells, and it cannot take any actions, move, or perceive its surroundings. It remains in its petrified state until the spell's duration ends or until the caster ends the spell."
+    },
+    {
+        "id": "194",
+        "name": "Scent of Blood",
+        "rarity": "Rare",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "An ally or one of your creatures deals damage.",
+        "description": "One ally or creature within 5 feet of the target that was just damaged immediately performs an extra attack."
+    },
+    {
+        "id": "195",
+        "name": "Tar Pits",
+        "rarity": "Rare",
+        "class": "Reaction",
+        "tags": [],
+        "reaction": "A creature moves within 20 feet of you or an ally.",
+        "description": "The creature that moved starts to sink into the bubbling tar pits. The tar pits form in a 15-foot radius circle around the creature. This area is considered difficult terrain, lasts for 1 minute, and any creature that ends its turn in the tar pits area must succeed a DEX saving throw or take 3d6 acid damage."
+    },
+    {
+        "id": "196",
+        "name": "Triceratops",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 114,
+            "actions": [
+                {
+                    "name": "Gore",
+                    "description": "Melee Attack Roll: +9, reach 5 ft. Hit: 2d12 + 6 piercing damage. If the target is a Huge or smaller creature and this summon moved at least 20 feet straight toward the target before using this action, the target takes an additional 2d8 piercing damage."
+                }
+            ]
+        }
+    },
+    {
+        "id": "197",
+        "name": "Tyrannosaurus Rex",
+        "rarity": "Legendary",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 136,
+            "traits": [
+                {
+                    "name": "Predator Sense",
+                    "description": "When this summon deals damage, you may flip a coin. If heads, you may search your deck for a \"Scent of Blood\" and put it into your hand. Shuffle your deck afterward."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +10, reach 10 ft. Hit: 3d12 + 7 piercing damage. If the target is a Large or smaller creature, it is Grappled (escape DC 17). While Grappled, the target is also Restrained."
+                }
+            ]
+        }
+    },
+    {
+        "id": "198",
+        "name": "Volcano",
+        "rarity": "Legendary",
+        "class": "Spell",
+        "type": "Entity",
+        "tags": [],
+        "description": "Choose a point you can see on the ground within 60 feet. A fountain of lava erupts in a 15-foot wide circle centered on that point. Each creature in that area must make a DEX saving throw. A creature takes 10d10 fire damage on a failed save, or half as much damage on a successful one. Additionally, on failed saves, the creature receives halved healing for 1 hour."
+    },
+    {
+        "id": "199",
+        "name": "Extinction Horizon",
+        "rarity": "Legendary",
+        "class": "Utility",
+        "tags": [],
+        "description": "Banish the top 2 cards of your deck. Then, draw 2 cards."
+    },
+    {
+        "id": "200",
+        "name": "Giganotosaurus",
+        "rarity": "Mythic",
+        "class": "Summon",
+        "type": "Beast",
+        "tags": [],
+        "summonInfo": {
+            "hp": 233,
+            "specialSummon": "Sacrifice 1 \"Tyrannosaurus Rex\" in play and 2 Beast-type cards from your hand.",
+            "traits": [
+                {
+                    "name": "Rage",
+                    "description": "When this summon falls below half HP, it goes into a mindless rage, and gains advantage on saving throws and attack rolls."
+                }
+            ],
+            "actions": [
+                {
+                    "name": "Bite",
+                    "description": "Melee Attack Roll: +10, reach 10 ft. Hit: 8d12 + 3 piercing damage. Target must make a DC 18 CON saving throw or be inflicted with Bleed for 3 rounds or until healed. While inflicted with Bleed, a creature takes 2d6 damage at the start of each turn."
+                },
+                {
+                    "name": "Frightful Roar",
+                    "description": "1/S. WIS Saving Throw: DC 26, each creature within 90 feet. Failure: Frightened for 1 minute."
                 }
             ]
         }
@@ -2428,5 +2851,33 @@
                 }
             ]
         }
+    },
+    {
+        "id": "007-a",
+        "altOf": "007"
+    },
+    {
+        "id": "009-a",
+        "altOf": "009"
+    },
+    {
+        "id": "013-a",
+        "altOf": "013"
+    },
+    {
+        "id": "058-a",
+        "altOf": "058"
+    },
+    {
+        "id": "103-a",
+        "altOf": "103"
+    },
+    {
+        "id": "024-a",
+        "altOf": "024"
+    },
+    {
+        "id": "157-a",
+        "altOf": "157"
     }
 ]

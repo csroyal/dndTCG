@@ -200,7 +200,7 @@ function bindSpecStatic() {
             const opt = document.createElement('button');
             opt.type = 'button';
             opt.className = 'admin-card-result' + (c.id === spec.add.cardId ? ' picked' : '');
-            opt.innerHTML = `<img src="./assets/card-art/${c.id}.jpg" alt="" loading="lazy"><span>${escapeHTML(c.name)}</span><span class="admin-rarity rarity-${c.rarity.toLowerCase()}">${c.class}</span>`;
+            opt.innerHTML = `<img src="./assets/card-art/${c.id}.jpg" alt="" loading="lazy"><span>${escapeHTML(cardLabel(c))}</span><span class="admin-rarity rarity-${c.rarity.toLowerCase()}">${c.class}</span>`;
             opt.addEventListener('click', () => { spec.add.cardId = c.id; drawResults(); });
             results.append(opt);
         }
@@ -257,11 +257,20 @@ function updateSpecDynamic() {
     const summons = s.summons || [];
     const hp = s.hp || [];
     const tokens = s.tokens || {};
+    // read-only: which of each summon's 1/S abilities the player has marked used
+    const onceHTML = (id, i) => {
+        const abilities = onceAbilities(id);
+        if (!abilities.length) return '';
+        const spent = s.once?.[i] || [];
+        return `<span class="spec-once">${abilities.map(a => spent.includes(a)
+            ? `<span class="used" title="${escapeHTML(a)}: used"><i class="bi bi-check-circle-fill"></i>${escapeHTML(a)}</span>`
+            : `<span title="${escapeHTML(a)}: not used yet"><i class="bi bi-1-circle"></i>${escapeHTML(a)}</span>`).join('')}</span>`;
+    };
     specView.querySelector('.spec-board').innerHTML = `
         <div class="spec-main">
             <div class="spec-zone"><h3>Summon Zone <span>${summons.length}/${MAX_ACTIVE_SUMMONS}</span></h3>
                 <div class="spec-row">${summons.length ? summons.map((id, i) => specCardTile('summon', id, i,
-                    `<span class="spec-hp ${(hp[i] ?? 0) <= 0 ? 'down' : ''}"><i class="bi bi-heart-fill"></i> ${hp[i] ?? summonDefaultHp(id)}</span>`)).join('') : '<p class="admin-muted">No summons on the field.</p>'}</div></div>
+                    `<span class="spec-hp ${(hp[i] ?? 0) <= 0 ? 'down' : ''}"><i class="bi bi-heart-fill"></i> ${hp[i] ?? summonDefaultHp(id)}</span>${onceHTML(id, i)}`)).join('') : '<p class="admin-muted">No summons on the field.</p>'}</div></div>
             <div class="spec-zone"><h3>Reaction Zone <span>${(s.reactions || []).length}</span></h3>
                 <div class="spec-row">${(s.reactions || []).length ? s.reactions.map((id, i) => specCardTile('reaction', id, i)).join('') : '<p class="admin-muted">No Reactions set.</p>'}</div></div>
             <div class="spec-zone"><h3>Hand <span>${(s.hand || []).length}</span></h3>

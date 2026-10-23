@@ -418,7 +418,7 @@ function renderGiveTab(body, user) {
         const card = getObjectById(cards, g.cardId);
         row.hidden = false;
         row.querySelector('.admin-give-preview').src = `./assets/card-art/${card.id}.jpg`;
-        row.querySelector('.admin-give-name').textContent = card.name;
+        row.querySelector('.admin-give-name').textContent = cardLabel(card);
         row.querySelector('.admin-give-owned').textContent = `${card.rarity} ${card.class}${single ? ` · owns ${ownedBy(card.id)}` : ''}`;
     };
     const renderResults = () => {
@@ -430,7 +430,7 @@ function renderGiveTab(body, user) {
             const opt = document.createElement('button');
             opt.type = 'button';
             opt.className = 'admin-card-result' + (c.id === g.cardId ? ' picked' : '');
-            opt.innerHTML = `<img src="./assets/card-art/${c.id}.jpg" alt="" loading="lazy"><span>${escapeHTML(c.name)}</span>
+            opt.innerHTML = `<img src="./assets/card-art/${c.id}.jpg" alt="" loading="lazy"><span>${escapeHTML(cardLabel(c))}</span>
                 <span class="admin-rarity rarity-${c.rarity.toLowerCase()}">${c.rarity}</span>${single ? `<span class="admin-muted">×${ownedBy(c.id)}</span>` : ''}`;
             opt.addEventListener('click', () => { g.cardId = c.id; renderResults(); showPicked(); });
             results.append(opt);
@@ -645,7 +645,7 @@ function renderCollectionTab(body, user) {
             const tile = document.createElement('div');
             tile.className = 'admin-coll-tile' + (n ? '' : ' missing');
             tile.innerHTML = `<img src="./assets/card-art/${card.id}.jpg" alt="${escapeHTML(card.name)}" loading="lazy">
-                <div class="admin-coll-name" title="${escapeHTML(card.name)}">${escapeHTML(card.name)}</div>
+                <div class="admin-coll-name" title="${escapeHTML(cardLabel(card))}">${escapeHTML(cardLabel(card))}</div>
                 <div class="admin-qty small">
                     <button type="button" data-d="-1" aria-label="Remove one ${escapeHTML(card.name)}" ${n ? '' : 'disabled'}>−</button>
                     <span>${n}</span>
@@ -797,6 +797,42 @@ function renderActivityTab(body, user) {
             renderUserList(); renderAdminDetail();
         });
         list.append(row);
+    }
+}
+
+/* ---------- Limited set access (everyone at once; see home.js) ---------- */
+
+const adminSetAccess = document.getElementById('adminSetAccess');
+
+function renderSetAccess() {
+    const limited = packs ? packs.filter(p => p.limited) : [];
+    adminSetAccess.hidden = !limited.length;
+    adminSetAccess.innerHTML = `<div class="admin-set-access-title"><i class="bi bi-hourglass-split"></i> Limited sets
+            <span class="admin-muted">Open or close for every player</span></div>` +
+        limited.map(p => {
+            const open = isPackOpen(p);
+            return `<button type="button" class="admin-set-switch${open ? ' on' : ''}" role="switch" aria-checked="${open}" data-pack="${p.id}">
+                <img src="./assets/pack-art/${p.id}.png" alt="">
+                <span class="admin-set-switch-name">${escapeHTML(p.name)}</span>
+                <span class="admin-switch" aria-hidden="true"></span>
+                <span class="admin-set-switch-state">${open ? 'Open' : 'Closed'}</span>
+            </button>`;
+        }).join('');
+    adminSetAccess.querySelectorAll('.admin-set-switch').forEach(btn => btn.addEventListener('click', () => {
+        setPackClosed(btn.dataset.pack, btn.getAttribute('aria-checked') === 'true');
+    }));
+}
+
+async function setPackClosed(packId, closed) {
+    try {
+        await packAccessDoc().set({
+            closed: { [packId]: closed ? true : firebase.firestore.FieldValue.delete() },
+            updatedBy: currentProfile, updatedAt: Date.now(),
+        }, { merge: true });
+        showToast(`${packName(packId)} is now ${closed ? 'closed' : 'open'} for everyone.`, 'success');
+    } catch (err) {
+        console.error(err);
+        showToast(`Couldn't change ${packName(packId)}. Your Firestore rules may need to allow writes to settings/packs.`, 'error');
     }
 }
 

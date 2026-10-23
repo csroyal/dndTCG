@@ -28,6 +28,7 @@ let activeGraveyard = [];
 let activeSummons = [];
 let activeSummonNotes = [];
 let activeSummonHP = [];   // current HP per summon, parallel to activeSummons
+let activeSummonUsed = []; // names of the 1/S abilities each summon has spent, parallel too
 let activeReactions = [];
 let activeBanish = [];
 let activeTokens = {
@@ -42,6 +43,28 @@ let simBusyUntil = 0;
 function simHold(ms) { simBusyUntil = Math.max(simBusyUntil, performance.now() + ms); }
 
 function summonDefaultHp(cardID) { return getObjectById(cards, cardID)?.summonInfo?.hp ?? 0; }
+
+// A summon's state lives in parallel arrays; these keep them in step.
+function addSummonState(cardID) {
+    activeSummons.push(cardID);
+    activeSummonNotes.push('');
+    activeSummonHP.push(summonDefaultHp(cardID));
+    activeSummonUsed.push([]);
+}
+function removeSummonState(i) {
+    activeSummons.splice(i, 1);
+    activeSummonNotes.splice(i, 1);
+    activeSummonHP.splice(i, 1);
+    activeSummonUsed.splice(i, 1);
+}
+
+// Abilities usable once per summon ("1/S." at the start of their text). They reset when the summon leaves play.
+function onceAbilities(cardID) {
+    const info = getObjectById(cards, cardID)?.summonInfo;
+    if (!info) return [];
+    return [...(info.traits || []), ...(info.actions || []), ...(info.bonusActions || []), ...(info.reactions || [])]
+        .filter(a => /^1\/S\b/.test(a.description || '')).map(a => a.name);
+}
 
 document.addEventListener("click", function () {
     simulatorContextMenu.classList.remove("active");
@@ -285,6 +308,38 @@ function createSimulatorCard(cardID, zone = "hand", func = "", hp = null) {
 
         hpBar.append(heart, hpVal);
         wrap.append(hpBar);
+
+        const once = onceAbilities(cardID);
+        if (once.length) {
+            const strip = document.createElement("div");
+            strip.className = "summon-once";
+            once.forEach(ability => {
+                const pill = document.createElement("button");
+                pill.type = "button";
+                pill.className = "summon-once-pill";
+                pill.innerHTML = `<i class="bi"></i><span>${escapeHTML(ability)}</span>`;
+                const idx = () => Array.from(simulatorSummonZone.querySelectorAll(".summon-card-wrap")).indexOf(wrap);
+                const render = () => {
+                    const used = (activeSummonUsed[idx()] || []).includes(ability);
+                    pill.classList.toggle("used", used);
+                    pill.setAttribute("aria-pressed", String(used));
+                    pill.querySelector("i").className = used ? "bi bi-check-circle-fill" : "bi bi-1-circle";
+                    pill.title = used ? `${ability}: used. Click if it wasn't.` : `${ability}: once per summon. Click when you use it.`;
+                };
+                pill.addEventListener("click", (e) => {
+                    e.stopPropagation(); // not the card's action menu
+                    const i = idx();
+                    if (i === -1) return;
+                    const used = activeSummonUsed[i] || (activeSummonUsed[i] = []);
+                    if (used.includes(ability)) used.splice(used.indexOf(ability), 1);
+                    else used.push(ability);
+                    render();
+                });
+                strip.append(pill);
+                requestAnimationFrame(render); // the wrap has to be in the zone to know its index
+            });
+            wrap.append(strip);
+        }
         return wrap;
     }
 
@@ -371,6 +426,7 @@ function resetSimulator({ openDeckSelect = true } = {}) {
     simStarted = false;
     simGameId = null;
     activeSummonHP = [];
+    activeSummonUsed = [];
     activeSimDeck = [];
     activeHand = [];
     activeGraveyard = [];
@@ -967,6 +1023,7 @@ function transformTargetedCard() {
         if (!selectedTransformID) { showToast('Select a card to transform into.', 'error'); return; }
         activeSummons[arrIdx] = selectedTransformID;
         activeSummonHP[arrIdx] = summonDefaultHp(selectedTransformID);
+        activeSummonUsed[arrIdx] = [];
         simulatorModalContainer.classList.remove('active');
         updateActiveSummons();
         showToast('Transformed!', 'success');
@@ -1027,9 +1084,7 @@ function playCard(fromRect = null) {
             updateGraveyard();
         } else if (cardClass === "Summon") {
             pendingSummons = Math.max(0, pendingSummons - 1);
-            activeSummons.push(cardID);
-            activeSummonNotes.push('');
-            activeSummonHP.push(summonDefaultHp(cardID));
+            addSummonState(cardID);
             updateActiveSummons();
             landed = simulatorSummonZone.querySelector('.summon-card-wrap:last-of-type img');
         } else if (cardClass === "Reaction") {
@@ -1139,7 +1194,7 @@ function _removeCardFromContext(card, direction, cb) {
     const domIdx = Array.from(parent.children).indexOf(el);
     const arrIdx = (parent === simulatorHand) ? domIdx : domIdx - 1;
     if (parent === simulatorHand)             activeHand.splice(arrIdx, 1);
-    else if (parent === simulatorSummonZone) { activeSummons.splice(arrIdx, 1); activeSummonNotes.splice(arrIdx, 1); activeSummonHP.splice(arrIdx, 1); }
+    else if (parent === simulatorSummonZone) removeSummonState(arrIdx);
     else if (parent === simulatorReactionZone) activeReactions.splice(arrIdx, 1);
     _fadeOut(el, 185, direction, () => {
         if (parent === simulatorSummonZone)   updateActiveSummons();
@@ -1514,7 +1569,7 @@ function updateActiveReactions() {
 
 function handleRemovingTargetedCard(index) {
     if (targetedCard.parentElement === simulatorSummonZone) {
-        activeSummons.splice(index, 1);
+        removeSummonState(index);
         updateActiveSummons();
     }
     if (targetedCard.parentElement === simulatorReactionZone) {
@@ -1658,7 +1713,7 @@ function serializeSim() {
     return JSON.stringify({
         v: 1, started: simStarted, game: simGameId,
         deck: activeSimDeck, hand: activeHand, graveyard: activeGraveyard, banish: activeBanish,
-        summons: activeSummons, notes: activeSummonNotes, hp: activeSummonHP, reactions: activeReactions,
+        summons: activeSummons, notes: activeSummonNotes, hp: activeSummonHP, once: activeSummonUsed, reactions: activeReactions,
         tokens: activeTokens, counters: _counters,
         turn: parseInt(document.getElementById('simulatorTurnNum').textContent, 10) || 1,
         used: ['action', 'bonusAction', 'reaction'].filter(k => document.getElementById(`${k}Pip`).classList.contains('used')),
@@ -1678,12 +1733,13 @@ function applySimState(state) {
     activeGraveyard = known(state.graveyard);
     activeBanish = known(state.banish);
     activeReactions = known(state.reactions);
-    activeSummons = []; activeSummonNotes = []; activeSummonHP = [];
+    activeSummons = []; activeSummonNotes = []; activeSummonHP = []; activeSummonUsed = [];
     (state.summons || []).forEach((id, i) => {
         if (!getObjectById(cards, id)) return;
         activeSummons.push(id);
         activeSummonNotes.push(state.notes?.[i] ?? '');
         activeSummonHP.push(state.hp?.[i] ?? summonDefaultHp(id));
+        activeSummonUsed.push([...(state.once?.[i] || [])]);
     });
     for (const t in activeTokens) activeTokens[t] = state.tokens?.[t] || 0;
     simulatorTokensModalBody.querySelectorAll('.token-amt').forEach(el => { el.innerHTML = activeTokens[el.dataset.token] || 0; });
@@ -1899,7 +1955,6 @@ function applyBattleCommand(cmd) {
     const fail = (text, log) => ({ ok: false, text, log: log || `Failed: ${text}` });
     // the board may have shifted since the DM looked: trust the index only if the card still matches
     const find = (arr) => arr[cmd.index] === cmd.cardId ? cmd.index : arr.indexOf(cmd.cardId);
-    const removeSummonAt = (i) => { activeSummons.splice(i, 1); activeSummonNotes.splice(i, 1); activeSummonHP.splice(i, 1); };
     const summonImg = (i) => simulatorSummonZone.querySelectorAll('.summon-card-wrap img')[i];
 
     switch (cmd.type) {
@@ -1934,9 +1989,7 @@ function applyBattleCommand(cmd) {
                 case 'summon':
                     if (card.class !== 'Summon') return fail(`${n} isn't a Summon.`);
                     if (activeSummons.length + pendingSummons >= MAX_ACTIVE_SUMMONS) return fail(`your Summon Zone is full.`, `Summon Zone full; ${n} not summoned`);
-                    activeSummons.push(card.id);
-                    activeSummonNotes.push('');
-                    activeSummonHP.push(summonDefaultHp(card.id));
+                    addSummonState(card.id);
                     updateActiveSummons();
                     if (seen) { const el = summonImg(activeSummons.length - 1); dmTouch(el?.parentElement); playCardEffect(card, el); }
                     return done(`summoned ${n} onto your field.`, `Summoned ${n}`);
@@ -1957,7 +2010,7 @@ function applyBattleCommand(cmd) {
             switch (cmd.action) {
                 case 'kill':
                     if (seen && summonImg(i)) { targetedCard = summonImg(i); sendTargetedCardToGraveyard(); }
-                    else { removeSummonAt(i); activeGraveyard.push(id); updateActiveSummons(); updateGraveyard(); }
+                    else { removeSummonState(i); activeGraveyard.push(id); updateActiveSummons(); updateGraveyard(); }
                     return done(`slew your ${n}.`, `Killed ${n}`);
                 case 'hp': case 'heal': {
                     const hp = cmd.action === 'heal' ? summonDefaultHp(id) : Math.round(Number(cmd.hp) || 0);
@@ -1969,14 +2022,14 @@ function applyBattleCommand(cmd) {
                         cmd.action === 'heal' ? `Healed ${n} to ${hp} HP` : `Set ${n} to ${hp} HP`);
                 }
                 case 'toHand':
-                    removeSummonAt(i);
+                    removeSummonState(i);
                     activeHand.push(id);
                     simulatorHand.append(createSimulatorCard(id));
                     updateActiveSummons();
                     if (seen) dmTouch(simulatorHand.lastElementChild);
                     return done(`returned your ${n} to your hand.`, `Returned ${n} to hand`);
                 case 'banish':
-                    removeSummonAt(i);
+                    removeSummonState(i);
                     activeBanish.push(id);
                     updateActiveSummons();
                     if (seen) animateBanish();

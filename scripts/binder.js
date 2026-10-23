@@ -181,7 +181,7 @@ function buildFlatView(cards, packs) {
 function binderCardMatches(img, search) {
     const card = getObjectById(cards, img.dataset.cardId);
     if (!card) return false;
-    return (!search || card.name.toLowerCase().includes(search))
+    return cardMatchesSearch(card, search)
         && (!binderMissingOnly || !img.classList.contains('owned'))
         && (!binderClassFilter.value  || card.class === binderClassFilter.value)
         && (!binderRarityFilter.value || card.rarity === binderRarityFilter.value)

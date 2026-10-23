@@ -1369,6 +1369,60 @@ const CARD_FX_SIGNATURES = {
         fx.glint({ x: card.x, y: card.top + card.h * 0.2, size: 36, color: '255,245,210', delay: 600, dur: 700 });
     },
 
+    // Giganotosaurus: huge jaws snap shut over the card, then a Frightful Roar shakes the whole board.
+    '200'(fx) {
+        const { card } = fx;
+        fx.vignette({ color: '40,0,0', alpha: 0.45, dur: 2600 });
+        fx.shake(5, 350);
+        const N = 7, half = card.w * 0.68, step = (half * 2) / N, toothH = card.h * 0.16;
+        // dir -1 is the upper jaw (teeth point down), +1 the lower; both curve away at the corners
+        const jaw = (ctx, base, dir, a, teeth) => {
+            const y = (x) => base + dir * ((x - card.x) / half) ** 2 * card.h * 0.12;
+            ctx.beginPath();
+            for (let x = card.x - half; x <= card.x + half + 1; x += step / 2) ctx.lineTo(x, y(x));
+            for (let x = card.x + half; x >= card.x - half - 1; x -= step / 2) ctx.lineTo(x, y(x) + dir * toothH * 0.7);
+            ctx.closePath();
+            const gum = ctx.createLinearGradient(0, base, 0, base + dir * (toothH * 0.7 + card.h * 0.12));
+            gum.addColorStop(0, rgba('150,32,30', a)); gum.addColorStop(1, rgba('55,8,10', a));
+            ctx.fillStyle = gum; ctx.fill();
+            for (const [cx, len] of teeth) {
+                const by = y(cx);
+                ctx.beginPath();
+                ctx.moveTo(cx - step * 0.4, by); ctx.quadraticCurveTo(cx - step * 0.1, by - dir * len * 0.6, cx, by - dir * len);
+                ctx.quadraticCurveTo(cx + step * 0.25, by - dir * len * 0.45, cx + step * 0.4, by);
+                ctx.closePath();
+                const ivory = ctx.createLinearGradient(0, by, 0, by - dir * len);
+                ivory.addColorStop(0, rgba('215,200,170', a)); ivory.addColorStop(1, rgba('255,252,240', a));
+                ctx.fillStyle = ivory; ctx.fill();
+                ctx.lineWidth = 2; ctx.strokeStyle = rgba('60,20,15', a); ctx.stroke();
+            }
+        };
+        const upper = Array.from({ length: N }, (_, i) => [card.x - half + (i + 0.5) * step, toothH * (i === 1 || i === N - 2 ? 1.4 : 1)]);
+        const lower = Array.from({ length: N - 1 }, (_, i) => [card.x - half + (i + 1) * step, toothH * 0.8]);
+        fx.draw(1100, (ctx, p) => {
+            const t = Math.min(1, (p / 0.3) ** 2);   // accelerates into the bite
+            const gap = (1 - t) * card.h * 0.55 + (p > 0.6 ? (p - 0.6) * card.h * 0.3 : 0);
+            const a = p < 0.6 ? 1 : 1 - (p - 0.6) / 0.4;
+            jaw(ctx, card.y - gap - toothH * 0.15, -1, a, upper);
+            jaw(ctx, card.y + gap + toothH * 0.15, 1, a, lower);
+        }, 0, 'source-over');
+        fx.sound('chomp', 330);
+        fx.at(330, () => {
+            fx.shake(18, 700);
+            fx.flash({ x: card.x, y: card.y, r: 380, color: '255,60,40', alpha: 0.45, dur: 700 });
+            fx.emit(40, { x: card.x, y: card.y, spreadX: card.w * 0.5, spreadY: 6, speed: [3, 9], drag: 0.94, ay: 0.15, life: [500, 900],
+                size: [2, 4], shape: 'spark', colors: ['255,80,60', '200,30,30', '255,160,120'], len: 2 });
+        });
+        // Frightful Roar: shockwaves roll out across the screen and kick up dust
+        for (let i = 0; i < 4; i++) {
+            fx.ring({ x: card.x, y: card.y, r0: card.w * 0.5, r1: Math.max(fx.W, fx.H) * 0.75, dur: 1000, color: '255,120,90', width: 7 - i, alpha: 0.5, delay: 650 + i * 170 });
+        }
+        fx.at(650, () => fx.shake(12, 900));
+        fx.sound('giganotosaurus', 650);
+        fx.emit(18, { x: fx.W / 2, y: fx.H, spreadX: fx.W * 0.5, angle: [250, 290], speed: [1, 3], life: [1200, 1800], size: [30, 50], grow: 1.5,
+            shape: 'smoke', color: '120,95,70', alpha: 0.3, delay: [650, 1100] });
+    },
+
     // The Suspicious trio share a goo splat that grows with the card.
     'PR1-1': slimeSignature(0.6, ['150,240,90', '190,255,130', '110,210,70']),
     'PR1-2': slimeSignature(0.85, ['255,210,90', '255,235,150', '240,180,60']),
@@ -1442,7 +1496,8 @@ function resolveCardEffect(card) {
         if (CARD_FX_ELEMENTS[key]) return { kind: 'element', key, label: `${key} (override)` };
         if (CARD_FX_CATEGORIES[key]) return { kind: 'category', key, options: {}, label: `${key} (override)` };
     }
-    if (CARD_FX_SIGNATURES[card.id]) return { kind: 'signature', key: card.id, label: `${card.name} signature` };
+    const baseId = card.altOf || card.id; // alt arts play the original's signature
+    if (CARD_FX_SIGNATURES[baseId]) return { kind: 'signature', key: baseId, label: `${card.name} signature` };
     const category = CARD_FX_CATEGORY_RULES.find(([, , test]) => test(card));
     if (category) {
         const [key, options] = category;
@@ -1466,7 +1521,7 @@ function resolveCardEffect(card) {
 // The main sound file for an effect: assets/sounds/fx/<name>.mp3.
 // Signatures that set their own sounds in their bodies return null here.
 const SIGNATURE_SOUNDS = {
-    '059': 'iron-golem', '060': 'meteor-swarm', '090': null, '147': 'mr-hands', '173': 'marut-edict',
+    '059': 'iron-golem', '060': 'meteor-swarm', '090': null, '147': 'mr-hands', '173': 'marut-edict', '200': null,
     'PR1-1': 'slime', 'PR1-2': 'slime', 'PR1-3': 'slime', 'PR1-4': 'oblex',
 };
 function fxSoundName(spec) {

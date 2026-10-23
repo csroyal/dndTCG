@@ -40,7 +40,7 @@ time, earth, arcane, utility, reaction (all `.mp3`)
 | legendary.mp3 | Plays on top of every Legendary (a bright shimmer or sting) |
 | prismatic-spray.mp3 | Prismatic Spray |
 | tick.mp3, explosion.mp3 | Ticking Time Bomb |
-| chomp.mp3 | Giant Crocodile |
+| chomp.mp3 | Giant Crocodile, Giganotosaurus (the bite) |
 | rat-king.mp3 | Rat King |
 | mirror.mp3, glass-shatter.mp3 | Mirror of Echoed Power |
 | forest-queen.mp3 | Forest Queen |
@@ -48,6 +48,7 @@ time, earth, arcane, utility, reaction (all `.mp3`)
 | meteor-swarm.mp3, meteor-impact.mp3 | Meteor Swarm (impact plays 4 times) |
 | iron-golem.mp3 | Iron Golem |
 | marut-edict.mp3 | Marut |
+| giganotosaurus.mp3 | Giganotosaurus (a huge, deep roar) |
 | mr-hands.mp3 | Mr. Hands |
 | slime.mp3 | Suspicious Slime, Jelly, and Ooze |
 | oblex.mp3 | The Oblex |

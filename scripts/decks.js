@@ -331,7 +331,10 @@ function getDeckRuleViolation(deckList, card) {
     if (countDeckList(deckList) + 1 > DECK_LIMIT) {
         return `Decks are limited to ${DECK_LIMIT} cards.`;
     }
-    const copies = deckList[card.id] || 0;
+    // every art of a card counts toward the same copy limit
+    const baseId = card.altOf || card.id;
+    let copies = 0;
+    for (let id in deckList) if (artBaseId(id) === baseId) copies += deckList[id];
     if (card.rarity === "Mythic" || card.rarity === "Legendary") {
         if (copies > 0) return `Only 1 copy of ${card.name} allowed per deck.`;
     } else if (copies >= MAX_COPIES_PER_CARD) {
@@ -468,7 +471,7 @@ function applyDeckBuilderFilters() {
     deckBuilderBinderList.querySelectorAll(".card").forEach(img => {
         const card = getObjectById(cards, img.dataset.cardId);
         const show = card
-            && (!search || card.name.toLowerCase().includes(search))
+            && cardMatchesSearch(card, search)
             && (!cls    || card.class === cls)
             && (!rarity || card.rarity === rarity)
             && (!type   || card.type === type);

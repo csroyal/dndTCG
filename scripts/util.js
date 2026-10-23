@@ -14,7 +14,13 @@ const dataReady = Promise.all([
     fetch("./data/cards.json").then(res => res.json()),
     fetch("./data/packs.json").then(res => res.json()),
 ]).then(([cardData, packData]) => {
-    cards = cardData;
+    // Alternate arts are listed as { id, altOf }: the same card as `altOf`, with a different front.
+    // Each one is its own collectible, so it gets a full copy of the original's data under its own id.
+    cards = cardData.map(c => {
+        if (!c.altOf) return c;
+        const { forms, ...original } = getObjectById(cardData, c.altOf);
+        return { ...original, ...c };
+    });
     packs = packData;
     buildBinder(cards, packs);
 });
@@ -327,6 +333,9 @@ function createCardEl(card, func, includeBadge = true, sleeveCount = false, show
         cardWrapper.append(sleeveOverlay);
     }
 
+    if (card.altOf) cardWrapper.append(altArtChip());
+    setHolo(cardWrapper, card.rarity);
+
     cardEl.addEventListener("click", func);
 
     cardEl.addEventListener("contextmenu", (e) => {
@@ -376,15 +385,51 @@ function ownedCopies(cardID) {
     return (binder && binder[ownershipId(cardID)]) || 0;
 }
 
+// Alternate arts play as the card they reprint: deck limits and effects go by this id.
+function artBaseId(cardID) {
+    return getObjectById(cards, cardID)?.altOf || cardID;
+}
+
+// "Wolf (Alt Art)", for lists where the two arts would otherwise share a name.
+function cardLabel(card) {
+    return card.altOf ? `${card.name} (Alt Art)` : card.name;
+}
+
+// Search boxes match a card's name and all of its rules text; every word typed has to appear somewhere.
+const _cardSearchText = new WeakMap();
+function cardMatchesSearch(card, query) {
+    const words = (query || '').toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length) return true;
+    let text = _cardSearchText.get(card);
+    if (text === undefined) {
+        const info = card.summonInfo || {};
+        const abilities = [...(info.traits || []), ...(info.actions || []), ...(info.bonusActions || []), ...(info.reactions || [])];
+        text = [card.name, card.class, card.type, ...(card.tags || []), card.description, card.reaction, info.specialSummon,
+            ...abilities.flatMap(a => [a.name, a.description])].filter(Boolean).join('\n').toLowerCase();
+        _cardSearchText.set(card, text);
+    }
+    return words.every(w => text.includes(w));
+}
+
+function altArtChip() {
+    const chip = document.createElement("div");
+    chip.className = "alt-art-chip";
+    chip.title = "Alternate art";
+    chip.innerHTML = '<i class="bi bi-stars"></i>Alt';
+    return chip;
+}
+
 function _applyCardViewCard(cardID) {
     cardViewImg.src = "./assets/card-art/" + cardID + ".jpg";
     cardViewImg.setAttribute("data-card-id", cardID);
     cardViewImg.setAttribute("data-rarity", getObjectById(cards, cardID).rarity);
+    setHolo(cardViewImg.parentElement, getObjectById(cards, cardID).rarity);
     const countId = ownershipId(cardID);
     cardViewImg.dataset.countId = countId; // the +/- buttons change the base card's count
     const ownedCount = ownedCopies(cardID);
     cardViewCountDisplay.textContent = ownedCount;
-    cardViewLabel.textContent = countId !== cardID ? `Owned (as ${getObjectById(cards, countId)?.name ?? countId})` : "Owned";
+    cardViewLabel.textContent = countId !== cardID ? `Owned (as ${getObjectById(cards, countId)?.name ?? countId})`
+        : getObjectById(cards, cardID)?.altOf ? "Owned (alt art)" : "Owned";
     updateCardViewButtons(ownedCount, cardID);
     cardViewImg.classList.toggle("owned", ownedCount >= 1);
 }
@@ -521,11 +566,96 @@ cardViewImg.addEventListener("click", () => {
         if (cardViewImg.classList.contains("back")) {
             cardViewImg.src = "./assets/card-art/" + card.id + ".jpg";
         } else {
-            cardViewImg.src = "./assets/card-art/" + card.id + "-back.jpg";
+            cardViewImg.src = "./assets/card-art/" + (card.altOf || card.id) + "-back.jpg"; // alt arts share the original's back
         }
         cardViewImg.classList.toggle("back");
     }
 });
+
+/* ---- Holo sheen on Legendary and Mythic cards ----
+   Each card's light drifts slowly on its own phase; while the pointer is over a card the light
+   follows the pointer instead, and eases back when it leaves. Only cards on screen are animated. */
+const CARD_SHINE_KEY = 'DND_TCG_CARD_SHINE';
+let cardShineOn = localStorage.getItem(CARD_SHINE_KEY) !== 'off';
+const _holoState = new WeakMap();
+const _holoVisible = new Set();
+let _holoHovered = null;
+let _holoRaf = 0;
+const _holoObserver = new IntersectionObserver(entries => {
+    for (const e of entries) {
+        if (e.isIntersecting) _holoVisible.add(e.target);
+        else _holoVisible.delete(e.target);
+    }
+    _holoKick();
+});
+
+// Give an element its rarity's sheen (or take it away); safe to call again when its card changes.
+function setHolo(el, rarity) {
+    const kind = rarity === 'Mythic' ? 'mythic' : rarity === 'Legendary' ? 'legendary' : null;
+    el.classList.toggle('holo', !!kind);
+    el.classList.toggle('holo-mythic', kind === 'mythic');
+    el.classList.toggle('holo-legendary', kind === 'legendary');
+    if (kind) {
+        if (!_holoState.has(el)) _holoState.set(el, { x: 50, y: 50, i: 0.7, px: 50, py: 50, phase: Math.random() * Math.PI * 2 });
+        _holoObserver.observe(el);
+    } else {
+        _holoObserver.unobserve(el);
+        _holoVisible.delete(el);
+    }
+}
+
+function _holoKick() {
+    if (!_holoRaf && cardShineOn && !prefersReducedMotion.matches && _holoVisible.size) _holoRaf = requestAnimationFrame(_holoFrame);
+}
+
+function _holoFrame(now) {
+    _holoRaf = 0;
+    const t = now / 1000;
+    for (const el of _holoVisible) {
+        if (!el.isConnected) { _holoVisible.delete(el); continue; }
+        const s = _holoState.get(el);
+        const hover = el === _holoHovered;
+        // idle: a slow figure-of-eight across the card
+        const tx = hover ? s.px : 50 + 40 * Math.sin(t * 0.38 + s.phase);
+        const ty = hover ? s.py : 50 + 30 * Math.sin(t * 0.27 + s.phase * 1.7);
+        const ease = hover ? 0.16 : 0.05;
+        s.x += (tx - s.x) * ease;
+        s.y += (ty - s.y) * ease;
+        s.i += ((hover ? 1 : 0.7) - s.i) * 0.08;
+        el.style.setProperty('--holo-x', s.x.toFixed(1) + '%');
+        el.style.setProperty('--holo-y', s.y.toFixed(1) + '%');
+        el.style.setProperty('--holo-i', s.i.toFixed(3));
+    }
+    _holoKick();
+}
+
+document.addEventListener('pointermove', (e) => {
+    const el = e.target.closest?.('.holo');
+    _holoHovered = el && _holoState.has(el) ? el : null;
+    if (!_holoHovered) return;
+    const r = el.getBoundingClientRect();
+    const s = _holoState.get(el);
+    s.px = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+    s.py = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100));
+}, { passive: true });
+document.documentElement.addEventListener('pointerleave', () => { _holoHovered = null; });
+prefersReducedMotion.addEventListener?.('change', _holoKick);
+
+function setCardShine(on) {
+    cardShineOn = on;
+    localStorage.setItem(CARD_SHINE_KEY, on ? 'on' : 'off');
+    document.documentElement.classList.toggle('no-card-shine', !on);
+    document.querySelectorAll('#cardShineToggle button').forEach(btn => {
+        const active = (btn.dataset.shine === 'on') === on;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-checked', String(active));
+    });
+    _holoKick();
+}
+document.querySelectorAll('#cardShineToggle button').forEach(btn => {
+    btn.addEventListener('click', () => setCardShine(btn.dataset.shine === 'on'));
+});
+setCardShine(cardShineOn);
 
 /* ---- Sound effects volume (0–100, 0 = silent) ---- */
 const SFX_VOLUME_KEY = 'DND_TCG_SFX_VOLUME';

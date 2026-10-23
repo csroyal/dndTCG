@@ -83,6 +83,13 @@
                                 <button type="button" role="radio" data-fx="off">Off</button>
                             </div>
                         </div>
+                        <div id="cardShineSection">
+                            <div class="profile-section-label"><i class="bi bi-brightness-high"></i> Card Shine</div>
+                            <div id="cardShineToggle" class="segmented" role="radiogroup" aria-label="Legendary and Mythic card shine">
+                                <button type="button" role="radio" data-shine="on">On</button>
+                                <button type="button" role="radio" data-shine="off">Off</button>
+                            </div>
+                        </div>
                         <div id="sfxVolumeSection">
                             <label for="sfxVolume" class="profile-section-label">
                                 <i id="sfxVolumeIcon" class="bi bi-volume-up-fill"></i> Sound Effects
@@ -158,7 +165,7 @@
         </div>
         <div id="binderSection" class="section">
             <div class="binder-toolbar">
-                <input id="binderSearch" type="search" placeholder="Search for a card...">
+                <input id="binderSearch" type="search" placeholder="Search names and card text…">
                 <div class="binder-toolbar-actions">
                     <button id="binderMissingToggle" class="btn-ghost"><i class="bi bi-eye-slash"></i> Missing Only</button>
                     <div class="binder-view-toggle">
@@ -244,7 +251,7 @@
                         <div id="deckBuilderBinderControls">
                             <div class="deck-builder-field">
                                 <label for="deckBuilderBinderSearch">Search</label>
-                                <input id="deckBuilderBinderSearch" type="search" placeholder="Card name">
+                                <input id="deckBuilderBinderSearch" type="search" placeholder="Name or card text">
                             </div>
                             <div class="deck-builder-field">
                                 <label for="deckBuilderBinderFilter">Class</label>
@@ -404,6 +411,7 @@
                 </div>
                 <button id="adminRefreshButton" class="btn-ghost" type="button"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
             </div>
+            <div id="adminSetAccess" class="admin-set-access" hidden></div>
             <div class="admin-layout">
                 <aside class="admin-users">
                     <input id="adminUserSearch" type="search" placeholder="Find a player">

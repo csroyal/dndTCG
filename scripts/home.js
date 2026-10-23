@@ -19,6 +19,30 @@ let packOpeningRarityTable = {
     5: { "Rare": 80, "Legendary": 15, "Mythic": 5 }
 }
 
+/* ---------- Limited set access ----------
+   Admins open and close limited sets for everyone from the Admin page. The switch lives in
+   settings/packs as { closed: { packId: true } } and every client listens, so the shop updates live.
+   A set with no entry is open, and so is everything if that doc can't be read. */
+const packAccessDoc = () => db.collection("settings").doc("packs");
+let closedPacks = {};
+
+function isPackOpen(pack) {
+    return !pack.limited || !closedPacks[pack.id];
+}
+
+function watchPackAccess() {
+    packAccessDoc().onSnapshot(snap => {
+        closedPacks = (snap.exists && snap.data().closed) || {};
+        // the shop is only built once a profile is loaded; leave an open pack alone
+        if (packsContainer.childElementCount && !packOpeningModalContainer.classList.contains("active")) buildPacks();
+        renderSetAccess();
+    }, err => {
+        console.warn("Couldn't read limited set access; leaving every set open.", err);
+        renderSetAccess();
+    });
+}
+dataReady.then(watchPackAccess);
+
 let packResults = [];
 let lastOpenedPackId = null;
 let lastOpenedPackResultsCopy = [];
@@ -29,8 +53,10 @@ function buildPacks() {
     packs.forEach(pack => {
         if (!pack.canBuyFromShop) return;
 
+        const open = isPackOpen(pack);
         let packCard = document.createElement("div");
         packCard.classList.add("pack-card");
+        packCard.classList.toggle("closed", !open);
 
         let packImg = document.createElement("img");
         packImg.src = `./assets/pack-art/${pack.id}.png`;
@@ -83,8 +109,9 @@ function buildPacks() {
         let packCta = document.createElement("button");
         packCta.type = "button";
         packCta.classList.add("pack-cta");
-        packCta.innerHTML = `<i class="bi bi-gift-fill"></i> Open Pack`;
-        packCta.setAttribute("aria-label", `Open a ${pack.name} booster pack`);
+        packCta.innerHTML = open ? `<i class="bi bi-gift-fill"></i> Open Pack` : `<i class="bi bi-lock-fill"></i> Closed`;
+        packCta.setAttribute("aria-label", open ? `Open a ${pack.name} booster pack` : `${pack.name} is closed right now`);
+        if (!open) packCta.setAttribute("aria-disabled", "true");
         let previewBtn = document.createElement("button");
         previewBtn.type = "button";
         previewBtn.classList.add("pack-preview-btn");
@@ -435,8 +462,12 @@ function markNextFlipCard() {
 
 // `blister`: open that promo's blister pack instead of a booster.
 function openPack(packId, { blister = null } = {}) {
-    packResults = [];
     let pack = getObjectById(packs, packId);
+    if (!blister && !isPackOpen(pack)) {
+        showToast(`${pack.name} is closed right now.`, "info");
+        return;
+    }
+    packResults = [];
     // the thing on stage: the booster's art, or the drawn blister
     const visual = blister ? blisterOpeningPack : packOpeningPackImage;
     packOpeningPackImage.hidden = !!blister;
@@ -501,6 +532,8 @@ function openPack(packId, { blister = null } = {}) {
             if (cardId !== "GT") {
                 // stops propagation itself, so it won't flip the next card
                 cardEl.querySelector(".back").append(createCardInfoButton(getObjectById(cards, cardId)));
+                if (getObjectById(cards, cardId).altOf) cardEl.querySelector(".back").append(altArtChip());
+                setHolo(cardEl.querySelector(".back"), rarity);
             }
 
             packOpeningResults.append(cardEl);
@@ -838,7 +871,7 @@ function buildPullHistory() {
     history.slice(0, 24).forEach(entry => {
         const rarityLower = entry.rarity === 'GT' ? 'gt' : entry.rarity.toLowerCase();
         const cardName = entry.id === 'GT' ? 'Golden Ticket'
-            : (cards ? getObjectById(cards, entry.id)?.name : null) || entry.id;
+            : (cards && getObjectById(cards, entry.id) ? cardLabel(getObjectById(cards, entry.id)) : null) || entry.id;
 
         const thumb = document.createElement('div');
         thumb.className = `pull-thumb rarity-${rarityLower}`;
