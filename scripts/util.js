@@ -657,6 +657,49 @@ document.querySelectorAll('#cardShineToggle button').forEach(btn => {
 });
 setCardShine(cardShineOn);
 
+/* ---- Card back: which face-down design you see, chosen in the account menu ----
+   Images marked data-card-back follow the choice live; code that makes a face-down card uses cardBackSrc(). */
+const CARD_BACKS = [
+    { id: 'classic',   name: 'Classic',   src: './assets/card-art/back.png' },
+    { id: 'logo-2026', name: 'Logo 2026', src: './assets/card-art/back-logo-2026.png' },
+    { id: 'icon-2026', name: 'Icon 2026', src: './assets/card-art/back-icon-2026.png' },
+];
+const CARD_BACK_KEY = 'DND_TCG_CARD_BACK';
+let cardBackId = CARD_BACKS.some(b => b.id === localStorage.getItem(CARD_BACK_KEY)) ? localStorage.getItem(CARD_BACK_KEY) : 'classic';
+
+function cardBackSrc() {
+    return (CARD_BACKS.find(b => b.id === cardBackId) || CARD_BACKS[0]).src;
+}
+
+function setCardBack(id) {
+    const back = CARD_BACKS.find(b => b.id === id) || CARD_BACKS[0];
+    cardBackId = back.id;
+    localStorage.setItem(CARD_BACK_KEY, back.id);
+    document.querySelectorAll('img[data-card-back]').forEach(img => { img.src = back.src; });
+    document.querySelectorAll('#cardBackPicker .card-back-option').forEach(btn => {
+        const on = btn.dataset.back === back.id;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-checked', String(on));
+    });
+    document.getElementById('cardBackLabel').textContent = back.name;
+}
+
+(function initCardBackPicker() {
+    const picker = document.getElementById('cardBackPicker');
+    CARD_BACKS.forEach(back => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'card-back-option';
+        btn.dataset.back = back.id;
+        btn.setAttribute('role', 'radio');
+        btn.title = back.name;
+        btn.innerHTML = `<img src="${back.src}" alt="${back.name}" draggable="false" loading="lazy">`;
+        btn.addEventListener('click', () => setCardBack(back.id));
+        picker.append(btn);
+    });
+    setCardBack(cardBackId);
+})();
+
 /* ---- Sound effects volume (0–100, 0 = silent) ---- */
 const SFX_VOLUME_KEY = 'DND_TCG_SFX_VOLUME';
 let _sfxVolume = (() => {

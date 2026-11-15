@@ -75,6 +75,11 @@
                             </div>
                             <div id="simBgLabel" class="sim-bg-name">Default</div>
                         </div>
+                        <div id="cardBackSection">
+                            <div class="profile-section-label"><i class="bi bi-back"></i> Card Back</div>
+                            <div id="cardBackPicker" role="radiogroup" aria-label="Card back"></div>
+                            <div id="cardBackLabel" class="sim-bg-name">Classic</div>
+                        </div>
                         <div id="cardFxSection">
                             <div class="profile-section-label"><i class="bi bi-stars"></i> Card Effects</div>
                             <div id="cardFxToggle" class="segmented" role="radiogroup" aria-label="Card effects">
@@ -338,7 +343,7 @@
                     <div id="simulatorDeck" class="empty" data-context="deck" data-drop="deck" data-drop-label="Top of deck">
                         <button type="button" class="zone-menu-btn" data-zone-menu="deck" aria-label="Deck actions" title="Deck actions"><i class="bi bi-three-dots"></i></button>
                         <h3 data-context="deck">Deck</h3>
-                        <img src="./assets/card-art/back.png" data-context="deck" class="simulator-deck-card" alt="Deck">
+                        <img src="./assets/card-art/back.png" data-card-back data-context="deck" class="simulator-deck-card" alt="Deck">
                         <div id="simDeckCountLabel" class="sim-deck-count-label"></div>
                     </div>
                 </div>

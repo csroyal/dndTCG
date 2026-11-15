@@ -99,7 +99,8 @@ function buildDecks() {
 
         let iconImg = document.createElement("img");
         iconImg.classList.add("deck-card-icon");
-        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : "./assets/card-art/back.png";
+        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : cardBackSrc();
+        if (!deck.icon) iconImg.dataset.cardBack = '';
         iconImg.alt = "";
         if (!deck.icon) iconImg.classList.add("placeholder");
 

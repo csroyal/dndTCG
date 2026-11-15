@@ -189,7 +189,8 @@ function buildDeckSelect() {
 
         let iconImg = document.createElement("img");
         iconImg.classList.add("deck-card-icon");
-        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : "./assets/card-art/back.png";
+        iconImg.src = deck.icon ? `./assets/card-art/${deck.icon}.jpg` : cardBackSrc();
+        if (!deck.icon) iconImg.dataset.cardBack = '';
         iconImg.alt = "";
         if (!deck.icon) iconImg.classList.add("placeholder");
 
@@ -1220,7 +1221,7 @@ function _removeCardFromContext(card, direction, cb) {
 
 function animateCardDraw() {
     let tempCard = document.createElement("img");
-    tempCard.src = './assets/card-art/back.png';
+    tempCard.src = cardBackSrc();
     tempCard.classList.add("simulator-deck-card", "simulator-deck-card-temp", "card-draw");
     simulatorDeck.append(tempCard);
 
@@ -1235,7 +1236,7 @@ function animateDeckShuffle() {
     document.querySelector(".simulator-deck-card").classList.add("card-shuffle");
     for (var i = 0; i < 4; i++) {
         let tempCard = document.createElement("img");
-        tempCard.src = './assets/card-art/back.png';
+        tempCard.src = cardBackSrc();
         tempCard.style.animationDelay = (Math.random() * (((i + 1) * 250) - (i * 250)) + (i * 250)) + "ms";
         tempCard.classList.add("simulator-deck-card", "simulator-deck-card-temp", "card-shuffle");
         simulatorDeck.append(tempCard);

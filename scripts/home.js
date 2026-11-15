@@ -16,7 +16,7 @@ let packOpeningRarityTable = {
     2: { "Common": 100 },
     3: { "Rare": 100 },
     4: { "Rare": 100 },
-    5: { "Rare": 80, "Legendary": 15, "Mythic": 5 }
+    5: { "Legendary": 80, "Mythic": 20 }
 }
 
 /* ---------- Limited set access ----------
@@ -516,7 +516,7 @@ function openPack(packId, { blister = null } = {}) {
             cardEl.innerHTML = `
                 <div class="flip-card-content" data-card-id="${cardId}" data-rarity="${rarity}">
                     <div class="front">
-                        <img src="./assets/card-art/back.png" alt="Face-down card">
+                        <img src="${cardBackSrc()}" alt="Face-down card">
                     </div>
                     <div class="back">
                         <img src="${backSrc}" alt="${backAlt}">

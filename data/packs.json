@@ -47,7 +47,7 @@
     {
         "id": "pack006",
         "name": "Primordial Wilds",
-        "canBuyFromShop": true,
+        "canBuyFromShop": false,
         "limited": false,
         "blister": false,
         "showInBinder": true,
