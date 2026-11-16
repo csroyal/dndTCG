@@ -298,17 +298,12 @@ input[type="search"]::-webkit-search-cancel-button { cursor: pointer; }
 }
 .header-title-mark {
     align-self: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(145deg, var(--accent-hover), var(--accent));
-    color: var(--on-accent);
-    font-size: 14px;
-    box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.25);
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
 }
+body:not(.dark-mode) .header-title-mark { filter: drop-shadow(0 0 1px rgba(30,22,50,0.85)) drop-shadow(0 1px 3px rgba(30,22,50,0.3)); }
 
 .header-actions {
     display: flex;
@@ -374,7 +369,12 @@ input[type="search"]::-webkit-search-cancel-button { cursor: pointer; }
     position: fixed;
     top: calc(var(--header-h) + 8px);
     right: 14px;
-    width: 270px;
+    width: auto;
+    max-width: calc(100vw - 28px);
+    /* never taller than the window: scroll rather than hide Log Out */
+    max-height: calc(100vh - var(--header-h) - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     display: none;
     flex-direction: column;
     gap: 8px;
@@ -409,6 +409,23 @@ input[type="search"]::-webkit-search-cancel-button { cursor: pointer; }
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 242px;
+}
+#profileInfo { width: 560px; max-width: 100%; }
+.profile-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+}
+.profile-settings-col { min-width: 0; display: flex; flex-direction: column; }
+/* the columns supply the dividers now */
+.profile-settings #simBgSection { border-top: none; border-bottom: none; margin-bottom: 0; }
+.profile-settings-col > :last-child { border-bottom: none; }
+@media (max-width: 620px) {
+    .profile-settings { grid-template-columns: 1fr; }
+    .profile-settings #simBgSection { border-bottom: 1px solid var(--border); }
 }
 #profileEntryInput { width: 100%; }
 
@@ -576,6 +593,40 @@ input[type="search"]::-webkit-search-cancel-button { cursor: pointer; }
    HOME / PACK SHOP
 ============================================================ */
 #homeSection { padding: 0; overflow: hidden; }
+
+/* Logged out: the campaign logo and a way in. While a saved login loads it's just the logo. */
+.home-welcome {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+    background: radial-gradient(ellipse 55% 45% at 50% 45%, rgba(110,80,200,0.16), transparent 70%);
+}
+.home-welcome[hidden] { display: none; }
+.home-welcome-logo {
+    width: min(620px, 82%);
+    height: auto;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 12px 28px rgba(0,0,0,0.45));
+    animation: welcome-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+/* the silver lettering needs an edge to stand out on parchment */
+body:not(.dark-mode) .home-welcome-logo {
+    filter: drop-shadow(0 0 1px rgba(30,22,50,0.9)) drop-shadow(0 0 6px rgba(30,22,50,0.35)) drop-shadow(0 12px 24px rgba(30,22,50,0.3));
+}
+.home-welcome p { margin: 0; color: var(--text-2); font-size: 0.95rem; }
+.home-welcome p, .home-welcome button { animation: welcome-in 0.9s 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.home-welcome.loading p,
+.home-welcome.loading button { visibility: hidden; }
+@keyframes welcome-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
+}
 
 #packsWrapper {
     display: none;

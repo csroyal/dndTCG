@@ -47,8 +47,21 @@ let packResults = [];
 let lastOpenedPackId = null;
 let lastOpenedPackResultsCopy = [];
 
+// Logged out, Home shows the campaign logo and a Log In button instead of the shop.
+const homeWelcome = document.getElementById("homeWelcome");
+function showHomeWelcome(show) {
+    homeWelcome.hidden = !show;
+    homeWelcome.classList.remove("loading");
+}
+// a saved login is about to load: show just the logo meanwhile, not the log-in prompt
+if (localStorage.getItem("DND_TCG_LATEST_PROFILE")) homeWelcome.classList.add("loading");
+document.getElementById("homeWelcomeLogIn").addEventListener("click", () => {
+    if (!profileEntryShowing) profileIcon.click();
+});
+
 function buildPacks() {
     packsWrapper.style.display = "flex";
+    showHomeWelcome(false);
     packsContainer.innerHTML = '';
     packs.forEach(pack => {
         if (!pack.canBuyFromShop) return;

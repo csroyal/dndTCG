@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DnD TCG</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
     <div id="header">
         <span class="header-title">
-            <span class="header-title-mark" aria-hidden="true"><i class="bi bi-suit-diamond-fill"></i></span>
+            <img class="header-title-mark" src="./assets/campaign-icon.webp" alt="" aria-hidden="true" draggable="false">
             DnD TCG
         </span>
         <div class="header-actions">
@@ -24,6 +26,8 @@
                         <input type="file" id="profilePictureInput" hidden accept="image/*">
                         <button id="addBaseSetToBinderButton" class="admin-only" hidden><i class="bi bi-collection"></i> Add Base Set to Binder</button>
                         <button id="addAllCardsToBinderButton" class="admin-only" hidden><i class="bi bi-collection-fill"></i> Add All Cards to Binder</button>
+                        <div class="profile-settings">
+                        <div class="profile-settings-col">
                         <div id="simBgSection">
                             <div class="profile-section-label"><i class="bi bi-controller"></i> Simulator Background</div>
                             <div id="simBgPicker">
@@ -75,6 +79,8 @@
                             </div>
                             <div id="simBgLabel" class="sim-bg-name">Default</div>
                         </div>
+                        </div>
+                        <div class="profile-settings-col">
                         <div id="cardBackSection">
                             <div class="profile-section-label"><i class="bi bi-back"></i> Card Back</div>
                             <div id="cardBackPicker" role="radiogroup" aria-label="Card back"></div>
@@ -101,6 +107,8 @@
                                 <span id="sfxVolumeValue">75%</span>
                             </label>
                             <input type="range" id="sfxVolume" min="0" max="100" step="5" value="75">
+                        </div>
+                        </div>
                         </div>
                         <button id="logOutButton"><i class="bi bi-box-arrow-right"></i> Log Out</button>
                     </div>
@@ -145,6 +153,11 @@
     </div>
     <div id="sectionsContainer">
         <div id="homeSection" class="section active">
+            <div id="homeWelcome" class="home-welcome">
+                <img class="home-welcome-logo" src="./assets/campaign-logo.webp" alt="Casual Campaign" draggable="false">
+                <p>Log in to open packs, collect cards and build your decks.</p>
+                <button type="button" id="homeWelcomeLogIn" class="btn-accent"><i class="bi bi-person-fill"></i> Log In</button>
+            </div>
             <div id="packsWrapper">
                 <h2>Booster Pack Shop</h2>
                 <p class="packs-description">Browse themed booster packs, open them to reveal new cards, and build your collection.</p>

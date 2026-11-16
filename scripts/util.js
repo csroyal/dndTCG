@@ -233,6 +233,7 @@ function unloadProfile() {
 
     if (cards && packs) buildBinder(cards, packs);
     packsWrapper.style.display = "none";
+    showHomeWelcome(true);
     buildPullHistory();
     decksContainer.innerHTML = '';
     decksContainer.style.display = "";
